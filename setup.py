@@ -3,6 +3,13 @@
 """The setup script."""
 from numpy.distutils.core import Extension, setup
 
+from include.download_source import get_source
+
+
+# Download and clean the source files
+get_source()
+
+# Explicit list of the Fortran filenames
 msis2_sources = ['msis_constants.F90', 'msis_init.F90', 'msis_gfn.F90',
                  'msis_tfn.F90', 'alt2gph.F90', 'msis_dfn.F90',
                  'msis_calc.F90']
