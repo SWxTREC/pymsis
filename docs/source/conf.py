@@ -33,8 +33,8 @@ release = '0.1.0'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
+    'sphinx.ext.napoleon',
     'matplotlib.sphinxext.plot_directive',
-    'numpydoc',
     'sphinx_gallery.gen_gallery',
 ]
 
