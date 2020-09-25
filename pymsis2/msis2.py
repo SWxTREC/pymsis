@@ -143,17 +143,17 @@ def create_input(dates, lons, lats, alts, f107s, f107as, aps):
         the flattened version of the input data.
     """
     # Turn everything into arrays
-    dates = np.array(dates, dtype='datetime64')
+    dates = np.atleast_1d(np.array(dates, dtype='datetime64'))
     dyear = (dates.astype('datetime64[D]') -
              dates.astype('datetime64[Y]')).astype(float)
     dseconds = (dates.astype('datetime64[s]') -
                 dates.astype('datetime64[D]')).astype(float)
-    lons = np.array(lons)
-    lats = np.array(lats)
-    alts = np.array(alts)
-    f107s = np.array(f107s)
-    f107as = np.array(f107as)
-    aps = np.array(aps)
+    lons = np.atleast_1d(lons)
+    lats = np.atleast_1d(lats)
+    alts = np.atleast_1d(alts)
+    f107s = np.atleast_1d(f107s)
+    f107as = np.atleast_1d(f107as)
+    aps = np.atleast_1d(aps)
 
     ndates = len(dates)
     nlons = len(lons)
