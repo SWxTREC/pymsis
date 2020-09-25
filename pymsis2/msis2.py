@@ -37,6 +37,12 @@ def run(dates, lons, lats, alts, f107s, f107as, aps, options=None):
         H # density (m-3), Ar # density (m-3), N # density (m-3),
         Anomalous oxygen # density (m-3),
         empty (will contain NO in future release), Temperature (K)]
+
+    Notes
+    -----
+    The 10.7 cm radio flux is at the Sun-Earth distance,
+    not the radio flux at 1 AU.
+
     """
     if options is None:
         options = create_options()
@@ -145,9 +151,11 @@ def create_input(dates, lons, lats, alts, f107s, f107as, aps):
     # Turn everything into arrays
     dates = np.atleast_1d(np.array(dates, dtype='datetime64'))
     dyear = (dates.astype('datetime64[D]') -
-             dates.astype('datetime64[Y]')).astype(float)
+             dates.astype('datetime64[Y]')).astype(float) + 1  # DOY 1-366
     dseconds = (dates.astype('datetime64[s]') -
                 dates.astype('datetime64[D]')).astype(float)
+    # Make it a continuous day of year
+    dyear += dseconds/86400
     lons = np.atleast_1d(lons)
     # If any longitudes were input as negatives, try to change them to
     # the (0, 360) range
@@ -170,10 +178,11 @@ def create_input(dates, lons, lats, alts, f107s, f107as, aps):
                          f"and aps ({len(aps)}) must all be equal")
 
     # Make a grid of indices
-    indices = np.stack(np.meshgrid(np.arange(len(dates)),
-                                   np.arange(len(lons)),
-                                   np.arange(len(lats)),
-                                   np.arange(len(alts))), -1).reshape(-1, 4)
+    indices = np.stack(np.meshgrid(np.arange(ndates),
+                                   np.arange(nlons),
+                                   np.arange(nlats),
+                                   np.arange(nalts), indexing='ij'),
+                       -1).reshape(-1, 4)
 
     # Now stack all of the arrays, indexing by the proper indices
     arr = np.stack([dyear[indices[:, 0]], dseconds[indices[:, 0]],
