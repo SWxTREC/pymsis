@@ -12,8 +12,9 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../pymsis2'))
+from sphinx_gallery.sorting import ExampleTitleSortKey
 
+sys.path.insert(0, os.path.abspath('../../pymsis2'))
 
 # -- Project information -----------------------------------------------------
 
@@ -54,6 +55,8 @@ exclude_patterns = []
 #
 html_theme = 'pydata_sphinx_theme'
 
+html_logo = "_static/pymsis2-logo.png"
+
 html_theme_options = {
   "github_url": "https://github.com/SWxTREC/pymsis2",
 }
@@ -71,4 +74,5 @@ sphinx_gallery_conf = {
      'examples_dirs': '../../examples',   # path to example scripts
      'gallery_dirs': 'examples',  # path to where to save generated output
      'matplotlib_animations': True,
+     'within_subsection_order': ExampleTitleSortKey,
 }
