@@ -48,4 +48,5 @@ setup(
     include_package_data=True,
     packages=['pymsis2'],
     version='0.1.0',
+    install_requires=requirements,
 )
