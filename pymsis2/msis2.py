@@ -149,6 +149,9 @@ def create_input(dates, lons, lats, alts, f107s, f107as, aps):
     dseconds = (dates.astype('datetime64[s]') -
                 dates.astype('datetime64[D]')).astype(float)
     lons = np.atleast_1d(lons)
+    # If any longitudes were input as negatives, try to change them to
+    # the (0, 360) range
+    lons[lons < 0] += 360
     lats = np.atleast_1d(lats)
     alts = np.atleast_1d(alts)
     f107s = np.atleast_1d(f107s)
