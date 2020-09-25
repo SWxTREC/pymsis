@@ -12,9 +12,10 @@ subroutine pyinitswitch(switch_legacy, parmpath)
     return
 end subroutine pyinitswitch
 
-subroutine pymsiscalc(day, utsec, lon, lat, z, sfluxavg, sflux, ap, output, n)
+subroutine pymsiscalc(day, utsec, lon, lat, z, sflux, sfluxavg, ap, output, n)
     ! NOTE: pymsiscalc takes the order (lon, lat, z), but the msiscalc Fortran
-    !       code takes the order (z, lat, lon)
+    !       code takes the order (z, lat, lon).
+    !       sflux also comes before sfluxavg
     use msis_calc, only: msiscalc
     use msis_constants, only: rp
 
@@ -26,8 +27,8 @@ subroutine pymsiscalc(day, utsec, lon, lat, z, sfluxavg, sflux, ap, output, n)
     real(kind=rp), intent(in)  :: lon(n)
     real(kind=rp), intent(in)  :: lat(n)
     real(kind=rp), intent(in)  :: z(n)
-    real(kind=rp), intent(in)  :: sfluxavg(n)
     real(kind=rp), intent(in)  :: sflux(n)
+    real(kind=rp), intent(in)  :: sfluxavg(n)
     real(kind=rp), intent(in)  :: ap(n, 1:7)
     real(kind=rp), intent(out) :: output(n, 1:11)
 
