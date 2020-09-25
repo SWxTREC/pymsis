@@ -1,5 +1,7 @@
 msis2/
 *.tar.gz
+docs/source/examples
+docs/source/reference/generated
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
