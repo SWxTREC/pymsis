@@ -6,8 +6,7 @@ from . import msis2f
 
 
 def run(dates, lons, lats, alts, f107s, f107as, aps, options=None):
-    """
-    Call MSIS looping over all possible inputs.
+    """Call MSIS looping over all possible inputs.
 
     Parameters
     ----------
@@ -31,12 +30,18 @@ def run(dates, lons, lats, alts, f107s, f107as, aps, options=None):
     Returns
     -------
     ndarray (ndates, nlons, nlats, nalts, 11)
-        The 11 values calculated at each grid point. The final dimension
-        contains [Total mass density (kg/m3), N2 # density (m-3),
-        O2 # density (m-3), O # density (m-3), He # density (m-3),
-        H # density (m-3), Ar # density (m-3), N # density (m-3),
-        Anomalous oxygen # density (m-3),
-        empty (will contain NO in future release), Temperature (K)]
+        | The data calculated at each grid point:
+        | [Total mass density (kg/m3)
+        | N2 # density (m-3),
+        | O2 # density (m-3),
+        | O # density (m-3),
+        | He # density (m-3),
+        | H # density (m-3),
+        | Ar # density (m-3),
+        | N # density (m-3),
+        | Anomalous oxygen # density (m-3),
+        | empty (will contain NO in future release),
+        | Temperature (K)]
 
     Notes
     -----
@@ -70,8 +75,7 @@ def create_options(f107=1, time_independent=1, symmetrical_annual=1,
                    asymmetrical_semiannual=1, diurnal=1, semidiurnal=1,
                    geomagnetic_activity=1, all_ut_effects=1, longitudinal=1,
                    mixed_ut_long=1, mixed_ap_ut_long=1, terdiurnal=1):
-    """
-    Creates the options list based on keyword argument choices.
+    """Creates the options list based on keyword argument choices.
 
     Defaults to all 1's for the input options.
 
@@ -95,8 +99,7 @@ def create_options(f107=1, time_independent=1, symmetrical_annual=1,
         Account for semidiurnal variations
     geomagnetic_activity : float
         Account for geomagnetic activity
-        1 = Daily Ap mode
-        -1 = Storm-time Ap mode
+        (1 = Daily Ap mode, -1 = Storm-time Ap mode)
     all_ut_effects : float
         Account for all UT/longitudinal effects
     longitudinal : float
@@ -122,8 +125,7 @@ def create_options(f107=1, time_independent=1, symmetrical_annual=1,
 
 
 def create_input(dates, lons, lats, alts, f107s, f107as, aps):
-    """
-    Combine all input values into a single flattened array.
+    """Combine all input values into a single flattened array.
 
     Parameters
     ----------
@@ -146,7 +148,8 @@ def create_input(dates, lons, lats, alts, f107s, f107as, aps):
     -------
     (shape, flattened_input)
         The shape of the data as a tuple (ndates, nlons, nlats, nalts) and
-        the flattened version of the input data.
+        the flattened version of the input data
+        (ndates*nlons*nlats*nalts, 14).
     """
     # Turn everything into arrays
     dates = np.atleast_1d(np.array(dates, dtype='datetime64'))
@@ -192,29 +195,3 @@ def create_input(dates, lons, lats, alts, f107s, f107as, aps):
     # ap has 7 components, so we need to concatenate it onto the
     # arrays rather than stack
     return shape, np.concatenate([arr, aps[indices[:, 0], :]], axis=1)
-
-
-def example():
-
-    alt = 200
-    f107 = 146.7
-    f107a = 163.6666
-    ap = 7
-    # One years worth of data at the 12th hour every day
-    dates = np.arange('2003-01', '2004-01',
-                      dtype='datetime64[D]') + np.timedelta64(12, 'h')
-    ndates = len(dates)
-    lons = range(-180, 185, 5)
-    lats = range(-90, 95, 5)
-    alts = [alt]
-    # (F107, F107a, ap) all need to be specified at the same length as dates
-    f107s = [f107]*ndates
-    f107as = [f107a]*ndates
-    aps = [[ap]*7]*ndates
-
-    output = run(dates, lons, lats, alts, f107s, f107as, aps)
-    return output
-
-
-if __name__ == "__main__":
-    example()
