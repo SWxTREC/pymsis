@@ -23,7 +23,7 @@ f107a = 150
 ap = 4
 # Diurnal data
 dates = np.arange('2003-01-01', '2003-01-02',
-                  dtype='datetime64[15m]')
+                  dtype='datetime64[30m]')
 ndates = len(dates)
 # (F107, F107a, ap) all need to be specified at the same length as dates
 f107s = [f107]*ndates
@@ -55,10 +55,9 @@ ax_time.xaxis.set_major_locator(mdates.HourLocator(interval=3))
 ax_time.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M'))
 time_line = ax_time.axvline(dates[0], c='r')
 
-sun_loc = -(dates.astype('datetime64[s]') -
-            dates.astype('datetime64[D]')).astype(float)/86400*360
-sun_loc[sun_loc < -180] += 360
-sun, = ax_mesh.plot(sun_loc[0], 0, '.', c='gold')
+sun_loc = 180 - (dates.astype('datetime64[s]') -
+                 dates.astype('datetime64[D]')).astype(float)/86400*360
+sun, = ax_mesh.plot(sun_loc[0], 0, '.', c='gold', markersize=15)
 
 date_string = dates[0].astype('O').strftime("%H:%M")
 title = ax_time.set_title(f"{date_string}")
