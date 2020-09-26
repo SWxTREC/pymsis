@@ -1,4 +1,3 @@
-import fileinput
 import glob
 import os
 import tarfile
@@ -40,11 +39,14 @@ def clean_utf8(fnames):
     fnames: list
         filenames to be cleaned
     """
-    with fileinput.input(files=fnames, mode='rb',
-                         inplace=True, backup='.bak') as f:
-        for line in f:
-            # Decode the line ignoring bad characters
-            print(line.decode('utf-8', 'ignore'), end='')
+    for fname in fnames:
+        with open(fname, 'rb+') as f:
+            # Ignore bad decode errors
+            data = f.read().decode('utf-8', 'ignore')
+            # write the good encoded bytes out to the same file
+            f.seek(0)
+            f.write(data.encode('utf-8'))
+            f.truncate()
 
 
 if __name__ == "__main__":
