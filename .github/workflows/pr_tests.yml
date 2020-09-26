@@ -25,10 +25,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install GFortran
-      run: |
-          which gfortran-9
-          which gfortran
+    - name: Cache tarfile
+      uses: actions/cache@v1
+      with:
+        path: .
+        key: ${{ runner.OS }}-tar-cache-${{ hashFiles('**/NRLMSIS2.0.tar.gz') }}
+        restore-keys: |
+          ${{ runner.OS }}-tar-cache-
 
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
@@ -41,6 +44,11 @@ jobs:
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         pip install .
+
+    - name: Investigate output after install
+      run: |
+        pwd
+        ls -lh
 
     - name: Lint with flake8
       run: |
