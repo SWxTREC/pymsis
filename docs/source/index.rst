@@ -1,6 +1,6 @@
 
-Pymsis2 Documentation
-=====================
+Pymsis Documentation
+====================
 
 This is a lightweight Python wrapper around the MSIS2 Fortran source code.
 

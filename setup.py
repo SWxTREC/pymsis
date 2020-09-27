@@ -18,7 +18,7 @@ msis2_sources = ['msis2.pyf', 'pywrapper.F90',
 # Add the directory where the files are located
 msis2_sources = ['msis2/' + x for x in msis2_sources]
 
-ext_msis = Extension(name='pymsis2.msis2f',
+ext_msis = Extension(name='pymsis.msis2f',
                      sources=msis2_sources,
                      extra_f90_compile_args=['-march=native', '-ffast-math'])
 
@@ -41,10 +41,10 @@ setup(
     ext_modules=[ext_msis],
     license="MIT license",
     keywords='MSIS2, NRLMSIS',
-    name='pymsis2',
-    data_files=[('pymsis2', ['pymsis2/msis2.0.parm'])],
+    name='pymsis',
+    data_files=[('pymsis', ['pymsis/msis2.0.parm'])],
     include_package_data=True,
-    packages=['pymsis2'],
+    packages=['pymsis'],
     version='0.1.0',
     install_requires=requirements,
 )

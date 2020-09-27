@@ -9,7 +9,7 @@ difference from the annual mean at a single location.
 import matplotlib.pyplot as plt
 import numpy as np
 
-from pymsis2 import msis2
+from pymsis import msis2
 
 
 lon = 0

@@ -14,11 +14,11 @@ import os
 import sys
 from sphinx_gallery.sorting import ExampleTitleSortKey
 
-sys.path.insert(0, os.path.abspath('../../pymsis2'))
+sys.path.insert(0, os.path.abspath('../../pymsis'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'pymsis2'
+project = 'pymsis'
 copyright = '2020, Regents of the University of Colorado'
 author = 'Greg Lucas'
 
@@ -55,10 +55,10 @@ exclude_patterns = []
 #
 html_theme = 'pydata_sphinx_theme'
 
-html_logo = "_static/pymsis2-logo.png"
+html_logo = "_static/pymsis-logo.png"
 
 html_theme_options = {
-  "github_url": "https://github.com/SWxTREC/pymsis2",
+  "github_url": "https://github.com/SWxTREC/pymsis",
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,

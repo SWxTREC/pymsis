@@ -28,9 +28,9 @@ def get_source():
             raise e
 
     # Rename the parameter file to what the Fortran is expecting
-    if not os.path.exists('pymsis2/msis2.0.parm'):
+    if not os.path.exists('pymsis/msis2.0.parm'):
         # Notice that the original is "20", not "2.0"
-        os.rename('msis2/msis20.parm', 'pymsis2/msis2.0.parm')
+        os.rename('msis2/msis20.parm', 'pymsis/msis2.0.parm')
 
     # Now go through and clean the source files
     clean_utf8(glob.glob('msis2/*.F90'))

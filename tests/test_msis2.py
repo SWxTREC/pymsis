@@ -2,7 +2,7 @@ import numpy as np
 from numpy.testing import assert_array_equal, assert_allclose
 import pytest
 
-from pymsis2 import msis2
+from pymsis import msis2
 
 
 def test_data():

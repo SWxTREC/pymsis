@@ -9,7 +9,7 @@ quantities on a constant altitude plane.
 import matplotlib.pyplot as plt
 import numpy as np
 
-from pymsis2 import msis2
+from pymsis import msis2
 
 
 lons = range(-180, 185, 5)
