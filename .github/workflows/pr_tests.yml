@@ -25,13 +25,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Cache tarfile
+    - name: Cache original source files
       uses: actions/cache@v1
       with:
-        path: .
-        key: ${{ runner.OS }}-tar-cache-${{ hashFiles('**/NRLMSIS2.0.tar.gz') }}
+        path: msis2
+        key: tar-cache-${{ hashFiles('**/*.F90') }}
         restore-keys: |
-          ${{ runner.OS }}-tar-cache-
+          tar-cache-
 
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
