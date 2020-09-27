@@ -66,6 +66,10 @@ def run(dates, lons, lats, alts, f107s, f107as, aps, options=None):
                                input_data[:, 2], input_data[:, 3],
                                input_data[:, 4], input_data[:, 5],
                                input_data[:, 6], input_data[:, 7:])
+    # The Fortran code puts 9.9e-38 in as NaN
+    # Have to make sure this doesn't overlap 0 due to really small values
+    # so atol should be less than the comparison value
+    output[np.isclose(output, 9.9e-38, atol=1e-38)] = np.nan
 
     return output.reshape(input_shape + (11,))
 
