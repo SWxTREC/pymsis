@@ -1,8 +1,8 @@
-import fileinput
 import glob
 import os
 import tarfile
 import urllib.request
+import warnings
 
 SOURCE_FILE = ("https://map.nrl.navy.mil/map/pub/nrl/NRLMSIS/"
                "NRLMSIS2.0/NRLMSIS2.0.tar.gz")
@@ -16,9 +16,11 @@ def get_source():
     if not os.path.exists('msis2/msis_init.F90'):
         # No source code yet, so go download and extract it
         try:
-            stream = urllib.request.urlopen(SOURCE_FILE)
-            tf = tarfile.open(fileobj=stream, mode="r|gz")
-            tf.extractall(path='msis2/')
+            warnings.warn("Downloading the MSIS2 source code from "
+                          f"{SOURCE_FILE}")
+            with urllib.request.urlopen(SOURCE_FILE) as stream:
+                tf = tarfile.open(fileobj=stream, mode="r|gz")
+                tf.extractall(path='msis2/')
         except Exception as e:
             print("Downloading the source code from the original repository "
                   "failed. You can manually download and extract the source "
@@ -26,8 +28,9 @@ def get_source():
             raise e
 
     # Rename the parameter file to what the Fortran is expecting
-    if not os.path.exists('msis2/msis2.0.parm'):
-        os.rename('msis2/msis20.parm', 'msis2/msis2.0.parm')
+    if not os.path.exists('pymsis2/msis2.0.parm'):
+        # Notice that the original is "20", not "2.0"
+        os.rename('msis2/msis20.parm', 'pymsis2/msis2.0.parm')
 
     # Now go through and clean the source files
     clean_utf8(glob.glob('msis2/*.F90'))
@@ -40,11 +43,14 @@ def clean_utf8(fnames):
     fnames: list
         filenames to be cleaned
     """
-    with fileinput.input(files=fnames, mode='rb',
-                         inplace=True, backup='.bak') as f:
-        for line in f:
-            # Decode the line ignoring bad characters
-            print(line.decode('utf-8', 'ignore'), end='')
+    for fname in fnames:
+        with open(fname, 'rb+') as f:
+            # Ignore bad decode errors
+            data = f.read().decode('utf-8', 'ignore')
+            # write the good encoded bytes out to the same file
+            f.seek(0)
+            f.write(data.encode('utf-8'))
+            f.truncate()
 
 
 if __name__ == "__main__":
