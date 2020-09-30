@@ -11,16 +11,21 @@ get_source()
 
 # Explicit list of the Fortran filenames
 # Put the pyf file first in the list and add in our own wrapper
-msis2_sources = ['msis2.pyf', 'pywrapper.F90',
+msis2_sources = ['msis2.pyf', 'msis2.F90',
                  'msis_constants.F90', 'msis_init.F90', 'msis_gfn.F90',
                  'msis_tfn.F90', 'alt2gph.F90', 'msis_dfn.F90',
                  'msis_calc.F90']
 # Add the directory where the files are located
 msis2_sources = ['msis2/' + x for x in msis2_sources]
 
-ext_msis = Extension(name='pymsis.msis2f',
-                     sources=msis2_sources,
-                     extra_f90_compile_args=['-march=native', '-ffast-math'])
+ext_msis2 = Extension(name='pymsis.msis2f',
+                      sources=msis2_sources,
+                      extra_f90_compile_args=['-march=native', '-ffast-math'])
+
+msis00_sources = ['msis00/msis00.F90', 'msis00/NRLMSISE-00.FOR']
+ext_msis00 = Extension(name='pymsis.msis00f',
+                       sources=msis00_sources,
+                       extra_f77_compile_args=['-std=legacy'])
 
 requirements = ['numpy']
 
@@ -38,7 +43,7 @@ setup(
         'Programming Language :: Python :: 3.8',
     ],
     description="A Python package for calling the MSIS2 Fortran code.",
-    ext_modules=[ext_msis],
+    ext_modules=[ext_msis2, ext_msis00],
     license="MIT license",
     keywords='MSIS2, NRLMSIS',
     name='pymsis',

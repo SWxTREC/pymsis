@@ -2,10 +2,11 @@ import os
 
 import numpy as np
 
-from . import msis2f
+from . import msis2f, msis00f
 
 
-def run(dates, lons, lats, alts, f107s, f107as, aps, options=None):
+def run(dates, lons, lats, alts, f107s, f107as, aps,
+        options=None, version=2):
     """Call MSIS looping over all possible inputs.
 
     Parameters
@@ -26,6 +27,8 @@ def run(dates, lons, lats, alts, f107s, f107as, aps, options=None):
         Ap for the given date(s)
     options : list of floats (length 25) [optional]
         A list of options (switches) to the model
+    version : int or string, default: 2
+        MSIS version number, [00, 2]
 
     Returns
     -------
@@ -54,18 +57,31 @@ def run(dates, lons, lats, alts, f107s, f107as, aps, options=None):
     elif len(options) != 25:
         raise ValueError("options needs to be a list of length 25")
 
-    # We need to point to the MSIS parameter file that was installed with
-    # the Python package
-    msis_path = os.path.dirname(os.path.realpath(__file__)) + "/"
-    msis2f.pyinitswitch(options, parmpath=msis_path)
-
     input_shape, input_data = create_input(dates, lons, lats, alts,
                                            f107s, f107as, aps)
 
-    output = msis2f.pymsiscalc(input_data[:, 0], input_data[:, 1],
-                               input_data[:, 2], input_data[:, 3],
-                               input_data[:, 4], input_data[:, 5],
-                               input_data[:, 6], input_data[:, 7:])
+    if int(version) == 0:
+        msis00f.pytselec(options)
+        output = msis00f.pygtd7d(input_data[:, 0], input_data[:, 1],
+                                 input_data[:, 2], input_data[:, 3],
+                                 input_data[:, 4], input_data[:, 5],
+                                 input_data[:, 6], input_data[:, 7:])
+
+    elif int(version) == 2:
+        # We need to point to the MSIS parameter file that was installed with
+        # the Python package
+        msis_path = os.path.dirname(os.path.realpath(__file__)) + "/"
+        msis2f.pyinitswitch(options, parmpath=msis_path)
+
+        output = msis2f.pymsiscalc(input_data[:, 0], input_data[:, 1],
+                                   input_data[:, 2], input_data[:, 3],
+                                   input_data[:, 4], input_data[:, 5],
+                                   input_data[:, 6], input_data[:, 7:])
+
+    else:
+        raise ValueError(f"The MSIS version selected: {version} is not "
+                         "a valid version number [0, 2]")
+
     # The Fortran code puts 9.9e-38 in as NaN
     # Have to make sure this doesn't overlap 0 due to really small values
     # so atol should be less than the comparison value
