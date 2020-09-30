@@ -31,7 +31,15 @@
         call gtd7d(10000 + FLOOR(day(i)), utsec(i), z(i), lat(i), lon(i), &
                    utsec(i)/3600. + lon(i)/15., sfluxavg(i), &
                    sflux(i), ap(i, :), 48, d, t)
+        ! O, H, and N are set to zero below 72.5 km
+        ! Change them to NaN instead
+        if(z(i) < 72.5) then
+          d(2) = 9.99e-38 ! NaN
+          d(7) = 9.99e-38 ! NaN
+          d(8) = 9.99e-38 ! NaN
+        endif
         ! These mappings are to go from MSIS00 locations to MSIS2 locations
+                   
         output(i, 1) = d(6)
         output(i, 2) = d(3)
         output(i, 3) = d(4)

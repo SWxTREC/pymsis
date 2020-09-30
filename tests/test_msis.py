@@ -23,6 +23,12 @@ def test_output():
                     dtype=np.float32)
 
 
+def test_output00():
+    return np.array([2.790941e-10, 3.354463e+15, 1.242698e+14, 4.331106e+15,
+                     8.082919e+12, 1.126601e+11, 2.710179e+12, 5.634838e+13,
+                     1.665595e-03, np.nan, 9.838066e+02], dtype=np.float32)
+
+
 def test_create_options():
     options = ['f107', 'time_independent', 'symmetrical_annual',
                'symmetrical_semiannual', 'asymmetrical_annual',
@@ -187,3 +193,36 @@ def test_run_poles():
     input_data = (date, 20, -90, alt, f107, f107a, ap)
     output2 = msis.run(*input_data)
     assert_allclose(output1, output2, rtol=1e-5)
+
+
+def test_run_versions():
+    # Make sure we accept these version numbers and don't throw an error
+    for ver in [0, 2, '00', '2']:
+        msis.run(*test_data(), version=ver)
+    # Test for something outside of that list for an error to be thrown
+    with pytest.raises(ValueError, match='The MSIS version selected'):
+        msis.run(*test_data(), version=1)
+
+
+def test_run_version00():
+    output = msis.run(*test_data(), version=0)
+    assert output.shape == (1, 1, 1, 1, 11)
+    assert_allclose(np.squeeze(output), test_output00(), rtol=1e-5)
+
+
+def test_run_multi_point00():
+    date, lon, lat, alt, f107, f107a, ap = test_data()
+    # 5 x 5 surface
+    input_data = (date, [lon]*5, [lat]*5, alt, f107, f107a, ap)
+    output = msis.run(*input_data, version=0)
+    assert output.shape == (1, 5, 5, 1, 11)
+    expected = np.tile(test_output00(), (5, 5, 1))
+    assert_allclose(np.squeeze(output), expected, rtol=1e-5)
+
+
+def test_run_version00_low_altitude():
+    # There is no O, H, N below 72.5 km, should be NaN
+    date, lon, lat, _, f107, f107a, ap = test_data()
+    input_data = (date, lon, lat, 71, f107, f107a, ap)
+    output = msis.run(*input_data, version=0)
+    assert np.all(np.isnan(np.squeeze(output)[[3, 5, 7]]))
