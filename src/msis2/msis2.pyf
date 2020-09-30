@@ -2,13 +2,13 @@
 ! Note: the context of this file is case sensitive.
 
 python module msis2f ! in 
-    interface  ! in :pymsis2
-        subroutine pyinitswitch(switch_legacy, parmpath) ! in :pymsis2:pymsiswrapper.F90
+    interface  ! in :pymsis
+        subroutine pyinitswitch(switch_legacy, parmpath) ! in :pymsis2:msis2.F90
             use msis_init, only: msisinit
             real(kind=4), optional,dimension(25),intent(in) :: switch_legacy
             character(len=*), intent(in), optional    :: parmpath
         end subroutine pyinitswitch
-        subroutine pymsiscalc(day,utsec,z,lat,lon,sfluxavg,sflux,ap,output,n) ! in :pymsis2:pymsiswrapper.F90
+        subroutine pymsiscalc(day,utsec,z,lat,lon,sfluxavg,sflux,ap,output,n) ! in :pymsis2:msis2.F90
             use msis_calc, only: msiscalc
             use msis_constants, only: rp
             real(kind=rp) dimension(n),intent(in) :: day

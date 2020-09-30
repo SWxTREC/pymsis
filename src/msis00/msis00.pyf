@@ -1,0 +1,22 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module msis00f ! in 
+    interface  ! in :pymsis
+        subroutine pytselec(switch_legacy) ! in :pymsis2:pymsis00.F90
+            real(kind=4), optional,dimension(25),intent(in) :: switch_legacy
+        end subroutine pyinitswitch
+        subroutine pygtd7d(day,utsec,z,lat,lon,sfluxavg,sflux,ap,output,n) ! in :pymsis:pymsis00.F90
+            real dimension(n),intent(in) :: day
+            real dimension(n),intent(in),depend(n) :: utsec
+            real dimension(n),intent(in),depend(n) :: z
+            real dimension(n),intent(in),depend(n) :: lat
+            real dimension(n),intent(in),depend(n) :: lon
+            real dimension(n),intent(in),depend(n) :: sfluxavg
+            real dimension(n),intent(in),depend(n) :: sflux
+            real dimension(n,7),intent(in),depend(n) :: ap
+            real dimension(n,11),intent(out),depend(n) :: output
+            integer, optional,intent(in),check(len(day)>=n),depend(day) :: n=len(day)
+        end subroutine pygtd7d
+    end interface 
+end python module msis00f

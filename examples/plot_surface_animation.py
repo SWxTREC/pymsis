@@ -12,7 +12,7 @@ import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 import numpy as np
 
-from pymsis import msis2
+from pymsis import msis
 
 
 lons = range(-180, 185, 5)
@@ -30,7 +30,7 @@ f107s = [f107]*ndates
 f107as = [f107a]*ndates
 aps = [[ap]*7]*ndates
 
-output = msis2.run(dates, lons, lats, alt, f107s, f107as, aps)
+output = msis.run(dates, lons, lats, alt, f107s, f107as, aps)
 #  output is now of the shape (ndates, nlons, nlats, 1, 11)
 # Get rid of the single dimensions
 output = np.squeeze(output)

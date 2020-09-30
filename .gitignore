@@ -1,8 +1,14 @@
-msis2/*
-!msis2/pywrapper.F90
-!msis2/msis2.pyf
+src/msis2/*
+!src/msis2/msis2.F90
+!src/msis2/msis2.pyf
+src/msis00/*
+!src/msis00/msis00.F90
+!src/msis00/msis00.pyf
+
 pymsis/msis2.0.parm
 pymsis/msis2f*
+pymsis/msis00f*
+
 *.tar.gz
 docs/source/examples
 docs/source/reference/generated

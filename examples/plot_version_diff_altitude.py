@@ -1,10 +1,10 @@
 """
-Altitude profiles
------------------
+Version Differences (Altitude)
+------------------------------
 
 This example demonstrates how to calculate the
-altitude variations at a single location. Additionally,
-we show the difference between densities at noon (solid)
+percent change along an altitude profile between MSIS version 00 and 2.
+Additionally, we show the difference between densities at noon (solid)
 and midnight (dashed).
 
 """
@@ -23,14 +23,20 @@ ap = 7
 aps = [[ap]*7]
 
 date = np.datetime64('2003-01-01T00:00')
-output_midnight = msis.run(date, lon, lat, alts, f107, f107a, aps)
+output_midnight2 = msis.run(date, lon, lat, alts, f107, f107a, aps)
+output_midnight0 = msis.run(date, lon, lat, alts, f107, f107a, aps, version=0)
+diff_midnight = (output_midnight2 - output_midnight0)/output_midnight0 * 100
+
 date = np.datetime64('2003-01-01T12:00')
-output_noon = msis.run(date, lon, lat, alts, f107, f107a, aps)
+output_noon2 = msis.run(date, lon, lat, alts, f107, f107a, aps)
+output_noon0 = msis.run(date, lon, lat, alts, f107, f107a, aps, version=0)
+diff_noon = (output_noon2 - output_noon0)/output_noon0 * 100
+
 
 #  output is now of the shape (1, 1, 1, 1000, 11)
 # Get rid of the single dimensions
-output_midnight = np.squeeze(output_midnight)
-output_noon = np.squeeze(output_noon)
+diff_midnight = np.squeeze(diff_midnight)
+diff_noon = np.squeeze(diff_noon)
 
 variables = ['Total mass density', 'N2', 'O2', 'O', 'He',
              'H', 'Ar', 'N', 'Anomalous O', 'NO', 'Temperature']
@@ -40,16 +46,15 @@ for i, label in enumerate(variables):
     if label in ('NO', 'Total mass density', 'Temperature'):
         # There is currently no NO data, also ignore non-number densities
         continue
-    line, = ax.plot(output_midnight[:, i], alts, linestyle='--')
-    ax.plot(output_noon[:, i], alts, c=line.get_color(), label=label)
+    line, = ax.plot(diff_midnight[:, i], alts, linestyle='--')
+    ax.plot(diff_noon[:, i], alts, c=line.get_color(), label=label)
 
 ax.legend(loc='upper center', bbox_to_anchor=(0.5, 1.15),
           fancybox=True, shadow=True, ncol=4)
 ax.set_title(f"Longitude: {lon}, Latitude: {lat}")
-ax.set_xscale('log')
-ax.set_xlim(1e8, 1e18)
+ax.set_xlim(-50, 50)
 ax.set_ylim(0, 1000)
-ax.set_xlabel('Number density (/m$^3$)')
+ax.set_xlabel('Change from MSIS-00 to MSIS2 (%)')
 ax.set_ylabel('Altitude (km)')
 
 plt.show()
