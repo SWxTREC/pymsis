@@ -2,13 +2,13 @@
 
 API reference
 =============
-.. currentmodule:: pymsis.msis
+.. currentmodule:: pymsis
 
-This page gives an overview of all public pymsis functions within the :mod:`pymsis.msis` module.
+This page gives an overview of all public pymsis functions within the :mod:`pymsis` package.
 
 .. autosummary::
     :toctree: generated/
 
-    run
-    create_options
-    create_input
+    msis.run
+    msis.create_options
+    msis.create_input

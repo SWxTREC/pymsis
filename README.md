@@ -2,8 +2,8 @@
 
 Note that the MSIS2 code is not available for commercial use without contacting NRL.
 See the [MSIS2 license file](MSIS2_LICENSE) for explicit details.
-We do not repackage any of the source code
-in the repository for this reason. However, we do provide utilities to easily download and extract the original source code. By using that code you agree to their terms and conditions.
+We do not repackage any of the MSIS source code
+in this repository for that reason. However, we do provide utilities to easily download and extract the original source code. By using that code you agree to their terms and conditions.
 
 ## NRL Mass Spectrometer, Incoherent Scatter Radar Extended Model (MSIS)
 

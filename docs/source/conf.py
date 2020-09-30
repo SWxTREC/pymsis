@@ -34,6 +34,7 @@ release = '0.1.0'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
+    'sphinx.ext.githubpages',  # Helpful for publishing to gh-pages
     'sphinx.ext.napoleon',
     'matplotlib.sphinxext.plot_directive',
     'sphinx_gallery.gen_gallery',
