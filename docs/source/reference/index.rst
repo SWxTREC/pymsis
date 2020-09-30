@@ -2,9 +2,9 @@
 
 API reference
 =============
-.. currentmodule:: pymsis.msis2
+.. currentmodule:: pymsis.msis
 
-This page gives an overview of all public pymsis functions within the :mod:`pymsis.msis2` module.
+This page gives an overview of all public pymsis functions within the :mod:`pymsis.msis` module.
 
 .. autosummary::
     :toctree: generated/

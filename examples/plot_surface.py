@@ -9,7 +9,7 @@ quantities on a constant altitude plane.
 import matplotlib.pyplot as plt
 import numpy as np
 
-from pymsis import msis2
+from pymsis import msis
 
 
 lons = range(-180, 185, 5)
@@ -22,7 +22,7 @@ ap = 7
 date = np.datetime64('2003-01-01T12:00')
 aps = [[ap]*7]
 
-output = msis2.run(date, lons, lats, alt, f107, f107a, aps)
+output = msis.run(date, lons, lats, alt, f107, f107a, aps)
 #  output is now of the shape (1, nlons, nlats, 1, 11)
 # Get rid of the single dimensions
 output = np.squeeze(output)

@@ -9,7 +9,7 @@ difference from the annual mean at a single location.
 import matplotlib.pyplot as plt
 import numpy as np
 
-from pymsis import msis2
+from pymsis import msis
 
 
 lon = 0
@@ -27,7 +27,7 @@ f107s = [f107]*ndates
 f107as = [f107a]*ndates
 aps = [[ap]*7]*ndates
 
-output = msis2.run(dates, lon, lat, alt, f107s, f107as, aps)
+output = msis.run(dates, lon, lat, alt, f107s, f107as, aps)
 #  output is now of the shape (ndates, 1, 1, 1, 11)
 # Get rid of the single dimensions
 output = np.squeeze(output)

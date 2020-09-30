@@ -16,13 +16,13 @@ msis2_sources = ['msis2.pyf', 'msis2.F90',
                  'msis_tfn.F90', 'alt2gph.F90', 'msis_dfn.F90',
                  'msis_calc.F90']
 # Add the directory where the files are located
-msis2_sources = ['msis2/' + x for x in msis2_sources]
+msis2_sources = ['src/msis2/' + x for x in msis2_sources]
 
 ext_msis2 = Extension(name='pymsis.msis2f',
                       sources=msis2_sources,
                       extra_f90_compile_args=['-march=native', '-ffast-math'])
 
-msis00_sources = ['msis00/msis00.F90', 'msis00/NRLMSISE-00.FOR']
+msis00_sources = ['src/msis00/msis00.F90', 'src/msis00/NRLMSISE-00.FOR']
 ext_msis00 = Extension(name='pymsis.msis00f',
                        sources=msis00_sources,
                        extra_f77_compile_args=['-std=legacy'])

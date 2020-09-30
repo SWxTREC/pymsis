@@ -1,9 +1,9 @@
-msis2/*
-!msis2/msis2.F90
-!msis2/msis2.pyf
-msis00/*
-!msis00/msis00.F90
-!msis00/msis00.pyf
+src/msis2/*
+!src/msis2/msis2.F90
+!src/msis2/msis2.pyf
+src/msis00/*
+!src/msis00/msis00.F90
+!src/msis00/msis00.pyf
 
 pymsis/msis2.0.parm
 pymsis/msis2f*

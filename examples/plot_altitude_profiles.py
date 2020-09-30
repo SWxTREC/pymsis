@@ -11,7 +11,7 @@ and midnight (dashed).
 import matplotlib.pyplot as plt
 import numpy as np
 
-from pymsis import msis2
+from pymsis import msis
 
 
 lon = 0
@@ -23,9 +23,9 @@ ap = 7
 aps = [[ap]*7]
 
 date = np.datetime64('2003-01-01T00:00')
-output_midnight = msis2.run(date, lon, lat, alts, f107, f107a, aps)
+output_midnight = msis.run(date, lon, lat, alts, f107, f107a, aps)
 date = np.datetime64('2003-01-01T12:00')
-output_noon = msis2.run(date, lon, lat, alts, f107, f107a, aps)
+output_noon = msis.run(date, lon, lat, alts, f107, f107a, aps)
 
 #  output is now of the shape (1, 1, 1, 1000, 11)
 # Get rid of the single dimensions
