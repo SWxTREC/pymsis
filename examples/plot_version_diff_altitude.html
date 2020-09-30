@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Version Differences (Altitude) &#8212; pymsis 0.1.0 documentation</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.30270b6e4c972e43c488.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Version Differences (Surface)" href="plot_version_diff_surface.html" />
+    <link rel="prev" title="Surface plot" href="plot_surface.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<div class="container-xl">
+
+    
+    <a class="navbar-brand" href="../index.html">
+      <img src="../_static/pymsis-logo.png" class="logo" alt="logo">
+    </a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="index.html">Examples</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../reference/index.html">API reference</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../development/index.html">Development</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/SWxTREC/pymsis" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar">
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+        
+          
+              <li class="">
+                  <a href="plot_altitude_profiles.html">Altitude profiles</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="plot_annual_variation.html">Annual variation</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="plot_diurnal_variation.html">Diurnal variation</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="plot_surface_animation.html">Surface animation</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="plot_surface.html">Surface plot</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="">Version Differences (Altitude)</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="plot_version_diff_surface.html">Version Differences (Surface)</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-examples-plot-version-diff-altitude-py"><span class="std std-ref">here</span></a>     to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="version-differences-altitude">
+<span id="sphx-glr-examples-plot-version-diff-altitude-py"></span><h1>Version Differences (Altitude)<a class="headerlink" href="#version-differences-altitude" title="Permalink to this headline">¶</a></h1>
+<p>This example demonstrates how to calculate the
+percent change along an altitude profile between MSIS version 00 and 2.
+Additionally, we show the difference between densities at noon (solid)
+and midnight (dashed).</p>
+<img alt="Longitude: 0, Latitude: 70" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_version_diff_altitude_001.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">pymsis</span> <span class="kn">import</span> <span class="n">msis</span>
+
+
+<span class="n">lon</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">lat</span> <span class="o">=</span> <span class="mi">70</span>
+<span class="n">alts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">f107</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="n">f107a</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="n">ap</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">aps</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ap</span><span class="p">]</span><span class="o">*</span><span class="mi">7</span><span class="p">]</span>
+
+<span class="n">date</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&#39;2003-01-01T00:00&#39;</span><span class="p">)</span>
+<span class="n">output_midnight2</span> <span class="o">=</span> <span class="n">msis</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">alts</span><span class="p">,</span> <span class="n">f107</span><span class="p">,</span> <span class="n">f107a</span><span class="p">,</span> <span class="n">aps</span><span class="p">)</span>
+<span class="n">output_midnight0</span> <span class="o">=</span> <span class="n">msis</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">alts</span><span class="p">,</span> <span class="n">f107</span><span class="p">,</span> <span class="n">f107a</span><span class="p">,</span> <span class="n">aps</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">diff_midnight</span> <span class="o">=</span> <span class="p">(</span><span class="n">output_midnight2</span> <span class="o">-</span> <span class="n">output_midnight0</span><span class="p">)</span><span class="o">/</span><span class="n">output_midnight0</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="n">date</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&#39;2003-01-01T12:00&#39;</span><span class="p">)</span>
+<span class="n">output_noon2</span> <span class="o">=</span> <span class="n">msis</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">alts</span><span class="p">,</span> <span class="n">f107</span><span class="p">,</span> <span class="n">f107a</span><span class="p">,</span> <span class="n">aps</span><span class="p">)</span>
+<span class="n">output_noon0</span> <span class="o">=</span> <span class="n">msis</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">alts</span><span class="p">,</span> <span class="n">f107</span><span class="p">,</span> <span class="n">f107a</span><span class="p">,</span> <span class="n">aps</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">diff_noon</span> <span class="o">=</span> <span class="p">(</span><span class="n">output_noon2</span> <span class="o">-</span> <span class="n">output_noon0</span><span class="p">)</span><span class="o">/</span><span class="n">output_noon0</span> <span class="o">*</span> <span class="mi">100</span>
+
+
+<span class="c1">#  output is now of the shape (1, 1, 1, 1000, 11)</span>
+<span class="c1"># Get rid of the single dimensions</span>
+<span class="n">diff_midnight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">diff_midnight</span><span class="p">)</span>
+<span class="n">diff_noon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">diff_noon</span><span class="p">)</span>
+
+<span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Total mass density&#39;</span><span class="p">,</span> <span class="s1">&#39;N2&#39;</span><span class="p">,</span> <span class="s1">&#39;O2&#39;</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">,</span> <span class="s1">&#39;He&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;Ar&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;Anomalous O&#39;</span><span class="p">,</span> <span class="s1">&#39;NO&#39;</span><span class="p">,</span> <span class="s1">&#39;Temperature&#39;</span><span class="p">]</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">variables</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">label</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;NO&#39;</span><span class="p">,</span> <span class="s1">&#39;Total mass density&#39;</span><span class="p">,</span> <span class="s1">&#39;Temperature&#39;</span><span class="p">):</span>
+        <span class="c1"># There is currently no NO data, also ignore non-number densities</span>
+        <span class="k">continue</span>
+    <span class="n">line</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diff_midnight</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">alts</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diff_noon</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">alts</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">line</span><span class="o">.</span><span class="n">get_color</span><span class="p">(),</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.15</span><span class="p">),</span>
+          <span class="n">fancybox</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Longitude: </span><span class="si">{</span><span class="n">lon</span><span class="si">}</span><span class="s2">, Latitude: </span><span class="si">{</span><span class="n">lat</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Change from MSIS-00 to MSIS2 (%)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Altitude (km)&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.171 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-plot-version-diff-altitude-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/62860f626f085608395edbc22ae77540/plot_version_diff_altitude.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_version_diff_altitude.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/ba93e9696def97e214480463c287cfe6/plot_version_diff_altitude.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_version_diff_altitude.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="plot_surface.html" title="previous page">Surface plot</a>
+    <a class='right-next' id="next-link" href="plot_version_diff_surface.html" title="next page">Version Differences (Surface)</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.30270b6e4c972e43c488.js"></script>
+
+
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2020, Regents of the University of Colorado.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

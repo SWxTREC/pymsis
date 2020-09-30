@@ -1,0 +1,6 @@
+﻿pymsis.msis.run
+===============
+
+.. currentmodule:: pymsis.msis
+
+.. autofunction:: run

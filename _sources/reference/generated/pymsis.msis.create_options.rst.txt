@@ -1,0 +1,6 @@
+﻿pymsis.msis.create\_options
+===========================
+
+.. currentmodule:: pymsis.msis
+
+.. autofunction:: create_options
