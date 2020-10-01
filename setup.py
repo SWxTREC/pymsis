@@ -3,6 +3,7 @@
 """The setup script."""
 from numpy.distutils.core import Extension, setup
 
+from pymsis import __version__
 from tools.download_source import get_source
 
 
@@ -29,11 +30,14 @@ ext_msis00 = Extension(name='pymsis.msis00f',
 
 requirements = ['numpy']
 
+with open("README.md", "r") as f:
+    long_description = f.read()
+
 setup(
     author="Greg Lucas",
     author_email='greg.lucas@lasp.colorado.edu',
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
@@ -42,7 +46,10 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
     ],
-    description="A Python package for calling the MSIS2 Fortran code.",
+    description="A Python wrapper around the NRLMSIS model.",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://swxtrec.github.io/pymsis/",
     ext_modules=[ext_msis2, ext_msis00],
     license="MIT license",
     keywords='MSIS2, NRLMSIS',
@@ -50,6 +57,6 @@ setup(
     data_files=[('pymsis', ['pymsis/msis2.0.parm'])],
     include_package_data=True,
     packages=['pymsis'],
-    version='0.1.0',
     install_requires=requirements,
+    version=__version__,
 )
