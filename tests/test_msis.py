@@ -5,7 +5,8 @@ import pytest
 from pymsis import msis
 
 
-def test_data():
+@pytest.fixture
+def input_data():
     date = np.datetime64('2010-01-01T12:00')
     lon = 0
     lat = 0
@@ -16,14 +17,21 @@ def test_data():
     return (date, lon, lat, alt, f107, f107a, ap)
 
 
-def test_output():
-    return np.array([2.465493e-10, 2.927530e+15, 1.251696e+14, 3.845063e+15,
-                     8.492528e+12, 1.300680e+11, 2.661727e+12, 5.718397e+13,
-                     3.302753e-04, np.nan, 9.845342e+02],
+@pytest.fixture
+def expected_input():
+    return [1., 86400/2, 0, 0, 200, 150, 150] + [3]*7
+
+
+@pytest.fixture
+def expected_output():
+    return np.array([2.466441e-10, 2.929253e+15, 1.250981e+14, 3.845766e+15,
+                     8.506817e+12, 1.300092e+11, 2.662435e+12, 5.717013e+13,
+                     3.302753e-04, np.nan, 9.846238e+02],
                     dtype=np.float32)
 
 
-def test_output00():
+@pytest.fixture
+def expected_output00():
     return np.array([2.790941e-10, 3.354463e+15, 1.242698e+14, 4.331106e+15,
                      8.082919e+12, 1.126601e+11, 2.710179e+12, 5.634838e+13,
                      1.665595e-03, np.nan, 9.838066e+02], dtype=np.float32)
@@ -50,118 +58,108 @@ def test_create_options():
     assert expected == msis.create_options(**{opt: 0 for opt in options})
 
 
-def test_create_input_single_point():
-    input_data = test_data()
+def test_create_input_single_point(input_data, expected_input):
     shape, data = msis.create_input(*input_data)
     assert shape == (1, 1, 1, 1)
     assert data.shape == (1, 14)
-    expected = [1.5, 86400/2, 0, 0, 200, 150, 150] + [3]*7
-    assert_array_equal(data[0, :], expected)
+    assert_array_equal(data[0, :], expected_input)
 
 
-def test_create_input_datetime():
+def test_create_input_datetime(input_data, expected_input):
     # Test with datetime, not just np.datetime64s
-    input_data = test_data()
     # .item() gets the datetime object from the np.datetime64 object
     input_data = (input_data[0].item(),) + input_data[1:]
     shape, data = msis.create_input(*input_data)
     assert shape == (1, 1, 1, 1)
     assert data.shape == (1, 14)
-    expected = [1.5, 86400/2, 0, 0, 200, 150, 150] + [3]*7
-    assert_array_equal(data[0, :], expected)
+    assert_array_equal(data[0, :], expected_input)
 
 
-def test_create_input_f107__date_mismatch():
+def test_create_input_f107__date_mismatch(input_data):
     # Make sure we raise when f107 and dates are different shapes
-    input_data = test_data()
-    # Repeat 5 dates
+    # Repeat 5 dates, but not f107
     input_data = ([input_data[0]]*5, ) + input_data[1:]
     with pytest.raises(ValueError, match='The length of dates'):
         msis.create_input(*input_data)
 
 
-def test_create_input_multi_date():
-    date, lon, lat, alt, f107, f107a, ap = test_data()
+def test_create_input_multi_date(input_data, expected_input):
+    date, lon, lat, alt, f107, f107a, ap = input_data
     # Repeat 5 dates
     input_data = ([date]*5, lon, lat, alt, [f107]*5, [f107a]*5, ap*5)
     shape, data = msis.create_input(*input_data)
     assert shape == (5, 1, 1, 1)
     assert data.shape == (5, 14)
-    expected = [[1.5, 86400/2, 0, 0, 200, 150, 150] + [3]*7]*5
-    assert_array_equal(data, expected)
+    assert_array_equal(data, [expected_input]*5)
 
 
-def test_create_input_multi_lon():
-    date, lon, lat, alt, f107, f107a, ap = test_data()
+def test_create_input_multi_lon(input_data, expected_input):
+    date, lon, lat, alt, f107, f107a, ap = input_data
     # Repeat 5 dates
     input_data = (date, [lon]*5, lat, alt, f107, f107a, ap)
     shape, data = msis.create_input(*input_data)
     assert shape == (1, 5, 1, 1)
     assert data.shape == (5, 14)
-    expected = [[1.5, 86400/2, 0, 0, 200, 150, 150] + [3]*7]*5
-    assert_array_equal(data, expected)
+    assert_array_equal(data, [expected_input]*5)
 
 
-def test_create_input_multi_lat():
-    date, lon, lat, alt, f107, f107a, ap = test_data()
+def test_create_input_multi_lat(input_data, expected_input):
+    date, lon, lat, alt, f107, f107a, ap = input_data
     # Repeat 5 dates
     input_data = (date, lon, [lat]*5, alt, f107, f107a, ap)
     shape, data = msis.create_input(*input_data)
     assert shape == (1, 1, 5, 1)
     assert data.shape == (5, 14)
-    expected = [[1.5, 86400/2, 0, 0, 200, 150, 150] + [3]*7]*5
-    assert_array_equal(data, expected)
+    assert_array_equal(data, [expected_input]*5)
 
 
-def test_create_input_multi_alt():
-    date, lon, lat, alt, f107, f107a, ap = test_data()
+def test_create_input_multi_alt(input_data, expected_input):
+    date, lon, lat, alt, f107, f107a, ap = input_data
     # Repeat 5 dates
     input_data = (date, lon, lat, [alt]*5, f107, f107a, ap)
     shape, data = msis.create_input(*input_data)
     assert shape == (1, 1, 1, 5)
     assert data.shape == (5, 14)
-    expected = [[1.5, 86400/2, 0, 0, 200, 150, 150] + [3]*7]*5
-    assert_array_equal(data, expected)
+    assert_array_equal(data, [expected_input]*5)
 
 
-def test_create_input_multi_lon_lat():
-    date, lon, lat, alt, f107, f107a, ap = test_data()
+def test_create_input_multi_lon_lat(input_data, expected_input):
+    date, lon, lat, alt, f107, f107a, ap = input_data
     # Repeat 5 dates
     input_data = (date, [lon]*5, [lat]*5, alt, f107, f107a, ap)
     shape, data = msis.create_input(*input_data)
     assert shape == (1, 5, 5, 1)
     assert data.shape == (5*5, 14)
-    expected = [[1.5, 86400/2, 0, 0, 200, 150, 150] + [3]*7]*5*5
-    assert_array_equal(data, expected)
+    assert_array_equal(data, [expected_input]*5*5)
 
 
-def test_run_options():
+def test_run_options(input_data):
     # Default options is all 1's, so make sure they are equivalent
-    assert_array_equal(msis.run(*test_data(), options=None),
-                       msis.run(*test_data(), options=[1]*25))
+    assert_array_equal(msis.run(*input_data, options=None),
+                       msis.run(*input_data, options=[1]*25))
 
     with pytest.raises(ValueError, match='options needs to be a list'):
-        msis.run(*test_data(), options=[1]*22)
+        msis.run(*input_data, options=[1]*22)
 
 
-def test_run_single_point():
-    output = msis.run(*test_data())
+def test_run_single_point(input_data, expected_output):
+    output = msis.run(*input_data)
     assert output.shape == (1, 1, 1, 1, 11)
-    assert_allclose(np.squeeze(output), test_output(), rtol=1e-5)
+    assert_allclose(np.squeeze(output), expected_output, rtol=1e-5)
 
 
-def test_run_multi_point():
-    date, lon, lat, alt, f107, f107a, ap = test_data()
+def test_run_multi_point(input_data, expected_output):
+    date, lon, lat, alt, f107, f107a, ap = input_data
     # 5 x 5 surface
     input_data = (date, [lon]*5, [lat]*5, alt, f107, f107a, ap)
     output = msis.run(*input_data)
     assert output.shape == (1, 5, 5, 1, 11)
-    expected = np.tile(test_output(), (5, 5, 1))
+    expected = np.tile(expected_output, (5, 5, 1))
     assert_allclose(np.squeeze(output), expected, rtol=1e-5)
 
 
-def test_run_wrapped_lon():
-    date, _, lat, alt, f107, f107a, ap = test_data()
+def test_run_wrapped_lon(input_data, expected_output):
+    date, _, lat, alt, f107, f107a, ap = input_data
 
     input_data = (date, -180, lat, alt, f107, f107a, ap)
     output1 = msis.run(*input_data)
@@ -176,11 +174,11 @@ def test_run_wrapped_lon():
     assert_allclose(output1, output2, rtol=1e-5)
 
 
-def test_run_poles():
+def test_run_poles(input_data):
     # Test that moving in longitude around a pole
     # returns the same values
     # North pole
-    date, _, _, alt, f107, f107a, ap = test_data()
+    date, _, _, alt, f107, f107a, ap = input_data
     input_data = (date, 0, 90, alt, f107, f107a, ap)
     output1 = msis.run(*input_data)
     input_data = (date, 20, 90, alt, f107, f107a, ap)
@@ -195,34 +193,34 @@ def test_run_poles():
     assert_allclose(output1, output2, rtol=1e-5)
 
 
-def test_run_versions():
+def test_run_versions(input_data):
     # Make sure we accept these version numbers and don't throw an error
     for ver in [0, 2, '00', '2']:
-        msis.run(*test_data(), version=ver)
+        msis.run(*input_data, version=ver)
     # Test for something outside of that list for an error to be thrown
     with pytest.raises(ValueError, match='The MSIS version selected'):
-        msis.run(*test_data(), version=1)
+        msis.run(*input_data, version=1)
 
 
-def test_run_version00():
-    output = msis.run(*test_data(), version=0)
+def test_run_version00(input_data, expected_output00):
+    output = msis.run(*input_data, version=0)
     assert output.shape == (1, 1, 1, 1, 11)
-    assert_allclose(np.squeeze(output), test_output00(), rtol=1e-5)
+    assert_allclose(np.squeeze(output), expected_output00, rtol=1e-5)
 
 
-def test_run_multi_point00():
-    date, lon, lat, alt, f107, f107a, ap = test_data()
+def test_run_multi_point00(input_data, expected_output00):
+    date, lon, lat, alt, f107, f107a, ap = input_data
     # 5 x 5 surface
     input_data = (date, [lon]*5, [lat]*5, alt, f107, f107a, ap)
     output = msis.run(*input_data, version=0)
     assert output.shape == (1, 5, 5, 1, 11)
-    expected = np.tile(test_output00(), (5, 5, 1))
+    expected = np.tile(expected_output00, (5, 5, 1))
     assert_allclose(np.squeeze(output), expected, rtol=1e-5)
 
 
-def test_run_version00_low_altitude():
+def test_run_version00_low_altitude(input_data):
     # There is no O, H, N below 72.5 km, should be NaN
-    date, lon, lat, _, f107, f107a, ap = test_data()
+    date, lon, lat, _, f107, f107a, ap = input_data
     input_data = (date, lon, lat, 71, f107, f107a, ap)
     output = msis.run(*input_data, version=0)
     assert np.all(np.isnan(np.squeeze(output)[[3, 5, 7]]))
