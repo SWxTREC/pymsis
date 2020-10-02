@@ -72,7 +72,6 @@ def run(dates, lons, lats, alts, f107s, f107as, aps,
         # the Python package
         msis_path = os.path.dirname(os.path.realpath(__file__)) + "/"
         msis2f.pyinitswitch(options, parmpath=msis_path)
-
         output = msis2f.pymsiscalc(input_data[:, 0], input_data[:, 1],
                                    input_data[:, 2], input_data[:, 3],
                                    input_data[:, 4], input_data[:, 5],
@@ -177,8 +176,10 @@ def create_input(dates, lons, lats, alts, f107s, f107as, aps):
              dates.astype('datetime64[Y]')).astype(float) + 1  # DOY 1-366
     dseconds = (dates.astype('datetime64[s]') -
                 dates.astype('datetime64[D]')).astype(float)
-    # Make it a continuous day of year
-    dyear += dseconds/86400
+    # TODO: Make it a continuous day of year?
+    #       The new code mentions it should be and accepts float, but the
+    #       regression tests indicate it should still be integer DOY
+    # dyear += dseconds/86400
     lons = np.atleast_1d(lons)
     # If any longitudes were input as negatives, try to change them to
     # the (0, 360) range
