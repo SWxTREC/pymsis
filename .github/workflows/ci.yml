@@ -13,14 +13,20 @@ jobs:
   build:
 
     runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        python-version: [3.6, 3.7, 3.8]
+        os: [windows-latest]
+        python-version: [3.8]
+
     env:
-      FC: gfortran-9
-      F90: gfortran-9
-      CC: gcc-9
+      FC: gfortran
+      F90: gfortran
+      CC: gcc
+
+    defaults:
+      run:
+        shell: bash -l {0}
 
     steps:
     - uses: actions/checkout@v2
