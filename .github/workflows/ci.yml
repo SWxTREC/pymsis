@@ -13,14 +13,22 @@ jobs:
   build:
 
     runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        python-version: [3.6, 3.7, 3.8]
+        os: [windows-latest]
+        python-version: [3.8]
+
     env:
-      FC: gfortran-9
-      F90: gfortran-9
-      CC: gcc-9
+      if: ${{ matrix.os }}  ==  windows-latest
+      FC: gfortran
+      F90: gfortran
+      CC: gcc
+
+    defaults:
+      run:
+        shell: C:\Program Files\Git\mingw64\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+        # shell: bash.exe --login -eo pipefail "{0}"
 
     steps:
     - uses: actions/checkout@v2
@@ -29,6 +37,17 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+
+    - name: Add msys2 path
+      run: |
+        echo "C:\msys64\usr\bin\" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      shell: powershell
+
+    - name: Debug Windows
+      run: |
+        echo $PATH
+        which gfortran
+      shell: C:\Program Files\Git\mingw64\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
 
     - name: Download source files
       run: |
@@ -44,6 +63,7 @@ jobs:
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
+        which flake8
         flake8 . --count --show-source --statistics
 
     - name: Test with pytest
