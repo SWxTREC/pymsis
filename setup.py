@@ -30,7 +30,7 @@ ext_msis00 = Extension(name='pymsis.msis00f',
 
 requirements = ['numpy']
 
-with open("README.md", "r") as f:
+with open("README", "r") as f:
     long_description = f.read()
 
 setup(
@@ -42,9 +42,9 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
     ],
     description="A Python wrapper around the NRLMSIS model.",
     long_description=long_description,
