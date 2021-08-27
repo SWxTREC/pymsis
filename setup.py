@@ -5,6 +5,8 @@ import os
 import sys
 from numpy.distutils.core import Extension, setup
 
+# Some system's don't include the local directory on the
+# base Python path for some reason, so add it in directly
 sys.path.insert(0, os.getcwd())
 from pymsis import __version__
 from tools.download_source import get_source

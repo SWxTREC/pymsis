@@ -1,0 +1,4 @@
+[flake8]
+per-file-ignores =
+    # imports not at top of file
+    setup.py: E402
