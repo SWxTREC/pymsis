@@ -1,12 +1,23 @@
+.. image:: https://swxtrec.github.io/pymsis/_static/pymsis-logo.png
+
 pymsis: A python wrapper of the NRLMSIS model
 =============================================
 
-Note that the MSIS2 code is not available for commercial use without
-contacting NRL. See the `MSIS2 license file <MSIS2_LICENSE>`__ for
-explicit details. We do not repackage any of the MSIS source code in
-this repository for that reason. However, we do provide utilities to
-easily download and extract the original source code. By using that code
-you agree to their terms and conditions.
+|PyPi|_ |Downloads|_ |GitHubActions|_
+
+.. |PyPi| image:: https://badge.fury.io/py/pymsis.svg
+.. _PyPi: https://badge.fury.io/py/pymsis
+
+.. |Downloads| image:: https://pepy.tech/badge/pymsis/month
+.. _Downloads: https://pepy.tech/project/pymsis
+
+.. |GitHubActions| image:: https://github.com/SWxTREC/pymsis/actions/workflows/ci.yml/badge.svg
+.. _GitHubActions: https://github.com/SWxTREC/pymsis/actions?query=workflow%3Apymsis
+
+Pymsis is meant to be a minimal and fast Python wrapper of the NRLMSIS models.
+Documentation to get started quickly can be found on the `home page <https://swxtrec.github.io/pymsis/>`_.
+It includes some `examples <https://swxtrec.github.io/pymsis/examples/index.html>`_ that
+demonstrate how to access and plot the data.
 
 NRL Mass Spectrometer, Incoherent Scatter Radar Extended Model (MSIS)
 ---------------------------------------------------------------------
@@ -14,6 +25,13 @@ NRL Mass Spectrometer, Incoherent Scatter Radar Extended Model (MSIS)
 The `MSIS
 model <https://www.nrl.navy.mil/ssd/branches/7630/modeling-upper-atmosphere>`__
 is developed by the Naval Research Laboratory.
+
+Note that the MSIS2 code is not available for commercial use without
+contacting NRL. See the `MSIS2 license file <MSIS2_LICENSE>`__ for
+explicit details. We do not repackage any of the MSIS source code in
+this repository for that reason. However, we do provide utilities to
+easily download and extract the original source code. By using that code
+you agree to their terms and conditions.
 
 References
 ----------
