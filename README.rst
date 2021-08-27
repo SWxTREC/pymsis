@@ -40,7 +40,13 @@ The Original NRLMSISE-00 paper
 Installation
 ------------
 
-You can install pymsis from the git repository
+The easiest way to install pymsis is to install from PyPI.
+
+.. code:: bash
+
+    pip install pymsis
+
+For the most up-to-date pymsis, you can install directly from the git repository
 
 .. code:: bash
 
@@ -52,6 +58,7 @@ editable install
 .. code:: bash
 
     git clone https://github.com/SWxTREC/pymsis.git
+    cd pymsis
     pip install -e .
 
 Remote installation
@@ -63,22 +70,22 @@ the Fortran source code as follows.
 
 1. **Download the source code**
 
-   The source code is hosted on the NRL's website:
-   https://map.nrl.navy.mil/map/pub/nrl/NRLMSIS/NRLMSIS2.0/ Download the
-   ``NRLMSIS2.0.tar.gz`` file to your local system.
+    The source code is hosted on the NRL's website:
+    https://map.nrl.navy.mil/map/pub/nrl/NRLMSIS/NRLMSIS2.0/ Download the
+    ``NRLMSIS2.0.tar.gz`` file to your local system.
 
 2. **Extract the source files**
 
-   The tar file needs to be extracted to a new ``msis2`` directory in
-   the base of the pymsis package.
+    The tar file needs to be extracted to a new ``msis2`` directory in
+    the base of the pymsis package.
 
-   .. code:: bash
+    .. code:: bash
 
-       mkdir msis2
-       tar -xvzf NRLMSIS2.0.tar.gz -C msis2/
+        mkdir msis2
+        tar -xvzf NRLMSIS2.0.tar.gz -C msis2/
 
 3. **Install the Python package**
 
-   .. code:: bash
+    .. code:: bash
 
-       pip install .
+        pip install .
