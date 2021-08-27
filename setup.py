@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 
 """The setup script."""
+import os
+import sys
 from numpy.distutils.core import Extension, setup
 
+sys.path.insert(0, os.getcwd())
 from pymsis import __version__
 from tools.download_source import get_source
 
@@ -17,13 +20,15 @@ msis2_sources = ['msis2.pyf', 'msis2.F90',
                  'msis_tfn.F90', 'alt2gph.F90', 'msis_dfn.F90',
                  'msis_calc.F90']
 # Add the directory where the files are located
-msis2_sources = ['src/msis2/' + x for x in msis2_sources]
+msis2_sources = [os.path.join('src', 'msis2', x) for x in msis2_sources]
 
 ext_msis2 = Extension(name='pymsis.msis2f',
                       sources=msis2_sources,
-                      extra_f90_compile_args=['-march=native', '-ffast-math'])
+                      extra_f90_compile_args=['-std=legacy', '-march=native',
+                                              '-ffast-math'])
 
-msis00_sources = ['src/msis00/msis00.F90', 'src/msis00/NRLMSISE-00.FOR']
+msis00_sources = [os.path.join('src', 'msis00', 'msis00.F90'),
+                  os.path.join('src', 'msis00', 'NRLMSISE-00.FOR')]
 ext_msis00 = Extension(name='pymsis.msis00f',
                        sources=msis00_sources,
                        extra_f77_compile_args=['-std=legacy'])
@@ -48,13 +53,13 @@ setup(
     ],
     description="A Python wrapper around the NRLMSIS model.",
     long_description=long_description,
-    long_description_content_type="text/markdown",
+    long_description_content_type="text/x-rst",
     url="https://swxtrec.github.io/pymsis/",
     ext_modules=[ext_msis2, ext_msis00],
     license="MIT license",
     keywords='MSIS2, NRLMSIS',
     name='pymsis',
-    data_files=[('pymsis', ['pymsis/msis2.0.parm'])],
+    data_files=[('pymsis', [os.path.join('pymsis', 'msis2.0.parm')])],
     include_package_data=True,
     packages=['pymsis'],
     install_requires=requirements,
