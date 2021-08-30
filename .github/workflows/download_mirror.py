@@ -1,4 +1,5 @@
 """This is only for CI downloading/testing."""
+import os
 import tarfile
 import urllib.request
 
@@ -10,7 +11,7 @@ SOURCE_FILE = ("https://gist.github.com/greglucas/"
 
 with urllib.request.urlopen(SOURCE_FILE) as stream:
     tf = tarfile.open(fileobj=stream, mode="r|gz")
-    tf.extractall(path='src/msis2/')
+    tf.extractall(path=os.path.join('src', 'msis2', ''))
 
 # MSIS-00 fortran file
 MSIS00_FILE = ("https://gist.githubusercontent.com/greglucas/"
@@ -18,5 +19,5 @@ MSIS00_FILE = ("https://gist.githubusercontent.com/greglucas/"
                "raw/2c1f5d899d7b42392a6b19a041d2cc213589a5f1/"
                "NRLMSISE-00.FOR")
 with urllib.request.urlopen(MSIS00_FILE) as response:
-    with open('src/msis00/NRLMSISE-00.FOR', 'wb') as f:
+    with open(os.path.join('src', 'msis00', 'NRLMSISE-00.FOR'), 'wb') as f:
         f.write(response.read())
