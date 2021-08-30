@@ -38,7 +38,7 @@ ext_msis00 = Extension(name='pymsis.msis00f',
 
 requirements = ['numpy']
 
-with open("README.rst", "r") as f:
+with open("README.rst", "r", encoding='utf8', errors="ignore") as f:
     long_description = f.read()
 
 setup(
