@@ -24,10 +24,11 @@ msis2_sources = ['msis2.pyf', 'msis2.F90',
 # Add the directory where the files are located
 msis2_sources = [os.path.join('src', 'msis2', x) for x in msis2_sources]
 
+# If you want to get some additional speed from compile-time options you can
+# add extra compile-time flags. e.g., '-march=native', '-ffast-math'
 ext_msis2 = Extension(name='pymsis.msis2f',
                       sources=msis2_sources,
-                      extra_f90_compile_args=['-std=legacy', '-march=native',
-                                              '-ffast-math'])
+                      extra_f90_compile_args=['-std=legacy'])
 
 msis00_sources = [os.path.join('src', 'msis00', 'msis00.F90'),
                   os.path.join('src', 'msis00', 'NRLMSISE-00.FOR')]
