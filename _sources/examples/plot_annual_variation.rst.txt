@@ -87,7 +87,7 @@ difference from the annual mean at a single location.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.150 seconds)
+   **Total running time of the script:** ( 0 minutes  0.149 seconds)
 
 
 .. _sphx_glr_download_examples_plot_annual_variation.py:
