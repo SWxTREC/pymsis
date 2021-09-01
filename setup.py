@@ -26,9 +26,11 @@ msis2_sources = [os.path.join('src', 'msis2', x) for x in msis2_sources]
 
 # If you want to get some additional speed from compile-time options you can
 # add extra compile-time flags. e.g., '-march=native', '-ffast-math'
+# NOTE: -O1 seems to be required on Windows+Py39 CI systems, so we are setting
+#       that for everyone for now, but it should be investigated later.
 ext_msis2 = Extension(name='pymsis.msis2f',
                       sources=msis2_sources,
-                      extra_f90_compile_args=['-std=legacy'])
+                      extra_f90_compile_args=['-std=legacy', '-O1'])
 
 msis00_sources = [os.path.join('src', 'msis00', 'msis00.F90'),
                   os.path.join('src', 'msis00', 'NRLMSISE-00.FOR')]
@@ -38,7 +40,7 @@ ext_msis00 = Extension(name='pymsis.msis00f',
 
 requirements = ['numpy']
 
-with open("README.rst", "r") as f:
+with open("README.rst", "r", encoding='utf8', errors="ignore") as f:
     long_description = f.read()
 
 setup(

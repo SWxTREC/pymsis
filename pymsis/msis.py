@@ -215,4 +215,5 @@ def create_input(dates, lons, lats, alts, f107s, f107as, aps):
                     f107s[indices[:, 0]], f107as[indices[:, 0]]], -1)
     # ap has 7 components, so we need to concatenate it onto the
     # arrays rather than stack
-    return shape, np.concatenate([arr, aps[indices[:, 0], :]], axis=1)
+    return shape, np.concatenate([arr, aps[indices[:, 0], :]], axis=1,
+                                 dtype=np.float32)

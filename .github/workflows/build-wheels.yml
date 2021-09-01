@@ -12,14 +12,27 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04, macos-latest]
+        os: [windows-latest, ubuntu-latest, macos-latest]
     env:
       FC: gfortran-9
       F90: gfortran-9
       CC: gcc-9
+    defaults:
+      run:
+        shell: bash
 
     steps:
       - uses: actions/checkout@v2
+
+      # Only on the Windows runner
+      - name: Add Windows environment settings
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          echo "C:\msys64\mingw64\bin" >> $GITHUB_PATH
+          echo "C:\msys64\usr\bin" >> $GITHUB_PATH
+          echo "FC=gfortran" >> $GITHUB_ENV
+          echo "F90=gfortran" >> $GITHUB_ENV
+          echo "CC=gcc" >> $GITHUB_ENV
 
       - uses: actions/setup-python@v2
         name: Install Python

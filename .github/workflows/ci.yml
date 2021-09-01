@@ -13,17 +13,31 @@ jobs:
   build:
 
     runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [windows-latest, ubuntu-latest, macos-latest]
         python-version: [3.7, 3.8, 3.9]
     env:
       FC: gfortran-9
       F90: gfortran-9
       CC: gcc-9
+    defaults:
+      run:
+        shell: bash
 
     steps:
     - uses: actions/checkout@v2
+
+    # Only on the Windows runner
+    - name: Add Windows environment settings
+      if: startsWith(matrix.os, 'windows')
+      run: |
+        echo "C:\msys64\mingw64\bin" >> $GITHUB_PATH
+        echo "C:\msys64\usr\bin" >> $GITHUB_PATH
+        echo "FC=gfortran" >> $GITHUB_ENV
+        echo "F90=gfortran" >> $GITHUB_ENV
+        echo "CC=gcc" >> $GITHUB_ENV
 
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
@@ -39,7 +53,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         pip install -r requirements.txt
-        pip install .
+
+    - name: Install pymsis
+      run: pip install -v .
 
     - name: Lint with flake8
       run: |
