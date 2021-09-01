@@ -39,5 +39,4 @@ subroutine pymsiscalc(day, utsec, lon, lat, z, sflux, sfluxavg, ap, output, n)
                     sflux(i), ap(i, :), output(i, 11), output(i, 1:10))
     enddo
 
-    return
 end subroutine pymsiscalc
