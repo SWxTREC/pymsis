@@ -3,7 +3,10 @@
 pymsis: A python wrapper of the NRLMSIS model
 =============================================
 
-|PyPi|_ |Downloads|_ |GitHubActions|_
+|Zenodo|_ |PyPi|_ |Downloads|_ |GitHubActions|_
+
+.. |Zenodo| image:: https://zenodo.org/badge/298114805.svg
+.. _Zenodo: https://zenodo.org/badge/latestdoi/298114805
 
 .. |PyPi| image:: https://badge.fury.io/py/pymsis.svg
 .. _PyPi: https://badge.fury.io/py/pymsis
