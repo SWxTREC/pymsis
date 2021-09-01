@@ -1,5 +1,5 @@
 import os
-__version__ = "0.2.1"
+__version__ = "0.3.0"
 
 # If we are on Windows, Python 3.8+ then we need to add a DLL search path
 # The libraries are located relative to this init file.
