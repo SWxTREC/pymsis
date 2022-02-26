@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FC: gfortran-9
+      F77: gfortran-9
       F90: gfortran-9
       CC: gcc-9
     steps:
