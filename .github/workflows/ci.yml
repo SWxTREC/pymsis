@@ -17,9 +17,10 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
-        python-version: [3.7, 3.8, 3.9]
+        python-version: [3.7, 3.8, 3.9, '3.10']
     env:
       FC: gfortran-9
+      F77: gfortran-9
       F90: gfortran-9
       CC: gcc-9
     defaults:
@@ -36,6 +37,7 @@ jobs:
         echo "C:\msys64\mingw64\bin" >> $GITHUB_PATH
         echo "C:\msys64\usr\bin" >> $GITHUB_PATH
         echo "FC=gfortran" >> $GITHUB_ENV
+        echo "F77=gfortran" >> $GITHUB_ENV
         echo "F90=gfortran" >> $GITHUB_ENV
         echo "CC=gcc" >> $GITHUB_ENV
 
