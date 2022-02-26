@@ -56,7 +56,7 @@ jobs:
         pip install -r requirements-test.txt
 
     - name: Install pymsis
-      run: pip install -v .
+      run: pip install -ve .
 
     - name: Lint with flake8
       run: |
