@@ -53,8 +53,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest
-        pip install -r requirements.txt
+        pip install -r requirements-test.txt
 
     - name: Install pymsis
       run: pip install -v .
@@ -65,4 +64,7 @@ jobs:
         flake8 . --count --show-source --statistics
 
     - name: Test with pytest
-      run: pytest --color=yes
+      run: pytest --color=yes --cov --cov-report=xml
+
+    - name: Upload code coverage
+      uses: codecov/codecov-action@v2
