@@ -189,7 +189,12 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="pymsis.msis.run">
 <span class="sig-prename descclassname"><span class="pre">pymsis.msis.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lons</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f107s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f107as</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymsis.msis.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Call MSIS looping over all possible inputs.</p>
+<dd><p>Call MSIS looping over all possible inputs. If ndates is
+the same as nlons, nlats, and nalts, then a flattened
+multi-point input array is assumed. Otherwise, the data
+will be expanded in a grid-like fashion. The possible
+return shapes are therefore (ndates, 11) and
+(ndates, nlons, nlats, nalts, 11).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -222,7 +227,7 @@
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>ndarray (ndates, nlons, nlats, nalts, 11)</p>
+<dd class="field-odd"><p>ndarray (ndates, nlons, nlats, nalts, 11) or (ndates, 11)</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>

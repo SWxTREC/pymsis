@@ -205,7 +205,8 @@
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The shape of the data as a tuple (ndates, nlons, nlats, nalts) and
 the flattened version of the input data
-(ndates*nlons*nlats*nalts, 14).</p>
+(ndates*nlons*nlats*nalts, 14). If the input array was preflattened
+(ndates == nlons == nlats == nalts), then the shape is (ndates,).</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>(shape, flattened_input)</p>
