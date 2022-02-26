@@ -29,9 +29,10 @@ MSIS version 00 and 2.
 
 
 
-.. image:: /examples/images/sphx_glr_plot_version_diff_surface_001.png
-    :alt: Total mass density, N2, O2, O, He, H, Ar, N, Anomalous O
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/images/sphx_glr_plot_version_diff_surface_001.png
+   :alt: Total mass density, N2, O2, O, He, H, Ar, N, Anomalous O
+   :srcset: /examples/images/sphx_glr_plot_version_diff_surface_001.png
+   :class: sphx-glr-single-img
 
 
 
@@ -84,7 +85,7 @@ MSIS version 00 and 2.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.787 seconds)
+   **Total running time of the script:** ( 0 minutes  0.737 seconds)
 
 
 .. _sphx_glr_download_examples_plot_version_diff_surface.py:

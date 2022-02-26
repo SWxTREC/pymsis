@@ -28,9 +28,10 @@ quantities on a constant altitude plane.
 
 
 
-.. image:: /examples/images/sphx_glr_plot_surface_001.png
-    :alt: O$_2$ number density at 200 km
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/images/sphx_glr_plot_surface_001.png
+   :alt: O$_2$ number density at 200 km
+   :srcset: /examples/images/sphx_glr_plot_surface_001.png
+   :class: sphx-glr-single-img
 
 
 
@@ -75,7 +76,7 @@ quantities on a constant altitude plane.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.233 seconds)
+   **Total running time of the script:** ( 0 minutes  0.214 seconds)
 
 
 .. _sphx_glr_download_examples_plot_surface.py:
