@@ -60,7 +60,7 @@ def test_create_options():
 
 def test_create_input_single_point(input_data, expected_input):
     shape, data = msis.create_input(*input_data)
-    assert shape == (1, 1, 1, 1)
+    assert shape == (1,)
     assert data.shape == (1, 14)
     assert_array_equal(data[0, :], expected_input)
 
@@ -70,7 +70,7 @@ def test_create_input_datetime(input_data, expected_input):
     # .item() gets the datetime object from the np.datetime64 object
     input_data = (input_data[0].item(),) + input_data[1:]
     shape, data = msis.create_input(*input_data)
-    assert shape == (1, 1, 1, 1)
+    assert shape == (1,)
     assert data.shape == (1, 14)
     assert_array_equal(data[0, :], expected_input)
 
@@ -144,17 +144,30 @@ def test_run_options(input_data):
 
 def test_run_single_point(input_data, expected_output):
     output = msis.run(*input_data)
-    assert output.shape == (1, 1, 1, 1, 11)
+    assert output.shape == (1, 11)
     assert_allclose(np.squeeze(output), expected_output, rtol=1e-5)
 
 
-def test_run_multi_point(input_data, expected_output):
+def test_run_gridded_multi_point(input_data, expected_output):
     date, lon, lat, alt, f107, f107a, ap = input_data
     # 5 x 5 surface
     input_data = (date, [lon]*5, [lat]*5, alt, f107, f107a, ap)
     output = msis.run(*input_data)
     assert output.shape == (1, 5, 5, 1, 11)
     expected = np.tile(expected_output, (5, 5, 1))
+    assert_allclose(np.squeeze(output), expected, rtol=1e-5)
+
+
+def test_run_multi_point(input_data, expected_output):
+    # test multi-point run, like a satellite fly-through
+    # and make sure we don't grid the input data
+    # 5 input points
+    date, lon, lat, alt, f107, f107a, ap = input_data
+    input_data = ([date]*5, [lon]*5, [lat]*5, [alt]*5,
+                  [f107]*5, [f107a]*5, ap*5)
+    output = msis.run(*input_data)
+    assert output.shape == (5, 11)
+    expected = np.tile(expected_output, (5, 1))
     assert_allclose(np.squeeze(output), expected, rtol=1e-5)
 
 
@@ -204,7 +217,7 @@ def test_run_versions(input_data):
 
 def test_run_version00(input_data, expected_output00):
     output = msis.run(*input_data, version=0)
-    assert output.shape == (1, 1, 1, 1, 11)
+    assert output.shape == (1, 11)
     assert_allclose(np.squeeze(output), expected_output00, rtol=1e-5)
 
 

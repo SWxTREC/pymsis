@@ -7,7 +7,13 @@ from . import msis2f, msis00f
 
 def run(dates, lons, lats, alts, f107s, f107as, aps,
         options=None, version=2):
-    """Call MSIS looping over all possible inputs.
+    """
+    Call MSIS looping over all possible inputs. If ndates is
+    the same as nlons, nlats, and nalts, then a flattened
+    multi-point input array is assumed. Otherwise, the data
+    will be expanded in a grid-like fashion. The possible
+    return shapes are therefore (ndates, 11) and
+    (ndates, nlons, nlats, nalts, 11).
 
     Parameters
     ----------
@@ -32,7 +38,7 @@ def run(dates, lons, lats, alts, f107s, f107as, aps,
 
     Returns
     -------
-    ndarray (ndates, nlons, nlats, nalts, 11)
+    ndarray (ndates, nlons, nlats, nalts, 11) or (ndates, 11)
         | The data calculated at each grid point:
         | [Total mass density (kg/m3)
         | N2 # density (m-3),
@@ -168,7 +174,8 @@ def create_input(dates, lons, lats, alts, f107s, f107as, aps):
     (shape, flattened_input)
         The shape of the data as a tuple (ndates, nlons, nlats, nalts) and
         the flattened version of the input data
-        (ndates*nlons*nlats*nalts, 14).
+        (ndates*nlons*nlats*nalts, 14). If the input array was preflattened
+        (ndates == nlons == nlats == nalts), then the shape is (ndates,).
     """
     # Turn everything into arrays
     dates = np.atleast_1d(np.array(dates, dtype='datetime64'))
@@ -194,18 +201,30 @@ def create_input(dates, lons, lats, alts, f107s, f107as, aps):
     nlons = len(lons)
     nlats = len(lats)
     nalts = len(alts)
-    shape = (ndates, nlons, nlats, nalts)
 
     if not (ndates == len(f107s) == len(f107as) == len(aps)):
         raise ValueError(f"The length of dates ({ndates}), f107s "
                          f"({len(f107s)}), f107as ({len(f107as)}), "
                          f"and aps ({len(aps)}) must all be equal")
 
+    if ndates == nlons == nlats == nalts:
+        # This means the data came in preflattened, from a satellite
+        # trajectory for example, where we don't want to make a grid
+        # out of the input data, we just want to stack it together.
+        arr = np.stack([dyear, dseconds, lons, lats, alts, f107s, f107as], -1)
+
+        # ap has 7 components, so we need to concatenate it onto the
+        # arrays rather than stack
+        flattened_input = np.concatenate([arr, aps], axis=1,
+                                         dtype=np.float32)
+        shape = (ndates,)
+        return shape, flattened_input
+
     # Make a grid of indices
     indices = np.stack(np.meshgrid(np.arange(ndates),
-                                   np.arange(nlons),
-                                   np.arange(nlats),
-                                   np.arange(nalts), indexing='ij'),
+                       np.arange(nlons),
+                       np.arange(nlats),
+                       np.arange(nalts), indexing='ij'),
                        -1).reshape(-1, 4)
 
     # Now stack all of the arrays, indexing by the proper indices
@@ -215,5 +234,7 @@ def create_input(dates, lons, lats, alts, f107s, f107as, aps):
                     f107s[indices[:, 0]], f107as[indices[:, 0]]], -1)
     # ap has 7 components, so we need to concatenate it onto the
     # arrays rather than stack
-    return shape, np.concatenate([arr, aps[indices[:, 0], :]], axis=1,
-                                 dtype=np.float32)
+    flattened_input = np.concatenate([arr, aps[indices[:, 0], :]], axis=1,
+                                     dtype=np.float32)
+    shape = (ndates, nlons, nlats, nalts)
+    return shape, flattened_input
