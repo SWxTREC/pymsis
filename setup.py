@@ -3,7 +3,7 @@
 """The setup script."""
 import os
 import sys
-from numpy.distutils.core import Extension, setup
+from setuptools import Extension, setup
 
 # Some system's don't include the local directory on the
 # base Python path for some reason, so add it in directly
