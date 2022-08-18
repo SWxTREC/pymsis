@@ -66,7 +66,7 @@ ext_msis00 = Extension(
     extra_f77_compile_args=["-std=legacy"],
 )
 
-with open("README.rst", "r", encoding="utf8", errors="ignore") as f:
+with open("README.rst", encoding="utf8", errors="ignore") as f:
     long_description = f.read()
 
 setup(

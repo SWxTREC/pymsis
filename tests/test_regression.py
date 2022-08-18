@@ -11,7 +11,7 @@ def run_input_line(line, version):
 
     # Needs to be "-3:" due to strip() taking off leading spaces
     doy = int(items[0][-3:]) - 1  # Python wants DOY to start with 0
-    sec, alt, lat, lon, _, f107a, f107, ap = [float(x) for x in items[1:9]]
+    sec, alt, lat, lon, _, f107a, f107, ap = (float(x) for x in items[1:9])
     ap = [[ap] * 7]
     year = int(items[0][:-3])
     # Two digit year
@@ -80,7 +80,7 @@ def run_input_line(line, version):
 def test_included_msis20_f90_file():
     # Regressing to the included file
     TEST_DIR = Path(__file__).parent
-    with open(TEST_DIR / "msis2.0_test_ref_dp.txt", "r") as f:
+    with open(TEST_DIR / "msis2.0_test_ref_dp.txt") as f:
         f.readline()  # Header
         for line in f:
             run_input_line(line, version="2.0")
@@ -89,7 +89,7 @@ def test_included_msis20_f90_file():
 def test_included_msis_21_f90_file():
     # Regressing to the included file
     TEST_DIR = Path(__file__).parent
-    with open(TEST_DIR / "msis2.1_test_ref_dp.txt", "r") as f:
+    with open(TEST_DIR / "msis2.1_test_ref_dp.txt") as f:
         f.readline()  # Header
         for line in f:
             run_input_line(line, version="2.1")
