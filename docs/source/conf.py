@@ -14,16 +14,18 @@ from pathlib import Path
 import sys
 from sphinx_gallery.sorting import ExampleTitleSortKey
 
-sys.path.insert(0, Path('../../pymsis').resolve())
+import pymsis
+
+sys.path.insert(0, Path("../../pymsis").resolve())
 
 # -- Project information -----------------------------------------------------
 
-project = 'pymsis'
-copyright = '2020, Regents of the University of Colorado'
-author = 'Greg Lucas'
+project = "pymsis"
+copyright = "2020, Regents of the University of Colorado"
+author = "Greg Lucas"
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.0'
+release = pymsis.__version__
 
 
 # -- General configuration ---------------------------------------------------
@@ -32,16 +34,16 @@ release = '0.1.0'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
-    'sphinx.ext.githubpages',  # Helpful for publishing to gh-pages
-    'sphinx.ext.napoleon',
-    'matplotlib.sphinxext.plot_directive',
-    'sphinx_gallery.gen_gallery',
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.githubpages",  # Helpful for publishing to gh-pages
+    "sphinx.ext.napoleon",
+    "matplotlib.sphinxext.plot_directive",
+    "sphinx_gallery.gen_gallery",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -54,26 +56,26 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'pydata_sphinx_theme'
+html_theme = "pydata_sphinx_theme"
 
 html_logo = "_static/pymsis-logo.png"
 
 html_theme_options = {
-  "github_url": "https://github.com/SWxTREC/pymsis",
+    "github_url": "https://github.com/SWxTREC/pymsis",
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ["_static"]
 
 # Autosummary
 autosummary_generate = True
 
 # Sphinx gallery
 sphinx_gallery_conf = {
-     'examples_dirs': '../../examples',   # path to example scripts
-     'gallery_dirs': 'examples',  # path to where to save generated output
-     'matplotlib_animations': True,
-     'within_subsection_order': ExampleTitleSortKey,
+    "examples_dirs": "../../examples",  # path to example scripts
+    "gallery_dirs": "examples",  # path to where to save generated output
+    "matplotlib_animations": True,
+    "within_subsection_order": ExampleTitleSortKey,
 }
