@@ -1,74 +1,83 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Surface animation &#8212; pymsis 0.1.0 documentation</title>
-    
-    <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-  
-    
-    <link rel="stylesheet"
-      href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-  
-    
-      
-  
-    
+    <title>Surface animation &#8212; pymsis 0.5.0 documentation</title>
+<script>
+  document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+  document.documentElement.dataset.theme = localStorage.getItem("theme") || "light"
+</script>
+
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=92025949c220c2e29695" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=92025949c220c2e29695" rel="stylesheet">
+
+
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/pydata-sphinx-theme.css" />
     <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
-    
-    <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
-  
+
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=92025949c220c2e29695">
+
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Surface plot" href="plot_surface.html" />
     <link rel="prev" title="Diurnal variation" href="plot_diurnal_variation.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="docsearch:language" content="en">
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+    <div class="bd-header-announcement container-fluid" id="banner">
+      
+
+    </div>
 
     
-    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+    <nav class="bd-header navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="bd-header__inner container-xl">
 
   <div id="navbar-start">
     
     
+  
 
-<a class="navbar-brand" href="../index.html">
-  <img src="../_static/pymsis-logo.png" class="logo" alt="logo">
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    <img src="../_static/pymsis-logo.png" class="logo__image only-light" alt="Logo image">
+    <img src="../_static/pymsis-logo.png" class="logo__image only-dark" alt="Logo image">
+  
+  
 </a>
-
-
     
   </div>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <span class="fas fa-bars"></span>
   </button>
 
   
@@ -104,6 +113,14 @@
     <div id="navbar-end">
       
       <div class="navbar-end-item">
+        <span id="theme-switch" class="btn btn-sm btn-outline-primary navbar-btn rounded-circle">
+    <a class="theme-switch" data-mode="light"><i class="fas fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="far fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fas fa-adjust"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
         <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
         <li class="nav-item">
           <a class="nav-link" href="https://github.com/SWxTREC/pymsis" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github-square"></i></span>
@@ -118,60 +135,48 @@
     </nav>
     
 
-    <div class="container-xl">
-      <div class="row">
+    <div class="bd-container container-xl">
+      <div class="bd-container__inner row">
           
-            
-            <!-- Only show if we have sidebars configured, else just a small margin  -->
-            <div class="col-12 col-md-3 bd-sidebar">
-              <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+
+<!-- Only show if we have sidebars configured, else just a small margin  -->
+<div class="bd-sidebar-primary col-12 col-md-3 bd-sidebar">
+  <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
   <div class="bd-toc-item active">
-    <ul class="nav bd-sidenav">
+    <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="plot_altitude_profiles.html">
    Altitude profiles
   </a>
  </li>
-</ul>
-<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="plot_annual_variation.html">
    Annual variation
   </a>
  </li>
-</ul>
-<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="plot_diurnal_variation.html">
    Diurnal variation
   </a>
  </li>
-</ul>
-<ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Surface animation
   </a>
  </li>
-</ul>
-<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="plot_surface.html">
    Surface plot
   </a>
  </li>
-</ul>
-<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="plot_version_diff_altitude.html">
    Version Differences (Altitude)
   </a>
  </li>
-</ul>
-<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="plot_version_diff_surface.html">
    Version Differences (Surface)
@@ -181,40 +186,39 @@
 
   </div>
 </nav>
-              </div>
-              <div class="sidebar-end-items">
-              </div>
-            </div>
-            
-          
+  </div>
+  <div class="sidebar-end-items">
+  </div>
+</div>
+
 
           
-          <div class="d-none d-xl-block col-xl-2 bd-toc">
-            
-              
-              <div class="toc-item">
-                
+
+
+<div class="bd-sidebar-secondary d-none d-xl-block col-xl-2 bd-toc">
+  
+    
+    <div class="toc-item">
+      
 
 <nav id="bd-toc-nav">
     
 </nav>
-              </div>
-              
-              <div class="toc-item">
-                
-              </div>
-              
-            
-          </div>
-          
+    </div>
+    
+    <div class="toc-item">
+      
+    </div>
+    
+  
+</div>
+
 
           
           
-            
-          
-          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+          <div class="bd-content col-12 col-md-9 col-xl-7">
               
-              <div>
+              <article class="bd-article" role="main">
                 
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
@@ -222,7 +226,7 @@
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="surface-animation">
-<span id="sphx-glr-examples-plot-surface-animation-py"></span><h1>Surface animation<a class="headerlink" href="#surface-animation" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-examples-plot-surface-animation-py"></span><h1>Surface animation<a class="headerlink" href="#surface-animation" title="Permalink to this heading">#</a></h1>
 <p>This example demonstrates how to animate the surface plot. Showing
 the variations over the course of a year.</p>
 <div class="sphx-glr-animation docutils container">
@@ -410,42 +414,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_imgb1a078cd0508480daaf1e94f2a2a6538">
+  <img id="_anim_img631cf9057d2748f9ba19d152ff5cf434">
   <div class="anim-controls">
-    <input id="_anim_sliderb1a078cd0508480daaf1e94f2a2a6538" type="range" class="anim-slider"
+    <input id="_anim_slider631cf9057d2748f9ba19d152ff5cf434" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="animb1a078cd0508480daaf1e94f2a2a6538.set_frame(parseInt(this.value));"></input>
+           oninput="anim631cf9057d2748f9ba19d152ff5cf434.set_frame(parseInt(this.value));">
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="animb1a078cd0508480daaf1e94f2a2a6538.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim631cf9057d2748f9ba19d152ff5cf434.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="animb1a078cd0508480daaf1e94f2a2a6538.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="anim631cf9057d2748f9ba19d152ff5cf434.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="animb1a078cd0508480daaf1e94f2a2a6538.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="anim631cf9057d2748f9ba19d152ff5cf434.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="animb1a078cd0508480daaf1e94f2a2a6538.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="anim631cf9057d2748f9ba19d152ff5cf434.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="animb1a078cd0508480daaf1e94f2a2a6538.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="anim631cf9057d2748f9ba19d152ff5cf434.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="animb1a078cd0508480daaf1e94f2a2a6538.play_animation()">
+      <button title="Play" aria-label="Play" onclick="anim631cf9057d2748f9ba19d152ff5cf434.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="animb1a078cd0508480daaf1e94f2a2a6538.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="anim631cf9057d2748f9ba19d152ff5cf434.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="animb1a078cd0508480daaf1e94f2a2a6538.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="anim631cf9057d2748f9ba19d152ff5cf434.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="animb1a078cd0508480daaf1e94f2a2a6538.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="anim631cf9057d2748f9ba19d152ff5cf434.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectb1a078cd0508480daaf1e94f2a2a6538"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select631cf9057d2748f9ba19d152ff5cf434"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_b1a078cd0508480daaf1e94f2a2a6538"
+      <input type="radio" name="state" value="once" id="_anim_radio1_631cf9057d2748f9ba19d152ff5cf434"
              >
-      <label for="_anim_radio1_b1a078cd0508480daaf1e94f2a2a6538">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_b1a078cd0508480daaf1e94f2a2a6538"
+      <label for="_anim_radio1_631cf9057d2748f9ba19d152ff5cf434">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_631cf9057d2748f9ba19d152ff5cf434"
              checked>
-      <label for="_anim_radio2_b1a078cd0508480daaf1e94f2a2a6538">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_b1a078cd0508480daaf1e94f2a2a6538"
+      <label for="_anim_radio2_631cf9057d2748f9ba19d152ff5cf434">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_631cf9057d2748f9ba19d152ff5cf434"
              >
-      <label for="_anim_radio3_b1a078cd0508480daaf1e94f2a2a6538">Reflect</label>
+      <label for="_anim_radio3_631cf9057d2748f9ba19d152ff5cf434">Reflect</label>
     </form>
   </div>
 </div>
@@ -455,13 +459,13 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_imgb1a078cd0508480daaf1e94f2a2a6538";
-    var slider_id = "_anim_sliderb1a078cd0508480daaf1e94f2a2a6538";
-    var loop_select_id = "_anim_loop_selectb1a078cd0508480daaf1e94f2a2a6538";
+    var img_id = "_anim_img631cf9057d2748f9ba19d152ff5cf434";
+    var slider_id = "_anim_slider631cf9057d2748f9ba19d152ff5cf434";
+    var loop_select_id = "_anim_loop_select631cf9057d2748f9ba19d152ff5cf434";
     var frames = new Array(48);
 
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACKaElEQVR4nO3dd3yT1f4H8E+SNumge9AWSgsIZZYllCJL2SCCuC4XZYrjgqio\
 F3AxHMUBDq7i+GnR60C9CihOVpkFWWXIELDsMgRKB53J+f2BfWza5Jy2aUmaft6vV15tnjOek5PR\
 b5883+fohBACREREROS29M4eABERERHVLAZ8RERERG6OAR8RERGRm2PAR0REROTmGPAREQEoKCjA\
@@ -1087,7 +1091,7 @@ sixEREREbo4BHxEREZGbY8BHRERE5OYY8BERERG5OQZ8RERERG6OAR8RERGRm/t/bQu04UCZrnUA\
 AAAASUVORK5CYII=\
 "
   frames[1] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLPUlEQVR4nO3dd3xTVf8H8E+SNuneLW1paQGh7CmUIksZZYggTh6UKY4fiMqD\
 D+ACXMUBDlRQHy36OFBUQHGyZwEZZcgQsOwyREoHncn5/YGNTZuckzYtSdPP+/XKC3LPuCenN+m3\
 N/d7j0YIIUBEREREbkvr7AEQERERUc1iwEdERETk5hjwEREREbk5BnxEREREbo4BHxERgMLCQkyd\
@@ -1716,7 +1720,7 @@ efPm1fh+iKobz/AREdWA+Ph4XLp0CU8//bTdt9chIqopDPiIiIiI3Bxvy0JERETk5hjwEREREbk5\
 BnxEREREbo4BHxEREZGbY8BHRERE5OYY8BERERG5uf8HysOQHSqa6gcAAAAASUVORK5CYII=\
 "
   frames[2] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACKkklEQVR4nO3dd3yT1f4H8E+SNumge9AWSgsIZU+hFFnKBhHEdbmoZYhef+BC\
 vIALcBX34CqoV4teRRQVUMTBngVkFESGgGWXIVI66EzO7w/sY9Mm56RNS9L083698mrznPGcnGZ8\
 ++T5PkcnhBAgIiIiIo+ld/UAiIiIiKhmMeAjIiIi8nAM+IiIiIg8HAM+IiIiIg/HgI+ICEBhYSGm\
@@ -2342,7 +2346,7 @@ c+bMqfH9EFU3HuEjIqoB8fHxuHjxIp566imHL69DRFRTGPAREREReTheloWIiIjIwzHgIyIiIvJw\
 DPiIiIiIPBwDPiIiIiIPx4CPiIiIyMMx4CMiIiLycP8PgjYSc6/aBOgAAAAASUVORK5CYII=\
 "
   frames[3] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACKYElEQVR4nO3dd3yT1f4H8E+SNuneG0oLCGVPoRRZygYRxHW5KGWI4weiIl7A\
 xXAUB7gugnq16FVEuQoozrJXARkFKkPAssuU0kFncn5/YGPTJue0DSVp+nm/XnlBnvOc85ycPkm/\
 ffJ8z9EIIQSIiIiIyGVpHd0BIiIiIqpZDPiIiIiIXBwDPiIiIiIXx4CPiIiIyMUx4CMiAlBYWIip\
@@ -2968,7 +2972,7 @@ wEdERETk4hjwEREREbk4BnxERERELo4BHxEREZGLY8BHRERE5OL+H99JIfLcdUDcAAAAAElFTkSu\
 QmCC\
 "
   frames[4] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACKzUlEQVR4nO3dd3xTVf8H8E+SNuneLW2htIBQZllCKbKUDSKIkwe1DHExVMQH\
 UBRwFUVxoIL6aNGfIooyFHGwZwEZZcgQsOwypZTuNjm/P7CxaZNz2oaSNP28X6+82txzz7knpxnf\
 3tzvORohhAARERERuSytoztARERERFWLAR8RERGRi2PAR0REROTiGPARERERuTgGfEREAPLz8zFx\
@@ -3595,7 +3599,7 @@ d8fs2bOr/DhE1xvP8BERVYGYmBhcvnwZL7zwQrmn1yEiqioM+IiIiIhcHKdlISIiInJxDPiIiIiI\
 XBwDPiIiIiIXx4CPiIiIyMUx4CMiIiJycQz4iIiIiFzc/wN/OpIBI9BspgAAAABJRU5ErkJggg==\
 "
   frames[5] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACK1UlEQVR4nO3dd3yT1f4H8E+SNumge9AWSgsIZZYllCJL2SBDnFyUMsTxA7mK\
 eAEX4CoOcF0E9WrRq4hyFVCcZa8CMsqQIWDZZUop3W1yfn9gY9Mm56QNJWn6eb9eeUGeM56TkzT9\
 9km+52iEEAJERERE5La0zh4AEREREVUvBnxEREREbo4BHxEREZGbY8BHRERE5OYY8BERASgsLMTU\
@@ -4223,7 +4227,7 @@ iNwcAz4iIiIiN8eAj4iIiMjNMeAjIiIicnMM+IiIiIjcHAM+IiIiIjf3/1xIigX7FudiAAAAAElF\
 TkSuQmCC\
 "
   frames[6] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLWElEQVR4nO3dd3yT1f4H8E+SNumge9CWlhYQyp5CKbKUDSKIk4taEHH8QFQu\
 XsAFuIp7IqhXi15FFGUo4mDPgqwyZAhYdplSOuhMzu8PbGya5Jy0oSRNP+/XK682zxnPyUmafPvk\
 +T5HI4QQICIiIiKPpXX1AIiIiIioejHgIyIiIvJwDPiIiIiIPBwDPiIiIiIPx4CPiAhAUVERJk2a\
@@ -4853,7 +4857,7 @@ RFRdGPAREREReTheloWIiIjIwzHgIyIiIvJwDPiIiIiIPBwDPiIiIiIPx4CPiIiIyMMx4CMiIiLy\
 cP8PedilRWk32M4AAAAASUVORK5CYII=\
 "
   frames[7] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLYUlEQVR4nO3dd3xTVf8H8E+SNumge9AWSgsIZU+hFFnKBhHEyYNahjh+ICri\
 A7gAV3HgfBTHo0UfRRRlKM6yVwEZZcgQsOwyREpp6UzO7w9sbNrknLRpmzT5vF+vvCD3jHvuaZp8\
 e3O/92iEEAJERERE5La0zh4AEREREdUsBnxEREREbo4BHxEREZGbY8BHRERE5OYY8BERASgsLMS0\
@@ -5483,7 +5487,7 @@ F/H000/bfXsdIqKawoCPiIiIyM3xtixEREREbo4BHxEREZGbY8BHRERE5OYY8BERERG5OQZ8RERE\
 RG6OAR8RERGRm/t/LdD8/Qec6cEAAAAASUVORK5CYII=\
 "
   frames[8] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACK8klEQVR4nO3dd3yT1f4H8E+SNumge9AWSgsIZU+hFFnKBhHEdblcKaDo9YKo\
 XLyAC8FRHDguV3FcLfq7KspVQHGyZ0FWGTIuYNllCJQOOpPz+wP72LTJOWnTNmn6eb9eebV5znhO\
 TtP02yf5nqMTQggQERERkcfSu3oARERERFSzGPAREREReTgGfEREREQejgEfERERkYdjwEdEBKCw\
@@ -6111,7 +6115,7 @@ jytXruDpp592eHkdIqKawoCPiIiIyMNxWRYiIiIiD8eAj4iIiMjDMeAjIiIi8nAM+IiIiIg8HAM+\
 IiIiIg/HgI+IiIjIw/0/s461eq1F7N8AAAAASUVORK5CYII=\
 "
   frames[9] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACK4UlEQVR4nO3dd3iTVfsH8G+SNumge9CWlhYQyp5CKbKUDSKIkxe1DHH8QFRE\
 AUWGqyiKAxXUV4u+DhQVUJzsWUBGgcoQsOwyREoHncn5/YGNTZuckzaUpOn3c125IM8Zz8lpmtx9\
 kvscjRBCgIiIiIjcltbZAyAiIiKi6sWAj4iIiMjNMeAjIiIicnMM+IiIiIjcHAM+IiIAhYWFmDx5\
@@ -6739,7 +6743,7 @@ EREREbk5LstCRERE5OYY8BERERG5OQZ8RERERG6OAR8RERGRm2PAR0REROTmGPARERERubn/B34o\
 p/CXg4HCAAAAAElFTkSuQmCC\
 "
   frames[10] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACK7ElEQVR4nO3dd3hUxfoH8O/uJrsppBeSQEgAIfQqhNCVDiKI7XJRQhHLBVER\
 BWyALVhRuQrq1aA/C1ZAsdJCDZ1QpAgYeigiIYXU3fn9gTlmk92ZJEvYzeb7eZ59kj1zZs6cyWbz\
 5ux5Z3RCCAEiIiIiclt6Z3eAiIiIiKoXAz4iIiIiN8eAj4iIiMjNMeAjIiIicnMM+IiIABQUFGDa\
@@ -7367,7 +7371,7 @@ x9ndcTtDhgzBoUOHcOrUKURHR6N79+4YOXJktR/X09MT8+bNq/bjEF1tvMJHRFQNYmNjcfHiRTz9\
 4CMiIiJyc/8PrhUz8pcu0HoAAAAASUVORK5CYII=\
 "
   frames[11] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACKtUlEQVR4nO3dd3yT1f4H8E+SNumge9CWlhYQyp5CKbKUUYYI4uSilCF6/YGo\
 iBdwAa7iHqigXi16HSgqoDjZs4CMMmQIWHbZlNLSmZzfH9jHpk3OaRtK0vTzfr3yonnOeE5Ok/TL\
 k3zP0QkhBIiIiIjIbemdPQAiIiIiql4M+IiIiIjcHAM+IiIiIjfHgI+IiIjIzTHgIyICUFBQgMmT\
@@ -7994,7 +7998,7 @@ ePrppyu8vA4RUXVhwEdERETk5rgsCxEREZGbY8BHRERE5OYY8BERERG5OQZ8RERERG6OAR8RERGR\
 m2PAR0REROTm/h/eX9cS96+UwAAAAABJRU5ErkJggg==\
 "
   frames[12] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLY0lEQVR4nO3dd3yT1f4H8E+SNumge9AWSgsIZZYllLJlDxHcl4tSUHFcEJWL\
 F3AhruJE5SqOnxa9DpyA4mSVWZBVEBkCll2GQOmgMzm/P7CPTZuckzaUpOnn/Xrl1eY54zk5Gf32\
 yfN9jk4IIUBEREREHkvv6gEQERERUe1iwEdERETk4RjwEREREXk4BnxEREREHo4BHxERgOLiYkyf\
@@ -8624,7 +8628,7 @@ PR1vvvmmq4fjcUaMGIH9+/fj+PHjiI2NRa9evTBmzJha36+3tzfmzZtX6/shutx4hI+IqBbEx8fj\
 IiIiD8eAj4iIiMjD/T8pt+3If5SCNAAAAABJRU5ErkJggg==\
 "
   frames[13] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACK2ElEQVR4nO3dd3xTVf8H8E+SNumge5eWFpANZQmlbNlDBLc8qAURxw9cPPgA\
 igIOinsL6qNFHwdOQHGyZwEZZcgQsOwyREoHncn5/YGNTZuc0/bSJk0/79crrzb3jHtyMvrtzf3e\
 oxNCCBARERGR29I7ewBEREREVLMY8BERERG5OQZ8RERERG6OAR8RERGRm2PAR0QEoLCwEFOnTkV0\
@@ -9252,7 +9256,7 @@ IiIicnMM+IiIiIjcHAM+IiIiIjfHgI+IiIjIzTHgIyIiInJzDPiIiIiI3Nz/A9vM8SvoWSA/AAAA\
 AElFTkSuQmCC\
 "
   frames[14] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACKVUlEQVR4nO3dd3xTVf8H8E+SNl10D9pCaQGhzLKEUmTJHiKI60GUMsTxgKiI\
 D+BiOIoDUHkU1J8WfRRRVEBxssosm4LIELDssikddCbn9wc2Nm1yTtpQkqaf9+uVF+Secc89TdJv\
 b+73Ho0QQoCIiIiIXJbW0QMgIiIioqrFgI+IiIjIxTHgIyIiInJxDPiIiIiIXBwDPiIiAAUFBZg8\
@@ -9877,7 +9881,7 @@ vh+iG41n+IiIqkBMTAyuXLmCF1980ebb6xARVRUGfEREREQujrdlISIiInJxDPiIiIiIXBwDPiIi\
 IiIXx4CPiIiIyMUx4CMiIiJycQz4iIiIiFzc/wOahBrNY4E4+QAAAABJRU5ErkJggg==\
 "
   frames[15] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACKJ0lEQVR4nO3dd3xTVf8H8E+SNuneLW1paQGh7CmUIktWGSKIE1HKEMcPREV8\
 AEUBV3EPVFAfLfoooqiAoqLsWTZlyBCwUEYZIqWDzuT8/sDGpk3uaXtpkyaf9+uVV5t77jn35GT0\
 25v7PUcjhBAgIiIiIqeltXcHiIiIiKhmMeAjIiIicnIM+IiIiIicHAM+IiIiIifHgI+ICEBhYSGm\
@@ -10502,7 +10506,7 @@ fEREREROjgEfERERkZNjwEdERETk5BjwERERETk5BnxERERETu7/AQdcnLFcm9pkAAAAAElFTkSu\
 QmCC\
 "
   frames[16] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACKvUlEQVR4nO3dd3xTVf8H8E+SNumgexdKCwhlT6EUWcoGkeHkQSlDHA+IivgA\
 LoajOAAVEdRHi/4cKI8CijhYZZZNQWQIWHYZAqWDzuT8/sDGpk3uSXspSZPP+/XKq809456cZnx7\
 c7/3aIQQAkRERETksrSOHgARERERVS8GfEREREQujgEfERERkYtjwEdERETk4hjwEREBKCwsxOTJ\
@@ -11129,7 +11133,7 @@ ahAXF4crV67gxRdftPvyOkRE1YUBHxEREZGL42VZiIiIiFwcAz4iIiIiF8eAj4iIiMjFMeAjIiIi\
 cnEM+IiIiIhcHAM+IiIiIhf3/2nJt2MBgBM5AAAAAElFTkSuQmCC\
 "
   frames[17] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACKx0lEQVR4nO3dd3xTVf8H8E+SNt17l5YWEMqeQimylFGGCOLkQSlD9PEHoiI+\
 gKKAqyiKAxXUR4s+DhQVUFSUPQvIKFAZAhbKKEOkdNCZnN8f2GvTJvekvZS06ef9euUFuWfck9Mk\
 /fYm33N0QggBIiIiInJaekcPgIiIiIhqFgM+IiIiIifHgI+IiIjIyTHgIyIiInJyDPiIiAAUFRVh\
@@ -11756,7 +11760,7 @@ NX4eomuNV/iIiGpAbGwsLl26hGeeecbu5XWIiGoKAz4iIiIiJ8dlWYiIiIicHAM+IiIiIifHgI+I\
 iIjIyTHgIyIiInJyDPiIiIiInBwDPiIiIiIn9/8HiNSu9R8AgQAAAABJRU5ErkJggg==\
 "
   frames[18] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACKjUlEQVR4nO3dd3xTVf8H8E+SNumge9AWSgsIZZYllCJL9hBBFJUHpQxxgaiI\
 D+ACXAUVHDwK6qNFf4oojwKKkz3LpgwZApZdhkBpC53J+f2BvTZtck/aEJImn/frlVebe8Y9Oc34\
 9uZ+79EIIQSIiIiIyG1pnT0AIiIiInIsBnxEREREbo4BHxEREZGbY8BHRERE5OYY8BERASgsLMSk\
@@ -12382,7 +12386,7 @@ ET4iIge4fPky1qxZgzVr1uCDDz5w9nDcTv/+/XH48GGcPn0asbGx6NixI4YOHerw/Xp7e2POnDkO\
 ROTmGPARERERuTkGfERERERujgEfERERkZv7f6bGN5u5XZEjAAAAAElFTkSuQmCC\
 "
   frames[19] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACKoUlEQVR4nO3deVxUVf8H8M/MwAz7DgKCoKaouG+Ie7ngkmm2+ljikvX006zM\
 HrVNbcP2xUqrJ7GeMstKLS3LfUUtFZVcUkNxwTURUNaZ8/vDmBiYuWfgijMMn/frNS+Ye5Z75szC\
 lzv3e49GCCFARERERC5L6+gBEBEREVHNYsBHRERE5OIY8BERERG5OAZ8RERERC6OAR8REYCioiJM\
@@ -13009,7 +13013,7 @@ ZVmIiIiIXBwDPiIiIiIXx4CPiIiIyMUx4CMiIiJycQz4iIiIiFwcAz4iIiIiF/f/qIsuFOr8+UAA\
 AAAASUVORK5CYII=\
 "
   frames[20] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACJcklEQVR4nO3dd3xTVf8H8E+SNumge9CWlhYQyp5CKbKUDSKIkwe1DHE8ICri\
 AzwOhqO4Byqojxb9KYKogOJkz7IpWBkCll02pYPO5Pz+wF6bNrkn7aUkTT/v1ysvyD3jnpwm6bc3\
 +Z6jE0IIEBEREZHb0jt7AERERERUvRjwEREREbk5BnxEREREbo4BHxEREZGbY8BHRAQgNzcX06ZN\
@@ -13630,7 +13634,7 @@ drWfh+ha4xU+IqJqEBcXh0uXLuG5555zeHkdIqLqwoCPiIiIyM1xWRYiIiIiN8eAj4iIiMjNMeAj\
 IiIicnMM+IiIiIjcHAM+IiIiIjfHgI+IiIjIzf0/cS1EzDVAVYgAAAAASUVORK5CYII=\
 "
   frames[21] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACKG0lEQVR4nO3dd3yT1f4H8E+SNuneLW3pAoSyp1DKVsoWQVyXi1KGOH4gKuIF\
 XAxHcYADFZxFryLKlaGIg1Vm2ZQhQ8Cyy6aUls7k/P7AxqZNnpM2LUmTz/v1ygvynPGcnCbpt0/y\
 PUclhBAgIiIiIqeltvcAiIiIiKhmMeAjIiIicnIM+IiIiIicHAM+IiIiIifHgI+ICEBubi6mTp2K\
@@ -14254,7 +14258,7 @@ Pw9RdeMVPiKiGhAXF4erV6/ipZdesnp5HSKimsKAj4iIiMjJcVkWIiIiIifHgI+IiIjIyTHgIyIi\
 InJyDPiIiIiInBwDPiIiIiInx4CPiIiIyMn9PyiEXsCZ42BFAAAAAElFTkSuQmCC\
 "
   frames[22] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACJaElEQVR4nO3dd3yT1f4H8E+SNumge9AWSgsIZU+hFFnKBhHEdbkoZYjjB6Jy\
 8QLXwXAUF27BWfQqol4FFHGwZ9kURIaAZZcppbR0Juf3BzY2bXJO2oeSNP28X6+82jxnPCcno98+\
 eb7P0QkhBIiIiIjIY+ldPQAiIiIiqloM+IiIiIg8HAM+IiIiIg/HgI+IiIjIwzHgIyICkJOTg2nT\
@@ -14875,7 +14879,7 @@ VSA+Ph4XL17E008/7fTldYiIqgoDPiIiIiIPx8uyEBEREXk4BnxEREREHo4BHxEREZGHY8BHRERE\
 5OEY8BERERF5OAZ8RERERB7u/wG0cEuJY0XqMgAAAABJRU5ErkJggg==\
 "
   frames[23] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACJ7ElEQVR4nO3dd3yT1f4H8E+SNl1070JpAaHsKZQiSylbBHFyUQoojguiIl7A\
 xXAUB24E9WrRnyLKVUAQB6vMsimIDAHLLpvSQWdyfn9gY9Mm57QNJWnyeb9eeUGeM56T0yT99km+\
 52iEEAJERERE5LS09h4AEREREdUsBnxERERETo4BHxEREZGTY8BHRERE5OQY8BERAcjNzcXUqVPR\
@@ -15499,7 +15503,7 @@ EREROTkGfEREREROjgEfERERkZNjwEdERETk5BjwERERETm5/weMizQLKpFQhAAAAABJRU5ErkJg\
 gg==\
 "
   frames[24] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACJ2UlEQVR4nO3dd3yT1f4H8E+SNl10D9pCaQGh7CmUIkvZIIK4LhelDHH8QFTE\
 C1wHw1EUwS2oV4teB8qVoTjLXgVZZcgQsFBGmVI66EzO7w9sbNrknLYPJWn6eb9eeUGeM56T0yT9\
 9km+5+iEEAJERERE5LL0jh4AEREREVUvBnxERERELo4BHxEREZGLY8BHRERE5OIY8BERAcjJycGM\
@@ -16122,7 +16126,7 @@ NYiJicHly5fx3HPPVXh5HSKi6sKAj4iIiMjFcVkWIiIiIhfHgI+IiIjIxTHgIyIiInJxDPiIiIiI\
 XBwDPiIiIiIXx4CPiIiIyMX9P5WzsDsPRlrNAAAAAElFTkSuQmCC\
 "
   frames[25] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACKfElEQVR4nO3dd3xTVf8H8M9N2nTRPWgLHYBQ9hRKkaWULYI4eVDKEMcDoiI+\
 gIvhKA7cCuqjRX8OhEeGII4yyiybMmQIWCijbEpp6UzO7w9sbNrknraXkjT9vF+vvGjuGffkNEm/\
 3OR7jiKEECAiIiIip6Wz9wCIiIiIqHox4CMiIiJycgz4iIiIiJwcAz4iIiIiJ8eAj4gIQE5ODqZN\
@@ -16748,7 +16752,7 @@ vPTSSxVeXoeIqLow4CMiIiJyclyWhYiIiMjJMeAjIiIicnIM+IiIiIicHAM+IiIiIifHgI+IiIjI\
 yTHgIyIiInJy/w8fYlPTtWhdvQAAAABJRU5ErkJggg==\
 "
   frames[26] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACKwklEQVR4nO3dd3yT1f4H8E+SNl1070JpC0LZUyhFlrJBBHFdLkoLiOMHoiIK\
 XAfDURzgFtSrRa8DRRmKk1VmARllyBCw7DKldNCZnN8f2Ni0yTltQ0mafN6vV15tnjOek9OMb588\
 3+dohBACREREROS0tPYeABERERHVLgZ8RERERE6OAR8RERGRk2PAR0REROTkGPAREQHIy8vD9OnT\
@@ -17375,7 +17379,7 @@ j/AREdWC2NhYXLp0Cc8++2yVL69DRFRbGPAREREROTleloWIiIjIyTHgIyIiInJyDPiIiIiInBwD\
 PiIiIiInx4CPiIiIyMkx4CMiIiJycv8PjkSO+bmCdrwAAAAASUVORK5CYII=\
 "
   frames[27] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLZ0lEQVR4nO3dd3yT1f4H8E+SNuneLW2htIBQ9hRKkaVskCGuy0UpoDguiIp4\
 getgOIoDt4J6tejPgXJlCOJglVk2ZcgQsFBG2ZQOOpPz+wMbmzY5p20oSdPP+/XKC/Kc55zn5GR9\
 ++T5nqMRQggQERERkcvSOroDRERERFS9GPARERERuTgGfEREREQujgEfERERkYtjwEdEBCAnJwfT\
@@ -18005,7 +18009,7 @@ mJgYXLlyBS+88EKFp9chIqouDPiIiIiIXBynZSEiIiJycQz4iIiIiFwcAz4iIiIiF8eAj4iIiMjF\
 MeAjIiIicnEM+IiIiIhc3P8DWV7YARMtBAoAAAAASUVORK5CYII=\
 "
   frames[28] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLNElEQVR4nO3dd3xTVf8H8E+SNl10D9pCaQtC2VMoRZayQQRx8qAWUBwPQ0V8\
 gMfBcBT3QAX10aI/RRRlKOJgzwIyypAhYNlliJTS0pmc3x/Qa9Mm56QNJWn6eb9eebW5Z9yT04xv\
 b+73Hp0QQoCIiIiI3Jbe2QMgIiIioqrFgI+IiIjIzTHgIyIiInJzDPiIiIiI3BwDPiIiADk5OZgy\
@@ -18634,7 +18638,7 @@ AhcuXMDq1auxevVqfPDBB84ejtsZMGAADh48iJMnTyImJgadO3fG0KFDq3y/np6emDlzZpXvh+ha\
 4CMiIiJycwz4iIiIiNwcAz4iIiIiN/f/sDeyy8Y2hY4AAAAASUVORK5CYII=\
 "
   frames[29] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLbUlEQVR4nO3dd3yT1f4H8E+SNt170BZKWxDKnkIpspQNIohXvVyUAorjB6Ii\
 XsDFcBQHOBBBvVr0KqJcGYqTVWYBGUWQIWChjDKldNCZnN8f2Ni0yTlpQ0maft6vV15tnjOek9OM\
 b5883+dohBACREREROSytI4eABERERHVLAZ8RERERC6OAR8RERGRi2PAR0REROTiGPAREQHIy8vD\
@@ -19264,7 +19268,7 @@ HuEjIqoBsbGxuHz5Mp5//nmbL69DRFRTGPARERERuTheloWIiIjIxTHgIyIiInJxDPiIiIiIXBwD\
 PiIiIiIXx4CPiIiIyMUx4CMiIiJycf8PMNu8PMOy3FUAAAAASUVORK5CYII=\
 "
   frames[30] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLRElEQVR4nO3dd3yT1f4H8M+TtEkH3YO2UFpAKHsKpchSNoggTi5qQcVxwYV4\
 gesAXMWtFxXUq0V/V0RRAUUcrDILsgoiQ8Cyy6Z00Jmc3x/Y2LTJOWlDSZp+3q9XXm2eM56T04xv\
 nzzf52hCCAEiIiIi8lg6Vw+AiIiIiGoWAz4iIiIiD8eAj4iIiMjDMeAjIiIi8nAM+IiIAOTl5WHa\
@@ -19894,7 +19898,7 @@ gI+IiIjIwzHgIyIiIvJwDPiIiIiIPBwDPiIiIiIPx4CPiIiIyMP9Py2+Dp0JnIbHAAAAAElFTkSu\
 QmCC\
 "
   frames[31] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLOklEQVR4nO3dd3hURdsG8PvsJptGeiEJhAQQQq9CCNKUDiKIr4UXJRSxfCAq\
 ooANsAULdgVr0NeCohQLFlqoAaSEIkXA0EMnpJC6O98fmDWb7M4k2YTdbO7fde2V7Jkzc2YnW56c\
 Pc+MJoQQICIiIiKXpXN0B4iIiIioejHgIyIiInJxDPiIiIiIXBwDPiIiIiIXx4CPiAhAdnY2ZsyY\
@@ -20523,7 +20527,7 @@ VPtxiKoaz/AREVWDmJgYXLp0Cc8880y5p9chIqouDPiIiIiIXBynZSEiIiJycQz4iIiIiFwcAz4i\
 IiIiF8eAj4iIiMjFMeAjIiIicnEM+IiIiIhc3P8Dwp/enDIt8igAAAAASUVORK5CYII=\
 "
   frames[32] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLmklEQVR4nO3dd3yT1f4H8E+SNumge5eWFhDKnkIpsmQPkeHkopYhjguiIl7g\
 ijIcRVEcqKBeLfpTRFCG4mSVWTYFkSFg2WVTOuhMzu8PbGza5Jy2oaRNP+/XKy/Ic8Zzcpqk3z7J\
 9xyNEEKAiIiIiJyW1tEDICIiIqLKxYCPiIiIyMkx4CMiIiJycgz4iIiIiJwcAz4iIgBZWVmYNm0a\
@@ -21154,7 +21158,7 @@ XsWLL75Y5uV1iIgqCwM+IiIiIifHZVmIiIiInBwDPiIiIiInx4CPiIiIyMkx4CMiIiJycgz4iIiI\
 iJwcAz4iIiIiJ/f/gQ48y3zMrWEAAAAASUVORK5CYII=\
 "
   frames[33] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLaUlEQVR4nO3dd3yT1f4H8E+SNt17F0oLCGVPoRRZsocM8Tq4KGWI4wdyFfEC\
 LoajOAA3qFeLXkWEK0NxllFmARllyBCw7DKldNCZnN8f2Ni0yTltQ0maft6vV15tnjOek9OMb588\
 3+dohBACREREROS0tPYeABERERFVLwZ8RERERE6OAR8RERGRk2PAR0REROTkGPAREQHIycnBjBkz\
@@ -21784,7 +21788,7 @@ VA1iYmJw9epVvPDCCxW+vA4RUXVhwEdERETk5HhZFiIiIiInx4CPiIiIyMkx4CMiIiJycgz4iIiI\
 iJwcAz4iIiIiJ8eAj4iIiMjJ/T8wj9ever0IsQAAAABJRU5ErkJggg==\
 "
   frames[34] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLAklEQVR4nO3dd3xTVf8H8E+SNumge9CWlhYQyp5CKbKUDSKIkwe1gOL4gQvx\
 AR4Hw1HcAxXUR4s+iijKcOBglVlQRhkyBCy7TCkddCbn9wf22rTJOW1DSZp+3q9XXm3uGffkZPTb\
 m/u9RyeEECAiIiIit6V39gCIiIiIqGYx4CMiIiJycwz4iIiIiNwcAz4iIiIiN8eAj4gIQG5uLqZN\
@@ -22412,7 +22416,7 @@ nl3j+yG60niEj4ioBsTFxeHChQt45plnKn15HSKimsKAj4iIiMjN8bIsRERERG6OAR8RERGRm2PA\
 R0REROTmGPARERERuTkGfERERERujgEfERERkZv7f4k8pjoWQ45AAAAAAElFTkSuQmCC\
 "
   frames[35] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLNElEQVR4nO3dd3yT1f4H8E+SNumge9CWlhYQyp5CKbKUDSKIV71clDLE8QNR\
 ES/gYjiKAxyooF4tehVRrgxFHOxZQEYZMgQsu0wpHXQm5/cHNjZtck7aUJKmn/frlVeb5zznPCcn\
 o98+eb7naIQQAkRERETktrTO7gARERERVS0GfERERERujgEfERERkZtjwEdERETk5hjwEREByMnJ\
@@ -23041,7 +23045,7 @@ gStXrmDdunVYt24dPvjgA2d3x+0MGDAAR44cwZkzZxATE4POnTtj6NChVX5cT09PzJkzp8qPQ3Sj\
 fERERERujgEfERERkZtjwEdERETk5v4fTGB+jTcNZ8IAAAAASUVORK5CYII=\
 "
   frames[36] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACL2ElEQVR4nO3dd3yT1f4H8E+SNuneLW1paQGh7CmUIkvZIIK4Lhe1DNHrBRcX\
 L3AdCI7iHqi4i/4UEVRAcbLKLCijIDIELLtsSgedyfn9gY1Nm5zT9qEkTT/v1yuvNs8Zz8nJ6LdP\
 nu9zdEIIASIiIiJyW3pnD4CIiIiIahcDPiIiIiI3x4CPiIiIyM0x4CMiIiJycwz4iIgA5OXlYcaM\
@@ -23673,7 +23677,7 @@ Ph4XLlzAE088UeXL6xAR1RYGfERERERujpdlISIiInJzDPiIiIiI3BwDPiIiIiI3x4CPiIiIyM0x\
 4CMiIiJycwz4iIiIiNzc/wMH6gtESagAfwAAAABJRU5ErkJggg==\
 "
   frames[37] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLwUlEQVR4nO3dd3hUxfoH8O/ZTTa9F5JASAAh9CqEIE16EUFsl4sSilh+ICri\
 BWyALdgLKvagVxH0SrErLdQAUkKRImDooUpIIXV3fn9g1myyO5NkSXaz+X6eZ59kz5yZMztb8ubs\
 eWc0IYQAEREREbksnaM7QERERETViwEfERERkYtjwEdERETk4hjwEREREbk4BnxERABycnIwa9Ys\
@@ -24305,7 +24309,7 @@ yMVxWhYiIiIiF8eAj4iIiMjFMeAjIiIicnEM+IiIiIhcHAM+IiIiIhfHgI+IiIjIxf0/e2rLeFGN\
 QA8AAAAASUVORK5CYII=\
 "
   frames[38] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLH0lEQVR4nO3dd3xTVf8H8M9N2qSD7kFbKC0glD2FUmQpG0QRJw9qAcXxMFRE\
 ARfDUdwDFdRHi/4UUZThwMGeZVOGDAHLLlNKB53J+f2BjU2bnNM2lKTp5/165QW5Z9xzT5P025v7\
 vUcTQggQERERkdvSOXsARERERFS1GPARERERuTkGfERERERujgEfERERkZtjwEdEBCA7OxtTpkxB\
@@ -24934,7 +24938,7 @@ EVUVBnxEREREbo63ZSEiIiJycwz4iIiIiNwcAz4iIiIiN8eAj4iIiMjNMeAjIiIicnMM+IiIiIjc\
 3P8DJ8EwBkeu7lUAAAAASUVORK5CYII=\
 "
   frames[39] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLmElEQVR4nO3dd3yT1f4H8E+SNuneLW2htIBQ9hRKkaVsEEG8Di5KGeL4gaiI\
 Ai6GozjAgQrq1aJXEeXKUJzsWUBGGTIELLtMKR10Juf3BzY2bXJO21CSJp/365UX5DnjOTlJ02+f\
 5HuORgghQEREREQuS+voARARERFR9WLAR0REROTiGPARERERuTgGfEREREQujgEfERGAnJwcTJ06\
@@ -25565,7 +25569,7 @@ hRdeqPDyOkRE1YUBHxEREZGL47IsRERERC6OAR8RERGRi2PAR0REROTiGPARERERuTgGfEREREQu\
 jgEfERERkYv7fzT1uVJPPXI/AAAAAElFTkSuQmCC\
 "
   frames[40] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLgklEQVR4nO3dd3xTVf8H8M9N2nTRPWgLHYBQ9hRKkaVsEEGcPKgFFMcDoqI+\
 wOMAXMWBG0F9FPTnQFEBQRzsWYZAGTIELLtsSgedyfn9gY1Nm5yTNi1J08/79cqrzT3jnpyMfntz\
 v/doQggBIiIiInJbOmcPgIiIiIiqFwM+IiIiIjfHgI+IiIjIzTHgIyIiInJzDPiIqNbbunUrxo0b\
@@ -26196,7 +26200,7 @@ ERG5OQZ8RERERG6OAR8RERGRm2PAR0REROTmGPARERERuTkGfERERERu7v8BnCx2zCSNRVMAAAAA\
 SUVORK5CYII=\
 "
   frames[41] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLRUlEQVR4nO3dd3yT1f4H8E+SNt170JYuQCh7CqXIUsoWQZxclDLE8QNRES/g\
 YjiKA7eCerXoVUS5CghOVpllU4YMAcsum9JBZ3J+f2Bj0ybntA0lafp5v155tXnOeE5ORr998nyf\
 oxFCCBARERGR09LaewBEREREVLMY8BERERE5OQZ8RERERE6OAR8RERGRk2PAR0R13tatWzF+/Hi0\
@@ -26826,7 +26830,7 @@ x4CPiIiIyMkx4CMiIiJycgz4iIiIiJwcAz4iIiIiJ8eAj4iIiMjJ/T+fW/psRAf5agAAAABJRU5E\
 rkJggg==\
 "
   frames[42] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACKd0lEQVR4nO3dd3yT1f4H8E+SNl1070JpAaHsKZQiS9kggrguF6UMcVyQq4gX\
 +DkAV3GA6yo4ixvlKiCIg1Vm2ZQhQ8CyyxAoHXQm5/cHNjZtck7bh5I0/bxfr7zaPGc8Jyej3z55\
 vs/RCSEEiIiIiMhl6R09ACIiIiKqXgz4iIiIiFwcAz4iIiIiF8eAj4iIiMjFMeAjolpv27ZtmDBh\
@@ -27452,7 +27456,7 @@ X16HiKi6MOAjIiIicnG8LAsRERGRi2PAR0REROTiGPARERERuTgGfEREREQujgEfERERkYtjwEdE\
 RETk4v4fJdQwEkx5LTkAAAAASUVORK5CYII=\
 "
   frames[43] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACKaElEQVR4nO3dd3yT1f4H8M+TtOmie9AWSgsIZU+hFFnKBhFE0ctFKag4LoiK\
 eoHrYDgKKm4E9WrRnwPlKiCIgz3LpgwZApZdhkApLZ3J+f2BjU2bnNM2LUmTz/v1yqvNc8Zzcvo0\
 /fbJ832OJoQQICIiIiKXpXP0AIiIiIioejHgIyIiInJxDPiIiIiIXBwDPiIiIiIXx4CPiNzetm3b\
@@ -28078,7 +28082,7 @@ ZSEiIiJycQz4iIiIiFwcAz4iIiIiF8eAj4iIiMjFMeAjIiIicnEM+IiIiIhc3P8DTI8zy+ZGlJEA\
 AAAASUVORK5CYII=\
 "
   frames[44] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLB0lEQVR4nO3dd3yT1f4H8M+TtOmie9AWSgsIZU+hFFnKBhHEdbkoZYjjB3IV\
 8QLXAbiKA7eCerXodaCogOAsexVklSFDwLLLEOmkMzm/P7CxaZNz0oaSNP28X6+82jxnPCcno98+\
 eb7P0YQQAkRERETktnTOHgARERER1SwGfERERERujgEfERERkZtjwEdERETk5hjwEVGdt23bNkye\
@@ -28706,7 +28710,7 @@ pyfefPPNGt8P0dXGI3xERDUgLi4Oly5dwpNPPmn35XWIiGoKAz4iIiIiN8fLshARERG5OQZ8RERE\
 RG6OAR8RERGRm2PAR0REROTmGPARERERuTkGfERERERu7v8Bbqk/QwM66cUAAAAASUVORK5CYII=\
 "
   frames[45] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACLDElEQVR4nO3dd3yT1f4H8E+SNumge9AWSgsIZW8oRZZStgiiqFyUMsSrF0RF\
 vcB1MBzFgVtBvVr050C4CgjiYM+yKUOGgGWXKaWDzuT8/sDGpk3OSRtK0vTzfr3yavOc8ZycPk2/\
 ffJ8n6MRQggQERERkdvSOnsARERERFS1GPARERERuTkGfERERERujgEfERERkZtjwEdENd727dsx\
@@ -29335,7 +29339,7 @@ Y8BHRERE5OYY8BERERG5OQZ8RERERG6OAR8RERGRm2PAR0REROTm/h8RKq8zuMk9LAAAAABJRU5E\
 rkJggg==\
 "
   frames[46] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACK/UlEQVR4nO3dd3RU1doG8GdmkkkjvZAEQgIIoXcIQZrSQQRR9HJRqlg+kKuI\
 F7gWiiVYwC6oV4NeC4oKCFZ6DZ1QpAgYeigCqaTO7O8PzDGTzOydZBJmMnl+a81K5uxy9uycTN6c\
 Oe/ZOiGEABERERG5LL2jB0BEREREVYsBHxEREZGLY8BHRERE5OIY8BERERG5OAZ8RFTj7dy5E5Mm\
@@ -29963,7 +29967,7 @@ VNl4ho+IqArExMTg2rVrePbZZ8t8ex0ioqrCgI+IiIjIxfG2LEREREQujgEfERERkYtjwEdERETk\
 4hjwEREREbk4BnxERERELo4BHxEREZGL+39NpLC4nl87HQAAAABJRU5ErkJggg==\
 "
   frames[47] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9h\
+bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAA9h\
 AAAPYQGoP6dpAACK5ElEQVR4nO3dd3yT1f4H8E+SNmlL96ItXYBQ9oZSZClliQii6OWiFFD0ekFU\
 1AtcB8NRHLgV1KtFfw4UFRDEwZ5lbxkCll02pYPO5Pz+wMamSc5pG0rS9PN+vfKCPGc8JydP02+f\
 PN/naIQQAkRERETktrTOHgARERERVS8GfERERERujgEfERERkZtjwEdERETk5hjwEVGtt2XLFowb\
@@ -30595,7 +30599,7 @@ QNeuXfGf//ynWvc7a9YszJ8/H7/99lu17ofoeuMZPiKianD58mWsWrUKq1atwgcffODs4bidAQMG\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        animb1a078cd0508480daaf1e94f2a2a6538 = new Animation(frames, img_id, slider_id, 25.0,
+        anim631cf9057d2748f9ba19d152ff5cf434 = new Animation(frames, img_id, slider_id, 25.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -30616,13 +30620,12 @@ QNeuXfGf//ynWvc7a9YszJ8/H7/99lu17ofoeuMZPiKianD58mWsWrUKq1atwgcffODs4bidAQMG\
 <span class="n">f107a</span> <span class="o">=</span> <span class="mi">150</span>
 <span class="n">ap</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="c1"># Diurnal data</span>
-<span class="n">dates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="s1">&#39;2003-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2003-01-02&#39;</span><span class="p">,</span>
-                  <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;datetime64[30m]&#39;</span><span class="p">)</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="s2">&quot;2003-01-01&quot;</span><span class="p">,</span> <span class="s2">&quot;2003-01-02&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;datetime64[30m]&quot;</span><span class="p">)</span>
 <span class="n">ndates</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span>
 <span class="c1"># (F107, F107a, ap) all need to be specified at the same length as dates</span>
-<span class="n">f107s</span> <span class="o">=</span> <span class="p">[</span><span class="n">f107</span><span class="p">]</span><span class="o">*</span><span class="n">ndates</span>
-<span class="n">f107as</span> <span class="o">=</span> <span class="p">[</span><span class="n">f107a</span><span class="p">]</span><span class="o">*</span><span class="n">ndates</span>
-<span class="n">aps</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ap</span><span class="p">]</span><span class="o">*</span><span class="mi">7</span><span class="p">]</span><span class="o">*</span><span class="n">ndates</span>
+<span class="n">f107s</span> <span class="o">=</span> <span class="p">[</span><span class="n">f107</span><span class="p">]</span> <span class="o">*</span> <span class="n">ndates</span>
+<span class="n">f107as</span> <span class="o">=</span> <span class="p">[</span><span class="n">f107a</span><span class="p">]</span> <span class="o">*</span> <span class="n">ndates</span>
+<span class="n">aps</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ap</span><span class="p">]</span> <span class="o">*</span> <span class="mi">7</span><span class="p">]</span> <span class="o">*</span> <span class="n">ndates</span>
 
 <span class="n">output</span> <span class="o">=</span> <span class="n">msis</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">alt</span><span class="p">,</span> <span class="n">f107s</span><span class="p">,</span> <span class="n">f107as</span><span class="p">,</span> <span class="n">aps</span><span class="p">)</span>
 <span class="c1">#  output is now of the shape (ndates, nlons, nlats, 1, 11)</span>
@@ -30631,50 +30634,54 @@ QNeuXfGf//ynWvc7a9YszJ8/H7/99lu17ofoeuMZPiKianD58mWsWrUKq1atwgcffODs4bidAQMG\
 
 <span class="n">i</span> <span class="o">=</span> <span class="mi">7</span>  <span class="c1"># N</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax_time</span><span class="p">,</span> <span class="n">ax_mesh</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="p">{</span>
-    <span class="s1">&#39;height_ratios&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]},</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax_time</span><span class="p">,</span> <span class="n">ax_mesh</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span>
+    <span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;height_ratios&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]},</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
 <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">)</span>
 <span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mf">1e13</span><span class="p">,</span> <span class="mf">8e13</span>
 <span class="n">norm</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">)</span>
-<span class="n">mesh</span> <span class="o">=</span> <span class="n">ax_mesh</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
-                          <span class="n">shading</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;N number density at </span><span class="si">{</span><span class="n">alt</span><span class="si">}</span><span class="s1"> km (/m$^3$)&#39;</span><span class="p">,</span>
-             <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">)</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">ax_mesh</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">shading</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span>
+    <span class="n">mesh</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;N number density at </span><span class="si">{</span><span class="n">alt</span><span class="si">}</span><span class="s2"> km (/m$^3$)&quot;</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span>
+<span class="p">)</span>
 
-<span class="n">time_data</span> <span class="o">=</span> <span class="n">output</span><span class="p">[:,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lons</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lats</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>
-<span class="n">ax_time</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">time_data</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">time_data</span> <span class="o">=</span> <span class="n">output</span><span class="p">[:,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lons</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lats</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">ax_time</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">time_data</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
 <span class="n">ax_time</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dates</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">ax_time</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">)</span>
 <span class="n">ax_time</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">mdates</span><span class="o">.</span><span class="n">HourLocator</span><span class="p">(</span><span class="n">interval</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
-<span class="n">ax_time</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%H:%M&#39;</span><span class="p">))</span>
-<span class="n">time_line</span> <span class="o">=</span> <span class="n">ax_time</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">ax_time</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s2">&quot;%H:%M&quot;</span><span class="p">))</span>
+<span class="n">time_line</span> <span class="o">=</span> <span class="n">ax_time</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
 
-<span class="n">sun_loc</span> <span class="o">=</span> <span class="mi">180</span> <span class="o">-</span> <span class="p">(</span><span class="n">dates</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[s]&#39;</span><span class="p">)</span> <span class="o">-</span>
-                 <span class="n">dates</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[D]&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">/</span><span class="mi">86400</span><span class="o">*</span><span class="mi">360</span>
-<span class="n">sun</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax_mesh</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sun_loc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">sun_loc</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="mi">180</span>
+    <span class="o">-</span> <span class="p">(</span><span class="n">dates</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;datetime64[s]&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="n">dates</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;datetime64[D]&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    <span class="o">/</span> <span class="mi">86400</span>
+    <span class="o">*</span> <span class="mi">360</span>
+<span class="p">)</span>
+<span class="p">(</span><span class="n">sun</span><span class="p">,)</span> <span class="o">=</span> <span class="n">ax_mesh</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sun_loc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;gold&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 
-<span class="n">date_string</span> <span class="o">=</span> <span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M&quot;</span><span class="p">)</span>
+<span class="n">date_string</span> <span class="o">=</span> <span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;O&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M&quot;</span><span class="p">)</span>
 <span class="n">title</span> <span class="o">=</span> <span class="n">ax_time</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">date_string</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">ax_mesh</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Longitude&quot;</span><span class="p">)</span>
 <span class="n">ax_mesh</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Latitude&quot;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">update_surface</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-    <span class="n">date_string</span> <span class="o">=</span> <span class="n">dates</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M&quot;</span><span class="p">)</span>
+    <span class="n">date_string</span> <span class="o">=</span> <span class="n">dates</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;O&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M&quot;</span><span class="p">)</span>
     <span class="n">title</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">date_string</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">time_line</span><span class="o">.</span><span class="n">set_xdata</span><span class="p">(</span><span class="n">dates</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
     <span class="n">mesh</span><span class="o">.</span><span class="n">set_array</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
     <span class="n">sun</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">sun_loc</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
 
 
-<span class="n">ani</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">update_surface</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="n">ndates</span><span class="p">),</span>
-                    <span class="n">interval</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">ani</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">update_surface</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="n">ndates</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  34.903 seconds)</p>
-<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-plot-surface-animation-py">
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  31.240 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-plot-surface-animation-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/dd9f0d1f9eb29933b55635113120b047/plot_surface_animation.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_surface_animation.py</span></code></a></p>
 </div>
@@ -30686,50 +30693,55 @@ QNeuXfGf//ynWvc7a9YszJ8/H7/99lu17ofoeuMZPiKianD58mWsWrUKq1atwgcffODs4bidAQMG\
 </section>
 
 
-              </div>
+              </article>
               
-              
-              <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="plot_diurnal_variation.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Diurnal variation</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="plot_surface.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Surface plot</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-              
-          </main>
-          
 
+              
+              <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="plot_diurnal_variation.html" title="previous page">
+      <i class="fas fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Diurnal variation</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="plot_surface.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Surface plot</p>
+  </div>
+  <i class="fas fa-angle-right"></i>
+  </a>
+</div>
+              </footer>
+              
+          </div>
+          
       </div>
     </div>
+
   
-    <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-  <footer class="footer mt-5 mt-md-0">
-  <div class="container">
-    
-    <div class="footer-item">
-      <p class="copyright">
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=92025949c220c2e29695"></script>
+
+<footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    <p class="copyright">
     &copy; Copyright 2020, Regents of the University of Colorado.<br>
 </p>
-    </div>
-    
-    <div class="footer-item">
-      <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.4.0.<br>
-</p>
-    </div>
-    
   </div>
+  
+  <div class="footer-item">
+    <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.1.1.<br>
+</p>
+  </div>
+  
+</div>
 </footer>
   </body>
 </html>

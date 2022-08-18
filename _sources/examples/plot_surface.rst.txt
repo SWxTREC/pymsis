@@ -52,8 +52,8 @@ quantities on a constant altitude plane.
     f107a = 150
     ap = 7
     # One years worth of data at the 12th hour every day
-    date = np.datetime64('2003-01-01T12:00')
-    aps = [[ap]*7]
+    date = np.datetime64("2003-01-01T12:00")
+    aps = [[ap] * 7]
 
     output = msis.run(date, lons, lats, alt, f107, f107a, aps)
     #  output is now of the shape (1, nlons, nlats, 1, 11)
@@ -64,8 +64,8 @@ quantities on a constant altitude plane.
 
     _, ax = plt.subplots()
     xx, yy = np.meshgrid(lons, lats)
-    mesh = ax.pcolormesh(xx, yy, output[:, :, i].T, shading='auto')
-    plt.colorbar(mesh, label='Number density (/m$^3$)')
+    mesh = ax.pcolormesh(xx, yy, output[:, :, i].T, shading="auto")
+    plt.colorbar(mesh, label="Number density (/m$^3$)")
 
     ax.set_title(f"O$_2$ number density at {alt} km")
     ax.set_xlabel("Longitude")
@@ -76,28 +76,23 @@ quantities on a constant altitude plane.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.229 seconds)
+   **Total running time of the script:** ( 0 minutes  0.236 seconds)
 
 
 .. _sphx_glr_download_examples_plot_surface.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: plot_surface.py <plot_surface.py>`
 
-     :download:`Download Python source code: plot_surface.py <plot_surface.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: plot_surface.ipynb <plot_surface.ipynb>`
+      :download:`Download Jupyter notebook: plot_surface.ipynb <plot_surface.ipynb>`
 
 
 .. only:: html

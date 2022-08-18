@@ -24,7 +24,7 @@ Diurnal variation
 This example demonstrates how to calculate the
 diurnal variation at a single location.
 
-.. GENERATED FROM PYTHON SOURCE LINES 9-57
+.. GENERATED FROM PYTHON SOURCE LINES 9-69
 
 
 
@@ -53,12 +53,12 @@ diurnal variation at a single location.
     f107a = 150
     ap = 7
     # One years worth of data at the 12th hour every day
-    dates = np.arange('2003-01-01', '2003-01-02', dtype='datetime64[m]')
+    dates = np.arange("2003-01-01", "2003-01-02", dtype="datetime64[m]")
     ndates = len(dates)
     # (F107, F107a, ap) all need to be specified at the same length as dates
-    f107s = [f107]*ndates
-    f107as = [f107a]*ndates
-    aps = [[ap]*7]*ndates
+    f107s = [f107] * ndates
+    f107as = [f107a] * ndates
+    aps = [[ap] * 7] * ndates
 
     output = msis.run(dates, lon, lat, alt, f107s, f107as, aps)
     #  output is now of the shape (ndates, 1, 1, 1, 11)
@@ -66,53 +66,60 @@ diurnal variation at a single location.
     output = np.squeeze(output)
 
     # Lets get the percent variation from the annual mean for each variable
-    variation = 100*(output/output.mean(axis=0) - 1)
+    variation = 100 * (output / output.mean(axis=0) - 1)
 
-    variables = ['Total mass density', 'N2', 'O2', 'O', 'He',
-                 'H', 'Ar', 'N', 'Anomalous O', 'NO', 'Temperature']
+    variables = [
+        "Total mass density",
+        "N2",
+        "O2",
+        "O",
+        "He",
+        "H",
+        "Ar",
+        "N",
+        "Anomalous O",
+        "NO",
+        "Temperature",
+    ]
 
     _, ax = plt.subplots()
     for i, label in enumerate(variables):
-        if label == 'NO':
+        if label == "NO":
             # There is currently no NO data
             continue
         ax.plot(dates, variation[:, i], label=label)
 
-    ax.legend(loc='upper center', bbox_to_anchor=(0.5, 1.15),
-              fancybox=True, shadow=True, ncol=5)
+    ax.legend(
+        loc="upper center", bbox_to_anchor=(0.5, 1.15), fancybox=True, shadow=True, ncol=5
+    )
     ax.set_xlabel(f"Longitude: {lon}, Latitude: {lat}, Altitude: {alt} km")
-    ax.set_ylabel('Difference from the daily mean (%)')
+    ax.set_ylabel("Difference from the daily mean (%)")
     ax.set_xlim(dates[0], dates[-1])
     ax.xaxis.set_major_locator(mdates.HourLocator(interval=3))
-    ax.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M'))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%H:%M"))
 
     plt.show()
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.191 seconds)
+   **Total running time of the script:** ( 0 minutes  0.166 seconds)
 
 
 .. _sphx_glr_download_examples_plot_diurnal_variation.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: plot_diurnal_variation.py <plot_diurnal_variation.py>`
 
-     :download:`Download Python source code: plot_diurnal_variation.py <plot_diurnal_variation.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: plot_diurnal_variation.ipynb <plot_diurnal_variation.ipynb>`
+      :download:`Download Jupyter notebook: plot_diurnal_variation.ipynb <plot_diurnal_variation.ipynb>`
 
 
 .. only:: html
