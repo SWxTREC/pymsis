@@ -7,8 +7,9 @@ from . import msis00f, msis20f, msis21f
 
 def run(dates, lons, lats, alts, f107s, f107as, aps, options=None, version=2):
     """
-    Call MSIS looping over all possible inputs. If ndates is
-    the same as nlons, nlats, and nalts, then a flattened
+    Call MSIS looping over all possible inputs.
+
+    If ndates is the same as nlons, nlats, and nalts, then a flattened
     multi-point input array is assumed. Otherwise, the data
     will be expanded in a grid-like fashion. The possible
     return shapes are therefore (ndates, 11) and
@@ -131,7 +132,8 @@ def create_options(
     mixed_ap_ut_long=1,
     terdiurnal=1,
 ):
-    """Creates the options list based on keyword argument choices.
+    """
+    Create the options list based on keyword argument choices.
 
     Defaults to all 1's for the input options.
 

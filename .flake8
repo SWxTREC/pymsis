@@ -1,5 +1,7 @@
 [flake8]
-exclude = .git,__pycache__,build,dist
+exclude = .git,__pycache__,build,dist,examples,tests
+max-line-length = 88
 per-file-ignores =
     # imports not at top of file
     setup.py: E402
+ignore = D100,D104

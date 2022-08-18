@@ -1,4 +1,3 @@
-import glob
 from pathlib import Path
 import tarfile
 import urllib.request
@@ -99,7 +98,7 @@ def clean_utf8(fnames):
 
 
 def fix_msis00(fname):
-    """Fix bad lines in msis00
+    """Fix bad lines in msis00.
 
     The gfortran compiler thinks there is a character/int mismatch,
     so fix these bad lines.
