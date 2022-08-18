@@ -1,10 +1,12 @@
-name: Build and upload to PyPI
+name: Build wheels
 
 # Only build on tagged releases
 on:
   push:
     tags:
       - '*'
+    branches:
+      - 'main'
 
 jobs:
   build_wheels:
@@ -23,7 +25,7 @@ jobs:
         shell: bash
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       # Only on the Windows runner
       - name: Add Windows environment settings
@@ -41,21 +43,19 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Install cibuildwheel
-        run: |
-          python -m pip install cibuildwheel
-
       - name: Download source files
         run: |
           python .github/workflows/download_mirror.py
 
       - name: Build wheels
-        run: |
-          python -m cibuildwheel --output-dir wheelhouse
+        uses: pypa/cibuildwheel@v2.9.0
         env:
           CIBW_BUILD: "cp38-* cp39-* cp310-* cp311-*"
+          # TODO: Look into universal2 support, but compilers and options
+          #       will be tricky with the Fortran code and tests...
+          CIBW_ARCHS_MACOS: x86_64
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           path: ./wheelhouse/*.whl
 
