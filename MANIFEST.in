@@ -1,4 +1,2 @@
-include README.rst
-include pymsis/msis2.0.parm
+include MSIS2_LICENSE
 include tools/*
-include src/**/*.pyf

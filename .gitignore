@@ -1,12 +1,12 @@
-src/msis2/*
-!src/msis2/msis2.F90
-!src/msis2/msis2.pyf
-src/msis00/*
-!src/msis00/msis00.F90
-!src/msis00/msis00.pyf
+src/msis**/*
+!src/msis*/.gitkeep
+src/wrappers/*
+!src/wrappers/*.pyf
+!src/wrappers/*.F90
 
-pymsis/msis2.0.parm
-pymsis/msis2f*
+pymsis/msis*.parm
+pymsis/msis20f*
+pymsis/msis21f*
 pymsis/msis00f*
 
 *.tar.gz

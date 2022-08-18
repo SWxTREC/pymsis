@@ -1,8 +1,8 @@
-import os
+from pathlib import Path
 
 import numpy as np
 
-from . import msis2f, msis00f
+from . import msis00f, msis20f, msis21f
 
 
 def run(dates, lons, lats, alts, f107s, f107as, aps,
@@ -66,19 +66,27 @@ def run(dates, lons, lats, alts, f107s, f107as, aps,
     input_shape, input_data = create_input(dates, lons, lats, alts,
                                            f107s, f107as, aps)
 
-    if int(version) == 0:
+    # convert to string version
+    version = str(version)
+    if version in {"0", "00"}:
         msis00f.pytselec(options)
         output = msis00f.pygtd7d(input_data[:, 0], input_data[:, 1],
                                  input_data[:, 2], input_data[:, 3],
                                  input_data[:, 4], input_data[:, 5],
                                  input_data[:, 6], input_data[:, 7:])
 
-    elif int(version) == 2:
+    elif version.startswith("2"):
         # We need to point to the MSIS parameter file that was installed with
         # the Python package
-        msis_path = os.path.dirname(os.path.realpath(__file__)) + "/"
-        msis2f.pyinitswitch(options, parmpath=msis_path)
-        output = msis2f.pymsiscalc(input_data[:, 0], input_data[:, 1],
+        msis_path = str(Path(__file__).resolve().parent) + "/"
+
+        # Select the proper library. Default to version 2.1, unless explicitly
+        # requested "2.0" via string
+        msis_lib = msis21f
+        if version == "2.0":
+            msis_lib = msis20f
+        msis_lib.pyinitswitch(options, parmpath=msis_path)
+        output = msis_lib.pymsiscalc(input_data[:, 0], input_data[:, 1],
                                    input_data[:, 2], input_data[:, 3],
                                    input_data[:, 4], input_data[:, 5],
                                    input_data[:, 6], input_data[:, 7:])
