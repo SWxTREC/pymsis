@@ -1,15 +1,15 @@
-import os
+from pathlib import Path
 
 import numpy as np
 
-from . import msis2f, msis00f
+from . import msis00f, msis20f, msis21f
 
 
-def run(dates, lons, lats, alts, f107s, f107as, aps,
-        options=None, version=2):
+def run(dates, lons, lats, alts, f107s, f107as, aps, options=None, version=2):
     """
-    Call MSIS looping over all possible inputs. If ndates is
-    the same as nlons, nlats, and nalts, then a flattened
+    Call MSIS looping over all possible inputs.
+
+    If ndates is the same as nlons, nlats, and nalts, then a flattened
     multi-point input array is assumed. Otherwise, the data
     will be expanded in a grid-like fashion. The possible
     return shapes are therefore (ndates, 11) and
@@ -49,7 +49,7 @@ def run(dates, lons, lats, alts, f107s, f107as, aps,
         | Ar # density (m-3),
         | N # density (m-3),
         | Anomalous oxygen # density (m-3),
-        | empty (will contain NO in future release),
+        | NO # density (m-3),
         | Temperature (K)]
 
     Notes
@@ -63,29 +63,50 @@ def run(dates, lons, lats, alts, f107s, f107as, aps,
     elif len(options) != 25:
         raise ValueError("options needs to be a list of length 25")
 
-    input_shape, input_data = create_input(dates, lons, lats, alts,
-                                           f107s, f107as, aps)
+    input_shape, input_data = create_input(dates, lons, lats, alts, f107s, f107as, aps)
 
-    if int(version) == 0:
+    # convert to string version
+    version = str(version)
+    if version in {"0", "00"}:
         msis00f.pytselec(options)
-        output = msis00f.pygtd7d(input_data[:, 0], input_data[:, 1],
-                                 input_data[:, 2], input_data[:, 3],
-                                 input_data[:, 4], input_data[:, 5],
-                                 input_data[:, 6], input_data[:, 7:])
+        output = msis00f.pygtd7d(
+            input_data[:, 0],
+            input_data[:, 1],
+            input_data[:, 2],
+            input_data[:, 3],
+            input_data[:, 4],
+            input_data[:, 5],
+            input_data[:, 6],
+            input_data[:, 7:],
+        )
 
-    elif int(version) == 2:
+    elif version.startswith("2"):
         # We need to point to the MSIS parameter file that was installed with
         # the Python package
-        msis_path = os.path.dirname(os.path.realpath(__file__)) + "/"
-        msis2f.pyinitswitch(options, parmpath=msis_path)
-        output = msis2f.pymsiscalc(input_data[:, 0], input_data[:, 1],
-                                   input_data[:, 2], input_data[:, 3],
-                                   input_data[:, 4], input_data[:, 5],
-                                   input_data[:, 6], input_data[:, 7:])
+        msis_path = str(Path(__file__).resolve().parent) + "/"
+
+        # Select the proper library. Default to version 2.1, unless explicitly
+        # requested "2.0" via string
+        msis_lib = msis21f
+        if version == "2.0":
+            msis_lib = msis20f
+        msis_lib.pyinitswitch(options, parmpath=msis_path)
+        output = msis_lib.pymsiscalc(
+            input_data[:, 0],
+            input_data[:, 1],
+            input_data[:, 2],
+            input_data[:, 3],
+            input_data[:, 4],
+            input_data[:, 5],
+            input_data[:, 6],
+            input_data[:, 7:],
+        )
 
     else:
-        raise ValueError(f"The MSIS version selected: {version} is not "
-                         "a valid version number [0, 2]")
+        raise ValueError(
+            f"The MSIS version selected: {version} is not "
+            "a valid version number [0, 2]"
+        )
 
     # The Fortran code puts 9.9e-38 in as NaN
     # Have to make sure this doesn't overlap 0 due to really small values
@@ -95,12 +116,24 @@ def run(dates, lons, lats, alts, f107s, f107as, aps,
     return output.reshape(input_shape + (11,))
 
 
-def create_options(f107=1, time_independent=1, symmetrical_annual=1,
-                   symmetrical_semiannual=1, asymmetrical_annual=1,
-                   asymmetrical_semiannual=1, diurnal=1, semidiurnal=1,
-                   geomagnetic_activity=1, all_ut_effects=1, longitudinal=1,
-                   mixed_ut_long=1, mixed_ap_ut_long=1, terdiurnal=1):
-    """Creates the options list based on keyword argument choices.
+def create_options(
+    f107=1,
+    time_independent=1,
+    symmetrical_annual=1,
+    symmetrical_semiannual=1,
+    asymmetrical_annual=1,
+    asymmetrical_semiannual=1,
+    diurnal=1,
+    semidiurnal=1,
+    geomagnetic_activity=1,
+    all_ut_effects=1,
+    longitudinal=1,
+    mixed_ut_long=1,
+    mixed_ap_ut_long=1,
+    terdiurnal=1,
+):
+    """
+    Create the options list based on keyword argument choices.
 
     Defaults to all 1's for the input options.
 
@@ -141,11 +174,22 @@ def create_options(f107=1, time_independent=1, symmetrical_annual=1,
     list
         25 options as a list ready for msis2 input
     """
-    options = [f107, time_independent, symmetrical_annual,
-               symmetrical_semiannual, asymmetrical_annual,
-               asymmetrical_semiannual, diurnal, semidiurnal,
-               geomagnetic_activity, all_ut_effects, longitudinal,
-               mixed_ut_long, mixed_ap_ut_long, terdiurnal] + [1]*11
+    options = [
+        f107,
+        time_independent,
+        symmetrical_annual,
+        symmetrical_semiannual,
+        asymmetrical_annual,
+        asymmetrical_semiannual,
+        diurnal,
+        semidiurnal,
+        geomagnetic_activity,
+        all_ut_effects,
+        longitudinal,
+        mixed_ut_long,
+        mixed_ap_ut_long,
+        terdiurnal,
+    ] + [1] * 11
     return options
 
 
@@ -178,11 +222,13 @@ def create_input(dates, lons, lats, alts, f107s, f107as, aps):
         (ndates == nlons == nlats == nalts), then the shape is (ndates,).
     """
     # Turn everything into arrays
-    dates = np.atleast_1d(np.array(dates, dtype='datetime64'))
-    dyear = (dates.astype('datetime64[D]') -
-             dates.astype('datetime64[Y]')).astype(float) + 1  # DOY 1-366
-    dseconds = (dates.astype('datetime64[s]') -
-                dates.astype('datetime64[D]')).astype(float)
+    dates = np.atleast_1d(np.array(dates, dtype="datetime64"))
+    dyear = (dates.astype("datetime64[D]") - dates.astype("datetime64[Y]")).astype(
+        float
+    ) + 1  # DOY 1-366
+    dseconds = (dates.astype("datetime64[s]") - dates.astype("datetime64[D]")).astype(
+        float
+    )
     # TODO: Make it a continuous day of year?
     #       The new code mentions it should be and accepts float, but the
     #       regression tests indicate it should still be integer DOY
@@ -203,9 +249,11 @@ def create_input(dates, lons, lats, alts, f107s, f107as, aps):
     nalts = len(alts)
 
     if not (ndates == len(f107s) == len(f107as) == len(aps)):
-        raise ValueError(f"The length of dates ({ndates}), f107s "
-                         f"({len(f107s)}), f107as ({len(f107as)}), "
-                         f"and aps ({len(aps)}) must all be equal")
+        raise ValueError(
+            f"The length of dates ({ndates}), f107s "
+            f"({len(f107s)}), f107as ({len(f107as)}), "
+            f"and aps ({len(aps)}) must all be equal"
+        )
 
     if ndates == nlons == nlats == nalts:
         # This means the data came in preflattened, from a satellite
@@ -215,26 +263,39 @@ def create_input(dates, lons, lats, alts, f107s, f107as, aps):
 
         # ap has 7 components, so we need to concatenate it onto the
         # arrays rather than stack
-        flattened_input = np.concatenate([arr, aps], axis=1,
-                                         dtype=np.float32)
+        flattened_input = np.concatenate([arr, aps], axis=1, dtype=np.float32)
         shape = (ndates,)
         return shape, flattened_input
 
     # Make a grid of indices
-    indices = np.stack(np.meshgrid(np.arange(ndates),
-                       np.arange(nlons),
-                       np.arange(nlats),
-                       np.arange(nalts), indexing='ij'),
-                       -1).reshape(-1, 4)
+    indices = np.stack(
+        np.meshgrid(
+            np.arange(ndates),
+            np.arange(nlons),
+            np.arange(nlats),
+            np.arange(nalts),
+            indexing="ij",
+        ),
+        -1,
+    ).reshape(-1, 4)
 
     # Now stack all of the arrays, indexing by the proper indices
-    arr = np.stack([dyear[indices[:, 0]], dseconds[indices[:, 0]],
-                    lons[indices[:, 1]], lats[indices[:, 2]],
-                    alts[indices[:, 3]],
-                    f107s[indices[:, 0]], f107as[indices[:, 0]]], -1)
+    arr = np.stack(
+        [
+            dyear[indices[:, 0]],
+            dseconds[indices[:, 0]],
+            lons[indices[:, 1]],
+            lats[indices[:, 2]],
+            alts[indices[:, 3]],
+            f107s[indices[:, 0]],
+            f107as[indices[:, 0]],
+        ],
+        -1,
+    )
     # ap has 7 components, so we need to concatenate it onto the
     # arrays rather than stack
-    flattened_input = np.concatenate([arr, aps[indices[:, 0], :]], axis=1,
-                                     dtype=np.float32)
+    flattened_input = np.concatenate(
+        [arr, aps[indices[:, 0], :]], axis=1, dtype=np.float32
+    )
     shape = (ndates, nlons, nlats, nalts)
     return shape, flattened_input

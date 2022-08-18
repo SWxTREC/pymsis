@@ -1,4 +1,8 @@
-include README.rst
-include pymsis/msis2.0.parm
+include MSIS2_LICENSE
+include tests/*
 include tools/*
-include src/**/*.pyf
+# Exclude external fortran files
+exclude src/msis**/*
+exclude src/wrappers/*.[fc]
+include src/wrappers/*.pyf
+exclude pymsis/*.parm
