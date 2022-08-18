@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
-        python-version: [3.7, 3.8, 3.9, '3.10']
+        python-version: [3.8, 3.9, '3.10', '3.11-dev']
     env:
       FC: gfortran-9
       F77: gfortran-9
@@ -56,7 +56,9 @@ jobs:
         pip install -r requirements-test.txt
 
     - name: Install pymsis
-      run: pip install -ve .
+      # Enable the legacy editable install capability for now
+      # numpy distutils fails compiling the wrappers without it
+      run: SETUPTOOLS_ENABLE_FEATURES="legacy-editable" pip install -ve .
 
     - name: Lint with flake8
       run: |
