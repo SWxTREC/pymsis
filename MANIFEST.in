@@ -1,2 +1,8 @@
 include MSIS2_LICENSE
+include tests/*
 include tools/*
+# Exclude external fortran files
+exclude src/msis**/*
+exclude src/wrappers/*.[fc]
+include src/wrappers/*.pyf
+exclude pymsis/*.parm

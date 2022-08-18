@@ -60,13 +60,15 @@ def get_source():
     clean_utf8(Path("src/msis2.1").glob("*.F90"))
 
     # Now go to MSIS-00
-    if not Path("src/msis00/NRLMSISE-00.FOR").exists():
+    local_msis00_path = Path("src/msis00/NRLMSISE-00.FOR")
+    if not local_msis00_path.exists():
+        local_msis00_path.parent.mkdir(parents=True, exist_ok=True)
         # No source code yet, so go download and extract it
         try:
             warnings.warn("Downloading the MSIS-00 source code from " f"{MSIS00_FILE}")
 
             with urllib.request.urlopen(MSIS00_FILE) as response:
-                with open(Path("src/msis00/NRLMSISE-00.FOR"), "wb") as f:
+                with open(local_msis00_path, "wb") as f:
                     f.write(response.read())
         except Exception as e:
             print(
@@ -77,7 +79,7 @@ def get_source():
             raise e
 
     # Fix up the file outside of the download incase it is an offline install
-    fix_msis00(Path("src/msis00/NRLMSISE-00.FOR"))
+    fix_msis00(local_msis00_path)
 
 
 # Clean up the source files
