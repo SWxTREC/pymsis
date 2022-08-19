@@ -1,4 +1,5 @@
 include MSIS2_LICENSE
+include pyproject.toml
 include tests/*
 include tools/*
 # Exclude external fortran files
