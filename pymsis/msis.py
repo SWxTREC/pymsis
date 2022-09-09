@@ -2,7 +2,7 @@ from pathlib import Path
 
 import numpy as np
 
-from . import msis00f, msis20f, msis21f
+from pymsis import msis00f, msis20f, msis21f
 
 
 def run(dates, lons, lats, alts, f107s, f107as, aps, options=None, version=2):
