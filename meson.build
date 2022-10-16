@@ -4,7 +4,7 @@ project(
   # Note that the git commit hash cannot be added dynamically here
   version: '0.6.0',
   license: 'MIT',
-  meson_version: '>= 0.63.0',
+  meson_version: '>= 0.63.3',
   default_options: [
     'buildtype=debugoptimized',
     'c_std=c99',
