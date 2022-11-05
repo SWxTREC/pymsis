@@ -3,7 +3,7 @@ build-backend = "mesonpy"
 requires = [
     "meson-python>=0.10.0",
     "wheel",
-    "numpy"
+    "oldest-supported-numpy"
 ]
 
 [project]
@@ -31,7 +31,7 @@ classifiers = [
     "Operating System :: Unix",
     "Operating System :: MacOS",
 ]
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 dependencies = ["numpy"]
 
 [project.optional-dependencies]
