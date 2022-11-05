@@ -7,6 +7,7 @@ on:
       - '*'
     branches:
       - 'main'
+  release:
 
 jobs:
   build_wheels:
@@ -15,11 +16,6 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
-    env:
-      FC: gfortran-9
-      F77: gfortran-9
-      F90: gfortran-9
-      CC: gcc-9
     defaults:
       run:
         shell: bash
@@ -27,30 +23,39 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # Only on the Windows runner
+      # symlinks the compiler paths automatically for us
+      - name: Install GNU Fortran
+        uses: modflowpy/install-gfortran-action@v1
+
+      - name: Compiler versions
+        run: |
+          which gcc
+          gcc --version
+          which gfortran
+          gfortran --version
+
+      # On Windows, the compilers can cause issues when
+      # using higher optimization levels
       - name: Add Windows environment settings
         if: startsWith(matrix.os, 'windows')
         run: |
-          echo "C:\msys64\mingw64\bin" >> $GITHUB_PATH
-          echo "C:\msys64\usr\bin" >> $GITHUB_PATH
-          echo "FC=gfortran" >> $GITHUB_ENV
-          echo "F77=gfortran" >> $GITHUB_ENV
-          echo "F90=gfortran" >> $GITHUB_ENV
-          echo "CC=gcc" >> $GITHUB_ENV
+          echo "FFLAGS=-O1" >> $GITHUB_ENV
 
-      - uses: actions/setup-python@v2
-        name: Install Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.10'
 
       - name: Download source files
         run: |
           python .github/workflows/download_mirror.py
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.9.0
+        uses: pypa/cibuildwheel@v2.11.2
         env:
           CIBW_BUILD: "cp38-* cp39-* cp310-* cp311-*"
+          # Skip 32 bit windows builds due to compiler
+          CIBW_SKIP: "*-win32"
           # TODO: Look into universal2 support, but compilers and options
           #       will be tricky with the Fortran code and tests...
           CIBW_ARCHS_MACOS: x86_64
@@ -65,31 +70,27 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
         name: Install Python
         with:
-          python-version: '3.9'
+          python-version: '3.10'
 
       - name: Download source files
         run: |
           python .github/workflows/download_mirror.py
-
       - name: Build sdist
         run: |
-          python -m pip install numpy
-          python setup.py sdist
-
-      - uses: actions/upload-artifact@v2
+          python -m pip install meson-python meson ninja build
+          python -m build --sdist
+      - uses: actions/upload-artifact@v3
         with:
           path: dist/*.tar.gz
 
   upload_pypi:
     needs: [build_wheels, build_sdist]
     runs-on: ubuntu-latest
-    # upload to PyPI on every tag starting with 'v'
-    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/v')
     # alternatively, to publish when a GitHub Release is created, use the following rule:
-    # if: github.event_name == 'release' && github.event.action == 'published'
+    if: github.event_name == 'release' && github.event.action == 'published'
     steps:
       - uses: actions/download-artifact@v2
         with:
