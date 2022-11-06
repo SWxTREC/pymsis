@@ -40,6 +40,8 @@ jobs:
         if: startsWith(matrix.os, 'windows')
         run: |
           echo "FFLAGS=-O1" >> $GITHUB_ENV
+          # Windows can't decode the README which has utf8 characters
+          echo "PYTHONUTF8=1" >> $GITHUB_ENV
 
       - name: Set up Python
         uses: actions/setup-python@v4
