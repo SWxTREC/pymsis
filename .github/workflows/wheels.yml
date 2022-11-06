@@ -10,18 +10,53 @@ on:
   release:
 
 jobs:
+  generate-wheels-matrix:
+    name: Generate wheels matrix
+    runs-on: ubuntu-latest
+    outputs:
+      include: ${{ steps.set-matrix.outputs.include }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install cibuildwheel
+        run: pipx install cibuildwheel==2.11.2
+      - id: set-matrix
+        run: |
+          MATRIX=$(
+            {
+              cibuildwheel --print-build-identifiers --platform linux \
+              | jq -nRc '{"only": inputs, "os": "ubuntu-latest"}' \
+              && cibuildwheel --print-build-identifiers --platform macos \
+              | jq -nRc '{"only": inputs, "os": "macos-latest"}' \
+              && cibuildwheel --print-build-identifiers --platform windows \
+              | jq -nRc '{"only": inputs, "os": "windows-latest"}'
+            } | jq -sc
+          )
+          echo "include=$MATRIX" >> $GITHUB_OUTPUT          
+        env:
+          CIBW_BUILD: "cp38-* cp39-* cp310-* cp311-*"
+          # Skip 32 bit windows builds due to compiler
+          CIBW_SKIP: "*-win32"
+          # TODO: Look into universal2 support, but compilers and options
+          #       will be tricky with the Fortran code and tests...
+          CIBW_ARCHS_MACOS: x86_64
   build_wheels:
-    name: Build wheels on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    name: Build ${{ matrix.os }} ${{ matrix.only }}
+    needs: generate-wheels-matrix
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest]
+        include: ${{ fromJson(needs.generate-wheels-matrix.outputs.include) }}
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
         shell: bash
-
     steps:
       - uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        if: runner.os == 'Linux'
+        uses: docker/setup-qemu-action@v1
+        with:
+          platforms: all
 
       # symlinks the compiler paths automatically for us
       - name: Install GNU Fortran
@@ -37,7 +72,7 @@ jobs:
       # On Windows, the compilers can cause issues when
       # using higher optimization levels
       - name: Add Windows environment settings
-        if: startsWith(matrix.os, 'windows')
+        if: runner.os == 'Windows'
         run: |
           echo "FFLAGS=-O1" >> $GITHUB_ENV
           # Windows can't decode the README which has utf8 characters
@@ -52,15 +87,9 @@ jobs:
         run: |
           python .github/workflows/download_mirror.py
 
-      - name: Build wheels
-        uses: pypa/cibuildwheel@v2.11.2
-        env:
-          CIBW_BUILD: "cp38-* cp39-* cp310-* cp311-*"
-          # Skip 32 bit windows builds due to compiler
-          CIBW_SKIP: "*-win32"
-          # TODO: Look into universal2 support, but compilers and options
-          #       will be tricky with the Fortran code and tests...
-          CIBW_ARCHS_MACOS: x86_64
+      - uses: pypa/cibuildwheel@v2.11.2
+        with:
+          only: ${{ matrix.only }}
 
       - uses: actions/upload-artifact@v3
         with:
