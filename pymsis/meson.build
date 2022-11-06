@@ -4,6 +4,5 @@ py3.install_sources([
   'msis2.0.parm',
   'msis21.parm',
 ],
-  pure: false,
   subdir: 'pymsis'
 )
