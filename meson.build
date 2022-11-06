@@ -4,7 +4,7 @@ project(
   # Note that the git commit hash cannot be added dynamically here
   version: '0.6.0',
   license: 'MIT',
-  meson_version: '>= 0.63.3',
+  meson_version: '>= 0.64.0',
   default_options: [
     'buildtype=debugoptimized',
     'c_std=c99',
@@ -51,7 +51,7 @@ generate_f2pymod = files('tools/generate_f2pymod.py')
 
 # https://mesonbuild.com/Python-module.html
 py_mod = import('python')
-py3 = py_mod.find_installation()
+py3 = py_mod.find_installation(pure: false)
 py3_dep = py3.dependency()
 
 incdir_numpy = run_command(py3,

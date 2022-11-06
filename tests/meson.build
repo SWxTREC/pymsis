@@ -5,6 +5,5 @@ py3.install_sources(
      'msis2.0_test_ref_dp.txt',
      'msis2.1_test_ref_dp.txt',
     ],
-    pure: false,
     subdir: 'pymsis/tests'
 )
