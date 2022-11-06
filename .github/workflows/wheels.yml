@@ -1,4 +1,7 @@
 name: Build wheels
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number }}-${{ github.event.ref }}
+  cancel-in-progress: true
 
 # Only build on tagged releases
 on:

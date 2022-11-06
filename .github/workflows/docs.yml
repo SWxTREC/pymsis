@@ -1,5 +1,8 @@
 name: "Documentation Build"
-on: 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number }}-${{ github.event.ref }}
+  cancel-in-progress: true
+on:
 - pull_request
 - release
 
