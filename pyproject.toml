@@ -10,7 +10,7 @@ requires = [
 name = "pymsis"
 version = "0.6.0"
 description = "A Python wrapper around the NRLMSIS model."
-readme = "README.rst"
+readme = "README.md"
 license = {file = "LICENSE"}
 keyword = ["MSIS2", "NRLMSIS"]
 authors = [{name = "Greg Lucas", email = "greg.lucas@lasp.colorado.edu"}]
