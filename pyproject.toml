@@ -1,8 +1,65 @@
 [build-system]
+build-backend = "mesonpy"
 requires = [
-    "setuptools==59.2.0",
+    "meson-python>=0.10.0",
     "wheel",
-    "numpy"
+    "oldest-supported-numpy"
 ]
 
-build-backend = "setuptools.build_meta"
+[project]
+name = "pymsis"
+version = "0.6.0"
+description = "A Python wrapper around the NRLMSIS model."
+readme = "README.md"
+license = {file = "LICENSE"}
+keyword = ["MSIS2", "NRLMSIS"]
+authors = [{name = "Greg Lucas", email = "greg.lucas@lasp.colorado.edu"}]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development",
+    "Topic :: Scientific/Engineering",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
+    "Operating System :: MacOS",
+]
+requires-python = ">=3.8"
+dependencies = ["numpy"]
+
+[project.optional-dependencies]
+tests = [
+    "flake8",
+    "pytest",
+    "pytest-cov",
+]
+docs = [
+    "matplotlib",
+    "sphinx",
+    "sphinx_gallery",
+    "pydata-sphinx-theme",
+]
+
+[project.urls]
+homepage = "https://swxtrec.github.io/pymsis/"
+repository = "https://github.com/swxtrec/pymsis"
+
+[tool.pytest.ini_options]
+junit_family = "xunit2"
+testpaths = [
+  "tests",
+]
+addopts = [
+    "--import-mode=importlib",
+]
+
+[tool.cibuildwheel]
+test-requires = "pytest"
+test-command = "pytest --pyargs pymsis"

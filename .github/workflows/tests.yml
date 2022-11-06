@@ -1,48 +1,53 @@
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: pymsis
+name: tests
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number }}-${{ github.event.ref }}
+  cancel-in-progress: true
 
 on:
   push:
-    branches: [ main ]
+    branches: [ '*' ]
   pull_request:
     branches: [ main ]
 
 jobs:
   build:
-
     runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
-        python-version: [3.8, 3.9, '3.10', '3.11-dev']
-    env:
-      FC: gfortran-9
-      F77: gfortran-9
-      F90: gfortran-9
-      CC: gcc-9
+        python-version: ['3.8', '3.9', '3.10', '3.11']
     defaults:
       run:
         shell: bash
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
-    # Only on the Windows runner
+    # symlinks the compiler paths automatically for us
+    - name: Install GNU Fortran
+      uses: modflowpy/install-gfortran-action@v1
+
+    - name: Compiler versions
+      run: |
+        which gcc
+        gcc --version
+        which gfortran
+        gfortran --version
+
+    # On Windows, the compilers can cause issues when
+    # using higher optimization levels
     - name: Add Windows environment settings
       if: startsWith(matrix.os, 'windows')
       run: |
-        echo "C:\msys64\mingw64\bin" >> $GITHUB_PATH
-        echo "C:\msys64\usr\bin" >> $GITHUB_PATH
-        echo "FC=gfortran" >> $GITHUB_ENV
-        echo "F77=gfortran" >> $GITHUB_ENV
-        echo "F90=gfortran" >> $GITHUB_ENV
-        echo "CC=gcc" >> $GITHUB_ENV
+        echo "FFLAGS=-O1" >> $GITHUB_ENV
+        # Windows can't decode the README which has utf8 characters
+        echo "PYTHONUTF8=1" >> $GITHUB_ENV
 
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
 
@@ -50,15 +55,10 @@ jobs:
       run: |
         python .github/workflows/download_mirror.py
 
-    - name: Install dependencies
+    - name: Install pymsis
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements-test.txt
-
-    - name: Install pymsis
-      # Enable the legacy editable install capability for now
-      # numpy distutils fails compiling the wrappers without it
-      run: pip install -ve .
+        pip install -v .[tests]
 
     - name: Lint with flake8
       run: |
@@ -66,7 +66,9 @@ jobs:
         flake8 . --count --show-source --statistics
 
     - name: Test with pytest
-      run: pytest --color=yes --cov --cov-report=xml
+      run: |
+        # TODO: Get coverage for other modules without specifying pymsis.msis directly
+        pytest --color=yes --cov=pymsis.msis --cov-report=xml --pyargs pymsis
 
     - name: Upload code coverage
-      uses: codecov/codecov-action@v2
+      uses: codecov/codecov-action@v3

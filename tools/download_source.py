@@ -1,4 +1,5 @@
 from pathlib import Path
+import shutil
 import tarfile
 import urllib.request
 import warnings
@@ -28,9 +29,10 @@ def get_source():
             raise e
 
     # Rename the parameter file to what the Fortran is expecting
-    if not Path("pymsis/msis2.0.parm").exists():
+    param_file = Path("pymsis/msis2.0.parm")
+    if not param_file.exists():
         # Notice that the original is "20", not "2.0"
-        Path("src/msis2.0/msis20.parm").rename(Path("pymsis/msis2.0.parm"))
+        shutil.copy(Path("src/msis2.0/msis20.parm"), param_file)
 
     # Now go through and clean the source files
     clean_utf8(Path("src/msis2.0").glob("*.F90"))
@@ -52,9 +54,10 @@ def get_source():
             raise e
 
     # Rename the parameter file to what the Fortran is expecting
-    if not Path("pymsis/msis21.parm").exists():
+    param_file = Path("pymsis/msis21.parm")
+    if not param_file.exists():
         # Notice that the original is "21", so keep it this time
-        Path("src/msis2.1/msis21.parm").rename("pymsis/msis21.parm")
+        shutil.copy("src/msis2.1/msis21.parm", param_file)
 
     # Now go through and clean the source files
     clean_utf8(Path("src/msis2.1").glob("*.F90"))

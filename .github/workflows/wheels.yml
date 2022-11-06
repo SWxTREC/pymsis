@@ -1,0 +1,139 @@
+name: Build wheels
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number }}-${{ github.event.ref }}
+  cancel-in-progress: true
+
+# Only build on tagged releases
+on:
+  push:
+    tags:
+      - '*'
+    branches:
+      - 'main'
+  release:
+
+jobs:
+  generate-wheels-matrix:
+    name: Generate wheels matrix
+    runs-on: ubuntu-latest
+    outputs:
+      include: ${{ steps.set-matrix.outputs.include }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install cibuildwheel
+        run: pipx install cibuildwheel==2.11.2
+      - id: set-matrix
+        run: |
+          MATRIX=$(
+            {
+              cibuildwheel --print-build-identifiers --platform linux \
+              | jq -nRc '{"only": inputs, "os": "ubuntu-latest"}' \
+              && cibuildwheel --print-build-identifiers --platform macos \
+              | jq -nRc '{"only": inputs, "os": "macos-latest"}' \
+              && cibuildwheel --print-build-identifiers --platform windows \
+              | jq -nRc '{"only": inputs, "os": "windows-latest"}'
+            } | jq -sc
+          )
+          echo "include=$MATRIX" >> $GITHUB_OUTPUT          
+        env:
+          CIBW_BUILD: "cp38-* cp39-* cp310-* cp311-*"
+          # Skip 32 bit windows builds due to compiler
+          # Skip musllinux because there aren't musllinux wheels yet
+          CIBW_SKIP: "*-win32 *-musllinux*"
+          # TODO: Look into universal2 support, but compilers and options
+          #       will be tricky with the Fortran code and tests...
+          CIBW_ARCHS_MACOS: x86_64
+  build_wheels:
+    name: Build ${{ matrix.os }} ${{ matrix.only }}
+    needs: generate-wheels-matrix
+    strategy:
+      matrix:
+        include: ${{ fromJson(needs.generate-wheels-matrix.outputs.include) }}
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        if: runner.os == 'Linux'
+        uses: docker/setup-qemu-action@v1
+        with:
+          platforms: all
+
+      # symlinks the compiler paths automatically for us
+      - name: Install GNU Fortran
+        uses: modflowpy/install-gfortran-action@v1
+
+      - name: Compiler versions
+        run: |
+          which gcc
+          gcc --version
+          which gfortran
+          gfortran --version
+
+      # On Windows, the compilers can cause issues when
+      # using higher optimization levels
+      - name: Add Windows environment settings
+        if: runner.os == 'Windows'
+        run: |
+          echo "FFLAGS=-O1" >> $GITHUB_ENV
+          # Windows can't decode the README which has utf8 characters
+          echo "PYTHONUTF8=1" >> $GITHUB_ENV
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Download source files
+        run: |
+          python .github/workflows/download_mirror.py
+
+      - uses: pypa/cibuildwheel@v2.11.2
+        with:
+          only: ${{ matrix.only }}
+
+      - uses: actions/upload-artifact@v3
+        with:
+          path: ./wheelhouse/*.whl
+
+  build_sdist:
+    name: Build source distribution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v4
+        name: Install Python
+        with:
+          python-version: '3.10'
+
+      - name: Download source files
+        run: |
+          python .github/workflows/download_mirror.py
+      - name: Build sdist
+        run: |
+          python -m pip install meson-python meson ninja build
+          python -m build --sdist
+      - uses: actions/upload-artifact@v3
+        with:
+          path: dist/*.tar.gz
+
+  upload_pypi:
+    needs: [build_wheels, build_sdist]
+    runs-on: ubuntu-latest
+    # alternatively, to publish when a GitHub Release is created, use the following rule:
+    if: github.event_name == 'release' && github.event.action == 'published'
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: artifact
+          path: dist
+
+      - uses: pypa/gh-action-pypi-publish@master
+        with:
+          user: __token__
+          password: ${{ secrets.pypi_password }}
+          # To test: repository_url: https://test.pypi.org/legacy/
