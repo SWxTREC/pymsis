@@ -35,7 +35,8 @@ jobs:
         env:
           CIBW_BUILD: "cp38-* cp39-* cp310-* cp311-*"
           # Skip 32 bit windows builds due to compiler
-          CIBW_SKIP: "*-win32"
+          # Skip musllinux because there aren't musllinux wheels yet
+          CIBW_SKIP: "*-win32 *-musllinux*"
           # TODO: Look into universal2 support, but compilers and options
           #       will be tricky with the Fortran code and tests...
           CIBW_ARCHS_MACOS: x86_64
