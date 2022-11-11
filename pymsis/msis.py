@@ -6,7 +6,7 @@ from pymsis import msis00f, msis20f, msis21f
 
 
 def run(dates, lons, lats, alts, f107s, f107as, aps, *,
-        options=None, version=2, **kwargs):
+        options=None, version=2.1, **kwargs):
     """
     Call MSIS looping over all possible inputs.
 
@@ -44,8 +44,8 @@ def run(dates, lons, lats, alts, f107s, f107as, aps, *,
     options : list of floats (length 25) [optional]
         A list of options (switches) to the model, if options is passed
         all keyword arguments specifying individual options will be ignored.
-    version : int or string, default: 2.1
-        MSIS version number, [0, 2, 2.1]
+    version : Number or string, default: 2.1
+        MSIS version number, [0, 2.0, 2.1]
 
     Returns
     -------
