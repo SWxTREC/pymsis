@@ -3,10 +3,22 @@ from pathlib import Path
 import numpy as np
 
 from pymsis import msis00f, msis20f, msis21f
+from pymsis.utils import get_f107_ap
 
 
-def run(dates, lons, lats, alts, f107s, f107as, aps, *,
-        options=None, version=2.1, **kwargs):
+def run(
+    dates,
+    lons,
+    lats,
+    alts,
+    f107s=None,
+    f107as=None,
+    aps=None,
+    *,
+    options=None,
+    version=2.1,
+    **kwargs,
+):
     """
     Call MSIS looping over all possible inputs.
 
@@ -26,11 +38,11 @@ def run(dates, lons, lats, alts, f107s, f107as, aps, *,
         Latitudes of interest
     alts : list of floats
         Altitudes of interest
-    f107s : list of floats
+    f107s : list of floats, optional
         Daily F10.7 of the previous day for the given date(s)
-    f107as : list of floats
+    f107as : list of floats, optional
         F10.7 running 81-day average centered on the given date(s)
-    aps : list of floats
+    aps : list of floats, optional
         | Ap for the given date(s), (1-6 only used if `geomagnetic_activity=-1`)
         | (0) Daily Ap
         | (1) 3 hr ap index for current time
@@ -237,7 +249,7 @@ def create_options(
     return options
 
 
-def create_input(dates, lons, lats, alts, f107s, f107as, aps):
+def create_input(dates, lons, lats, alts, f107s=None, f107as=None, aps=None):
     """Combine all input values into a single flattened array.
 
     Parameters
@@ -250,16 +262,16 @@ def create_input(dates, lons, lats, alts, f107s, f107as, aps):
         Latitudes of interest
     alts : list of floats
         Altitudes of interest
-    f107s : list of floats
+    f107s : list of floats, optional
         F107 values for the previous day of the given date(s)
-    f107as : list of floats
+    f107as : list of floats, optional
         F107 running 81-day average for the given date(s)
-    aps : list of floats
+    aps : list of floats, optional
         Ap for the given date(s)
 
     Returns
     -------
-    (shape, flattened_input)
+    tuple (shape, flattened_input)
         The shape of the data as a tuple (ndates, nlons, nlats, nalts) and
         the flattened version of the input data
         (ndates*nlons*nlats*nalts, 14). If the input array was preflattened
@@ -283,6 +295,19 @@ def create_input(dates, lons, lats, alts, f107s, f107as, aps):
     lons[lons < 0] += 360
     lats = np.atleast_1d(lats)
     alts = np.atleast_1d(alts)
+
+    # If any of the geomagnetic data wasn't specified, we will default
+    # to getting it with the utility functions.
+    if f107s is None or f107as is None or aps is None:
+        data = get_f107_ap(dates)
+        # Only update the values that were None
+        if f107s is None:
+            f107s = data[0]
+        if f107as is None:
+            f107as = data[1]
+        if aps is None:
+            aps = data[2]
+
     f107s = np.atleast_1d(f107s)
     f107as = np.atleast_1d(f107as)
     aps = np.atleast_1d(aps)

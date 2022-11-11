@@ -125,7 +125,7 @@ def _load_f107_ap_data():
     return data
 
 
-def get_f107_ap(times):
+def get_f107_ap(dates):
     """
     Retrieve the F10.7 and ap data needed to run msis for the given times.
 
@@ -134,7 +134,7 @@ def get_f107_ap(times):
 
     Parameters
     ----------
-    times : datetime-like or sequence of datetimes
+    dates : datetime-like or sequence of datetimes
         times of interest to get the proper ap and F10.7 values for
 
     Returns
@@ -159,15 +159,15 @@ def get_f107_ap(times):
             | (6) Average of eight 3 hr ap indices from 36 to 57 hrs
             |     prior to current time
     """
-    times = np.asarray(times, dtype=np.datetime64)
+    dates = np.asarray(dates, dtype=np.datetime64)
     data = _DATA or _load_f107_ap_data()
 
-    # 3-hourly index values
-    ap_indices = (times - _DATA_START_DATE).astype("timedelta64[h]").astype(int) // 3
     # daily index values
-    daily_indices = (times - _DATA_START_DATE).astype("timedelta64[D]").astype(int)
+    daily_indices = (dates - _DATA_START_DATE).astype("timedelta64[D]").astype(int)
+    # 3-hourly index values
+    ap_indices = (dates - _DATA_START_DATE).astype("timedelta64[h]").astype(int) // 3
 
-    ap = np.take(data["ap"], ap_indices, axis=0)
     f107 = np.take(data["f107"], daily_indices)
     f107a = np.take(data["f107a"], daily_indices)
-    return ap, f107, f107a
+    ap = np.take(data["ap"], ap_indices, axis=0)
+    return f107, f107a, ap
