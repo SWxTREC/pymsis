@@ -1,5 +1,4 @@
 from pathlib import Path
-from typing import Any
 import urllib.request
 import warnings
 
@@ -166,6 +165,14 @@ def get_f107_ap(dates):
     daily_indices = (dates - _DATA_START_DATE).astype("timedelta64[D]").astype(int)
     # 3-hourly index values
     ap_indices = (dates - _DATA_START_DATE).astype("timedelta64[h]").astype(int) // 3
+
+    if np.any(daily_indices < 0) or np.any(daily_indices > len(data["f107"])):
+        # We are requesting data outside of the valid range
+        raise ValueError(
+            "The geomagnetic data is not available for these dates. "
+            f"Dates should be between {_DATA_START_DATE} and "
+            f"{_DATA_START_DATE + np.timedelta64(1, 'D') * len(daily_indices)}."
+        )
 
     f107 = np.take(data["f107"], daily_indices)
     f107a = np.take(data["f107a"], daily_indices)
