@@ -29,7 +29,7 @@ def run(dates, lons, lats, alts, f107s, f107as, aps, *,
     f107s : list of floats
         Daily F10.7 of the previous day for the given date(s)
     f107as : list of floats
-        F107 running 81-day average for the given date(s)
+        F10.7 running 81-day average centered on the given date(s)
     aps : list of floats
         | Ap for the given date(s), (1-6 only used if `geomagnetic_activity=-1`)
         | (0) Daily Ap

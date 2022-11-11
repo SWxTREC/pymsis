@@ -4,7 +4,8 @@ API reference
 =============
 .. currentmodule:: pymsis
 
-This page gives an overview of all public pymsis functions within the :mod:`pymsis` package.
+This page gives an overview of the routines within the pymsis package.
+To run the code, use the :mod:`pymsis.msis` module.
 
 .. autosummary::
     :toctree: generated/
@@ -13,5 +14,10 @@ This page gives an overview of all public pymsis functions within the :mod:`pyms
     msis.create_options
     msis.create_input
 
-    utils.download_ap_f107
-    utils.get_ap_f107
+To get input data for historical events, use the :mod:`pymsis.utils` module.
+
+.. autosummary::
+    :toctree: generated/
+
+    utils.download_f107_ap
+    utils.get_f107_ap
