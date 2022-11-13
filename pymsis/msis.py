@@ -121,6 +121,11 @@ def run(
 
     input_shape, input_data = create_input(dates, lons, lats, alts, f107s, f107as, aps)
 
+    if np.any(~np.isfinite(input_data)):
+        raise ValueError(
+            "Input data has non-finite values, all input data must be valid."
+        )
+
     # convert to string version
     version = str(version)
     if version in {"0", "00"}:

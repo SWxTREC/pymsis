@@ -64,8 +64,15 @@ def expected_output00():
 
 @pytest.fixture()
 def input_auto_f107_ap():
-    return (np.datetime64("2000-07-01T12:00"), 0, 0, 200,
-        159.6, 186.296296, [[7, 4, 5, 9, 4, 5.25, 5.75]])
+    return (
+        np.datetime64("2000-07-01T12:00"),
+        0,
+        0,
+        200,
+        159.6,
+        186.296296,
+        [[7, 4, 5, 9, 4, 5.25, 5.75]],
+    )
 
 
 def test_create_options():
@@ -334,3 +341,17 @@ def test_run_auto_f107(input_auto_f107_ap):
 
     # ap
     assert_allclose(msis.run(date, lon, lat, alt, aps=ap), expected)
+
+
+@pytest.mark.parametrize(
+    "inputs",
+    [
+        (np.datetime64("2000-01-01T00:00"), np.nan, 0, 100),
+        (np.datetime64("2000-01-01T00:00"), 0, 0, 100),
+        (np.datetime64("2000-01-01T00:00"), 0, 0, 100, np.nan),
+    ],
+)
+def test_bad_run_inputs(inputs):
+    # Inputs that have nan's in them at various places should all raise for the user
+    with pytest.raises(ValueError, match="Input data has non-finite values"):
+        msis.run(*inputs)
