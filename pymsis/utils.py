@@ -29,8 +29,8 @@ def download_f107_ap():
 
     References
     ----------
-    .. [1] Matzka, J., Stolle, C., Yamazaki, Y., Bronkalla, O. and Morschhauser, A., 2021.
-       The geomagnetic Kp index and derived indices of geomagnetic activity.
+    .. [1] Matzka, J., Stolle, C., Yamazaki, Y., Bronkalla, O. and Morschhauser, A.,
+       2021. The geomagnetic Kp index and derived indices of geomagnetic activity.
        Space Weather, https://doi.org/10.1029/2020SW002641
     """
     warnings.warn(f"Downloading ap and F10.7 data from {_F107_AP_URL}")
