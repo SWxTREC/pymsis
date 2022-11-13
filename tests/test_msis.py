@@ -62,6 +62,12 @@ def expected_output00():
     )
 
 
+@pytest.fixture()
+def input_auto_f107_ap():
+    return (np.datetime64("2000-07-01T12:00"), 0, 0, 200,
+        159.6, 186.296296, [[7, 4, 5, 9, 4, 5.25, 5.75]])
+
+
 def test_create_options():
     options = [
         "f107",
@@ -111,7 +117,7 @@ def test_create_input_datetime(input_data, expected_input):
     assert_array_equal(data[0, :], expected_input)
 
 
-def test_create_input_f107__date_mismatch(input_data):
+def test_create_input_f107_date_mismatch(input_data):
     # Make sure we raise when f107 and dates are different shapes
     # Repeat 5 dates, but not f107
     input_data = ([input_data[0]] * 5,) + input_data[1:]
@@ -281,3 +287,50 @@ def test_run_version00_low_altitude(input_data):
     input_data = (date, lon, lat, 71, f107, f107a, ap)
     output = msis.run(*input_data, version=0)
     assert np.all(np.isnan(np.squeeze(output)[[3, 5, 7]]))
+
+
+def test_create_input_auto_f107(input_auto_f107_ap):
+    date, lon, lat, alt, f107, f107a, ap = input_auto_f107_ap
+
+    # What we put in is what we get out
+    shape, data = msis.create_input(*input_auto_f107_ap)
+    assert shape == (1,)
+    assert data.shape == (1, 14)
+    assert_allclose(data[0, :], [183, 43200, lon, lat, alt, f107, f107a, *ap[0]])
+
+    # No f107
+    _, test_data = msis.create_input(date, lon, lat, alt, f107as=f107a, aps=ap)
+    assert_allclose(data, test_data)
+
+    # No f107a
+    _, test_data = msis.create_input(date, lon, lat, alt, f107s=f107, aps=ap)
+    assert_allclose(data, test_data)
+
+    # No ap
+    _, test_data = msis.create_input(date, lon, lat, alt, f107s=f107, f107as=f107a)
+    assert_allclose(data, test_data)
+
+    # Nothing auto-fills
+    _, test_data = msis.create_input(date, lon, lat, alt)
+    assert_allclose(data, test_data)
+
+
+def test_run_auto_f107(input_auto_f107_ap):
+    # Dropping any of the f107/f107a/ap will go and get those
+    # values automatically as needed
+    date, lon, lat, alt, f107, f107a, ap = input_auto_f107_ap
+
+    # fully specified run
+    expected = msis.run(*input_auto_f107_ap)
+
+    # auto
+    assert_allclose(msis.run(date, lon, lat, alt), expected)
+
+    # f107
+    assert_allclose(msis.run(date, lon, lat, alt, f107s=f107), expected)
+
+    # f107a
+    assert_allclose(msis.run(date, lon, lat, alt, f107as=f107a), expected)
+
+    # ap
+    assert_allclose(msis.run(date, lon, lat, alt, aps=ap), expected)

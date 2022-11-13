@@ -21,7 +21,7 @@ def test_downloading(monkeypatch, tmp_path):
 
 def test_loading_data(monkeypatch, tmp_path):
     # Make sure we are starting off fresh with nothing loaded yet
-    assert utils._DATA is None
+    utils._DATA is None
 
     # Make sure a download warning is emitted if the file doesn't exist
     tmp_file = tmp_path / "testfile.txt"
