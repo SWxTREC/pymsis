@@ -18,8 +18,8 @@ def local_path(monkeypatch):
 @pytest.fixture(autouse=True)
 def remote_path(monkeypatch, local_path):
     # Update the remote URL to point to a local file system test path
-    # by appending file:// so that it can be opened by urlopen()
-    test_url = f"file://{local_path.absolute()}"
+    # by prepending file:// so that it can be opened by urlopen()
+    test_url = local_path.absolute().as_uri()
     # Monkeypatch the url and expected download location, so we aren't
     # dependent on an internet connection.
     monkeypatch.setattr(utils, "_F107_AP_URL", test_url)
