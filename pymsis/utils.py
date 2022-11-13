@@ -69,7 +69,7 @@ def _load_f107_ap_data():
             "i4",
             "i4",
             "i4",
-            "f4",
+            "f8",
         ),
     }
     usecols = (3, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25)
@@ -78,9 +78,10 @@ def _load_f107_ap_data():
     # transform each day's 8 3-hourly ap values into a single column
     ap = np.empty(len(arr) * 8, dtype=float)
     daily_ap = arr["Ap"].astype(float)
-    dates = _DATA_START_DATE + np.arange(len(ap)) * np.timedelta64(3, "h")
+    dates = _DATA_START_DATE + np.repeat(arr["total days"], 8)
     for i in range(8):
         ap[i::8] = arr[f"ap{i+1}"]
+        dates[i::8] += i * np.timedelta64(3, "h")
 
     # data file has missing values as negatives
     ap[ap < 0] = np.nan
@@ -111,8 +112,8 @@ def _load_f107_ap_data():
     ap_data[4 + 16 - 1 :, 6] = rolling_mean[: -(4 + 8)]
 
     # F107 Data is needed from the previous day
-    f107_data = np.ones(len(arr)) * np.nan
-    f107a_data = np.ones(len(arr)) * np.nan
+    f107_data = np.ones(len(arr), dtype=float) * np.nan
+    f107a_data = np.ones(len(arr), dtype=float) * np.nan
     f107_data[1:] = arr["f107"][:-1]
     # average of 81-days, centered on the current day
     rolling_mean = np.convolve(arr["f107"], np.ones(81) / 81, mode="valid")
@@ -161,17 +162,20 @@ def get_f107_ap(dates):
     dates = np.asarray(dates, dtype=np.datetime64)
     data = _DATA or _load_f107_ap_data()
 
+    data_start = data["dates"][0]
+    data_end = data["dates"][-1]
+    date_offsets = dates - data_start
     # daily index values
-    daily_indices = (dates - _DATA_START_DATE).astype("timedelta64[D]").astype(int)
+    daily_indices = date_offsets.astype("timedelta64[D]").astype(int)
     # 3-hourly index values
-    ap_indices = (dates - _DATA_START_DATE).astype("timedelta64[h]").astype(int) // 3
+    ap_indices = date_offsets.astype("timedelta64[h]").astype(int) // 3
 
-    if np.any(daily_indices < 0) or np.any(daily_indices > len(data["f107"])):
+    if np.any((ap_indices < 0) | (ap_indices >= len(data["ap"]))):
         # We are requesting data outside of the valid range
         raise ValueError(
             "The geomagnetic data is not available for these dates. "
-            f"Dates should be between {_DATA_START_DATE} and "
-            f"{_DATA_START_DATE + np.timedelta64(1, 'D') * len(daily_indices)}."
+            f"Dates should be between {data_start} and "
+            f"{data_end}."
         )
 
     f107 = np.take(data["f107"], daily_indices)
