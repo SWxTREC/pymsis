@@ -3,9 +3,22 @@ from pathlib import Path
 import numpy as np
 
 from pymsis import msis00f, msis20f, msis21f
+from pymsis.utils import get_f107_ap
 
 
-def run(dates, lons, lats, alts, f107s, f107as, aps, options=None, version=2):
+def run(
+    dates,
+    lons,
+    lats,
+    alts,
+    f107s=None,
+    f107as=None,
+    aps=None,
+    *,
+    options=None,
+    version=2.1,
+    **kwargs,
+):
     """
     Call MSIS looping over all possible inputs.
 
@@ -25,16 +38,26 @@ def run(dates, lons, lats, alts, f107s, f107as, aps, options=None, version=2):
         Latitudes of interest
     alts : list of floats
         Altitudes of interest
-    f107s : list of floats
-        F107 value for the given date(s)
-    f107as : list of floats
-        F107 running 100-day average for the given date(s)
-    aps : list of floats
-        Ap for the given date(s)
+    f107s : list of floats, optional
+        Daily F10.7 of the previous day for the given date(s)
+    f107as : list of floats, optional
+        F10.7 running 81-day average centered on the given date(s)
+    aps : list of floats, optional
+        | Ap for the given date(s), (1-6 only used if `geomagnetic_activity=-1`)
+        | (0) Daily Ap
+        | (1) 3 hr ap index for current time
+        | (2) 3 hr ap index for 3 hrs before current time
+        | (3) 3 hr ap index for 6 hrs before current time
+        | (4) 3 hr ap index for 9 hrs before current time
+        | (5) Average of eight 3 hr ap indices from 12 to 33 hrs
+        |     prior to current time
+        | (6) Average of eight 3 hr ap indices from 36 to 57 hrs
+        |     prior to current time
     options : list of floats (length 25) [optional]
-        A list of options (switches) to the model
-    version : int or string, default: 2
-        MSIS version number, [00, 2]
+        A list of options (switches) to the model, if options is passed
+        all keyword arguments specifying individual options will be ignored.
+    version : Number or string, default: 2.1
+        MSIS version number, [0, 2.0, 2.1]
 
     Returns
     -------
@@ -52,18 +75,56 @@ def run(dates, lons, lats, alts, f107s, f107as, aps, options=None, version=2):
         | NO # density (m-3),
         | Temperature (K)]
 
+    Other Parameters
+    ----------------
+    f107 : float
+        Account for F10.7 variations
+    time_independent : float
+        Account for time variations
+    symmetrical_annual : float
+        Account for symmetrical annual variations
+    symmetrical_semiannual : float
+        Account for symmetrical semiannual variations
+    asymmetrical_annual : float
+        Account for asymmetrical annual variations
+    asymmetrical_semiannual : float
+        Account for asymmetrical semiannual variations
+    diurnal : float
+        Account for diurnal variations
+    semidiurnal : float
+        Account for semidiurnal variations
+    geomagnetic_activity : float
+        Account for geomagnetic activity
+        (1 = Daily Ap mode, -1 = Storm-time Ap mode)
+    all_ut_effects : float
+        Account for all UT/longitudinal effects
+    longitudinal : float
+        Account for longitudinal effects
+    mixed_ut_long : float
+        Account for UT and mixed UT/longitudinal effects
+    mixed_ap_ut_long : float
+        Account for mixed Ap, UT, and longitudinal effects
+    terdiurnal : float
+        Account for terdiurnal variations
+
     Notes
     -----
-    The 10.7 cm radio flux is at the Sun-Earth distance,
-    not the radio flux at 1 AU.
+    1. The 10.7 cm radio flux is at the Sun-Earth distance,
+       not the radio flux at 1 AU.
+    2. aps[1:] are only used when ``geomagnetic_activity=-1``.
 
     """
     if options is None:
-        options = create_options()
+        options = create_options(**kwargs)
     elif len(options) != 25:
         raise ValueError("options needs to be a list of length 25")
 
     input_shape, input_data = create_input(dates, lons, lats, alts, f107s, f107as, aps)
+
+    if np.any(~np.isfinite(input_data)):
+        raise ValueError(
+            "Input data has non-finite values, all input data must be valid."
+        )
 
     # convert to string version
     version = str(version)
@@ -193,7 +254,7 @@ def create_options(
     return options
 
 
-def create_input(dates, lons, lats, alts, f107s, f107as, aps):
+def create_input(dates, lons, lats, alts, f107s=None, f107as=None, aps=None):
     """Combine all input values into a single flattened array.
 
     Parameters
@@ -206,16 +267,16 @@ def create_input(dates, lons, lats, alts, f107s, f107as, aps):
         Latitudes of interest
     alts : list of floats
         Altitudes of interest
-    f107s : list of floats
-        F107 values for the given date(s)
-    f107as : list of floats
-        F107 running 100-day average for the given date(s)
-    aps : list of floats
+    f107s : list of floats, optional
+        F107 values for the previous day of the given date(s)
+    f107as : list of floats, optional
+        F107 running 81-day average for the given date(s)
+    aps : list of floats, optional
         Ap for the given date(s)
 
     Returns
     -------
-    (shape, flattened_input)
+    tuple (shape, flattened_input)
         The shape of the data as a tuple (ndates, nlons, nlats, nalts) and
         the flattened version of the input data
         (ndates*nlons*nlats*nalts, 14). If the input array was preflattened
@@ -239,6 +300,19 @@ def create_input(dates, lons, lats, alts, f107s, f107as, aps):
     lons[lons < 0] += 360
     lats = np.atleast_1d(lats)
     alts = np.atleast_1d(alts)
+
+    # If any of the geomagnetic data wasn't specified, we will default
+    # to getting it with the utility functions.
+    if f107s is None or f107as is None or aps is None:
+        data = get_f107_ap(dates)
+        # Only update the values that were None
+        if f107s is None:
+            f107s = data[0]
+        if f107as is None:
+            f107as = data[1]
+        if aps is None:
+            aps = data[2]
+
     f107s = np.atleast_1d(f107s)
     f107as = np.atleast_1d(f107as)
     aps = np.atleast_1d(aps)
