@@ -5,20 +5,20 @@
 
 Computation times
 =================
-**00:34.411** total execution time for **examples** files:
+**00:42.224** total execution time for **examples** files:
 
 +--------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_plot_surface_animation.py` (``plot_surface_animation.py``)         | 00:32.735 | 0.0 MB |
+| :ref:`sphx_glr_examples_plot_surface_animation.py` (``plot_surface_animation.py``)         | 00:40.384 | 0.0 MB |
 +--------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_plot_version_diff_surface.py` (``plot_version_diff_surface.py``)   | 00:00.750 | 0.0 MB |
+| :ref:`sphx_glr_examples_plot_version_diff_surface.py` (``plot_version_diff_surface.py``)   | 00:00.964 | 0.0 MB |
 +--------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_plot_altitude_profiles.py` (``plot_altitude_profiles.py``)         | 00:00.313 | 0.0 MB |
+| :ref:`sphx_glr_examples_plot_surface.py` (``plot_surface.py``)                             | 00:00.245 | 0.0 MB |
 +--------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_plot_surface.py` (``plot_surface.py``)                             | 00:00.227 | 0.0 MB |
+| :ref:`sphx_glr_examples_plot_altitude_profiles.py` (``plot_altitude_profiles.py``)         | 00:00.204 | 0.0 MB |
 +--------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_plot_diurnal_variation.py` (``plot_diurnal_variation.py``)         | 00:00.164 | 0.0 MB |
+| :ref:`sphx_glr_examples_plot_diurnal_variation.py` (``plot_diurnal_variation.py``)         | 00:00.178 | 0.0 MB |
 +--------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_plot_annual_variation.py` (``plot_annual_variation.py``)           | 00:00.121 | 0.0 MB |
+| :ref:`sphx_glr_examples_plot_annual_variation.py` (``plot_annual_variation.py``)           | 00:00.134 | 0.0 MB |
 +--------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_plot_version_diff_altitude.py` (``plot_version_diff_altitude.py``) | 00:00.101 | 0.0 MB |
+| :ref:`sphx_glr_examples_plot_version_diff_altitude.py` (``plot_version_diff_altitude.py``) | 00:00.116 | 0.0 MB |
 +--------------------------------------------------------------------------------------------+-----------+--------+

@@ -1,0 +1,6 @@
+﻿pymsis.utils.get\_f107\_ap
+==========================
+
+.. currentmodule:: pymsis.utils
+
+.. autofunction:: get_f107_ap

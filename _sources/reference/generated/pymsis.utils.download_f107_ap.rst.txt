@@ -1,0 +1,6 @@
+﻿pymsis.utils.download\_f107\_ap
+===============================
+
+.. currentmodule:: pymsis.utils
+
+.. autofunction:: download_f107_ap

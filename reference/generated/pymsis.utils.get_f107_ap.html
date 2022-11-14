@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>pymsis.msis.run &#8212; pymsis 0.6.0 documentation</title>
+    <title>pymsis.utils.get_f107_ap &#8212; pymsis 0.6.0 documentation</title>
   <script>
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
@@ -42,11 +42,11 @@
     <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/sphinx_highlight.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/generated/pymsis.msis.run';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/generated/pymsis.utils.get_f107_ap';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="pymsis.msis.create_options" href="pymsis.msis.create_options.html" />
-    <link rel="prev" title="API reference" href="../index.html" />
+    <link rel="next" title="Development" href="../../development/index.html" />
+    <link rel="prev" title="pymsis.utils.download_f107_ap" href="pymsis.utils.download_f107_ap.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="docsearch:language" content="en">
   </head>
@@ -279,14 +279,14 @@
     Section Navigation
   </p>
   <div class="bd-toc-item navbar-nav">
-    <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">pymsis.msis.run</a></li>
+    <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pymsis.msis.run.html">pymsis.msis.run</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pymsis.msis.create_options.html">pymsis.msis.create_options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pymsis.msis.create_input.html">pymsis.msis.create_input</a></li>
 </ul>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="pymsis.utils.download_f107_ap.html">pymsis.utils.download_f107_ap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pymsis.utils.get_f107_ap.html">pymsis.utils.get_f107_ap</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">pymsis.utils.get_f107_ap</a></li>
 </ul>
 
   </div>
@@ -315,27 +315,27 @@
             
             <article class="bd-article" role="main">
               
-  <section id="pymsis-msis-run">
-<h1>pymsis.msis.run<a class="headerlink" href="#pymsis-msis-run" title="Permalink to this heading">#</a></h1>
+  <section id="pymsis-utils-get-f107-ap">
+<h1>pymsis.utils.get_f107_ap<a class="headerlink" href="#pymsis-utils-get-f107-ap" title="Permalink to this heading">#</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="pymsis.msis.run">
-<span class="sig-prename descclassname"><span class="pre">pymsis.msis.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lons</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f107s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f107as</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymsis.msis.run" title="Permalink to this definition">#</a></dt>
-<dd><p>Call MSIS looping over all possible inputs.</p>
-<p>If ndates is the same as nlons, nlats, and nalts, then a flattened
-multi-point input array is assumed. Otherwise, the data
-will be expanded in a grid-like fashion. The possible
-return shapes are therefore (ndates, 11) and
-(ndates, nlons, nlats, nalts, 11).</p>
+<dt class="sig sig-object py" id="pymsis.utils.get_f107_ap">
+<span class="sig-prename descclassname"><span class="pre">pymsis.utils.</span></span><span class="sig-name descname"><span class="pre">get_f107_ap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dates</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymsis.utils.get_f107_ap" title="Permalink to this definition">#</a></dt>
+<dd><p>Retrieve the F10.7 and ap data needed to run msis for the given times.</p>
+<p>The MSIS model uses historical F10.7 and ap values for the calculations,
+and these are also derived quantities.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dates</strong> (<em>list</em><em> of </em><em>dates</em>) – Dates and times of interest</p></li>
-<li><p><strong>lons</strong> (<em>list</em><em> of </em><em>floats</em>) – Longitudes of interest</p></li>
-<li><p><strong>lats</strong> (<em>list</em><em> of </em><em>floats</em>) – Latitudes of interest</p></li>
-<li><p><strong>alts</strong> (<em>list</em><em> of </em><em>floats</em>) – Altitudes of interest</p></li>
-<li><p><strong>f107s</strong> (<em>list</em><em> of </em><em>floats</em><em>, </em><em>optional</em>) – Daily F10.7 of the previous day for the given date(s)</p></li>
-<li><p><strong>f107as</strong> (<em>list</em><em> of </em><em>floats</em><em>, </em><em>optional</em>) – F10.7 running 81-day average centered on the given date(s)</p></li>
-<li><p><strong>aps</strong> (<em>list</em><em> of </em><em>floats</em><em>, </em><em>optional</em>) – <div class="line-block">
+<dd class="field-odd"><p><strong>dates</strong> (<em>datetime-like</em><em> or </em><em>sequence</em><em> of </em><em>datetimes</em>) – times of interest to get the proper ap and F10.7 values for</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>Three arrays containing the f107, f107a, and ap values
+corresponding to the input times of length n.</p>
+<dl>
+<dt>f107<span class="classifier">np.ndarray</span></dt><dd><p>Daily F10.7 of the previous day for the given date(s)</p>
+</dd>
+<dt>f107a<span class="classifier">np.ndarray</span></dt><dd><p>F10.7 running 81-day average centered on the given date(s)</p>
+</dd>
+<dt>ap<span class="classifier">np.ndarray</span></dt><dd><div class="line-block">
 <div class="line">Ap for the given date(s), (1-6 only used if <cite>geomagnetic_activity=-1</cite>)</div>
 <div class="line">(0) Daily Ap</div>
 <div class="line">(1) 3 hr ap index for current time</div>
@@ -351,54 +351,14 @@ return shapes are therefore (ndates, 11) and
 <div class="line">prior to current time</div>
 </div>
 </div>
-</p></li>
-<li><p><strong>options</strong> (<em>list</em><em> of </em><em>floats</em><em> (</em><em>length 25</em><em>) </em><em>[</em><em>optional</em><em>]</em>) – A list of options (switches) to the model, if options is passed
-all keyword arguments specifying individual options will be ignored.</p></li>
-<li><p><strong>version</strong> (<em>Number</em><em> or </em><em>string</em><em>, </em><em>default: 2.1</em>) – MSIS version number, [0, 2.0, 2.1]</p></li>
-<li><p><strong>f107</strong> (<em>float</em>) – Account for F10.7 variations</p></li>
-<li><p><strong>time_independent</strong> (<em>float</em>) – Account for time variations</p></li>
-<li><p><strong>symmetrical_annual</strong> (<em>float</em>) – Account for symmetrical annual variations</p></li>
-<li><p><strong>symmetrical_semiannual</strong> (<em>float</em>) – Account for symmetrical semiannual variations</p></li>
-<li><p><strong>asymmetrical_annual</strong> (<em>float</em>) – Account for asymmetrical annual variations</p></li>
-<li><p><strong>asymmetrical_semiannual</strong> (<em>float</em>) – Account for asymmetrical semiannual variations</p></li>
-<li><p><strong>diurnal</strong> (<em>float</em>) – Account for diurnal variations</p></li>
-<li><p><strong>semidiurnal</strong> (<em>float</em>) – Account for semidiurnal variations</p></li>
-<li><p><strong>geomagnetic_activity</strong> (<em>float</em>) – Account for geomagnetic activity
-(1 = Daily Ap mode, -1 = Storm-time Ap mode)</p></li>
-<li><p><strong>all_ut_effects</strong> (<em>float</em>) – Account for all UT/longitudinal effects</p></li>
-<li><p><strong>longitudinal</strong> (<em>float</em>) – Account for longitudinal effects</p></li>
-<li><p><strong>mixed_ut_long</strong> (<em>float</em>) – Account for UT and mixed UT/longitudinal effects</p></li>
-<li><p><strong>mixed_ap_ut_long</strong> (<em>float</em>) – Account for mixed Ap, UT, and longitudinal effects</p></li>
-<li><p><strong>terdiurnal</strong> (<em>float</em>) – Account for terdiurnal variations</p></li>
-</ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><div class="line-block">
-<div class="line">The data calculated at each grid point:</div>
-<div class="line">[Total mass density (kg/m3)</div>
-<div class="line">N2 # density (m-3),</div>
-<div class="line">O2 # density (m-3),</div>
-<div class="line">O # density (m-3),</div>
-<div class="line">He # density (m-3),</div>
-<div class="line">H # density (m-3),</div>
-<div class="line">Ar # density (m-3),</div>
-<div class="line">N # density (m-3),</div>
-<div class="line">Anomalous oxygen # density (m-3),</div>
-<div class="line">NO # density (m-3),</div>
-<div class="line">Temperature (K)]</div>
-</div>
+</dl>
 </p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray (ndates, nlons, nlats, nalts, 11) or (ndates, 11)</p>
+<dd class="field-odd"><p>tuple (f107 [n], f107a [n], ap [n x 7])</p>
 </dd>
 </dl>
-<p class="rubric">Notes</p>
-<ol class="arabic simple">
-<li><p>The 10.7 cm radio flux is at the Sun-Earth distance,
-not the radio flux at 1 AU.</p></li>
-<li><p>aps[1:] are only used when <code class="docutils literal notranslate"><span class="pre">geomagnetic_activity=-1</span></code>.</p></li>
-</ol>
 </dd></dl>
 
 </section>
@@ -411,17 +371,17 @@ not the radio flux at 1 AU.</p></li>
             <footer class="bd-footer-article">
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-  <a class='left-prev' id="prev-link" href="../index.html" title="previous page">
+  <a class='left-prev' id="prev-link" href="pymsis.utils.download_f107_ap.html" title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
           <p class="prev-next-subtitle">previous</p>
-          <p class="prev-next-title">API reference</p>
+          <p class="prev-next-title">pymsis.utils.download_f107_ap</p>
       </div>
   </a>
-  <a class='right-next' id="next-link" href="pymsis.msis.create_options.html" title="next page">
+  <a class='right-next' id="next-link" href="../../development/index.html" title="next page">
   <div class="prev-next-info">
       <p class="prev-next-subtitle">next</p>
-      <p class="prev-next-title">pymsis.msis.create_options</p>
+      <p class="prev-next-title">Development</p>
   </div>
   <i class="fa-solid fa-angle-right"></i>
   </a>
@@ -442,10 +402,10 @@ not the radio flux at 1 AU.</p></li>
 <nav id="bd-toc-nav" class="page-toc">
     <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pymsis.msis.run">
+  <a class="reference internal nav-link" href="#pymsis.utils.get_f107_ap">
    <code class="docutils literal notranslate">
     <span class="pre">
-     run()
+     get_f107_ap()
     </span>
    </code>
   </a>
@@ -467,7 +427,7 @@ not the radio flux at 1 AU.</p></li>
 <div class="toc-item">
   
 <div class="tocsection sourcelink">
-    <a href="../../_sources/reference/generated/pymsis.msis.run.rst.txt">
+    <a href="../../_sources/reference/generated/pymsis.utils.get_f107_ap.rst.txt">
         <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
 </div>
