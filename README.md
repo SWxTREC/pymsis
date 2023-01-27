@@ -99,7 +99,11 @@ you make use of this model in a publication.
 ### Geomagnetic Data
 
 If you make use of the automatic downloads of the F10.7 and ap data,
-please cite that data in your publication as well.
+please cite that data in your publication as well. The data is downloaded
+from CelesTrak, which has filled in missing data from the source. Both citations
+are given below.
+
+> CelesTrak. https://celestrak.org/SpaceData/
 
 > Matzka, J., Stolle, C., Yamazaki, Y., Bronkalla, O. and Morschhauser, A.,
 > 2021. The geomagnetic Kp index and derived indices of geomagnetic activity.
@@ -133,7 +137,9 @@ pip install .[tests]
 
 The installation is dependent on access to the NRL source code. If the
 download fails, or you have no internet access you can manually install
-the Fortran source code as follows.
+the Fortran source code as follows. A script to help with this or give
+ideas on how to achieve this remote installation are provided in the
+[tools directory](tools/download_source.py).
 
 1. **Download the source code**
     The source code is hosted on NRL\'s website:

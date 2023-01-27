@@ -1,3 +1,4 @@
+from io import BytesIO
 from pathlib import Path
 import urllib.request
 import warnings
@@ -6,30 +7,34 @@ import numpy as np
 import pymsis
 
 
-_DATA_FNAME: str = "Kp_ap_Ap_SN_F107_since_1932.txt"
-_F107_AP_URL: str = f"https://kp.gfz-potsdam.de/app/files/{_DATA_FNAME}"
+_DATA_FNAME: str = "SW-All.csv"
+_F107_AP_URL: str = f"https://celestrak.org/SpaceData/{_DATA_FNAME}"
 _F107_AP_PATH: Path = Path(pymsis.__file__).parent / _DATA_FNAME
-# total days is from 1932-01-01 00:00 according to the header of the file
-_DATA_START_DATE: np.datetime64 = np.datetime64("1932-01-01 00:00")
 _DATA: dict = None
 
 
 def download_f107_ap():
     """
-    Download the latest ap and F10.7 values
+    Download the latest ap and F10.7 values.
 
-    The download path is to the installed package location, keeping
-    the same filename as the data source: `Kp_ap_Ap_SN_F107_since_1932.txt`.
+    The file is downloaded into the installed package location, keeping
+    the same filename as the data source: `SW-All.csv`.
     This routine can be called to update the data as well if you would like to
     use newer data since the last time you downloaded the file.
 
     Notes
     -----
-    Use of this geomagnetic data should be cited following the references [1]_.
+    The data provider we are using is CelesTrak, which gets data from other
+    sources and interpolates or predicts missing values to make data easier to
+    work with. A warning is emitted when the interpolation or prediction
+    occurs, but it is up to the user to verify the Ap and F10.7 data that is used
+    is correct for their application.
+    Use of this geomagnetic data should cite the references [1]_ [2]_.
 
     References
     ----------
-    .. [1] Matzka, J., Stolle, C., Yamazaki, Y., Bronkalla, O. and Morschhauser, A.,
+    .. [1] CelesTrak. https://celestrak.org/SpaceData/
+    .. [2] Matzka, J., Stolle, C., Yamazaki, Y., Bronkalla, O. and Morschhauser, A.,
        2021. The geomagnetic Kp index and derived indices of geomagnetic activity.
        Space Weather, https://doi.org/10.1029/2020SW002641
     """
@@ -46,7 +51,7 @@ def _load_f107_ap_data():
 
     dtype = {
         "names": (
-            "total days",
+            "date",
             "ap1",
             "ap2",
             "ap3",
@@ -57,9 +62,11 @@ def _load_f107_ap_data():
             "ap8",
             "Ap",
             "f107",
+            "f107-type",
+            "f107a",
         ),
         "formats": (
-            "timedelta64[D]",
+            "datetime64[D]",
             "i4",
             "i4",
             "i4",
@@ -70,15 +77,31 @@ def _load_f107_ap_data():
             "i4",
             "i4",
             "f8",
+            "S3",
+            "f8",
         ),
     }
-    usecols = (3, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25)
-    arr = np.loadtxt(_F107_AP_PATH, dtype=dtype, usecols=usecols)
+    usecols = (0, 12, 13, 14, 15, 16, 17, 18, 19, 20, 24, 26, 27)
+
+    # Use a buffer to read in and load so we can quickly get rid of
+    # the extra "PRD" lines at the end of the file (unknown length
+    # so we can't just go back in line lengths)
+    with open(_F107_AP_PATH) as fin:
+        with BytesIO() as fout:
+            for line in fin:
+                if "PRM" in line:
+                    # We don't want the monthly predicted values
+                    continue
+                fout.write(line.encode("utf-8"))
+            fout.seek(0)
+            arr = np.loadtxt(
+                fout, delimiter=",", dtype=dtype, usecols=usecols, skiprows=1
+            )
 
     # transform each day's 8 3-hourly ap values into a single column
     ap = np.empty(len(arr) * 8, dtype=float)
     daily_ap = arr["Ap"].astype(float)
-    dates = _DATA_START_DATE + np.repeat(arr["total days"], 8)
+    dates = np.repeat(arr["date"], 8).astype("datetime64[m]")
     for i in range(8):
         ap[i::8] = arr[f"ap{i+1}"]
         dates[i::8] += i * np.timedelta64(3, "h")
@@ -111,16 +134,22 @@ def _load_f107_ap_data():
     # Use the same window length as before, just shifting the fill values
     ap_data[4 + 16 - 1 :, 6] = rolling_mean[: -(4 + 8)]
 
-    # F107 Data is needed from the previous day
+    # F107 Data is needed from the previous day, F107a centered on the current day
     f107_data = np.ones(len(arr), dtype=float) * np.nan
     f107a_data = np.ones(len(arr), dtype=float) * np.nan
     f107_data[1:] = arr["f107"][:-1]
-    # average of 81-days, centered on the current day
-    rolling_mean = np.convolve(arr["f107"], np.ones(81) / 81, mode="valid")
-    f107a_data[40:-40] = rolling_mean
+    f107a_data = arr["f107a"]
+    # So that we can warn the user that this F107 data was interpolated or predicted
+    warn_data = (arr["f107-type"] == b"INT") | (arr["f107-type"] == b"PRD")
 
     # Set the global module-level data variable
-    data = {"dates": dates, "ap": ap_data, "f107": f107_data, "f107a": f107a_data}
+    data = {
+        "dates": dates,
+        "ap": ap_data,
+        "f107": f107_data,
+        "f107a": f107a_data,
+        "warn_data": warn_data,
+    }
     globals()["_DATA"] = data
     return data
 
@@ -181,4 +210,12 @@ def get_f107_ap(dates):
     f107 = np.take(data["f107"], daily_indices)
     f107a = np.take(data["f107a"], daily_indices)
     ap = np.take(data["ap"], ap_indices, axis=0)
+    warn_or_not = np.take(data["warn_data"], daily_indices)
+    # TODO: Do we want to warn if any values within 81 days of a point are used?
+    #      i.e. if any of the f107a values were interpolated or predicted
+    if np.any(warn_or_not):
+        warnings.warn(
+            "There is data that was either interpolated or predicted "
+            "(not observed), use at your own risk."
+        )
     return f107, f107a, ap

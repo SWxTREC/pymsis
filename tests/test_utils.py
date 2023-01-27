@@ -56,33 +56,26 @@ def test_loading_data(monkeypatch, tmp_path):
     "dates,expected_f107,expected_f107a,expected_ap",
     [
         # First timestep of the file
-        # No F10.7 the day before and average shouldn't be calculated
+        # No F10.7 the day before
         # Ap should only have the daily value and the previous days
         (
             np.datetime64("2000-01-01T00:00"),
             [np.nan],
-            [np.nan],
+            [166.2],
             [30, 56, np.nan, np.nan, np.nan, np.nan, np.nan],
-        ),
-        # Final timestep, the F107a can't be calculated
-        (
-            np.datetime64("2000-12-31T21:00"),
-            [182.1],
-            [np.nan],
-            [2, 2, 0, 0, 3, 2.75, 4.125],
         ),
         # Middle of the data file, should be fully filled
         (
             np.datetime64("2000-07-01T12:00"),
             [159.6],
-            [186.296296],
+            [186.3],
             [7, 4, 5, 9, 4, 5.25, 5.75],
         ),
         # Requesting two dates should return length two arrays
         (
             [np.datetime64("2000-07-01T12:00"), np.datetime64("2000-07-01T12:00")],
             [159.6, 159.6],
-            [186.296296, 186.296296],
+            [186.3, 186.3],
             [[7, 4, 5, 9, 4, 5.25, 5.75], [7, 4, 5, 9, 4, 5.25, 5.75]],
         ),
     ],
@@ -97,13 +90,32 @@ def test_get_f107_ap(dates, expected_f107, expected_f107a, expected_ap):
 @pytest.mark.parametrize(
     "dates",
     [
+        # edge cases
         (np.datetime64("1999-12-31T23:00")),
         (np.datetime64("2001-01-01T00:00")),
+        # Array of dates should raise if one of them is outside the bounds
         ([np.datetime64("2000-12-31T00:00"), np.datetime64("2001-01-01T00:00")]),
+        # Extreme cases
+        (np.datetime64("1900-01-01T00:00")),
+        (np.datetime64("2100-01-01T00:00")),
     ],
 )
 def test_get_f107_ap_out_of_range(dates):
     with pytest.raises(
         ValueError, match="The geomagnetic data is not available for these dates"
+    ):
+        utils.get_f107_ap(dates)
+
+
+@pytest.mark.parametrize(
+    "dates",
+    [
+        (np.datetime64("2000-12-30T00:00")),
+        ([np.datetime64("2000-12-01T00:00"), np.datetime64("2000-12-31T00:00")]),
+    ],
+)
+def test_get_f107_ap_interpolated_warns(dates):
+    with pytest.warns(
+        UserWarning, match="There is data that was either interpolated or"
     ):
         utils.get_f107_ap(dates)
