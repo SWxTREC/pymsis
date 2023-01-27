@@ -42,7 +42,7 @@ tests = [
 ]
 docs = [
     "matplotlib",
-    "sphinx",
+    "sphinx<6",
     "sphinx_gallery",
     "pydata-sphinx-theme",
 ]
