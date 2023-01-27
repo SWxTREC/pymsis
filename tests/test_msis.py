@@ -2,7 +2,7 @@ import numpy as np
 from numpy.testing import assert_array_equal, assert_allclose
 import pytest
 
-from pymsis import msis
+from pymsis import msis, msis00f, msis20f, msis21f
 
 
 @pytest.fixture
@@ -355,3 +355,43 @@ def test_bad_run_inputs(inputs):
     # Inputs that have nan's in them at various places should all raise for the user
     with pytest.raises(ValueError, match="Input data has non-finite values"):
         msis.run(*inputs)
+
+
+@pytest.mark.parametrize(
+    "version,func",
+    [("0", msis00f.pygtd7d), ("2.0", msis20f.pymsiscalc), ("2.1", msis21f.pymsiscalc)],
+)
+def test_keyword_argument_call(input_data, version, func):
+    # Make sure that the wrapper definition is correct for whether we
+    # call it with or without keyword arguments
+    date, lon, lat, alt, f107, f107a, ap = input_data
+    dyear = (date.astype("datetime64[D]") - date.astype("datetime64[Y]")).astype(
+        float
+    ) + 1  # DOY 1-366
+    dseconds = (date.astype("datetime64[s]") - date.astype("datetime64[D]")).astype(
+        float
+    )
+    run_output = msis.run(
+        dates=date,
+        alts=alt,
+        lats=lat,
+        lons=lon,
+        f107s=f107,
+        f107as=f107a,
+        aps=ap,
+        version=version,
+    )
+    direct_output = func(
+        day=np.array([dyear]),
+        utsec=np.array([dseconds]),
+        z=np.array([alt]),
+        lat=np.array([lat]),
+        lon=np.array([lon]),
+        sflux=np.array([f107]),
+        sfluxavg=np.array([f107a]),
+        ap=np.array(ap),
+    )
+    if version < "2.1":
+        # NO missing from versions before 2.1
+        direct_output[:, -2] = np.nan
+    assert_array_equal(run_output, direct_output)

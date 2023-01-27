@@ -8,16 +8,16 @@ python module msis20f ! in
             real(kind=4), optional,dimension(25),intent(in) :: switch_legacy
             character(len=*), intent(in), optional    :: parmpath
         end subroutine pyinitswitch
-        subroutine pymsiscalc(day,utsec,z,lat,lon,sfluxavg,sflux,ap,output,n) ! in :pymsis:msis2.F90
+        subroutine pymsiscalc(day,utsec,lon,lat,z,sfluxavg,sflux,ap,output,n) ! in :pymsis:msis2.F90
             use msis_calc, only: msiscalc
             use msis_constants, only: rp
             real(kind=rp) dimension(n),intent(in) :: day
             real(kind=rp) dimension(n),intent(in),depend(n) :: utsec
-            real(kind=rp) dimension(n),intent(in),depend(n) :: z
-            real(kind=rp) dimension(n),intent(in),depend(n) :: lat
             real(kind=rp) dimension(n),intent(in),depend(n) :: lon
-            real(kind=rp) dimension(n),intent(in),depend(n) :: sfluxavg
+            real(kind=rp) dimension(n),intent(in),depend(n) :: lat
+            real(kind=rp) dimension(n),intent(in),depend(n) :: z
             real(kind=rp) dimension(n),intent(in),depend(n) :: sflux
+            real(kind=rp) dimension(n),intent(in),depend(n) :: sfluxavg
             real(kind=rp) dimension(n,7),intent(in),depend(n) :: ap
             real(kind=rp) dimension(n,11),intent(out),depend(n) :: output
             integer, optional,intent(in),check(len(day)>=n),depend(day) :: n=len(day)
