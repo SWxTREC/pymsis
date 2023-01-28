@@ -77,7 +77,7 @@ lines_after_imports = 2
 match = "pymsis/*.py"
 
 [tool.ruff]
-select = ["B", "D", "E", "F", "I", "N", "S", "W", "PT"]
+select = ["B", "D", "E", "F", "I", "N", "S", "W", "PL", "PT", "RUF"]
 # Ignore import sorting for now until lines_after_imports is respected
 # by ruff and we can replace isort
 ignore = ["I001", "D203", "D212"]

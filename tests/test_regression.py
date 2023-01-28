@@ -15,8 +15,9 @@ def run_input_line(line, version):
     sec, alt, lat, lon, _, f107a, f107, ap = (float(x) for x in items[1:9])
     ap = [[ap] * 7]
     year = int(items[0][:-3])
-    # Two digit year
-    if year > 60:
+    # Two digit year?
+    start_two_digit_year = 60
+    if year > start_two_digit_year:
         year += 1900
     else:
         year += 2000

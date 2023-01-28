@@ -142,7 +142,9 @@ def _load_f107_ap_data():
     f107_data[1:] = arr["f107"][:-1]
     f107a_data = arr["f107a"]
     # So that we can warn the user that this F107 data was interpolated or predicted
-    warn_data = (arr["f107-type"] == b"INT") | (arr["f107-type"] == b"PRD")
+    interpolated = b"INT"
+    predicted = b"PRD"
+    warn_data = (arr["f107-type"] == interpolated) | (arr["f107-type"] == predicted)
 
     # Set the global module-level data variable
     data = {

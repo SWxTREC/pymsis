@@ -117,10 +117,11 @@ def run(
     2. aps[1:] are only used when ``geomagnetic_activity=-1``.
 
     """
+    num_options = 25
     if options is None:
         options = create_options(**kwargs)
-    elif len(options) != 25:
-        raise ValueError("options needs to be a list of length 25")
+    elif len(options) != num_options:
+        raise ValueError(f"options needs to be a list of length {num_options}")
 
     input_shape, input_data = create_input(dates, lons, lats, alts, f107s, f107as, aps)
 
@@ -177,7 +178,7 @@ def run(
     # so atol should be less than the comparison value
     output[np.isclose(output, 9.9e-38, atol=1e-38)] = np.nan
 
-    return output.reshape(input_shape + (11,))
+    return output.reshape(*input_shape, 11)
 
 
 def create_options(
