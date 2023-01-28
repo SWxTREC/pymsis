@@ -7,10 +7,10 @@ the variations over the course of a year.
 
 """
 import matplotlib
-from matplotlib.animation import FuncAnimation
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.animation import FuncAnimation
 
 from pymsis import msis
 

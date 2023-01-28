@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+
 __version__ = "0.6.0"
 
 # If we are on Windows, Python 3.8+ then we need to add a DLL search path

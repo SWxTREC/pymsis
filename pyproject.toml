@@ -46,6 +46,11 @@ docs = [
     "sphinx_gallery",
     "pydata-sphinx-theme",
 ]
+dev = [
+    "pymsis[tests,docs]",
+    "precommit",
+    "ruff",
+]
 
 [project.urls]
 homepage = "https://swxtrec.github.io/pymsis/"
@@ -63,3 +68,14 @@ addopts = [
 [tool.cibuildwheel]
 test-requires = "pytest"
 test-command = "pytest --pyargs pymsis"
+
+[tool.isort]
+profile = "black"
+lines_after_imports = 2
+
+[tool.ruff]
+# Enable Pyflakes `E` and `F` codes by default.
+select = ["E", "F", "I", "N", "W"]
+# Ignore import sorting for now until lines_after_imports is respected
+# by ruff and we can replace isort
+ignore = ["I001"]

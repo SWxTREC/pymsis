@@ -1,9 +1,10 @@
-from io import BytesIO
-from pathlib import Path
 import urllib.request
 import warnings
+from io import BytesIO
+from pathlib import Path
 
 import numpy as np
+
 import pymsis
 
 

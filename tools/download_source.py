@@ -1,8 +1,9 @@
-from pathlib import Path
 import shutil
 import tarfile
 import urllib.request
 import warnings
+from pathlib import Path
+
 
 SOURCE_DIR = "https://map.nrl.navy.mil/map/pub/nrl/NRLMSIS/"
 MSIS20_FILE = SOURCE_DIR + "NRLMSIS2.0/NRLMSIS2.0.tar.gz"

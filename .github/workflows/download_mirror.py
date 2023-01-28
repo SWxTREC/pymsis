@@ -1,7 +1,8 @@
 """This is only for CI downloading/testing."""
-from pathlib import Path
 import tarfile
 import urllib.request
+from pathlib import Path
+
 
 MSIS21_FILE = (
     "https://gist.github.com/greglucas/"
