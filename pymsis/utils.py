@@ -42,7 +42,7 @@ def download_f107_ap():
     """
     warnings.warn(f"Downloading ap and F10.7 data from {_F107_AP_URL}")
     req = urllib.request.urlopen(_F107_AP_URL)
-    with open(_F107_AP_PATH, "wb") as f:
+    with _F107_AP_PATH.open("wb") as f:
         f.write(req.read())
 
 
@@ -88,7 +88,7 @@ def _load_f107_ap_data():
     # Use a buffer to read in and load so we can quickly get rid of
     # the extra "PRD" lines at the end of the file (unknown length
     # so we can't just go back in line lengths)
-    with open(_F107_AP_PATH) as fin:
+    with _F107_AP_PATH.open() as fin:
         with BytesIO() as fout:
             for line in fin:
                 if "PRM" in line:
