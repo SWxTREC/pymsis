@@ -3,8 +3,10 @@ import urllib.request
 import warnings
 from io import BytesIO
 from pathlib import Path
+from typing import Optional, Tuple
 
 import numpy as np
+import numpy.typing as npt
 
 import pymsis
 
@@ -12,10 +14,10 @@ import pymsis
 _DATA_FNAME: str = "SW-All.csv"
 _F107_AP_URL: str = f"https://celestrak.org/SpaceData/{_DATA_FNAME}"
 _F107_AP_PATH: Path = Path(pymsis.__file__).parent / _DATA_FNAME
-_DATA: dict = None
+_DATA: Optional[dict[str, npt.NDArray]] = None
 
 
-def download_f107_ap():
+def download_f107_ap() -> None:
     """
     Download the latest ap and F10.7 values.
 
@@ -46,7 +48,7 @@ def download_f107_ap():
         f.write(req.read())
 
 
-def _load_f107_ap_data():
+def _load_f107_ap_data() -> dict[str, npt.NDArray]:
     """Load data from disk, if it isn't present go out and download it first."""
     if not _F107_AP_PATH.exists():
         download_f107_ap()
@@ -98,7 +100,7 @@ def _load_f107_ap_data():
             fout.seek(0)
             arr = np.loadtxt(
                 fout, delimiter=",", dtype=dtype, usecols=usecols, skiprows=1
-            )
+            )  # type: ignore
 
     # transform each day's 8 3-hourly ap values into a single column
     ap = np.empty(len(arr) * 8, dtype=float)
@@ -158,7 +160,7 @@ def _load_f107_ap_data():
     return data
 
 
-def get_f107_ap(dates):
+def get_f107_ap(dates: npt.ArrayLike) -> Tuple[npt.NDArray, npt.NDArray, npt.NDArray]:
     """
     Retrieve the F10.7 and ap data needed to run msis for the given times.
 

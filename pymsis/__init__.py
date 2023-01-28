@@ -16,9 +16,9 @@ if os.name == "nt":
         pymsis_dir_libs = pymsis_dir / ".libs"
         # This was added in Python 3.8, so we can default to this
         # once we only support 3.8+
-        os.add_dll_directory(pymsis_dir)
+        os.add_dll_directory(pymsis_dir)  # type: ignore
         # Additionally, we need the .libs directory which has gfortran
-        os.add_dll_directory(pymsis_dir_libs)
+        os.add_dll_directory(pymsis_dir_libs)  # type: ignore
 
         os.environ["PATH"] = f"{pymsis_dir};{pymsis_dir_libs};" f"{os.environ['PATH']}"
     except Exception:
