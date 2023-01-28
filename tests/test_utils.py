@@ -53,7 +53,7 @@ def test_loading_data(monkeypatch, tmp_path):
 
 
 @pytest.mark.parametrize(
-    "dates,expected_f107,expected_f107a,expected_ap",
+    ("dates", "expected_f107", "expected_f107a", "expected_ap"),
     [
         # First timestep of the file
         # No F10.7 the day before
