@@ -1,4 +1,4 @@
-"""This is only for CI downloading/testing."""
+"""Only for CI downloading/testing."""
 import tarfile
 import urllib.request
 from pathlib import Path

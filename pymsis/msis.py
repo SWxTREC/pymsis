@@ -1,3 +1,4 @@
+"""Interface for running and creating input for the MSIS models."""
 from pathlib import Path
 
 import numpy as np
@@ -58,6 +59,8 @@ def run(
         all keyword arguments specifying individual options will be ignored.
     version : Number or string, default: 2.1
         MSIS version number, [0, 2.0, 2.1]
+    **kwargs : dictionary
+        Single options for the switches can be defined through keyword arguments.
 
     Returns
     -------
@@ -255,7 +258,8 @@ def create_options(
 
 
 def create_input(dates, lons, lats, alts, f107s=None, f107as=None, aps=None):
-    """Combine all input values into a single flattened array.
+    """
+    Combine all input values into a single flattened array.
 
     Parameters
     ----------

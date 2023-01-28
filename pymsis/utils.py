@@ -1,3 +1,4 @@
+"""Utilities for obtaining input datasets."""
 import urllib.request
 import warnings
 from io import BytesIO
@@ -46,7 +47,7 @@ def download_f107_ap():
 
 
 def _load_f107_ap_data():
-    """Load data from disk, if it isn't present go out and download it first"""
+    """Load data from disk, if it isn't present go out and download it first."""
     if not _F107_AP_PATH.exists():
         download_f107_ap()
 

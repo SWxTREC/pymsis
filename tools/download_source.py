@@ -1,3 +1,9 @@
+"""
+Tools to download the MSIS Fortran source code.
+
+There are some additional routines to clean up the source
+code which helps with compiling with gfortran.
+"""
 import shutil
 import tarfile
 import urllib.request
@@ -88,7 +94,8 @@ def get_source():
 
 # Clean up the source files
 def clean_utf8(fnames):
-    """Remove bad characters.
+    """
+    Remove bad characters.
 
     fnames: list
         filenames to be cleaned
@@ -104,7 +111,8 @@ def clean_utf8(fnames):
 
 
 def fix_msis00(fname):
-    """Fix bad lines in msis00.
+    """
+    Fix bad lines in msis00.
 
     The gfortran compiler thinks there is a character/int mismatch,
     so fix these bad lines.

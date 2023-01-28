@@ -1,3 +1,4 @@
+"""Python interface to the MSIS codes."""
 import os
 from pathlib import Path
 
