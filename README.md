@@ -68,7 +68,7 @@ you make use of this model in a publication.
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5348502.svg)](https://doi.org/10.5281/zenodo.5348502)
 
-> Lucas, G. (2022). pymsis [Computer software]. [doi:10.5281/zenodo.5348502](https://doi.org/10.1029/2022JA030896)
+> Lucas, G. (2022). pymsis [Computer software]. [doi:10.5281/zenodo.5348502](https://doi.org/10.5281/zenodo.5348502)
 
 ### MSIS2.1
 
@@ -110,21 +110,21 @@ are given below.
 
 The easiest way to install pymsis is to install from PyPI.
 
-``` bash
+```bash
 pip install pymsis
 ```
 
 For the most up-to-date pymsis, you can install directly from the git
 repository
 
-``` bash
+```bash
 pip install git+https://github.com/SWxTREC/pymsis.git
 ```
 
 or to work on it locally, you can clone the repository and install the
 test dependencies.
 
-``` bash
+```bash
 git clone https://github.com/SWxTREC/pymsis.git
 cd pymsis
 pip install .[tests]
@@ -152,6 +152,6 @@ ideas on how to achieve this remote installation are provided in the
 
 3. **Install the Python package**
 
-    ``` bash
+    ```bash
     pip install .
     ```
