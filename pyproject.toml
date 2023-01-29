@@ -49,7 +49,7 @@ docs = [
 dev = [
     "pymsis[tests,docs]",
     "mypy",
-    "precommit",
+    "pre-commit",
     "ruff",
 ]
 
@@ -78,7 +78,8 @@ lines_after_imports = 2
 match = "pymsis/*.py"
 
 [tool.ruff]
-select = ["B", "D", "E", "F", "I", "N", "S", "W", "PL", "PT", "RUF", "ANN"]
+target-version = "py38"
+select = ["B", "D", "E", "F", "I", "N", "S", "W", "PL", "PT", "UP", "RUF", "ANN"]
 # Ignore import sorting for now until lines_after_imports is respected
 # by ruff and we can replace isort
 ignore = ["I001", "D203", "D212"]

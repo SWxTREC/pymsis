@@ -3,7 +3,7 @@ import urllib.request
 import warnings
 from io import BytesIO
 from pathlib import Path
-from typing import Optional, Tuple
+from typing import Dict, Optional, Tuple
 
 import numpy as np
 import numpy.typing as npt
@@ -14,7 +14,7 @@ import pymsis
 _DATA_FNAME: str = "SW-All.csv"
 _F107_AP_URL: str = f"https://celestrak.org/SpaceData/{_DATA_FNAME}"
 _F107_AP_PATH: Path = Path(pymsis.__file__).parent / _DATA_FNAME
-_DATA: Optional[dict[str, npt.NDArray]] = None
+_DATA: Optional[Dict[str, npt.NDArray]] = None
 
 
 def download_f107_ap() -> None:
@@ -48,7 +48,7 @@ def download_f107_ap() -> None:
         f.write(req.read())
 
 
-def _load_f107_ap_data() -> dict[str, npt.NDArray]:
+def _load_f107_ap_data() -> Dict[str, npt.NDArray]:
     """Load data from disk, if it isn't present go out and download it first."""
     if not _F107_AP_PATH.exists():
         download_f107_ap()

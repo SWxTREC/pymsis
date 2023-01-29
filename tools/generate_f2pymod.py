@@ -12,7 +12,7 @@ def main():
     parser.add_argument("-o", "--outdir", type=str, help="Path to the output directory")
     args = parser.parse_args()
 
-    if not args.infile.endswith((".pyf")):
+    if not args.infile.endswith(".pyf"):
         raise ValueError(f"Input file has unknown extension: {args.infile}")
 
     outdir_abs = os.path.join(os.getcwd(), args.outdir)
