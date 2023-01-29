@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install cibuildwheel
-        run: pipx install cibuildwheel==2.11.2
+        run: pipx install cibuildwheel==2.12.0
       - id: set-matrix
         run: |
           MATRIX=$(

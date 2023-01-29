@@ -9,7 +9,7 @@ authors:
       Atmospheric and Space Physics (LASP)
     orcid: "https://orcid.org/0000-0003-1331-1863"
 title: "pymsis"
-version: v0.6.0
+version: v0.7.0
 doi: 10.5281/zenodo.5348502
-date-released: 2012-11-14
+date-released: 2023-01-27
 url: "https://github.com/SWxTREC/pymsis"
