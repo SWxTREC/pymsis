@@ -1,20 +1,25 @@
-# Configuration file for the Sphinx documentation builder.
-#
-# This file only contains a selection of the most common options. For a full
-# list see the documentation:
-# https://www.sphinx-doc.org/en/master/usage/configuration.html
+"""
+Configuration file for the Sphinx documentation builder.
+
+This file only contains a selection of the most common options. For a full
+list see the documentation:
+https://www.sphinx-doc.org/en/master/usage/configuration.html
+"""
 
 # -- Path setup --------------------------------------------------------------
+
+import sys
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use resolve() to make it absolute, like shown here.
 #
 from pathlib import Path
-import sys
+
 from sphinx_gallery.sorting import ExampleTitleSortKey
 
 import pymsis
+
 
 sys.path.insert(0, Path("../../pymsis").resolve())
 

@@ -1,8 +1,15 @@
-from pathlib import Path
+"""
+Tools to download the MSIS Fortran source code.
+
+There are some additional routines to clean up the source
+code which helps with compiling with gfortran.
+"""
 import shutil
 import tarfile
 import urllib.request
 import warnings
+from pathlib import Path
+
 
 SOURCE_DIR = "https://map.nrl.navy.mil/map/pub/nrl/NRLMSIS/"
 MSIS20_FILE = SOURCE_DIR + "NRLMSIS2.0/NRLMSIS2.0.tar.gz"
@@ -87,7 +94,8 @@ def get_source():
 
 # Clean up the source files
 def clean_utf8(fnames):
-    """Remove bad characters.
+    """
+    Remove bad characters.
 
     fnames: list
         filenames to be cleaned
@@ -103,7 +111,8 @@ def clean_utf8(fnames):
 
 
 def fix_msis00(fname):
-    """Fix bad lines in msis00.
+    """
+    Fix bad lines in msis00.
 
     The gfortran compiler thinks there is a character/int mismatch,
     so fix these bad lines.

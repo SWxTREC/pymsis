@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import numpy as np
 from numpy.testing import assert_allclose
 
@@ -14,8 +15,9 @@ def run_input_line(line, version):
     sec, alt, lat, lon, _, f107a, f107, ap = (float(x) for x in items[1:9])
     ap = [[ap] * 7]
     year = int(items[0][:-3])
-    # Two digit year
-    if year > 60:
+    # Two digit year?
+    start_two_digit_year = 60
+    if year > start_two_digit_year:
         year += 1900
     else:
         year += 2000
@@ -79,8 +81,8 @@ def run_input_line(line, version):
 
 def test_included_msis20_f90_file():
     # Regressing to the included file
-    TEST_DIR = Path(__file__).parent
-    with open(TEST_DIR / "msis2.0_test_ref_dp.txt") as f:
+    test_dir = Path(__file__).parent
+    with open(test_dir / "msis2.0_test_ref_dp.txt") as f:
         f.readline()  # Header
         for line in f:
             run_input_line(line, version="2.0")
@@ -88,8 +90,8 @@ def test_included_msis20_f90_file():
 
 def test_included_msis_21_f90_file():
     # Regressing to the included file
-    TEST_DIR = Path(__file__).parent
-    with open(TEST_DIR / "msis2.1_test_ref_dp.txt") as f:
+    test_dir = Path(__file__).parent
+    with open(test_dir / "msis2.1_test_ref_dp.txt") as f:
         f.readline()  # Header
         for line in f:
             run_input_line(line, version="2.1")

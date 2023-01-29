@@ -6,8 +6,8 @@ This example demonstrates how to calculate the
 diurnal variation at a single location.
 
 """
-import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+import matplotlib.pyplot as plt
 import numpy as np
 
 from pymsis import msis

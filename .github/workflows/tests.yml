@@ -8,12 +8,22 @@ concurrency:
 
 on:
   push:
-    branches: [ '*' ]
+    branches: [ 'main' ]
   pull_request:
-    branches: [ main ]
 
 jobs:
-  build:
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+            python-version: 3.11
+      - name: Install mypy
+        run: |
+          python -m pip install mypy numpy
+          mypy pymsis
+  test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -59,11 +69,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -v .[tests]
-
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --show-source --statistics
 
     - name: Test with pytest
       run: |

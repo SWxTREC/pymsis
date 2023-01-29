@@ -1,3 +1,4 @@
+"""Generate the f2py wrappers."""
 import argparse
 import os
 import subprocess
@@ -5,12 +6,13 @@ import sys
 
 
 def main():
+    """Run the script."""
     parser = argparse.ArgumentParser()
     parser.add_argument("infile", type=str, help="Path to the input file")
     parser.add_argument("-o", "--outdir", type=str, help="Path to the output directory")
     args = parser.parse_args()
 
-    if not args.infile.endswith((".pyf")):
+    if not args.infile.endswith(".pyf"):
         raise ValueError(f"Input file has unknown extension: {args.infile}")
 
     outdir_abs = os.path.join(os.getcwd(), args.outdir)

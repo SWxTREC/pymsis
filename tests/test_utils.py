@@ -1,6 +1,6 @@
 import numpy as np
-from numpy.testing import assert_array_equal, assert_allclose
 import pytest
+from numpy.testing import assert_allclose, assert_array_equal
 
 from pymsis import utils
 
@@ -21,7 +21,7 @@ def test_downloading(monkeypatch, tmp_path):
 
 def test_loading_data(monkeypatch, tmp_path):
     # Make sure we are starting off fresh with nothing loaded yet
-    utils._DATA is None
+    utils._DATA = None
 
     # Make sure a download warning is emitted if the file doesn't exist
     tmp_file = tmp_path / "testfile.txt"
@@ -53,7 +53,7 @@ def test_loading_data(monkeypatch, tmp_path):
 
 
 @pytest.mark.parametrize(
-    "dates,expected_f107,expected_f107a,expected_ap",
+    ("dates", "expected_f107", "expected_f107a", "expected_ap"),
     [
         # First timestep of the file
         # No F10.7 the day before

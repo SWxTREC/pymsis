@@ -1,24 +1,27 @@
+"""Interface for running and creating input for the MSIS models."""
 from pathlib import Path
+from typing import List, Optional, Tuple, Union
 
 import numpy as np
+import numpy.typing as npt
 
-from pymsis import msis00f, msis20f, msis21f
+from pymsis import msis00f, msis20f, msis21f  # type: ignore
 from pymsis.utils import get_f107_ap
 
 
 def run(
-    dates,
-    lons,
-    lats,
-    alts,
-    f107s=None,
-    f107as=None,
-    aps=None,
+    dates: npt.ArrayLike,
+    lons: npt.ArrayLike,
+    lats: npt.ArrayLike,
+    alts: npt.ArrayLike,
+    f107s: Optional[npt.ArrayLike] = None,
+    f107as: Optional[npt.ArrayLike] = None,
+    aps: Optional[npt.ArrayLike] = None,
     *,
-    options=None,
-    version=2.1,
-    **kwargs,
-):
+    options: Optional[List[float]] = None,
+    version: Union[float, str] = 2.1,
+    **kwargs: dict,
+) -> npt.NDArray:
     """
     Call MSIS looping over all possible inputs.
 
@@ -30,19 +33,19 @@ def run(
 
     Parameters
     ----------
-    dates : list of dates
+    dates : ArrayLike
         Dates and times of interest
-    lons : list of floats
+    lons : ArrayLike
         Longitudes of interest
-    lats : list of floats
+    lats : ArrayLike
         Latitudes of interest
-    alts : list of floats
+    alts : ArrayLike
         Altitudes of interest
-    f107s : list of floats, optional
+    f107s : ArrayLike, optional
         Daily F10.7 of the previous day for the given date(s)
-    f107as : list of floats, optional
+    f107as : ArrayLike, optional
         F10.7 running 81-day average centered on the given date(s)
-    aps : list of floats, optional
+    aps : ArrayLike, optional
         | Ap for the given date(s), (1-6 only used if `geomagnetic_activity=-1`)
         | (0) Daily Ap
         | (1) 3 hr ap index for current time
@@ -53,11 +56,13 @@ def run(
         |     prior to current time
         | (6) Average of eight 3 hr ap indices from 36 to 57 hrs
         |     prior to current time
-    options : list of floats (length 25) [optional]
+    options : ArrayLike[25, float], optional
         A list of options (switches) to the model, if options is passed
         all keyword arguments specifying individual options will be ignored.
     version : Number or string, default: 2.1
-        MSIS version number, [0, 2.0, 2.1]
+        MSIS version number, one of (0, 2.0, 2.1).
+    **kwargs : dict
+        Single options for the switches can be defined through keyword arguments.
 
     Returns
     -------
@@ -114,10 +119,11 @@ def run(
     2. aps[1:] are only used when ``geomagnetic_activity=-1``.
 
     """
+    num_options = 25
     if options is None:
-        options = create_options(**kwargs)
-    elif len(options) != 25:
-        raise ValueError("options needs to be a list of length 25")
+        options = create_options(**kwargs)  # type: ignore
+    elif len(options) != num_options:
+        raise ValueError(f"options needs to be a list of length {num_options}")
 
     input_shape, input_data = create_input(dates, lons, lats, alts, f107s, f107as, aps)
 
@@ -166,7 +172,7 @@ def run(
     else:
         raise ValueError(
             f"The MSIS version selected: {version} is not "
-            "a valid version number [0, 2]"
+            "one of the valid version numbers: (0, 2, 2.1)"
         )
 
     # The Fortran code puts 9.9e-38 in as NaN
@@ -174,25 +180,25 @@ def run(
     # so atol should be less than the comparison value
     output[np.isclose(output, 9.9e-38, atol=1e-38)] = np.nan
 
-    return output.reshape(input_shape + (11,))
+    return output.reshape(*input_shape, 11)
 
 
 def create_options(
-    f107=1,
-    time_independent=1,
-    symmetrical_annual=1,
-    symmetrical_semiannual=1,
-    asymmetrical_annual=1,
-    asymmetrical_semiannual=1,
-    diurnal=1,
-    semidiurnal=1,
-    geomagnetic_activity=1,
-    all_ut_effects=1,
-    longitudinal=1,
-    mixed_ut_long=1,
-    mixed_ap_ut_long=1,
-    terdiurnal=1,
-):
+    f107: float = 1,
+    time_independent: float = 1,
+    symmetrical_annual: float = 1,
+    symmetrical_semiannual: float = 1,
+    asymmetrical_annual: float = 1,
+    asymmetrical_semiannual: float = 1,
+    diurnal: float = 1,
+    semidiurnal: float = 1,
+    geomagnetic_activity: float = 1,
+    all_ut_effects: float = 1,
+    longitudinal: float = 1,
+    mixed_ut_long: float = 1,
+    mixed_ap_ut_long: float = 1,
+    terdiurnal: float = 1,
+) -> List[float]:
     """
     Create the options list based on keyword argument choices.
 
@@ -254,24 +260,33 @@ def create_options(
     return options
 
 
-def create_input(dates, lons, lats, alts, f107s=None, f107as=None, aps=None):
-    """Combine all input values into a single flattened array.
+def create_input(
+    dates: npt.ArrayLike,
+    lons: npt.ArrayLike,
+    lats: npt.ArrayLike,
+    alts: npt.ArrayLike,
+    f107s: Optional[npt.ArrayLike] = None,
+    f107as: Optional[npt.ArrayLike] = None,
+    aps: Optional[npt.ArrayLike] = None,
+) -> Tuple[Tuple, npt.NDArray]:
+    """
+    Combine all input values into a single flattened array.
 
     Parameters
     ----------
-    dates : list of dates
+    dates : ArrayLike
         Dates and times of interest
-    lons : list of floats
+    lons : ArrayLike
         Longitudes of interest
-    lats : list of floats
+    lats : ArrayLike
         Latitudes of interest
-    alts : list of floats
+    alts : ArrayLike
         Altitudes of interest
-    f107s : list of floats, optional
+    f107s : ArrayLike, optional
         F107 values for the previous day of the given date(s)
-    f107as : list of floats, optional
+    f107as : ArrayLike, optional
         F107 running 81-day average for the given date(s)
-    aps : list of floats, optional
+    aps : ArrayLike, optional
         Ap for the given date(s)
 
     Returns
@@ -283,13 +298,17 @@ def create_input(dates, lons, lats, alts, f107s=None, f107as=None, aps=None):
         (ndates == nlons == nlats == nalts), then the shape is (ndates,).
     """
     # Turn everything into arrays
-    dates = np.atleast_1d(np.array(dates, dtype="datetime64"))
-    dyear = (dates.astype("datetime64[D]") - dates.astype("datetime64[Y]")).astype(
+    dates_arr: npt.NDArray[np.datetime64] = np.atleast_1d(
+        np.array(dates, dtype=np.datetime64)
+    )
+    dyear: npt.NDArray[np.datetime64] = (
+        dates_arr.astype("datetime64[D]") - dates_arr.astype("datetime64[Y]")
+    ).astype(
         float
     ) + 1  # DOY 1-366
-    dseconds = (dates.astype("datetime64[s]") - dates.astype("datetime64[D]")).astype(
-        float
-    )
+    dseconds: npt.NDArray[np.datetime64] = (
+        dates_arr.astype("datetime64[s]") - dates_arr.astype("datetime64[D]")
+    ).astype(float)
     # TODO: Make it a continuous day of year?
     #       The new code mentions it should be and accepts float, but the
     #       regression tests indicate it should still be integer DOY
@@ -304,7 +323,7 @@ def create_input(dates, lons, lats, alts, f107s=None, f107as=None, aps=None):
     # If any of the geomagnetic data wasn't specified, we will default
     # to getting it with the utility functions.
     if f107s is None or f107as is None or aps is None:
-        data = get_f107_ap(dates)
+        data = get_f107_ap(dates_arr)
         # Only update the values that were None
         if f107s is None:
             f107s = data[0]
@@ -317,7 +336,7 @@ def create_input(dates, lons, lats, alts, f107s=None, f107as=None, aps=None):
     f107as = np.atleast_1d(f107as)
     aps = np.atleast_1d(aps)
 
-    ndates = len(dates)
+    ndates = len(dates_arr)
     nlons = len(lons)
     nlats = len(lats)
     nalts = len(alts)
@@ -338,8 +357,7 @@ def create_input(dates, lons, lats, alts, f107s=None, f107as=None, aps=None):
         # ap has 7 components, so we need to concatenate it onto the
         # arrays rather than stack
         flattened_input = np.concatenate([arr, aps], axis=1, dtype=np.float32)
-        shape = (ndates,)
-        return shape, flattened_input
+        return (ndates,), flattened_input
 
     # Make a grid of indices
     indices = np.stack(
@@ -371,5 +389,4 @@ def create_input(dates, lons, lats, alts, f107s=None, f107as=None, aps=None):
     flattened_input = np.concatenate(
         [arr, aps[indices[:, 0], :]], axis=1, dtype=np.float32
     )
-    shape = (ndates, nlons, nlats, nalts)
-    return shape, flattened_input
+    return (ndates, nlons, nlats, nalts), flattened_input

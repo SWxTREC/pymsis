@@ -12,7 +12,7 @@ def local_path(monkeypatch):
     # Monkeypatch the url and expected download location, so we aren't
     # dependent on an internet connection.
     monkeypatch.setattr(utils, "_F107_AP_PATH", test_file)
-    yield test_file
+    return test_file
 
 
 @pytest.fixture(autouse=True)
@@ -23,4 +23,4 @@ def remote_path(monkeypatch, local_path):
     # Monkeypatch the url and expected download location, so we aren't
     # dependent on an internet connection.
     monkeypatch.setattr(utils, "_F107_AP_URL", test_url)
-    yield test_url
+    return test_url

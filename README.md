@@ -3,28 +3,26 @@
 ![image](https://swxtrec.github.io/pymsis/_static/pymsis-logo.png)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5348502.svg)](https://doi.org/10.5281/zenodo.5348502)
-![PyPi](https://badge.fury.io/py/pymsis.svg)
-![Downloads](https://pepy.tech/badge/pymsis/month)
-![GitHubActions](https://github.com/SWxTREC/pymsis/actions/workflows/tests.yml/badge.svg)
+[![PyPi](https://badge.fury.io/py/pymsis.svg)](https://badge.fury.io/py/pymsis)
+[![Downloads](https://static.pepy.tech/badge/pymsis/month)](https://pepy.tech/project/pymsis)
+[![GitHubActions](https://github.com/SWxTREC/pymsis/actions/workflows/tests.yml/badge.svg)](https://github.com/SWxTREC/pymsis/actions?query=workflow%3Atests)
+[![codecov](https://codecov.io/gh/SWxTREC/pymsis/branch/main/graph/badge.svg?token=NSUGKPJ3F7)](https://codecov.io/gh/SWxTREC/pymsis)
 
-Pymsis is meant to be a minimal and fast Python wrapper of the NRLMSIS
-models. Documentation to get started quickly can be found on the [home
-page](https://swxtrec.github.io/pymsis/). It includes some
-[examples](https://swxtrec.github.io/pymsis/examples/index.html) that
-demonstrate how to access and plot the data.
+Pymsis is a minimal and fast Python wrapper of the NRLMSIS
+models (MSISE-00, MSIS2.0, MSIS2.1).
 
 ## Quickstart
 
-A few short lines of code to get started quickly with pymsis.
-Use Numpy to create a range of dates during the 2003 Halloween storm.
-Then run the model at the location (lon, lat) (0, 0) and 400 km altitude.
-The model will automatically download and access the F10.7 and ap data for you
-if you have an internet connection.
-The returned data structure has shape [ndates, nlons, nlats, nalts, 11],
-but note that for this example we only have one longitude, latitude, and altitude.
-The 11 is for each of the species MSIS calculates at each point of input.
-The first element is the Total Mass Density (kg/m3) and if we plot that over
-time, we can see how the mass density increased at 400 km altitude during this storm.
+[Web viewer](https://swx-trec.com/msis): An interactive website using pymsis through cloud-based serverless functions.
+[Project homepage](https://swxtrec.github.io/pymsis/): Location for all documentation.
+[API Reference](https://swxtrec.github.io/pymsis/reference/index.html): Details about the various options and configurations available in the functions.
+[Examples](https://swxtrec.github.io/pymsis/examples/index.html): Demo for how to access and plot the data.
+
+**A few short lines of code to get started quickly with pymsis.**
+
+1. Create a range of dates during the 2003 Halloween storm.
+2. Run the model at the desired location (lon, lat) (0, 0) and 400 km altitude.
+3. Plot the results to see how the mass density increased at 400 km altitude during this storm.
 
 ```python
 import numpy as np
@@ -38,15 +36,14 @@ data = msis.run(dates, 0, 0, 400, geomagnetic_activity=-1)
 import matplotlib.pyplot as plt
 # Total mass density over time
 plt.plot(dates, data[:, 0, 0, 0, 0])
-plt.tight_layout()
 plt.show()
 ```
 
-[Additional examples](https://swxtrec.github.io/pymsis/examples/index.html) that
-demonstrate how to access and plot the data.
-
-[API Documentation](https://swxtrec.github.io/pymsis/reference/index.html) with
-details about the various options and configurations available.
+> **note**
+>
+> * The model will automatically download and access the F10.7 and ap data for you if you have an internet connection.
+> * The returned data structure has shape [ndates, nlons, nlats, nalts, 11], but for this example we only have one point with many dates [ndates, 1, 1, 1, 11].
+> * The 11 is for each of the species MSIS calculates for each input point. The first element is the Total Mass Density (kg/m3).
 
 ## NRL Mass Spectrometer, Incoherent Scatter Radar Extended Model (MSIS)
 

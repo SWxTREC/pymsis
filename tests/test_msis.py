@@ -1,11 +1,11 @@
 import numpy as np
-from numpy.testing import assert_array_equal, assert_allclose
 import pytest
+from numpy.testing import assert_allclose, assert_array_equal
 
 from pymsis import msis, msis00f, msis20f, msis21f
 
 
-@pytest.fixture
+@pytest.fixture()
 def input_data():
     date = np.datetime64("2010-01-01T12:00")
     lon = 0
@@ -17,12 +17,12 @@ def input_data():
     return (date, lon, lat, alt, f107, f107a, ap)
 
 
-@pytest.fixture
+@pytest.fixture()
 def expected_input():
     return [1.0, 86400 / 2, 0, 0, 200, 150, 150] + [3] * 7
 
 
-@pytest.fixture
+@pytest.fixture()
 def expected_output():
     return np.array(
         [
@@ -42,7 +42,7 @@ def expected_output():
     )
 
 
-@pytest.fixture
+@pytest.fixture()
 def expected_output00():
     return np.array(
         [
@@ -358,7 +358,7 @@ def test_bad_run_inputs(inputs):
 
 
 @pytest.mark.parametrize(
-    "version,func",
+    ("version", "func"),
     [("0", msis00f.pygtd7d), ("2.0", msis20f.pymsiscalc), ("2.1", msis21f.pymsiscalc)],
 )
 def test_keyword_argument_call(input_data, version, func):

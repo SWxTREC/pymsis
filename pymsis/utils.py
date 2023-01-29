@@ -1,19 +1,23 @@
-from io import BytesIO
-from pathlib import Path
+"""Utilities for obtaining input datasets."""
 import urllib.request
 import warnings
+from io import BytesIO
+from pathlib import Path
+from typing import Dict, Optional, Tuple
 
 import numpy as np
+import numpy.typing as npt
+
 import pymsis
 
 
 _DATA_FNAME: str = "SW-All.csv"
 _F107_AP_URL: str = f"https://celestrak.org/SpaceData/{_DATA_FNAME}"
 _F107_AP_PATH: Path = Path(pymsis.__file__).parent / _DATA_FNAME
-_DATA: dict = None
+_DATA: Optional[Dict[str, npt.NDArray]] = None
 
 
-def download_f107_ap():
+def download_f107_ap() -> None:
     """
     Download the latest ap and F10.7 values.
 
@@ -40,12 +44,12 @@ def download_f107_ap():
     """
     warnings.warn(f"Downloading ap and F10.7 data from {_F107_AP_URL}")
     req = urllib.request.urlopen(_F107_AP_URL)
-    with open(_F107_AP_PATH, "wb") as f:
+    with _F107_AP_PATH.open("wb") as f:
         f.write(req.read())
 
 
-def _load_f107_ap_data():
-    """Load data from disk, if it isn't present go out and download it first"""
+def _load_f107_ap_data() -> Dict[str, npt.NDArray]:
+    """Load data from disk, if it isn't present go out and download it first."""
     if not _F107_AP_PATH.exists():
         download_f107_ap()
 
@@ -86,7 +90,7 @@ def _load_f107_ap_data():
     # Use a buffer to read in and load so we can quickly get rid of
     # the extra "PRD" lines at the end of the file (unknown length
     # so we can't just go back in line lengths)
-    with open(_F107_AP_PATH) as fin:
+    with _F107_AP_PATH.open() as fin:
         with BytesIO() as fout:
             for line in fin:
                 if "PRM" in line:
@@ -96,7 +100,7 @@ def _load_f107_ap_data():
             fout.seek(0)
             arr = np.loadtxt(
                 fout, delimiter=",", dtype=dtype, usecols=usecols, skiprows=1
-            )
+            )  # type: ignore
 
     # transform each day's 8 3-hourly ap values into a single column
     ap = np.empty(len(arr) * 8, dtype=float)
@@ -140,7 +144,9 @@ def _load_f107_ap_data():
     f107_data[1:] = arr["f107"][:-1]
     f107a_data = arr["f107a"]
     # So that we can warn the user that this F107 data was interpolated or predicted
-    warn_data = (arr["f107-type"] == b"INT") | (arr["f107-type"] == b"PRD")
+    interpolated = b"INT"
+    predicted = b"PRD"
+    warn_data = (arr["f107-type"] == interpolated) | (arr["f107-type"] == predicted)
 
     # Set the global module-level data variable
     data = {
@@ -154,7 +160,7 @@ def _load_f107_ap_data():
     return data
 
 
-def get_f107_ap(dates):
+def get_f107_ap(dates: npt.ArrayLike) -> Tuple[npt.NDArray, npt.NDArray, npt.NDArray]:
     """
     Retrieve the F10.7 and ap data needed to run msis for the given times.
 
