@@ -11,7 +11,7 @@ repos:
     - id: isort
       name: isort (python)
 -   repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: 'v0.0.236'
+    rev: 'v0.0.238'
     hooks:
     - id: ruff
       args: [--fix]
