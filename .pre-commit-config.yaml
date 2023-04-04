@@ -3,7 +3,7 @@ ci:
   autoupdate_schedule: 'quarterly'
 repos:
   - repo: https://github.com/psf/black
-    rev: 22.12.0
+    rev: 23.3.0
     hooks:
     - id: black
   - repo: https://github.com/pycqa/isort
@@ -12,7 +12,7 @@ repos:
     - id: isort
       name: isort (python)
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: 'v0.0.238'
+    rev: 'v0.0.260'
     hooks:
     - id: ruff
       args: [--fix]
