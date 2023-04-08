@@ -82,7 +82,7 @@ target-version = "py38"
 select = ["B", "D", "E", "F", "I", "N", "S", "W", "PL", "PT", "UP", "RUF", "ANN"]
 # Ignore import sorting for now until lines_after_imports is respected
 # by ruff and we can replace isort
-ignore = ["I001", "D203", "D212", "PLR0913"]
+ignore = ["B028", "D203", "D212", "I001", "PLR0913", "S310"]
 
 [tool.ruff.per-file-ignores]
 "examples/*" = ["D", "ANN"]
