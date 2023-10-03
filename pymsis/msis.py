@@ -1,6 +1,6 @@
 """Interface for running and creating input for the MSIS models."""
 from pathlib import Path
-from typing import List, Optional, Tuple, Union
+from typing import Optional, Union
 
 import numpy as np
 import numpy.typing as npt
@@ -18,7 +18,7 @@ def run(
     f107as: Optional[npt.ArrayLike] = None,
     aps: Optional[npt.ArrayLike] = None,
     *,
-    options: Optional[List[float]] = None,
+    options: Optional[list[float]] = None,
     version: Union[float, str] = 2.1,
     **kwargs: dict,
 ) -> npt.NDArray:
@@ -198,7 +198,7 @@ def create_options(
     mixed_ut_long: float = 1,
     mixed_ap_ut_long: float = 1,
     terdiurnal: float = 1,
-) -> List[float]:
+) -> list[float]:
     """
     Create the options list based on keyword argument choices.
 
@@ -268,7 +268,7 @@ def create_input(
     f107s: Optional[npt.ArrayLike] = None,
     f107as: Optional[npt.ArrayLike] = None,
     aps: Optional[npt.ArrayLike] = None,
-) -> Tuple[Tuple, npt.NDArray]:
+) -> tuple[tuple, npt.NDArray]:
     """
     Combine all input values into a single flattened array.
 
