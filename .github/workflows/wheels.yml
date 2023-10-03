@@ -11,17 +11,37 @@ on:
     branches:
       - 'main'
   release:
+  # Also allow running this action on PRs if requested by applying the
+  # "Run cibuildwheel" label.
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - labeled
 
 jobs:
   generate-wheels-matrix:
+    if: |
+      github.event_name == 'push' ||
+      github.event_name == 'release' ||
+      (github.event_name == 'pull_request' && (
+        (
+          github.event.action == 'labeled' &&
+          github.event.label.name == 'CI: build wheels'
+        ) ||
+        contains(github.event.pull_request.labels.*.name,
+                'CI: build wheels')
+      )
+      )
     name: Generate wheels matrix
     runs-on: ubuntu-latest
     outputs:
       include: ${{ steps.set-matrix.outputs.include }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install cibuildwheel
-        run: pipx install cibuildwheel==2.12.0
+        run: pipx install cibuildwheel==2.16.1
       - id: set-matrix
         run: |
           MATRIX=$(
@@ -36,10 +56,10 @@ jobs:
           )
           echo "include=$MATRIX" >> $GITHUB_OUTPUT          
         env:
-          CIBW_BUILD: "cp38-* cp39-* cp310-* cp311-*"
-          # Skip 32 bit windows builds due to compiler
-          # Skip musllinux because there aren't musllinux wheels yet
-          CIBW_SKIP: "*-win32 *-musllinux*"
+          CIBW_BUILD: "cp39-* cp310-* cp311-* cp312-*"
+          # skip 32 bit windows and linux builds because numpy
+          # does not provide wheels for these platforms
+          CIBW_SKIP: "*-win32 *_i686"
           # TODO: Look into universal2 support, but compilers and options
           #       will be tricky with the Fortran code and tests...
           CIBW_ARCHS_MACOS: x86_64
@@ -54,7 +74,7 @@ jobs:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up QEMU
         if: runner.os == 'Linux'
@@ -85,13 +105,13 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.12'
 
       - name: Download source files
         run: |
           python .github/workflows/download_mirror.py
 
-      - uses: pypa/cibuildwheel@v2.12.0
+      - uses: pypa/cibuildwheel@v2.16.1
         with:
           only: ${{ matrix.only }}
 
@@ -103,12 +123,12 @@ jobs:
     name: Build source distribution
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v4
         name: Install Python
         with:
-          python-version: '3.10'
+          python-version: '3.12'
 
       - name: Download source files
         run: |
