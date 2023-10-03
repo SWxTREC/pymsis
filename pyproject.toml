@@ -70,21 +70,15 @@ addopts = [
 test-requires = "pytest"
 test-command = "pytest --pyargs pymsis"
 
-[tool.isort]
-profile = "black"
-lines_after_imports = 2
-
-[tool.pydocstyle]
-match = "pymsis/*.py"
-
 [tool.ruff]
 target-version = "py38"
 select = ["B", "D", "E", "F", "I", "N", "S", "W", "PL", "PT", "UP", "RUF", "ANN"]
-# Ignore import sorting for now until lines_after_imports is respected
-# by ruff and we can replace isort
-ignore = ["B028", "D203", "D212", "I001", "PLR0913", "S310"]
+ignore = ["B028", "D203", "D212", "PLR0913", "S310"]
 
 [tool.ruff.per-file-ignores]
-"examples/*" = ["D", "ANN"]
-"tests/*" = ["D", "S", "ANN"]
-"tools/*" = ["ANN"]
+"examples/*" = ["ANN", "D"]
+"tests/*" = ["ANN", "D", "S"]
+"tools/*" = ["ANN", "S"]
+
+[tool.ruff.isort]
+lines-after-imports = 2
