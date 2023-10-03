@@ -7,14 +7,14 @@ requires = [
 
 [project]
 name = "pymsis"
-version = "0.7.0"
+version = "0.8.0"
 description = "A Python wrapper around the NRLMSIS model."
 readme = "README.md"
 license = {file = "LICENSE"}
 keyword = ["MSIS2", "NRLMSIS"]
 authors = [{name = "Greg Lucas", email = "greg.lucas@lasp.colorado.edu"}]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
@@ -69,7 +69,7 @@ test-requires = "pytest"
 test-command = "pytest --pyargs pymsis"
 
 [tool.ruff]
-target-version = "py38"
+target-version = "py39"
 select = ["B", "D", "E", "F", "I", "N", "S", "W", "PL", "PT", "UP", "RUF", "ANN"]
 ignore = ["B028", "D203", "D212", "PLR0913", "S310"]
 
