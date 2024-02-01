@@ -44,6 +44,8 @@ jobs:
               | jq -nRc '{"only": inputs, "os": "ubuntu-latest"}' \
               && cibuildwheel --print-build-identifiers --platform macos \
               | jq -nRc '{"only": inputs, "os": "macos-latest"}' \
+              && cibuildwheel --print-build-identifiers --platform macos \
+              | jq -nRc '{"only": inputs, "os": "macos-14"}' \
               && cibuildwheel --print-build-identifiers --platform windows \
               | jq -nRc '{"only": inputs, "os": "windows-2019"}'
             } | jq -sc
@@ -56,7 +58,7 @@ jobs:
           CIBW_SKIP: "*-win32 *_i686"
           # TODO: Look into universal2 support, but compilers and options
           #       will be tricky with the Fortran code and tests...
-          CIBW_ARCHS_MACOS: x86_64
+          CIBW_ARCHS_MACOS: auto
   build_wheels:
     name: Build ${{ matrix.os }} ${{ matrix.only }}
     needs: generate-wheels-matrix
