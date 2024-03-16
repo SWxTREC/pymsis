@@ -1,4 +1,5 @@
 """Interface for running and creating input for the MSIS models."""
+
 from pathlib import Path
 from typing import Optional, Union
 
@@ -303,9 +304,7 @@ def create_input(
     )
     dyear: npt.NDArray[np.datetime64] = (
         dates_arr.astype("datetime64[D]") - dates_arr.astype("datetime64[Y]")
-    ).astype(
-        float
-    ) + 1  # DOY 1-366
+    ).astype(float) + 1  # DOY 1-366
     dseconds: npt.NDArray[np.datetime64] = (
         dates_arr.astype("datetime64[s]") - dates_arr.astype("datetime64[D]")
     ).astype(float)

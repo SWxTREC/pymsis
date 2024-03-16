@@ -8,6 +8,7 @@ we show the difference between densities at noon (solid)
 and midnight (dashed).
 
 """
+
 import matplotlib.pyplot as plt
 import numpy as np
 

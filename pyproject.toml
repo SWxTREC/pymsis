@@ -70,13 +70,17 @@ test-command = "pytest --pyargs pymsis"
 
 [tool.ruff]
 target-version = "py39"
-select = ["B", "D", "E", "F", "I", "N", "S", "W", "PL", "PT", "UP", "RUF", "ANN"]
-ignore = ["B028", "D203", "D212", "PLR0913", "S310"]
+lint.select = ["B", "D", "E", "F", "I", "N", "S", "W", "PL", "PT", "UP", "RUF", "ANN"]
+lint.ignore = ["B028", "D203", "D212", "PLR0913", "S310"]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "examples/*" = ["ANN", "D"]
 "tests/*" = ["ANN", "D", "S"]
 "tools/*" = ["ANN", "S"]
+".github/*" = ["S"]
 
-[tool.ruff.isort]
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.isort]
 lines-after-imports = 2

@@ -7,6 +7,7 @@ percent change of all variables on a surface between
 MSIS version 00 and 2.
 
 """
+
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
