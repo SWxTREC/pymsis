@@ -43,14 +43,6 @@ jobs:
         compiler: gcc
         version: 13
 
-    # The setup-fortran action doesn't work on macos-arm64 currently
-    - name: Link fortrans on macos-arm64
-      if: startsWith(matrix.os, 'macos-14')
-      run: |
-        ln -fs /opt/homebrew/bin/gfortran-13 /usr/local/bin/gfortran
-        ln -fs /opt/homebrew/bin/gcc-13 /usr/local/bin/gcc
-        ln -fs /opt/homebrew/bin/g++-13 /usr/local/bin/g++
-
     - name: Compiler versions
       run: |
         which gcc
