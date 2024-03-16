@@ -17,6 +17,17 @@ on:
 
 jobs:
   build_wheels:
+    if: |
+      github.event_name == 'release' ||
+      (github.event_name == 'pull_request' && (
+        (
+          github.event.action == 'labeled' &&
+          github.event.label.name == 'CI: build wheels'
+        ) ||
+        contains(github.event.pull_request.labels.*.name,
+                'CI: build wheels')
+      )
+      )
     name: Build wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
@@ -48,14 +59,6 @@ jobs:
           compiler: gcc
           version: 13
 
-      # The setup-fortran action doesn't work on macos-arm64 currently
-      - name: Link fortran on macos-arm64
-        if: startsWith(matrix.os, 'macos-14')
-        run: |
-          ln -fs /opt/homebrew/bin/gfortran-13 /usr/local/bin/gfortran
-          ln -fs /opt/homebrew/bin/gcc-13 /usr/local/bin/gcc
-          ln -fs /opt/homebrew/bin/g++-13 /usr/local/bin/g++
-
       - name: Compiler versions
         run: |
           which gcc
@@ -75,7 +78,7 @@ jobs:
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.17.0
         env:
-          CIBW_BUILD: "cp39-* cp310-* cp311-* cp312-*"
+          CIBW_BUILD: "cp310-* cp311-* cp312-*"
           # skip 32 bit windows and linux builds because numpy
           # does not provide wheels for these platforms
           CIBW_SKIP: "*-win32 *_i686"
@@ -87,6 +90,7 @@ jobs:
 
   build_sdist:
     name: Build source distribution
+    needs: build_wheels
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
