@@ -16,63 +16,28 @@ on:
       - labeled
 
 jobs:
-  generate-wheels-matrix:
-    if: |
-      github.event_name == 'release' ||
-      (github.event_name == 'pull_request' && (
-        (
-          github.event.action == 'labeled' &&
-          github.event.label.name == 'CI: build wheels'
-        ) ||
-        contains(github.event.pull_request.labels.*.name,
-                'CI: build wheels')
-      )
-      )
-    name: Generate wheels matrix
-    runs-on: ubuntu-latest
-    outputs:
-      include: ${{ steps.set-matrix.outputs.include }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install cibuildwheel
-        run: pipx install cibuildwheel==2.16.1
-      - id: set-matrix
-        run: |
-          MATRIX=$(
-            {
-              cibuildwheel --print-build-identifiers --platform linux \
-              | jq -nRc '{"only": inputs, "os": "ubuntu-latest"}' \
-              && cibuildwheel --print-build-identifiers --platform macos \
-              | jq -nRc '{"only": inputs, "os": "macos-latest"}' \
-              && cibuildwheel --print-build-identifiers --platform windows \
-              | jq -nRc '{"only": inputs, "os": "windows-2019"}'
-            } | jq -sc
-          )
-          echo "include=$MATRIX" >> $GITHUB_OUTPUT          
-        env:
-          CIBW_BUILD: "cp39-* cp310-* cp311-* cp312-*"
-          # skip 32 bit windows and linux builds because numpy
-          # does not provide wheels for these platforms
-          CIBW_SKIP: "*-win32 *_i686"
-          # TODO: Look into universal2 support, but compilers and options
-          #       will be tricky with the Fortran code and tests...
-          CIBW_ARCHS_MACOS: x86_64
   build_wheels:
-    name: Build ${{ matrix.os }} ${{ matrix.only }}
-    needs: generate-wheels-matrix
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        include: ${{ fromJson(needs.generate-wheels-matrix.outputs.include) }}
-    runs-on: ${{ matrix.os }}
+        os: [ubuntu-latest, windows-latest, macos-13, macos-14]
     defaults:
       run:
         shell: bash
     steps:
       - uses: actions/checkout@v4
 
+      # Used to host cibuildwheel
+      - uses: actions/setup-python@v3
+
+      - name: Download source files
+        run: |
+          python .github/workflows/download_mirror.py
+
       - name: Set up QEMU
         if: runner.os == 'Linux'
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v3
         with:
           platforms: all
 
@@ -82,6 +47,14 @@ jobs:
         with:
           compiler: gcc
           version: 13
+
+      # The setup-fortran action doesn't work on macos-arm64 currently
+      - name: Link fortran on macos-arm64
+        if: startsWith(matrix.os, 'macos-14')
+        run: |
+          ln -fs /opt/homebrew/bin/gfortran-13 /usr/local/bin/gfortran
+          ln -fs /opt/homebrew/bin/gcc-13 /usr/local/bin/gcc
+          ln -fs /opt/homebrew/bin/g++-13 /usr/local/bin/g++
 
       - name: Compiler versions
         run: |
@@ -99,21 +72,17 @@ jobs:
           # Windows can't decode the README which has utf8 characters
           echo "PYTHONUTF8=1" >> $GITHUB_ENV
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.12'
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.17.0
+        env:
+          CIBW_BUILD: "cp39-* cp310-* cp311-* cp312-*"
+          # skip 32 bit windows and linux builds because numpy
+          # does not provide wheels for these platforms
+          CIBW_SKIP: "*-win32 *_i686"
 
-      - name: Download source files
-        run: |
-          python .github/workflows/download_mirror.py
-
-      - uses: pypa/cibuildwheel@v2.16.1
+      - uses: actions/upload-artifact@v4
         with:
-          only: ${{ matrix.only }}
-
-      - uses: actions/upload-artifact@v3
-        with:
+          name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
           path: ./wheelhouse/*.whl
 
   build_sdist:
@@ -136,21 +105,25 @@ jobs:
           python -m build --sdist
       - uses: actions/upload-artifact@v3
         with:
+          name: cibw-sdist
           path: dist/*.tar.gz
 
   upload_pypi:
     needs: [build_wheels, build_sdist]
     runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
     # alternatively, to publish when a GitHub Release is created, use the following rule:
     if: github.event_name == 'release' && github.event.action == 'published'
     steps:
-      - uses: actions/download-artifact@v2
+      - name: Download sdist and wheels
+        uses: actions/download-artifact@v4
         with:
-          name: artifact
+          # unpacks all CIBW artifacts into dist/
+          pattern: 'cibw-*'
           path: dist
+          merge-multiple: true
 
-      - uses: pypa/gh-action-pypi-publish@master
-        with:
-          user: __token__
-          password: ${{ secrets.pypi_password }}
-          # To test: repository_url: https://test.pypi.org/legacy/
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
