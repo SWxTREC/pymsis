@@ -79,8 +79,17 @@ def test_loading_data(monkeypatch, tmp_path):
             [186.3, 186.3],
             [[7, 4, 5, 9, 4, 5.25, 5.75], [7, 4, 5, 9, 4, 5.25, 5.75]],
         ),
+        # Bad F10.7 value artificially added to 2000-12-29 test file
+        # should be replaced with F10.7a value on that same day
+        (
+            np.datetime64("2000-12-30T12:00"),
+            [173.7],
+            [173.5],
+            [3, 4, 4, 3, 3, 6.375, 5.375],
+        ),
     ],
 )
+@pytest.mark.filterwarnings("ignore:There is data that was either interpolated")
 def test_get_f107_ap(dates, expected_f107, expected_f107a, expected_ap):
     f107, f107a, ap = utils.get_f107_ap(dates)
     assert_array_equal(f107, expected_f107)
@@ -111,7 +120,8 @@ def test_get_f107_ap_out_of_range(dates):
 @pytest.mark.parametrize(
     "dates",
     [
-        (np.datetime64("2000-12-30T00:00")),
+        (np.datetime64("2000-12-30T00:00")),  # Bad data inserted
+        (np.datetime64("2000-12-31T00:00")),  # Interpolated data
         ([np.datetime64("2000-12-01T00:00"), np.datetime64("2000-12-31T00:00")]),
     ],
 )

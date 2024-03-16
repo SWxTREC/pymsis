@@ -115,7 +115,13 @@ def _load_f107_ap_data() -> dict[str, npt.NDArray]:
     ap[ap < 0] = np.nan
     daily_ap[daily_ap < 0] = np.nan
     # There are also some non-physical f10.7 values
-    arr["f107"][arr["f107"] <= 0] = np.nan
+    # F10.7 > 400 is unrealistic indicating a solar radio burst
+    solar_radio_burst = 400
+    bad_f107 = (arr["f107"] <= 0) | (arr["f107"] > solar_radio_burst)
+    # Set the data to the 81-day average as a temporary fix
+    arr["f107"][bad_f107] = arr["f107a"][bad_f107]
+    # flag it as interpolated or predicted values so we warn the user
+    arr["f107-type"][bad_f107] = b"INT"
 
     ap_data = np.ones((len(ap), 7)) * np.nan
     # daily Ap
@@ -148,6 +154,9 @@ def _load_f107_ap_data() -> dict[str, npt.NDArray]:
     interpolated = b"INT"
     predicted = b"PRD"
     warn_data = (arr["f107-type"] == interpolated) | (arr["f107-type"] == predicted)
+    # Because we use the F107 from the day before, we need to shift the warning
+    # to the following day when we would actually use the value
+    warn_data[1:] = warn_data[:-1]
 
     # Set the global module-level data variable
     data = {
