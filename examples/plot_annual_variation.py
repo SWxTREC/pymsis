@@ -6,6 +6,7 @@ This example demonstrates how to calculate the
 difference from the annual mean at a single location.
 
 """
+
 import matplotlib.pyplot as plt
 import numpy as np
 

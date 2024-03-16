@@ -1,4 +1,5 @@
 """Generate the f2py wrappers."""
+
 import argparse
 import os
 import subprocess

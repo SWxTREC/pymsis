@@ -13,9 +13,10 @@ def test_downloading(monkeypatch, tmp_path):
     with pytest.warns(UserWarning, match="Downloading ap and F10.7"):
         utils.download_f107_ap()
     assert tmp_file.exists()
-    with open(tmp_file, "rb") as f_downloaded, open(
-        utils._F107_AP_PATH, "rb"
-    ) as f_expected:
+    with (
+        open(tmp_file, "rb") as f_downloaded,
+        open(utils._F107_AP_PATH, "rb") as f_expected,
+    ):
         assert f_downloaded.read() == f_expected.read()
 
 

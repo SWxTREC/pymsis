@@ -9,6 +9,9 @@ pymsis/msis20f*
 pymsis/msis21f*
 pymsis/msis00f*
 
+# Solar wind file
+SW-All.csv
+
 *.tar.gz
 docs/source/examples
 docs/source/reference/generated
