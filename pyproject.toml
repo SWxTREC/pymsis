@@ -2,12 +2,12 @@
 build-backend = "mesonpy"
 requires = [
     "meson-python>=0.10.0",
-    "numpy>=1.25",
+    "numpy>=2.0.0rc1",
 ]
 
 [project]
 name = "pymsis"
-version = "0.8.0"
+version = "0.9.0"
 description = "A Python wrapper around the NRLMSIS model."
 readme = "README.md"
 license = {file = "LICENSE"}

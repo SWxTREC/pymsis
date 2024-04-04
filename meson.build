@@ -2,12 +2,10 @@ project(
   'pymsis',
   'c',
   # Note that the git commit hash cannot be added dynamically here
-  version: '0.6.0',
+  version: '0.9.0',
   license: 'MIT',
-  meson_version: '>= 0.64.0',
+  meson_version: '>=1.2.99',
   default_options: [
-    'buildtype=debugoptimized',
-    'c_std=c99',
     'fortran_std=legacy',
   ],
 )
