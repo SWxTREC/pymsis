@@ -6,6 +6,7 @@ This example demonstrates how to calculate the
 quantities on a constant altitude plane.
 
 """
+
 import matplotlib.pyplot as plt
 import numpy as np
 

@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_plot_version_diff_altitude.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_plot_version_diff_altitude.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -26,7 +26,7 @@ percent change along an altitude profile between MSIS version 00 and 2.
 Additionally, we show the difference between densities at noon (solid)
 and midnight (dashed).
 
-.. GENERATED FROM PYTHON SOURCE LINES 11-73
+.. GENERATED FROM PYTHON SOURCE LINES 11-74
 
 
 
@@ -39,7 +39,8 @@ and midnight (dashed).
 
 
 
-.. code-block:: default
+.. code-block:: Python
+
 
     import matplotlib.pyplot as plt
     import numpy as np
@@ -107,7 +108,7 @@ and midnight (dashed).
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.167 seconds)
+   **Total running time of the script:** (0 minutes 0.116 seconds)
 
 
 .. _sphx_glr_download_examples_plot_version_diff_altitude.py:
@@ -116,14 +117,13 @@ and midnight (dashed).
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: plot_version_diff_altitude.ipynb <plot_version_diff_altitude.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: plot_version_diff_altitude.py <plot_version_diff_altitude.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: plot_version_diff_altitude.ipynb <plot_version_diff_altitude.ipynb>`
 
 
 .. only:: html

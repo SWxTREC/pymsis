@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_plot_surface_animation.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_plot_surface_animation.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -24,7 +24,7 @@ Surface animation
 This example demonstrates how to animate the surface plot. Showing
 the variations over the course of a year.
 
-.. GENERATED FROM PYTHON SOURCE LINES 9-83
+.. GENERATED FROM PYTHON SOURCE LINES 9-84
 
 
 
@@ -217,42 +217,42 @@ the variations over the course of a year.
      </style>
 
      <div class="animation">
-       <img id="_anim_img7c6a05f5fd56485b9e11b67c24256a3a">
+       <img id="_anim_img159f432f9478414cba895aaf153c6be0">
        <div class="anim-controls">
-         <input id="_anim_slider7c6a05f5fd56485b9e11b67c24256a3a" type="range" class="anim-slider"
+         <input id="_anim_slider159f432f9478414cba895aaf153c6be0" type="range" class="anim-slider"
                 name="points" min="0" max="1" step="1" value="0"
-                oninput="anim7c6a05f5fd56485b9e11b67c24256a3a.set_frame(parseInt(this.value));">
+                oninput="anim159f432f9478414cba895aaf153c6be0.set_frame(parseInt(this.value));">
          <div class="anim-buttons">
-           <button title="Decrease speed" aria-label="Decrease speed" onclick="anim7c6a05f5fd56485b9e11b67c24256a3a.slower()">
+           <button title="Decrease speed" aria-label="Decrease speed" onclick="anim159f432f9478414cba895aaf153c6be0.slower()">
                <i class="fa fa-minus"></i></button>
-           <button title="First frame" aria-label="First frame" onclick="anim7c6a05f5fd56485b9e11b67c24256a3a.first_frame()">
+           <button title="First frame" aria-label="First frame" onclick="anim159f432f9478414cba895aaf153c6be0.first_frame()">
              <i class="fa fa-fast-backward"></i></button>
-           <button title="Previous frame" aria-label="Previous frame" onclick="anim7c6a05f5fd56485b9e11b67c24256a3a.previous_frame()">
+           <button title="Previous frame" aria-label="Previous frame" onclick="anim159f432f9478414cba895aaf153c6be0.previous_frame()">
                <i class="fa fa-step-backward"></i></button>
-           <button title="Play backwards" aria-label="Play backwards" onclick="anim7c6a05f5fd56485b9e11b67c24256a3a.reverse_animation()">
+           <button title="Play backwards" aria-label="Play backwards" onclick="anim159f432f9478414cba895aaf153c6be0.reverse_animation()">
                <i class="fa fa-play fa-flip-horizontal"></i></button>
-           <button title="Pause" aria-label="Pause" onclick="anim7c6a05f5fd56485b9e11b67c24256a3a.pause_animation()">
+           <button title="Pause" aria-label="Pause" onclick="anim159f432f9478414cba895aaf153c6be0.pause_animation()">
                <i class="fa fa-pause"></i></button>
-           <button title="Play" aria-label="Play" onclick="anim7c6a05f5fd56485b9e11b67c24256a3a.play_animation()">
+           <button title="Play" aria-label="Play" onclick="anim159f432f9478414cba895aaf153c6be0.play_animation()">
                <i class="fa fa-play"></i></button>
-           <button title="Next frame" aria-label="Next frame" onclick="anim7c6a05f5fd56485b9e11b67c24256a3a.next_frame()">
+           <button title="Next frame" aria-label="Next frame" onclick="anim159f432f9478414cba895aaf153c6be0.next_frame()">
                <i class="fa fa-step-forward"></i></button>
-           <button title="Last frame" aria-label="Last frame" onclick="anim7c6a05f5fd56485b9e11b67c24256a3a.last_frame()">
+           <button title="Last frame" aria-label="Last frame" onclick="anim159f432f9478414cba895aaf153c6be0.last_frame()">
                <i class="fa fa-fast-forward"></i></button>
-           <button title="Increase speed" aria-label="Increase speed" onclick="anim7c6a05f5fd56485b9e11b67c24256a3a.faster()">
+           <button title="Increase speed" aria-label="Increase speed" onclick="anim159f432f9478414cba895aaf153c6be0.faster()">
                <i class="fa fa-plus"></i></button>
          </div>
-         <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select7c6a05f5fd56485b9e11b67c24256a3a"
+         <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select159f432f9478414cba895aaf153c6be0"
                class="anim-state">
-           <input type="radio" name="state" value="once" id="_anim_radio1_7c6a05f5fd56485b9e11b67c24256a3a"
+           <input type="radio" name="state" value="once" id="_anim_radio1_159f432f9478414cba895aaf153c6be0"
                   >
-           <label for="_anim_radio1_7c6a05f5fd56485b9e11b67c24256a3a">Once</label>
-           <input type="radio" name="state" value="loop" id="_anim_radio2_7c6a05f5fd56485b9e11b67c24256a3a"
+           <label for="_anim_radio1_159f432f9478414cba895aaf153c6be0">Once</label>
+           <input type="radio" name="state" value="loop" id="_anim_radio2_159f432f9478414cba895aaf153c6be0"
                   checked>
-           <label for="_anim_radio2_7c6a05f5fd56485b9e11b67c24256a3a">Loop</label>
-           <input type="radio" name="state" value="reflect" id="_anim_radio3_7c6a05f5fd56485b9e11b67c24256a3a"
+           <label for="_anim_radio2_159f432f9478414cba895aaf153c6be0">Loop</label>
+           <input type="radio" name="state" value="reflect" id="_anim_radio3_159f432f9478414cba895aaf153c6be0"
                   >
-           <label for="_anim_radio3_7c6a05f5fd56485b9e11b67c24256a3a">Reflect</label>
+           <label for="_anim_radio3_159f432f9478414cba895aaf153c6be0">Reflect</label>
          </form>
        </div>
      </div>
@@ -262,13 +262,13 @@ the variations over the course of a year.
        /* Instantiate the Animation class. */
        /* The IDs given should match those used in the template above. */
        (function() {
-         var img_id = "_anim_img7c6a05f5fd56485b9e11b67c24256a3a";
-         var slider_id = "_anim_slider7c6a05f5fd56485b9e11b67c24256a3a";
-         var loop_select_id = "_anim_loop_select7c6a05f5fd56485b9e11b67c24256a3a";
+         var img_id = "_anim_img159f432f9478414cba895aaf153c6be0";
+         var slider_id = "_anim_slider159f432f9478414cba895aaf153c6be0";
+         var loop_select_id = "_anim_loop_select159f432f9478414cba895aaf153c6be0";
          var frames = new Array(48);
     
        frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACKaElEQVR4nO3dd3yT1f4H8E+SNumge9AWSgsIZZYllCJL2SCCuC4XZYrjgqio\
      F3AxHMUBDq7i+GnR60C9CihOVpkFWWXIELDsMgRKB53J+f2BfWza5Jy2aUmaft6vV15tnjOek5PR\
      b5883+fohBACREREROS29M4eABERERHVLAZ8RERERG6OAR8RERGRm2PAR0REROTmGPAREQEoKCjA\
@@ -894,7 +894,7 @@ the variations over the course of a year.
      AAAASUVORK5CYII=\
      "
        frames[1] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLPUlEQVR4nO3dd3xTVf8H8E+SNuneLW1paQGh7CmUIksZZYggTh6UKY4fiMqD\
      D+ACXMUBDlRQHy36OFBUQHGyZwEZZcgQsOwyREoHncn5/YGNTZuckzYtSdPP+/XKC3LPuCenN+m3\
      N/d7j0YIIUBEREREbkvr7AEQERERUc1iwEdERETk5hjwEREREbk5BnxEREREbo4BHxERgMLCQkyd\
@@ -1523,7 +1523,7 @@ the variations over the course of a year.
      BnxEREREbo4BHxEREZGbY8BHRERE5OYY8BERERG5uf8HysOQHSqa6gcAAAAASUVORK5CYII=\
      "
        frames[2] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACKkklEQVR4nO3dd3yT1f4H8E+SNumge9AWSgsIZU+hFFnKBhHEdbmoZYhef+BC\
      vIALcBX34CqoV4teRRQVUMTBngVkFESGgGWXIVI66EzO7w/sY9Mm56RNS9L083698mrznPGcnGZ8\
      ++T5PkcnhBAgIiIiIo+ld/UAiIiIiKhmMeAjIiIi8nAM+IiIiIg8HAM+IiIiIg/HgI+ICEBhYSGm\
@@ -2149,7 +2149,7 @@ the variations over the course of a year.
      DPiIiIiIPBwDPiIiIiIPx4CPiIiIyMMx4CMiIiLycP8PgjYSc6/aBOgAAAAASUVORK5CYII=\
      "
        frames[3] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACKYElEQVR4nO3dd3yT1f4H8E+SNuneG0oLCGVPoRRZygYRxHW5KGWI4weiIl7A\
      xXAUB7gugnq16FVEuQoozrJXARkFKkPAssuU0kFncn5/YGPTJue0DSVp+nm/XnlBnvOc85ycPkm/\
      ffJ8z9EIIQSIiIiIyGVpHd0BIiIiIqpZDPiIiIiIXBwDPiIiIiIXx4CPiIiIyMUx4CMiAlBYWIip\
@@ -2775,7 +2775,7 @@ the variations over the course of a year.
      QmCC\
      "
        frames[4] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACKzUlEQVR4nO3dd3xTVf8H8E+SNuneLW2htIBQZllCKbKUDSKIkwe1DHExVMQH\
      UBRwFUVxoIL6aNGfIooyFHGwZwEZZcgQsOwypZTuNjm/P7CxaZNz2oaSNP28X6+82txzz7knpxnf\
      3tzvORohhAARERERuSytoztARERERFWLAR8RERGRi2PAR0REROTiGPARERERuTgGfEREAPLz8zFx\
@@ -3402,7 +3402,7 @@ the variations over the course of a year.
      XBwDPiIiIiIXx4CPiIiIyMUx4CMiIiJycQz4iIiIiFzc/wN/OpIBI9BspgAAAABJRU5ErkJggg==\
      "
        frames[5] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACK1UlEQVR4nO3dd3yT1f4H8E+SNumge9AWSgsIZZYllCJL2SBDnFyUMsTxA7mK\
      eAEX4CoOcF0E9WrRq4hyFVCcZa8CMsqQIWDZZUop3W1yfn9gY9Mm56QNJWn6eb9eeUGeM56TkzT9\
      9km+52iEEAJERERE5La0zh4AEREREVUvBnxEREREbo4BHxEREZGbY8BHRERE5OYY8BERASgsLMTU\
@@ -4030,7 +4030,7 @@ the variations over the course of a year.
      TkSuQmCC\
      "
        frames[6] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLWElEQVR4nO3dd3yT1f4H8E+SNumge9CWlhYQyp5CKbKUDSKIk4taEHH8QFQu\
      XsAFuIp7IqhXi15FFGUo4mDPgqwyZAhYdplSOuhMzu8PbGya5Jy0oSRNP+/XK682zxnPyUmafPvk\
      +T5HI4QQICIiIiKPpXX1AIiIiIioejHgIyIiIvJwDPiIiIiIPBwDPiIiIiIPx4CPiAhAUVERJk2a\
@@ -4660,7 +4660,7 @@ the variations over the course of a year.
      cP8PedilRWk32M4AAAAASUVORK5CYII=\
      "
        frames[7] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLYUlEQVR4nO3dd3xTVf8H8E+SNumge9AWSgsIZU+hFFnKBhHEyYNahjh+ICri\
      A7gAV3HgfBTHo0UfRRRlKM6yVwEZZcgQsOwyREpp6UzO7w9sbNrknLRpmzT5vF+vvCD3jHvuaZp8\
      e3O/92iEEAJERERE5La0zh4AEREREdUsBnxEREREbo4BHxEREZGbY8BHRERE5OYY8BERASgsLMS0\
@@ -5290,7 +5290,7 @@ the variations over the course of a year.
      RG6OAR8RERGRm/t/LdD8/Qec6cEAAAAASUVORK5CYII=\
      "
        frames[8] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACK8klEQVR4nO3dd3yT1f4H8E+SNumge9AWSgsIZU+hFFnKBhHEdblcKaDo9YKo\
      XLyAC8FRHDguV3FcLfq7KspVQHGyZ0FWGTIuYNllCJQOOpPz+wP72LTJOWnTNmn6eb9eebV5znhO\
      TtP02yf5nqMTQggQERERkcfSu3oARERERFSzGPAREREReTgGfEREREQejgEfERERkYdjwEdEBKCw\
@@ -5918,7 +5918,7 @@ the variations over the course of a year.
      IiIiIg/HgI+IiIjIw/0/s461eq1F7N8AAAAASUVORK5CYII=\
      "
        frames[9] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACK4UlEQVR4nO3dd3iTVfsH8G+SNumge9CWlhYQyp5CKbKUDSKIkxe1DHH8QFRE\
      AUWGqyiKAxXUV4u+DhQVUJzsWUBGgcoQsOwyREoHncn5/YGNTZuckzaUpOn3c125IM8Zz8lpmtx9\
      kvscjRBCgIiIiIjcltbZAyAiIiKi6sWAj4iIiMjNMeAjIiIicnMM+IiIiIjcHAM+IiIAhYWFmDx5\
@@ -6546,7 +6546,7 @@ the variations over the course of a year.
      p/CXg4HCAAAAAElFTkSuQmCC\
      "
        frames[10] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACK7ElEQVR4nO3dd3hUxfoH8O/uJrsppBeSQEgAIfQqhNCVDiKI7XJRQhHLBVER\
      BWyALVhRuQrq1aA/C1ZAsdJCDZ1QpAgYeigiIYXU3fn9gTlmk92ZJEvYzeb7eZ59kj1zZs6cyWbz\
      5ux5Z3RCCAEiIiIiclt6Z3eAiIiIiKoXAz4iIiIiN8eAj4iIiMjNMeAjIiIicnMM+IiIABQUFGDa\
@@ -7174,7 +7174,7 @@ the variations over the course of a year.
      4CMiIiJyc/8PrhUz8pcu0HoAAAAASUVORK5CYII=\
      "
        frames[11] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACKtUlEQVR4nO3dd3yT1f4H8E+SNumge9CWlhYQyp5CKbKUUYYI4uSilCF6/YGo\
      iBdwAa7iHqigXi16HSgqoDjZs4CMMmQIWHbZlNLSmZzfH9jHpk3OaRtK0vTzfr3yonnOeE5Ok/TL\
      k3zP0QkhBIiIiIjIbemdPQAiIiIiql4M+IiIiIjcHAM+IiIiIjfHgI+IiIjIzTHgIyICUFBQgMmT\
@@ -7801,7 +7801,7 @@ the variations over the course of a year.
      m2PAR0REROTm/h/eX9cS96+UwAAAAABJRU5ErkJggg==\
      "
        frames[12] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLY0lEQVR4nO3dd3yT1f4H8E+SNumge9AWSgsIZZYllLJlDxHcl4tSUHFcEJWL\
      F3AhruJE5SqOnxa9DpyA4mSVWZBVEBkCll2GQOmgMzm/P7CPTZuckzaUpOnn/Xrl1eY54zk5Gf32\
      yfN9jk4IIUBEREREHkvv6gEQERERUe1iwEdERETk4RjwEREREXk4BnxEREREHo4BHxERgOLiYkyf\
@@ -8431,7 +8431,7 @@ the variations over the course of a year.
      IiIiD8eAj4iIiMjD/T8pt+3If5SCNAAAAABJRU5ErkJggg==\
      "
        frames[13] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACK2ElEQVR4nO3dd3xTVf8H8E+SNumge5eWFpANZQmlbNlDBLc8qAURxw9cPPgA\
      igIOinsL6qNFHwdOQHGyZwEZZcgQsOwyREoHncn5/YGNTZuc0/bSJk0/79crrzb3jHtyMvrtzf3e\
      oxNCCBARERGR29I7ewBEREREVLMY8BERERG5OQZ8RERERG6OAR8RERGRm2PAR0QEoLCwEFOnTkV0\
@@ -9059,7 +9059,7 @@ the variations over the course of a year.
      AElFTkSuQmCC\
      "
        frames[14] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACKVUlEQVR4nO3dd3xTVf8H8E+SNl10D9pCaQGhzLKEUmTJHiKI60GUMsTxgKiI\
      D+BiOIoDUHkU1J8WfRRRVEBxssosm4LIELDssikddCbn9wc2Nm1yTtpQkqaf9+uVF+Secc89TdJv\
      b+73Ho0QQoCIiIiIXJbW0QMgIiIioqrFgI+IiIjIxTHgIyIiInJxDPiIiIiIXBwDPiIiAAUFBZg8\
@@ -9684,7 +9684,7 @@ the variations over the course of a year.
      IiIXx4CPiIiIyMUx4CMiIiJycQz4iIiIiFzc/wOahBrNY4E4+QAAAABJRU5ErkJggg==\
      "
        frames[15] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACKJ0lEQVR4nO3dd3xTVf8H8E+SNuneLW1paQGh7CmUIktWGSKIE1HKEMcPREV8\
      AEUBV3EPVFAfLfoooqiAoqLsWTZlyBCwUEYZIqWDzuT8/sDGpk3uaXtpkyaf9+uVV5t77jn35GT0\
      25v7PUcjhBAgIiIiIqeltXcHiIiIiKhmMeAjIiIicnIM+IiIiIicHAM+IiIiIifHgI+ICEBhYSGm\
@@ -10309,7 +10309,7 @@ the variations over the course of a year.
      QmCC\
      "
        frames[16] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACKvUlEQVR4nO3dd3xTVf8H8E+SNumgexdKCwhlT6EUWcoGkeHkQSlDHA+IivgA\
      LoajOAAVEdRHi/4cKI8CijhYZZZNQWQIWHYZAqWDzuT8/sDGpk3uSXspSZPP+/XKq809456cZnx7\
      c7/3aIQQAkRERETksrSOHgARERERVS8GfEREREQujgEfERERkYtjwEdERETk4hjwEREBKCwsxOTJ\
@@ -10936,7 +10936,7 @@ the variations over the course of a year.
      cnEM+IiIiIhcHAM+IiIiIhf3/2nJt2MBgBM5AAAAAElFTkSuQmCC\
      "
        frames[17] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACKx0lEQVR4nO3dd3xTVf8H8E+SNt17l5YWEMqeQimylFGGCOLkQSlD9PEHoiI+\
      gKKAqyiKAxXUR4s+DhQVUFSUPQvIKFAZAhbKKEOkdNCZnN8f2GvTJvekvZS06ef9euUFuWfck9Mk\
      /fYm33N0QggBIiIiInJaekcPgIiIiIhqFgM+IiIiIifHgI+IiIjIyTHgIyIiInJyDPiIiAAUFRVh\
@@ -11563,7 +11563,7 @@ the variations over the course of a year.
      iIjIyTHgIyIiInJyDPiIiIiInBwDPiIiIiIn9/8HiNSu9R8AgQAAAABJRU5ErkJggg==\
      "
        frames[18] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACKjUlEQVR4nO3dd3xTVf8H8E+SNumge9AWSgsIZZYllCJL9hBBFJUHpQxxgaiI\
      D+ACXAUVHDwK6qNFf4oojwKKkz3LpgwZApZdhkBpC53J+f2BvTZtck/aEJImn/frlVebe8Y9Oc34\
      9uZ+79EIIQSIiIiIyG1pnT0AIiIiInIsBnxEREREbo4BHxEREZGbY8BHRERE5OYY8BERASgsLMSk\
@@ -12189,7 +12189,7 @@ the variations over the course of a year.
      ROTmGPARERERuTkGfERERERujgEfERERkZv7f6bGN5u5XZEjAAAAAElFTkSuQmCC\
      "
        frames[19] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACKoUlEQVR4nO3deVxUVf8H8M/MwAz7DgKCoKaouG+Ie7ngkmm2+ljikvX006zM\
      HrVNbcP2xUqrJ7GeMstKLS3LfUUtFZVcUkNxwTURUNaZ8/vDmBiYuWfgijMMn/frNS+Ye5Z75szC\
      lzv3e49GCCFARERERC5L6+gBEBEREVHNYsBHRERE5OIY8BERERG5OAZ8RERERC6OAR8REYCioiJM\
@@ -12816,7 +12816,7 @@ the variations over the course of a year.
      AAAASUVORK5CYII=\
      "
        frames[20] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACJcklEQVR4nO3dd3xTVf8H8E+SNumge9CWlhYQyp5CKbKUDSKIkwe1DHE8ICri\
      AzwOhqO4Byqojxb9KYKogOJkz7IpWBkCll02pYPO5Pz+wF6bNrkn7aUkTT/v1ysvyD3jnpwm6bc3\
      +Z6jE0IIEBEREZHb0jt7AERERERUvRjwEREREbk5BnxEREREbo4BHxEREZGbY8BHRAQgNzcX06ZN\
@@ -13437,7 +13437,7 @@ the variations over the course of a year.
      IiIicnMM+IiIiIjcHAM+IiIiIjfHgI+IiIjIzf0/cS1EzDVAVYgAAAAASUVORK5CYII=\
      "
        frames[21] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACKG0lEQVR4nO3dd3yT1f4H8E+SNuneLW3pAoSyp1DKVsoWQVyXi1KGOH4gKuIF\
      XAxHcYADFZxFryLKlaGIg1Vm2ZQhQ8Cyy6aUls7k/P7AxqZNnpM2LUmTz/v1ygvynPGcnCbpt0/y\
      PUclhBAgIiIiIqeltvcAiIiIiKhmMeAjIiIicnIM+IiIiIicHAM+IiIiIifHgI+ICEBubi6mTp2K\
@@ -14061,7 +14061,7 @@ the variations over the course of a year.
      InJyDPiIiIiInBwDPiIiIiInx4CPiIiIyMn9PyiEXsCZ42BFAAAAAElFTkSuQmCC\
      "
        frames[22] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACJaElEQVR4nO3dd3yT1f4H8E+SNumge9AWSgsIZU+hFFnKBhHEdbkoZYjjB6Jy\
      8QLXwXAUF27BWfQqol4FFHGwZ9kURIaAZZcppbR0Juf3BzY2bXJO2oeSNP28X6+82jxnPCcno98+\
      eb7P0QkhBIiIiIjIY+ldPQAiIiIiqloM+IiIiIg8HAM+IiIiIg/HgI+IiIjIwzHgIyICkJOTg2nT\
@@ -14682,7 +14682,7 @@ the variations over the course of a year.
      5OEY8BERERF5OAZ8RERERB7u/wG0cEuJY0XqMgAAAABJRU5ErkJggg==\
      "
        frames[23] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACJ7ElEQVR4nO3dd3yT1f4H8E+SNl1070JpAaHsKZQiSylbBHFyUQoojguiIl7A\
      xXAUB24E9WrRnyLKVUAQB6vMsimIDAHLLpvSQWdyfn9gY9Mm57QNJWnyeb9eeUGeM56T0yT99km+\
      52iEEAJERERE5LS09h4AEREREdUsBnxERERETo4BHxEREZGTY8BHRERE5OQY8BERAcjNzcXUqVPR\
@@ -15306,7 +15306,7 @@ the variations over the course of a year.
      gg==\
      "
        frames[24] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACJ2UlEQVR4nO3dd3yT1f4H8E+SNl10D9pCaQGh7CmUIkvZIIK4LhelDHH8QFTE\
      C1wHw1EUwS2oV4teB8qVoTjLXgVZZcgQsFBGmVI66EzO7w9sbNrknLYPJWn6eb9eeUGeM56T0yT9\
      9km+5+iEEAJERERE5LL0jh4AEREREVUvBnxERERELo4BHxEREZGLY8BHRERE5OIY8BERAcjJycGM\
@@ -15929,7 +15929,7 @@ the variations over the course of a year.
      XBwDPiIiIiIXx4CPiIiIyMX9P5WzsDsPRlrNAAAAAElFTkSuQmCC\
      "
        frames[25] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACKfElEQVR4nO3dd3xTVf8H8M9N2nTRPWgLHYBQ9hRKkaWULYI4eVDKEMcDoiI+\
      gIvhKA7cCuqjRX8OhEeGII4yyiybMmQIWCijbEpp6UzO7w9sbNrknraXkjT9vF+vvGjuGffkNEm/\
      3OR7jiKEECAiIiIip6Wz9wCIiIiIqHox4CMiIiJycgz4iIiIiJwcAz4iIiIiJ8eAj4gIQE5ODqZN\
@@ -16555,7 +16555,7 @@ the variations over the course of a year.
      yTHgIyIiInJy/w8fYlPTtWhdvQAAAABJRU5ErkJggg==\
      "
        frames[26] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACKwklEQVR4nO3dd3yT1f4H8E+SNl1070JpC0LZUyhFlrJBBHFdLkoLiOMHoiIK\
      XAfDURzgFtSrRa8DRRmKk1VmARllyBCw7DKldNCZnN8f2Ni0yTltQ0mafN6vV15tnjOek9OMb588\
      3+dohBACREREROS0tPYeABERERHVLgZ8RERERE6OAR8RERGRk2PAR0REROTkGPAREQHIy8vD9OnT\
@@ -17182,7 +17182,7 @@ the variations over the course of a year.
      PiIiIiInx4CPiIiIyMkx4CMiIiJycv8PjkSO+bmCdrwAAAAASUVORK5CYII=\
      "
        frames[27] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLZ0lEQVR4nO3dd3yT1f4H8E+SNuneLW2htIBQ9hRKkaVskCGuy0UpoDguiIp4\
      getgOIoDt4J6tejPgXJlCOJglVk2ZcgQsFBG2ZQOOpPz+wMbmzY5p20oSdPP+/XKC/Kc55zn5GR9\
      ++T5nqMRQggQERERkcvSOroDRERERFS9GPARERERuTgGfEREREQujgEfERERkYtjwEdEBCAnJwfT\
@@ -17812,7 +17812,7 @@ the variations over the course of a year.
      MeAjIiIicnEM+IiIiIhc3P8DWV7YARMtBAoAAAAASUVORK5CYII=\
      "
        frames[28] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLNElEQVR4nO3dd3xTVf8H8E+SNl10D9pCaQtC2VMoRZayQQRx8qAWUBwPQ0V8\
      gMfBcBT3QAX10aI/RRRlKOJgzwIyypAhYNlliJTS0pmc3x/Qa9Mm56QNJWn6eb9eebW5Z9yT04xv\
      b+73Hp0QQoCIiIiI3Jbe2QMgIiIioqrFgI+IiIjIzTHgIyIiInJzDPiIiIiI3BwDPiIiADk5OZgy\
@@ -18441,7 +18441,7 @@ the variations over the course of a year.
      4CMiIiJycwz4iIiIiNwcAz4iIiIiN/f/sDeyy8Y2hY4AAAAASUVORK5CYII=\
      "
        frames[29] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLbUlEQVR4nO3dd3yT1f4H8E+SNt170BZKWxDKnkIpspQNIohXvVyUAorjB6Ii\
      XsDFcBQHOBBBvVr0KqJcGYqTVWYBGUWQIWChjDKldNCZnN8f2Ni0yTlpQ0maft6vV15tnjOek9OM\
      b5883+dohBACREREROSytI4eABERERHVLAZ8RERERC6OAR8RERGRi2PAR0REROTiGPAREQHIy8vD\
@@ -19071,7 +19071,7 @@ the variations over the course of a year.
      PiIiIiIXx4CPiIiIyMUx4CMiIiJycf8PMNu8PMOy3FUAAAAASUVORK5CYII=\
      "
        frames[30] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLRElEQVR4nO3dd3yT1f4H8M+TtEkH3YO2UFpAKHsKpchSNoggTi5qQcVxwYV4\
      gesAXMWtFxXUq0V/V0RRAUUcrDILsgoiQ8Cyy6Z00Jmc3x/Y2LTJOWlDSZp+3q9XXm2eM56T04xv\
      nzzf52hCCAEiIiIi8lg6Vw+AiIiIiGoWAz4iIiIiD8eAj4iIiMjDMeAjIiIi8nAM+IiIAOTl5WHa\
@@ -19701,7 +19701,7 @@ the variations over the course of a year.
      QmCC\
      "
        frames[31] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLOklEQVR4nO3dd3hURdsG8PvsJptGeiEJhAQQQq9CCNKUDiKIr4UXJRSxfCAq\
      ooANsAULdgVr0NeCohQLFlqoAaSEIkXA0EMnpJC6O98fmDWb7M4k2YTdbO7fde2V7Jkzc2YnW56c\
      Pc+MJoQQICIiIiKXpXN0B4iIiIioejHgIyIiInJxDPiIiIiIXBwDPiIiIiIXx4CPiAhAdnY2ZsyY\
@@ -20330,7 +20330,7 @@ the variations over the course of a year.
      IiIiF8eAj4iIiMjFMeAjIiIicnEM+IiIiIhc3P8Dwp/enDIt8igAAAAASUVORK5CYII=\
      "
        frames[32] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLmklEQVR4nO3dd3yT1f4H8E+SNumge5eWFhDKnkIpsmQPkeHkopYhjguiIl7g\
      ijIcRVEcqKBeLfpTRFCG4mSVWTYFkSFg2WVTOuhMzu8PbGza5Jy2oaRNP+/XKy/Ic8Zzcpqk3z7J\
      9xyNEEKAiIiIiJyW1tEDICIiIqLKxYCPiIiIyMkx4CMiIiJycgz4iIiIiJwcAz4iIgBZWVmYNm0a\
@@ -20961,7 +20961,7 @@ the variations over the course of a year.
      iJwcAz4iIiIiJ/f/gQ48y3zMrWEAAAAASUVORK5CYII=\
      "
        frames[33] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLaUlEQVR4nO3dd3yT1f4H8E+SNt17F0oLCGVPoRRZsocM8Tq4KGWI4wdyFfEC\
      LoajOAA3qFeLXkWEK0NxllFmARllyBCw7DKldNCZnN8f2Ni0yTltQ0maft6vV15tnjOek9OMb588\
      3+dohBACREREROS0tPYeABERERFVLwZ8RERERE6OAR8RERGRk2PAR0REROTkGPAREQHIycnBjBkz\
@@ -21591,7 +21591,7 @@ the variations over the course of a year.
      iJwcAz4iIiIiJ8eAj4iIiMjJ/T8wj9ever0IsQAAAABJRU5ErkJggg==\
      "
        frames[34] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLAklEQVR4nO3dd3xTVf8H8E+SNumge9CWlhYQyp5CKbKUDSKIkwe1gOL4gQvx\
      AR4Hw1HcAxXUR4s+iijKcOBglVlQRhkyBCy7TCkddCbn9wf22rTJOW1DSZp+3q9XXm3uGffkZPTb\
      m/u9RyeEECAiIiIit6V39gCIiIiIqGYx4CMiIiJycwz4iIiIiNwcAz4iIiIiN8eAj4gIQG5uLqZN\
@@ -22219,7 +22219,7 @@ the variations over the course of a year.
      R0REROTmGPARERERuTkGfERERERujgEfERERkZv7f4k8pjoWQ45AAAAAAElFTkSuQmCC\
      "
        frames[35] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLNElEQVR4nO3dd3yT1f4H8E+SNumge9CWlhYQyp5CKbKUDSKIV71clDLE8QNR\
      ES/gYjiKAxyooF4tehVRrgxFHOxZQEYZMgQsu0wpHXQm5/cHNjZtck7aUJKmn/frlVeb5zznPCcn\
      o98+eb7naIQQAkRERETktrTO7gARERERVS0GfERERERujgEfERERkZtjwEdERETk5hjwEREByMnJ\
@@ -22848,7 +22848,7 @@ the variations over the course of a year.
      fERERERujgEfERERkZtjwEdERETk5v4fTGB+jTcNZ8IAAAAASUVORK5CYII=\
      "
        frames[36] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACL2ElEQVR4nO3dd3yT1f4H8E+SNuneLW1paQGh7CmUIkvZIIK4Lhe1DNHrBRcX\
      L3AdCI7iHqi4i/4UEVRAcbLKLCijIDIELLtsSgedyfn9gY1Nm5zT9qEkTT/v1yuvNs8Zz8nJ6LdP\
      nu9zdEIIASIiIiJyW3pnD4CIiIiIahcDPiIiIiI3x4CPiIiIyM0x4CMiIiJycwz4iIgA5OXlYcaM\
@@ -23480,7 +23480,7 @@ the variations over the course of a year.
      4CMiIiJycwz4iIiIiNzc/wMH6gtESagAfwAAAABJRU5ErkJggg==\
      "
        frames[37] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLwUlEQVR4nO3dd3hUxfoH8O/ZTTa9F5JASAAh9CqEIE16EUFsl4sSilh+ICri\
      BWyALdgLKvagVxH0SrErLdQAUkKRImDooUpIIXV3fn9g1myyO5NkSXaz+X6eZ59kz5yZMztb8ubs\
      eWc0IYQAEREREbksnaM7QERERETViwEfERERkYtjwEdERETk4hjwEREREbk4BnxERABycnIwa9Ys\
@@ -24112,7 +24112,7 @@ the variations over the course of a year.
      QA8AAAAASUVORK5CYII=\
      "
        frames[38] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLH0lEQVR4nO3dd3xTVf8H8M9N2qSD7kFbKC0glD2FUmQpG0QRJw9qAcXxMFRE\
      ARfDUdwDFdRHi/4UUZThwMGeZVOGDAHLLlNKB53J+f2BjU2bnNM2lKTp5/165QW5Z9xzT5P025v7\
      vUcTQggQERERkdvSOXsARERERFS1GPARERERuTkGfERERERujgEfERERkZtjwEdEBCA7OxtTpkxB\
@@ -24741,7 +24741,7 @@ the variations over the course of a year.
      3P8DJ8EwBkeu7lUAAAAASUVORK5CYII=\
      "
        frames[39] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLmElEQVR4nO3dd3yT1f4H8E+SNuneLW2htIBQ9hRKkaVsEEG8Di5KGeL4gaiI\
      Ai6GozjAgQrq1aJXEeXKUJzsWUBGGTIELLtMKR10Juf3BzY2bXJO21CSJp/365UX5DnjOTlJ02+f\
      5HuORgghQEREREQuS+voARARERFR9WLAR0REROTiGPARERERuTgGfEREREQujgEfERGAnJwcTJ06\
@@ -25372,7 +25372,7 @@ the variations over the course of a year.
      jgEfERERkYv7fzT1uVJPPXI/AAAAAElFTkSuQmCC\
      "
        frames[40] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLgklEQVR4nO3dd3xTVf8H8M9N2nTRPWgLHYBQ9hRKkaVsEEGcPKgFFMcDoqI+\
      wOMAXMWBG0F9FPTnQFEBQRzsWYZAGTIELLtsSgedyfn9gY1Nm5yTNi1J08/79cqrzT3jnpyMfntz\
      v/doQggBIiIiInJbOmcPgIiIiIiqFwM+IiIiIjfHgI+IiIjIzTHgIyIiInJzDPiIqNbbunUrxo0b\
@@ -26003,7 +26003,7 @@ the variations over the course of a year.
      SUVORK5CYII=\
      "
        frames[41] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLRUlEQVR4nO3dd3yT1f4H8E+SNt170JYuQCh7CqXIUsoWQZxclDLE8QNRES/g\
      YjiKA7eCerXoVUS5CghOVpllU4YMAcsum9JBZ3J+f2Bj0ybntA0lafp5v155tXnOeE5ORr998nyf\
      oxFCCBARERGR09LaewBEREREVLMY8BERERE5OQZ8RERERE6OAR8RERGRk2PAR0R13tatWzF+/Hi0\
@@ -26633,7 +26633,7 @@ the variations over the course of a year.
      rkJggg==\
      "
        frames[42] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACKd0lEQVR4nO3dd3yT1f4H8E+SNl1070JpAaHsKZQiS9kggrguF6UMcVyQq4gX\
      +DkAV3GA6yo4ixvlKiCIg1Vm2ZQhQ8CyyxAoHXQm5/cHNjZtck7bh5I0/bxfr7zaPGc8Jyej3z55\
      vs/RCSEEiIiIiMhl6R09ACIiIiKqXgz4iIiIiFwcAz4iIiIiF8eAj4iIiMjFMeAjolpv27ZtmDBh\
@@ -27259,7 +27259,7 @@ the variations over the course of a year.
      RETk4v4fJdQwEkx5LTkAAAAASUVORK5CYII=\
      "
        frames[43] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACKaElEQVR4nO3dd3yT1f4H8M+TtOmie9AWSgsIZU+hFFnKBhFE0ctFKag4LoiK\
      eoHrYDgKKm4E9WrRnwPlKiCIgz3LpgwZApZdhkApLZ3J+f2BjU2bnNM2LUmTz/v1yqvNc8Zzcvo0\
      /fbJ832OJoQQICIiIiKXpXP0AIiIiIioejHgIyIiInJxDPiIiIiIXBwDPiIiIiIXx4CPiNzetm3b\
@@ -27885,7 +27885,7 @@ the variations over the course of a year.
      AAAASUVORK5CYII=\
      "
        frames[44] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLB0lEQVR4nO3dd3yT1f4H8M+TtOmie9AWSgsIZU+hFFnKBhHEdbkoZYjjB3IV\
      8QLXAbiKA7eCerXodaCogOAsexVklSFDwLLLEOmkMzm/P7CxaZNz0oaSNP28X6+82jxnPCcno98+\
      eb7P0YQQAkRERETktnTOHgARERER1SwGfERERERujgEfERERkZtjwEdERETk5hjwEVGdt23bNkye\
@@ -28513,7 +28513,7 @@ the variations over the course of a year.
      RG6OAR8RERGRm2PAR0REROTmGPARERERuTkGfERERERu7v8Bbqk/QwM66cUAAAAASUVORK5CYII=\
      "
        frames[45] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACLDElEQVR4nO3dd3yT1f4H8E+SNumge9AWSgsIZW8oRZZStgiiqFyUMsSrF0RF\
      vcB1MBzFgVtBvVr050C4CgjiYM+yKUOGgGWXKaWDzuT8/sDGpk3OSRtK0vTzfr3yavOc8ZycPk2/\
      ffJ8n6MRQggQERERkdvSOnsARERERFS1GPARERERuTkGfERERERujgEfERERkZtjwEdENd727dsx\
@@ -29142,7 +29142,7 @@ the variations over the course of a year.
      rkJggg==\
      "
        frames[46] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACK/UlEQVR4nO3dd3RU1doG8GdmkkkjvZAEQgIIoXcIQZrSQQRR9HJRqlg+kKuI\
      F7gWiiVYwC6oV4NeC4oKCFZ6DZ1QpAgYeigCqaTO7O8PzDGTzOydZBJmMnl+a81K5uxy9uycTN6c\
      Oe/ZOiGEABERERG5LL2jB0BEREREVYsBHxEREZGLY8BHRERE5OIY8BERERG5OAZ8RFTj7dy5E5Mm\
@@ -29770,7 +29770,7 @@ the variations over the course of a year.
      4hjwEREREbk4BnxERERELo4BHxEREZGL+39NpLC4nl87HQAAAABJRU5ErkJggg==\
      "
        frames[47] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnwAAAHeCAYAAAAB0dYuAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
-     bGliIHZlcnNpb24zLjYuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/P9b71AAAACXBIWXMAAA9h\
+     bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9h\
      AAAPYQGoP6dpAACK5ElEQVR4nO3dd3yT1f4H8E+SNmlL96ItXYBQ9oZSZClliQii6OWiFFD0ekFU\
      1AtcB8NRHLgV1KtFfw4UFRDEwZ5lbxkCll02pYPO5Pz+wMamSc5pG0rS9PN+vfKCPGc8JydP02+f\
      PN/naIQQAkRERETktrTOHgARERERVS8GfERERERujgEfERERkZtjwEdERETk5hjwEVGtt2XLFowb\
@@ -30402,7 +30402,7 @@ the variations over the course of a year.
          /* set a timeout to make sure all the above elements are created before
             the object is initialized. */
          setTimeout(function() {
-             anim7c6a05f5fd56485b9e11b67c24256a3a = new Animation(frames, img_id, slider_id, 25.0,
+             anim159f432f9478414cba895aaf153c6be0 = new Animation(frames, img_id, slider_id, 25.0,
                                       loop_select_id);
          }, 0);
        })()
@@ -30413,7 +30413,8 @@ the variations over the course of a year.
 
 
 
-.. code-block:: default
+.. code-block:: Python
+
 
     import matplotlib
     import matplotlib.dates as mdates
@@ -30493,7 +30494,7 @@ the variations over the course of a year.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 1 minutes  3.567 seconds)
+   **Total running time of the script:** (0 minutes 37.348 seconds)
 
 
 .. _sphx_glr_download_examples_plot_surface_animation.py:
@@ -30502,14 +30503,13 @@ the variations over the course of a year.
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: plot_surface_animation.ipynb <plot_surface_animation.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: plot_surface_animation.py <plot_surface_animation.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: plot_surface_animation.ipynb <plot_surface_animation.ipynb>`
 
 
 .. only:: html

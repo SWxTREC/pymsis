@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_plot_altitude_profiles.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_plot_altitude_profiles.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -26,7 +26,7 @@ altitude variations at a single location. Additionally,
 we show the difference between densities at noon (solid)
 and midnight (dashed).
 
-.. GENERATED FROM PYTHON SOURCE LINES 11-68
+.. GENERATED FROM PYTHON SOURCE LINES 11-69
 
 
 
@@ -39,7 +39,8 @@ and midnight (dashed).
 
 
 
-.. code-block:: default
+.. code-block:: Python
+
 
     import matplotlib.pyplot as plt
     import numpy as np
@@ -102,7 +103,7 @@ and midnight (dashed).
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.313 seconds)
+   **Total running time of the script:** (0 minutes 0.205 seconds)
 
 
 .. _sphx_glr_download_examples_plot_altitude_profiles.py:
@@ -111,14 +112,13 @@ and midnight (dashed).
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: plot_altitude_profiles.ipynb <plot_altitude_profiles.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: plot_altitude_profiles.py <plot_altitude_profiles.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: plot_altitude_profiles.ipynb <plot_altitude_profiles.ipynb>`
 
 
 .. only:: html

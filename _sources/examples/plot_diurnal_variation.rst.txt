@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_plot_diurnal_variation.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_plot_diurnal_variation.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -24,7 +24,7 @@ Diurnal variation
 This example demonstrates how to calculate the
 diurnal variation at a single location.
 
-.. GENERATED FROM PYTHON SOURCE LINES 9-69
+.. GENERATED FROM PYTHON SOURCE LINES 9-70
 
 
 
@@ -37,7 +37,8 @@ diurnal variation at a single location.
 
 
 
-.. code-block:: default
+.. code-block:: Python
+
 
     import matplotlib.dates as mdates
     import matplotlib.pyplot as plt
@@ -103,7 +104,7 @@ diurnal variation at a single location.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.228 seconds)
+   **Total running time of the script:** (0 minutes 0.157 seconds)
 
 
 .. _sphx_glr_download_examples_plot_diurnal_variation.py:
@@ -112,14 +113,13 @@ diurnal variation at a single location.
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: plot_diurnal_variation.ipynb <plot_diurnal_variation.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: plot_diurnal_variation.py <plot_diurnal_variation.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: plot_diurnal_variation.ipynb <plot_diurnal_variation.ipynb>`
 
 
 .. only:: html

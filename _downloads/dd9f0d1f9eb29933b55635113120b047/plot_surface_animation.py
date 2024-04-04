@@ -6,6 +6,7 @@ This example demonstrates how to animate the surface plot. Showing
 the variations over the course of a year.
 
 """
+
 import matplotlib
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt

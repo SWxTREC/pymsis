@@ -21,7 +21,7 @@ This is a collection of demos and examples of what can be done with pymsis.
 .. only:: html
 
   .. image:: /examples/images/thumb/sphx_glr_plot_altitude_profiles_thumb.png
-    :alt: Altitude profiles
+    :alt:
 
   :ref:`sphx_glr_examples_plot_altitude_profiles.py`
 
@@ -38,7 +38,7 @@ This is a collection of demos and examples of what can be done with pymsis.
 .. only:: html
 
   .. image:: /examples/images/thumb/sphx_glr_plot_annual_variation_thumb.png
-    :alt: Annual variation
+    :alt:
 
   :ref:`sphx_glr_examples_plot_annual_variation.py`
 
@@ -55,7 +55,7 @@ This is a collection of demos and examples of what can be done with pymsis.
 .. only:: html
 
   .. image:: /examples/images/thumb/sphx_glr_plot_diurnal_variation_thumb.png
-    :alt: Diurnal variation
+    :alt:
 
   :ref:`sphx_glr_examples_plot_diurnal_variation.py`
 
@@ -72,7 +72,7 @@ This is a collection of demos and examples of what can be done with pymsis.
 .. only:: html
 
   .. image:: /examples/images/thumb/sphx_glr_plot_surface_animation_thumb.gif
-    :alt: Surface animation
+    :alt:
 
   :ref:`sphx_glr_examples_plot_surface_animation.py`
 
@@ -89,7 +89,7 @@ This is a collection of demos and examples of what can be done with pymsis.
 .. only:: html
 
   .. image:: /examples/images/thumb/sphx_glr_plot_surface_thumb.png
-    :alt: Surface plot
+    :alt:
 
   :ref:`sphx_glr_examples_plot_surface.py`
 
@@ -106,7 +106,7 @@ This is a collection of demos and examples of what can be done with pymsis.
 .. only:: html
 
   .. image:: /examples/images/thumb/sphx_glr_plot_version_diff_altitude_thumb.png
-    :alt: Version Differences (Altitude)
+    :alt:
 
   :ref:`sphx_glr_examples_plot_version_diff_altitude.py`
 
@@ -123,7 +123,7 @@ This is a collection of demos and examples of what can be done with pymsis.
 .. only:: html
 
   .. image:: /examples/images/thumb/sphx_glr_plot_version_diff_surface_thumb.png
-    :alt: Version Differences (Surface)
+    :alt:
 
   :ref:`sphx_glr_examples_plot_version_diff_surface.py`
 

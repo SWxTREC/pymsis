@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_plot_version_diff_surface.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_plot_version_diff_surface.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -25,7 +25,7 @@ This example demonstrates how to calculate the
 percent change of all variables on a surface between
 MSIS version 00 and 2.
 
-.. GENERATED FROM PYTHON SOURCE LINES 10-61
+.. GENERATED FROM PYTHON SOURCE LINES 10-62
 
 
 
@@ -35,10 +35,22 @@ MSIS version 00 and 2.
    :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    /home/runner/work/pymsis/pymsis/examples/plot_version_diff_surface.py:52: MatplotlibDeprecationWarning: The get_cmap function was deprecated in Matplotlib 3.7 and will be removed two minor releases later. Use ``matplotlib.colormaps[name]`` or ``matplotlib.colormaps.get_cmap(obj)`` instead.
+      cmap = mpl.cm.get_cmap("RdBu_r")
 
 
 
-.. code-block:: default
+
+
+
+|
+
+.. code-block:: Python
+
 
     import matplotlib as mpl
     import matplotlib.pyplot as plt
@@ -95,7 +107,7 @@ MSIS version 00 and 2.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.521 seconds)
+   **Total running time of the script:** (0 minutes 0.877 seconds)
 
 
 .. _sphx_glr_download_examples_plot_version_diff_surface.py:
@@ -104,14 +116,13 @@ MSIS version 00 and 2.
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: plot_version_diff_surface.ipynb <plot_version_diff_surface.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: plot_version_diff_surface.py <plot_version_diff_surface.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: plot_version_diff_surface.ipynb <plot_version_diff_surface.ipynb>`
 
 
 .. only:: html
