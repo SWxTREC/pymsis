@@ -73,9 +73,9 @@ ax_mesh.set_ylabel("Latitude")
 def update_surface(t):
     date_string = dates[t].astype("O").strftime("%H:%M")
     title.set_text(f"{date_string}")
-    time_line.set_xdata(dates[t])
+    time_line.set_xdata([dates[t]])
     mesh.set_array(output[t, :, :, i].T)
-    sun.set_data(sun_loc[t], 0)
+    sun.set_data([sun_loc[t]], [0])
 
 
 ani = FuncAnimation(fig, update_surface, frames=range(ndates), interval=25)

@@ -49,7 +49,7 @@ variables = [
 fig, axarr = plt.subplots(nrows=3, ncols=3, constrained_layout=True, figsize=(8, 6))
 xx, yy = np.meshgrid(lons, lats)
 norm = mpl.colors.Normalize(-50, 50)
-cmap = mpl.cm.get_cmap("RdBu_r")
+cmap = mpl.colormaps["RdBu_r"]
 for i, ax in enumerate(axarr.flatten()):
     mesh = ax.pcolormesh(xx, yy, diff[:, :, i].T, shading="auto", norm=norm, cmap=cmap)
     ax.set_title(f"{variables[i]}")
