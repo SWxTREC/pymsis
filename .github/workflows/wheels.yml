@@ -1,11 +1,9 @@
 name: Build wheels
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.number }}-${{ github.event.ref }}
-  cancel-in-progress: true
 
 # Only build on tagged releases
 on:
   release:
+    types: [published]
   # Also allow running this action on PRs if requested by applying the
   # "Run cibuildwheel" label.
   pull_request:
@@ -14,6 +12,10 @@ on:
       - synchronize
       - reopened
       - labeled
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number }}-${{ github.event_name }}-${{ github.event.ref }}
+  cancel-in-progress: true
 
 jobs:
   build_wheels:
