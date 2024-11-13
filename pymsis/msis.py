@@ -1,7 +1,6 @@
 """Interface for running and creating input for the MSIS models."""
 
 from pathlib import Path
-from typing import Optional, Union
 
 import numpy as np
 import numpy.typing as npt
@@ -15,12 +14,12 @@ def run(
     lons: npt.ArrayLike,
     lats: npt.ArrayLike,
     alts: npt.ArrayLike,
-    f107s: Optional[npt.ArrayLike] = None,
-    f107as: Optional[npt.ArrayLike] = None,
-    aps: Optional[npt.ArrayLike] = None,
+    f107s: npt.ArrayLike | None = None,
+    f107as: npt.ArrayLike | None = None,
+    aps: npt.ArrayLike | None = None,
     *,
-    options: Optional[list[float]] = None,
-    version: Union[float, str] = 2.1,
+    options: list[float] | None = None,
+    version: float | str = 2.1,
     **kwargs: dict,
 ) -> npt.NDArray:
     """
@@ -69,7 +68,7 @@ def run(
     -------
     ndarray (ndates, nlons, nlats, nalts, 11) or (ndates, 11)
         | The data calculated at each grid point:
-        | [Total mass density (kg/m3)
+        | [Total mass density (kg/m3),
         | N2 # density (m-3),
         | O2 # density (m-3),
         | O # density (m-3),
@@ -266,9 +265,9 @@ def create_input(
     lons: npt.ArrayLike,
     lats: npt.ArrayLike,
     alts: npt.ArrayLike,
-    f107s: Optional[npt.ArrayLike] = None,
-    f107as: Optional[npt.ArrayLike] = None,
-    aps: Optional[npt.ArrayLike] = None,
+    f107s: npt.ArrayLike | None = None,
+    f107as: npt.ArrayLike | None = None,
+    aps: npt.ArrayLike | None = None,
 ) -> tuple[tuple, npt.NDArray]:
     """
     Combine all input values into a single flattened array.

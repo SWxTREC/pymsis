@@ -4,7 +4,6 @@ import urllib.request
 import warnings
 from io import BytesIO
 from pathlib import Path
-from typing import Optional
 
 import numpy as np
 import numpy.typing as npt
@@ -15,7 +14,7 @@ import pymsis
 _DATA_FNAME: str = "SW-All.csv"
 _F107_AP_URL: str = f"https://celestrak.org/SpaceData/{_DATA_FNAME}"
 _F107_AP_PATH: Path = Path(pymsis.__file__).parent / _DATA_FNAME
-_DATA: Optional[dict[str, npt.NDArray]] = None
+_DATA: dict[str, npt.NDArray] | None = None
 
 
 def download_f107_ap() -> None:

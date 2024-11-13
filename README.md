@@ -13,10 +13,10 @@ models (MSISE-00, MSIS2.0, MSIS2.1).
 
 ## Quickstart
 
-[Web viewer](https://swx-trec.com/msis): An interactive website using pymsis through cloud-based serverless functions.
-[Project homepage](https://swxtrec.github.io/pymsis/): Location for all documentation.
-[API Reference](https://swxtrec.github.io/pymsis/reference/index.html): Details about the various options and configurations available in the functions.
-[Examples](https://swxtrec.github.io/pymsis/examples/index.html): Demo for how to access and plot the data.
+- [Documentation](https://swxtrec.github.io/pymsis/)
+- [API Reference](https://swxtrec.github.io/pymsis/reference/index.html): Details about the various options and configurations available in the functions.
+- [Examples](https://swxtrec.github.io/pymsis/examples/index.html): Demo for how to access and plot the data.
+- [Web viewer](https://swx-trec.com/msis): An interactive website using pymsis through cloud-based serverless functions.
 
 **A few short lines of code to get started quickly with pymsis.**
 

@@ -2,12 +2,12 @@
 build-backend = "mesonpy"
 requires = [
     "meson-python>=0.10.0",
-    "numpy>=2.0.0rc1",
+    "numpy>=2",
 ]
 
 [project]
 name = "pymsis"
-version = "0.9.0"
+version = "0.10.0"
 description = "A Python wrapper around the NRLMSIS model."
 readme = "README.md"
 license = {file = "LICENSE"}
@@ -22,6 +22,7 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Software Development",
     "Topic :: Scientific/Engineering",
     "Operating System :: Microsoft :: Windows",
@@ -39,7 +40,7 @@ tests = [
 ]
 docs = [
     "matplotlib",
-    "sphinx<6",
+    "sphinx",
     "sphinx_gallery",
     "pydata-sphinx-theme",
 ]
@@ -64,11 +65,14 @@ addopts = [
 ]
 
 [tool.cibuildwheel]
+build = "cp310-* cp311-* cp312-* cp313-*"
+# skip 32 bit windows and linux builds for lack of numpy wheels
+skip = "*-win32 *_i686"
 test-requires = "pytest"
 test-command = "pytest --pyargs pymsis"
 
 [tool.ruff]
-target-version = "py39"
+target-version = "py310"
 lint.select = ["B", "D", "E", "F", "I", "N", "S", "W", "PL", "PT", "UP", "RUF", "ANN"]
 lint.ignore = ["B028", "D203", "D212", "PLR0913", "S310"]
 
