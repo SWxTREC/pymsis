@@ -8,6 +8,7 @@ https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 # -- Path setup --------------------------------------------------------------
 
+import importlib.metadata
 import sys
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -15,10 +16,6 @@ import sys
 # documentation root, use resolve() to make it absolute, like shown here.
 #
 from pathlib import Path
-
-from sphinx_gallery.sorting import ExampleTitleSortKey
-
-import pymsis
 
 
 sys.path.insert(0, Path("../../pymsis").resolve())
@@ -30,7 +27,8 @@ copyright = "2020, Regents of the University of Colorado"
 author = "Greg Lucas"
 
 # The full version, including alpha/beta/rc tags
-release = pymsis.__version__
+version = importlib.metadata.version("pymsis")
+release = version
 
 
 # -- General configuration ---------------------------------------------------
@@ -67,6 +65,7 @@ html_logo = "_static/pymsis-logo.png"
 
 html_theme_options = {
     "github_url": "https://github.com/SWxTREC/pymsis",
+    "navbar_start": ["navbar-logo", "version"],
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -83,5 +82,4 @@ sphinx_gallery_conf = {
     "examples_dirs": "../../examples",  # path to example scripts
     "gallery_dirs": "examples",  # path to where to save generated output
     "matplotlib_animations": True,
-    "within_subsection_order": ExampleTitleSortKey,
 }

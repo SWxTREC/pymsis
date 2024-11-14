@@ -15,6 +15,7 @@ SW-All.csv
 *.tar.gz
 docs/source/examples
 docs/source/reference/generated
+docs/source/sg_execution_times.rst
 junit/
 
 # Meson build files

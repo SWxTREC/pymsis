@@ -1,6 +1,6 @@
 
-Pymsis Documentation
-====================
+Pymsis (|version|)
+==================
 
 This is a lightweight Python wrapper around the MSIS00 and MSIS2 Fortran source code.
 The `MSIS model <https://www.nrl.navy.mil/Our-Work/Areas-of-Research/Space-Science/>`_ is

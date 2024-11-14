@@ -1,3 +1,6 @@
 """Python interface to the MSIS codes."""
 
-__version__ = "0.10.0"
+import importlib.metadata
+
+
+__version__ = importlib.metadata.version("pymsis")
