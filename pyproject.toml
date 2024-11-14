@@ -1,13 +1,14 @@
 [build-system]
 build-backend = "mesonpy"
 requires = [
-    "meson-python>=0.10.0",
+    "meson-python>=0.13.1",
     "numpy>=2",
+    "setuptools_scm>=7",
 ]
 
 [project]
 name = "pymsis"
-version = "0.10.0"
+dynamic = ["version"]
 description = "A Python wrapper around the NRLMSIS model."
 readme = "README.md"
 license = {file = "LICENSE"}
@@ -54,6 +55,12 @@ dev = [
 [project.urls]
 homepage = "https://swxtrec.github.io/pymsis/"
 repository = "https://github.com/swxtrec/pymsis"
+
+[tool.setuptools_scm]
+version_scheme = "release-branch-semver"
+local_scheme = "node-and-date"
+parentdir_prefix_version = "pymsis-"
+fallback_version = "0.0+UNKNOWN"
 
 [tool.pytest.ini_options]
 junit_family = "xunit2"

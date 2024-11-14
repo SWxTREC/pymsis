@@ -2,7 +2,7 @@ project(
   'pymsis',
   'c',
   # Note that the git commit hash cannot be added dynamically here
-  version: '0.10.0',
+  version: run_command(find_program('python3'), '-m', 'setuptools_scm', check: true).stdout().strip(),
   license: 'MIT',
   meson_version: '>=1.2.99',
   default_options: [
