@@ -41,9 +41,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Used to host cibuildwheel
-      - uses: actions/setup-python@v3
-
       - name: Download source files
         run: |
           python .github/workflows/download_mirror.py
@@ -78,12 +75,13 @@ jobs:
           echo "PYTHONUTF8=1" >> $GITHUB_ENV
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.17.0
+        uses: pypa/cibuildwheel@v2.21.3
         env:
-          CIBW_BUILD: "cp310-* cp311-* cp312-*"
-          # skip 32 bit windows and linux builds because numpy
-          # does not provide wheels for these platforms
-          CIBW_SKIP: "*-win32 *_i686"
+          # The brew built gfortran linked libraries have minimum macOS versions
+          # of the macOS version they were built on. We would need to compile
+          # from source rather than use setup-fortran if we want to support
+          # lower macOS versions.
+          MACOSX_DEPLOYMENT_TARGET: "${{ matrix.os == 'macos-13' && '13.0' || '14.0' }}"
 
       - uses: actions/upload-artifact@v4
         with:

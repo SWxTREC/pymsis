@@ -76,6 +76,7 @@ html_static_path = ["_static"]
 
 # Autosummary
 autosummary_generate = True
+autodoc_typehints = "none"
 
 # Sphinx gallery
 sphinx_gallery_conf = {
