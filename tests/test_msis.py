@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 import numpy as np
 import pytest
 from numpy.testing import assert_allclose, assert_array_equal
@@ -37,6 +39,26 @@ def expected_output():
             3.302753e-04,
             2.204773e12,
             9.846238e02,
+        ],
+        dtype=np.float32,
+    )
+
+
+@pytest.fixture
+def expected_output_with_options():
+    return np.array(
+        [
+            2.427699e-10,
+            2.849738e15,
+            1.364307e14,
+            3.836351e15,
+            9.207778e12,
+            1.490457e11,
+            2.554763e12,
+            3.459567e13,
+            8.023306e-04,
+            1.326593e12,
+            9.277623e02,
         ],
         dtype=np.float32,
     )
@@ -182,10 +204,13 @@ def test_create_input_multi_lon_lat(input_data, expected_input):
     assert_array_equal(data, [expected_input] * 5 * 5)
 
 
-def test_run_options(input_data):
+def test_run_options(input_data, expected_output):
     # Default options is all 1's, so make sure they are equivalent
-    assert_array_equal(
-        msis.run(*input_data, options=None), msis.run(*input_data, options=[1] * 25)
+    assert_allclose(
+        np.squeeze(msis.run(*input_data, options=None)), expected_output, rtol=1e-5
+    )
+    assert_allclose(
+        np.squeeze(msis.run(*input_data, options=[1] * 25)), expected_output, rtol=1e-5
     )
 
     with pytest.raises(ValueError, match="options needs to be a list"):
@@ -395,3 +420,48 @@ def test_keyword_argument_call(input_data, version, func):
         # NO missing from versions before 2.1
         direct_output[:, -2] = np.nan
     assert_array_equal(run_output, direct_output)
+
+
+def test_changing_options(input_data, expected_output, expected_output_with_options):
+    # Calling the function again while just changing options should
+    # also update the output data. There is global caching in MSIS,
+    # so we need to make sure that we are actually changing the model
+    # when the options change.
+    assert_allclose(
+        np.squeeze(msis.run(*input_data, options=[1] * 25)), expected_output, rtol=1e-5
+    )
+    assert_allclose(
+        np.squeeze(msis.run(*input_data, options=[0] * 25)),
+        expected_output_with_options,
+        rtol=1e-5,
+    )
+
+
+def test_options_calls(input_data):
+    # Check that we don't call the initialization function unless
+    # our options have changed between calls.
+    # Reset the cache
+    for version in msis._previous_options:
+        msis._previous_options[version] = None
+    with patch("pymsis.msis21f.pyinitswitch") as mock_init:
+        msis.run(*input_data, options=[0] * 25)
+        mock_init.assert_called_once()
+        msis.run(*input_data, options=[0] * 25)
+        # Called again shouldn't call the initialization function
+        mock_init.assert_called_once()
+
+    # Our initialization function is different for MSIS00 and v2.0
+    # This should still be called and not already set because
+    # we've already run v2.1
+    with patch("pymsis.msis20f.pyinitswitch") as mock_init:
+        msis.run(*input_data, options=[0] * 25, version="2.0")
+        mock_init.assert_called_once()
+        msis.run(*input_data, options=[0] * 25, version="2.0")
+        # Called again shouldn't call the initialization function
+        mock_init.assert_called_once()
+    with patch("pymsis.msis00f.pytselec") as mock_init:
+        msis.run(*input_data, options=[0] * 25, version=0)
+        mock_init.assert_called_once()
+        msis.run(*input_data, options=[0] * 25, version=0)
+        # Called again shouldn't call the initialization function
+        mock_init.assert_called_once()

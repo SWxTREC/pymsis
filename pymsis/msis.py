@@ -9,6 +9,11 @@ from pymsis import msis00f, msis20f, msis21f  # type: ignore
 from pymsis.utils import get_f107_ap
 
 
+# Store the previous options to avoid reinitializing the model
+# each iteration unless necessary
+_previous_options: dict[str, list[float] | None] = {"0": None, "2.0": None, "2.1": None}
+
+
 def run(
     dates: npt.ArrayLike,
     lons: npt.ArrayLike,
@@ -135,7 +140,9 @@ def run(
     # convert to string version
     version = str(version)
     if version in {"0", "00"}:
-        msis00f.pytselec(options)
+        if _previous_options["0"] != options:
+            msis00f.pytselec(options)
+            _previous_options["0"] = options
         output = msis00f.pygtd7d(
             input_data[:, 0],
             input_data[:, 1],
@@ -154,10 +161,17 @@ def run(
 
         # Select the proper library. Default to version 2.1, unless explicitly
         # requested "2.0" via string
-        msis_lib = msis21f
         if version == "2.0":
             msis_lib = msis20f
-        msis_lib.pyinitswitch(options, parmpath=msis_path)
+        else:
+            version = "2.1"
+            msis_lib = msis21f
+
+        # Only reinitialize the model if the options have changed
+        if _previous_options[version] != options:
+            msis_lib.pyinitswitch(options, parmpath=msis_path)
+            _previous_options[version] = options
+
         output = msis_lib.pymsiscalc(
             input_data[:, 0],
             input_data[:, 1],

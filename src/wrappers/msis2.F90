@@ -1,13 +1,23 @@
 
 subroutine pyinitswitch(switch_legacy, parmpath)
+    use msis_calc, only: msiscalc
+    use msis_constants, only: rp
     use msis_init, only: msisinit
 
     implicit none
 
     real(4), intent(in), optional             :: switch_legacy(1:25)      !Legacy switch array
     character(len=*), intent(in), optional    :: parmpath                 !Path to parameter file
+    real(kind=rp)                             :: output = 0.
+    real(kind=rp)                             :: output_arr(1:11) = 0.
 
     call msisinit(switch_legacy=switch_legacy, parmpath=parmpath)
+
+    ! Artificially call msiscalc to reset the last variables as there is
+    ! a global cache on these and the parameters won't be updated if we
+    ! don't set them to something different.
+    ! See issue: gh-59
+    call msiscalc(0., 0., -999., -999., -1., 0., 0., (/1., 1., 1., 1., 1., 1., 1./), output, output_arr)
 
     return
 end subroutine pyinitswitch
