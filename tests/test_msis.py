@@ -204,6 +204,27 @@ def test_create_input_multi_lon_lat(input_data, expected_input):
     assert_array_equal(data, [expected_input] * 5 * 5)
 
 
+@pytest.mark.parametrize("version", ["0", "2.0", "2.1"])
+def test_create_input_lon_wrapping(input_data, expected_input, version):
+    date, lon, lat, alt, f107, f107a, ap = input_data
+    # Repeat 5 dates
+    lons = np.array([-90] * 5)
+    input_data = (date, lons, [lat] * 5, alt, f107, f107a, ap)
+    shape, data = msis.create_input(*input_data)
+    assert shape == (1, 5, 5, 1)
+    assert data.shape == (5 * 5, 14)
+    expected_input[2] = -90
+    assert_array_equal(data, [expected_input] * 5 * 5)
+    # Make sure that our input lons array wasn't transfomrmed inplace
+    assert_array_equal(lons, [-90] * 5)
+
+    # Test that -90 and 270 produce the same output
+    assert_array_equal(
+        msis.run(date, lons, [lat] * 5, alt, f107, f107a, ap, version=version),
+        msis.run(date, lons + 360, [lat] * 5, alt, f107, f107a, ap, version=version),
+    )
+
+
 def test_run_options(input_data, expected_output):
     # Default options is all 1's, so make sure they are equivalent
     assert_allclose(

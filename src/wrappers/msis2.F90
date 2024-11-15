@@ -43,8 +43,14 @@ subroutine pymsiscalc(day, utsec, lon, lat, z, sflux, sfluxavg, ap, output, n)
     real(kind=rp), intent(out) :: output(n, 1:11)
 
     integer :: i
+    real(kind=rp) :: lon_tmp
 
     do i=1, n
+        if (lon(i) < 0) then
+            lon_tmp = lon(i) + 360
+          else
+            lon_tmp = lon(i)
+          endif
         call msiscalc(day(i), utsec(i), z(i), lat(i), lon(i), sfluxavg(i), &
                     sflux(i), ap(i, :), output(i, 11), output(i, 1:10))
     enddo
