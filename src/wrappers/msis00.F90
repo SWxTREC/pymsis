@@ -25,11 +25,16 @@
       real, intent(out) :: output(n, 1:11)
 
       integer :: i
-      real :: t(2), d(9) ! Temporary to swap dimensions
+      real :: t(2), d(9), lon_tmp ! Temporary to swap dimensions
 
       do i=1, n
-        call gtd7d(10000 + FLOOR(day(i)), utsec(i), z(i), lat(i), lon(i), &
-                   utsec(i)/3600. + lon(i)/15., sfluxavg(i), &
+        if (lon(i) < 0) then
+          lon_tmp = lon(i) + 360
+        else
+          lon_tmp = lon(i)
+        endif
+        call gtd7d(10000 + FLOOR(day(i)), utsec(i), z(i), lat(i), lon_tmp, &
+                   utsec(i)/3600. + lon_tmp/15., sfluxavg(i), &
                    sflux(i), ap(i, :), 48, d, t)
         ! O, H, and N are set to zero below 72.5 km
         ! Change them to NaN instead

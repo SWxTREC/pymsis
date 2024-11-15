@@ -325,9 +325,6 @@ def create_input(
     #       regression tests indicate it should still be integer DOY
     # dyear += dseconds/86400
     lons = np.atleast_1d(lons)
-    # If any longitudes were input as negatives, try to change them to
-    # the (0, 360) range
-    lons[lons < 0] += 360
     lats = np.atleast_1d(lats)
     alts = np.atleast_1d(alts)
 
