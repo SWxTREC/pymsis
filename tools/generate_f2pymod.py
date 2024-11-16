@@ -28,6 +28,7 @@ def main():
                 args.infile,
                 "--build-dir",
                 outdir_abs,
+                "--freethreading-compatible",
             ],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
