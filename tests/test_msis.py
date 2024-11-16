@@ -1,3 +1,4 @@
+import concurrent.futures
 from unittest.mock import patch
 
 import numpy as np
@@ -486,3 +487,50 @@ def test_options_calls(input_data):
         msis.run(*input_data, options=[0] * 25, version=0)
         # Called again shouldn't call the initialization function
         mock_init.assert_called_once()
+
+
+def test_multithreaded(
+    input_data, expected_output, expected_output00, expected_output_with_options
+):
+    """
+    Multithreaded run submission
+    Make sure that we can run the function in a multithreaded environment
+    and that the output is still correct and our global Fortran code hasn't
+    been shared between threads incorrectly.
+    NOTE: This will cause segfaults without the locks in place within the
+          Python code.
+    """
+    # We need to make the list of items long enough to cause some computation
+    # within the Fortran code during each run() call.
+    date, lon, lat, alt, f107, f107a, ap = input_data
+    n = 2000
+    input_data = (
+        [date] * n,
+        [lon] * n,
+        [lat] * n,
+        [alt] * n,
+        [f107] * n,
+        [f107a] * n,
+        ap * n,
+    )
+    # Create a tuple of items (version, options, expected_output)
+    # 3 items cycled over 100 times
+    list_of_inputs = [
+        (0, None, np.tile(expected_output00, (n, 1))),
+        (2.1, None, np.tile(expected_output, (n, 1))),
+        (2.1, [0] * 25, np.tile(expected_output_with_options, (n, 1))),
+    ] * 100
+
+    def run_function(input_items):
+        version, options, expected = input_items
+        return np.squeeze(
+            msis.run(*input_data, version=version, options=options)
+        ), expected
+
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        # Start the load operations and mark each future with its URL
+        results = [executor.submit(run_function, x) for x in list_of_inputs]
+
+    for future in results:
+        result, expected_result = future.result()
+        assert_allclose(result, expected_result, rtol=1e-5)
