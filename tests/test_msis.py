@@ -462,8 +462,8 @@ def test_options_calls(input_data):
     # Check that we don't call the initialization function unless
     # our options have changed between calls.
     # Reset the cache
-    for version in msis._previous_options:
-        msis._previous_options[version] = None
+    for msis_lib in [msis00f, msis20f, msis21f]:
+        msis_lib._last_used_options = None
     with patch("pymsis.msis21f.pyinitswitch") as mock_init:
         msis.run(*input_data, options=[0] * 25)
         mock_init.assert_called_once()

@@ -11,7 +11,9 @@ from pymsis.utils import get_f107_ap
 
 # Store the previous options to avoid reinitializing the model
 # each iteration unless necessary
-_previous_options: dict[str, list[float] | None] = {"0": None, "2.0": None, "2.1": None}
+msis00f._last_used_options = None
+msis20f._last_used_options = None
+msis21f._last_used_options = None
 
 
 def run(
@@ -140,9 +142,9 @@ def run(
     # convert to string version
     version = str(version)
     if version in {"0", "00"}:
-        if _previous_options["0"] != options:
+        if msis00f._last_used_options != options:
             msis00f.pytselec(options)
-            _previous_options["0"] = options
+            msis00f._last_used_options = options
         output = msis00f.pygtd7d(
             input_data[:, 0],
             input_data[:, 1],
@@ -168,9 +170,9 @@ def run(
             msis_lib = msis21f
 
         # Only reinitialize the model if the options have changed
-        if _previous_options[version] != options:
+        if msis_lib._last_used_options != options:
             msis_lib.pyinitswitch(options, parmpath=msis_path)
-            _previous_options[version] = options
+            msis_lib._last_used_options = options
 
         output = msis_lib.pymsiscalc(
             input_data[:, 0],
