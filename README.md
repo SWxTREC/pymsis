@@ -8,8 +8,10 @@
 [![GitHubActions](https://github.com/SWxTREC/pymsis/actions/workflows/tests.yml/badge.svg)](https://github.com/SWxTREC/pymsis/actions?query=workflow%3Atests)
 [![codecov](https://codecov.io/gh/SWxTREC/pymsis/branch/main/graph/badge.svg?token=NSUGKPJ3F7)](https://codecov.io/gh/SWxTREC/pymsis)
 
-Pymsis is a minimal and fast Python wrapper of the NRLMSIS
-models (MSISE-00, MSIS2.0, MSIS2.1).
+Pymsis is a minimal and fast Python wrapper of the NRLMSIS models (MSISE-00, MSIS2.0, MSIS2.1).
+The [MSIS model](https://www.nrl.navy.mil/Our-Work/Areas-of-Research/Space-Science/) is
+developed by the Naval Research Laboratory. For quick access to the model data without any code,
+there is a web viewer that uses pymsis: <https://swx-trec.com/msis>
 
 ## Quickstart
 
@@ -41,9 +43,9 @@ plt.show()
 
 > **note**
 >
-> * The model will automatically download and access the F10.7 and ap data for you if you have an internet connection.
-> * The returned data structure has shape [ndates, nlons, nlats, nalts, 11], but for this example we only have one point with many dates [ndates, 1, 1, 1, 11].
-> * The 11 is for each of the species MSIS calculates for each input point. The first element is the Total Mass Density (kg/m3).
+> - The model will automatically download and access the F10.7 and ap data for you if you have an internet connection.
+> - The returned data structure has shape [ndates, nlons, nlats, nalts, 11], but for this example we only have one point with many dates [ndates, 1, 1, 1, 11].
+> -s The 11 is for each of the species MSIS calculates for each input point. The first element is the Total Mass Density (kg/m3).
 
 ## NRL Mass Spectrometer, Incoherent Scatter Radar Extended Model (MSIS)
 
@@ -52,7 +54,7 @@ model](https://www.nrl.navy.mil/Our-Work/Areas-of-Research/Space-Science/)
 is developed by the Naval Research Laboratory.
 
 Note that the MSIS2 code is not available for commercial use without
-contacting NRL. See the [MSIS2 license file](MSIS2_LICENSE) for explicit
+contacting NRL. See the [MSIS2 license file](https://github.com/SWxTREC/pymsis/blob/main/MSIS2_LICENSE)) for explicit
 details. We do not repackage the MSIS source code in this
 repository for that reason. However, we do provide utilities to easily
 download and extract the original source code. By using that code you
@@ -127,7 +129,7 @@ test dependencies.
 ```bash
 git clone https://github.com/SWxTREC/pymsis.git
 cd pymsis
-pip install .[tests]
+pip install .[test]
 ```
 
 ### Remote installation
@@ -136,7 +138,7 @@ The installation is dependent on access to the NRL source code. If the
 download fails, or you have no internet access you can manually install
 the Fortran source code as follows. A script to help with this or give
 ideas on how to achieve this remote installation are provided in the
-[tools directory](tools/download_source.py).
+[tools directory](https://github.com/SWxTREC/pymsis/blob/main/tools/download_source.py)).
 
 1. **Download the source code**
     The source code is hosted on NRL\'s website:

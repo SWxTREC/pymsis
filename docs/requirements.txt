@@ -1,5 +1,0 @@
-numpy
-matplotlib
-sphinx
-sphinx_gallery
-pydata-sphinx-theme

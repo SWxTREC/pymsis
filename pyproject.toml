@@ -35,18 +35,19 @@ requires-python = ">=3.10"
 dependencies = ["numpy>=1.23"]
 
 [project.optional-dependencies]
-tests = [
+test = [
     "pytest",
     "pytest-cov",
 ]
-docs = [
+doc = [
     "matplotlib",
+    "myst-parser",
     "sphinx",
     "sphinx_gallery",
     "pydata-sphinx-theme",
 ]
 dev = [
-    "pymsis[tests,docs]",
+    "pymsis[doc,test]",
     "mypy",
     "pre-commit",
     "ruff",

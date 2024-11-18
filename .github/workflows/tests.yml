@@ -67,7 +67,7 @@ jobs:
         # that includes https://github.com/mesonbuild/meson/pull/13851 is available
         python -m pip install git+https://github.com/mesonbuild/meson
         python -m pip install ninja meson-python setuptools_scm numpy
-        python -m pip install --no-build-isolation -v .[tests]
+        python -m pip install --no-build-isolation -v .[test]
 
     - name: Test with pytest
       run: |
