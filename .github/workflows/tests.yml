@@ -51,15 +51,6 @@ jobs:
         which gfortran
         gfortran --version
 
-    # On Windows, the compilers can cause issues when
-    # using higher optimization levels
-    - name: Add Windows environment settings
-      if: startsWith(matrix.os, 'windows')
-      run: |
-        echo "FFLAGS=-O1" >> $GITHUB_ENV
-        # Windows can't decode the README which has utf8 characters
-        echo "PYTHONUTF8=1" >> $GITHUB_ENV
-
     - name: Set up Python ${{ matrix.python-version }}
       uses: Quansight-Labs/setup-python@b9ab292c751a42bcd2bb465b7fa202ea2c3f5796  # v5.3.1
       with:
