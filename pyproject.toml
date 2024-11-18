@@ -72,9 +72,9 @@ addopts = [
 ]
 
 [tool.cibuildwheel]
-build = "cp310-* cp311-* cp312-* cp313-*"
+# skip Python <3.10
 # skip 32 bit windows and linux builds for lack of numpy wheels
-skip = "*-win32 *_i686"
+skip = "cp36* cp37* cp38* cp39* *-win32 *_i686"
 free-threaded-support = true
 test-requires = "pytest"
 test-command = "pytest --pyargs pymsis"
