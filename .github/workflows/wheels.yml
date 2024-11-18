@@ -67,15 +67,6 @@ jobs:
           which gfortran
           gfortran --version
 
-      # On Windows, the compilers can cause issues when
-      # using higher optimization levels
-      - name: Add Windows environment settings
-        if: runner.os == 'Windows'
-        run: |
-          echo "FFLAGS=-O1" >> $GITHUB_ENV
-          # Windows can't decode the README which has utf8 characters
-          echo "PYTHONUTF8=1" >> $GITHUB_ENV
-
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.21.3
         env:

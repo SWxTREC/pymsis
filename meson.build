@@ -31,6 +31,10 @@ if ff.has_argument('-Wno-conversion')
   add_project_arguments('-Wno-conversion', language: 'fortran')
 endif
 
+# Default to optimization level 1
+# Some CI jobs fail with higher levels of optimization, so restrict this by default.
+add_project_arguments('-O1', language: 'fortran')
+
 is_windows = host_machine.system() == 'windows'
 # Platform detection
 is_mingw = is_windows and cc.get_id() == 'gcc'
