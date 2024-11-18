@@ -3,6 +3,23 @@
 
 python module msis00f ! in 
     interface  ! in :pymsis
+        subroutine pyinitswitch(switch_legacy, parmpath) ! in :pymsis2:pymsis00.F90
+            real(kind=4), optional,dimension(25),intent(in) :: switch_legacy
+            character(len=*), intent(in), optional          :: parmpath
+        end subroutine pyinitswitch
+        subroutine pymsiscalc(day,utsec,lon,lat,z,sflux,sfluxavg,ap,output,n) ! in :pymsis:pymsis00.F90
+            real dimension(n),intent(in) :: day
+            real dimension(n),intent(in),depend(n) :: utsec
+            real dimension(n),intent(in),depend(n) :: lon
+            real dimension(n),intent(in),depend(n) :: lat
+            real dimension(n),intent(in),depend(n) :: z
+            real dimension(n),intent(in),depend(n) :: sflux
+            real dimension(n),intent(in),depend(n) :: sfluxavg
+            real dimension(n,7),intent(in),depend(n) :: ap
+            real dimension(n,11),intent(out),depend(n) :: output
+            integer, optional,intent(in),check(len(day)>=n),depend(day) :: n=len(day)
+        end subroutine pygtd7d
+        ! The following functions are deprecated in 0.10 and will be removed in the future
         subroutine pytselec(switch_legacy) ! in :pymsis2:pymsis00.F90
             real(kind=4), optional,dimension(25),intent(in) :: switch_legacy
         end subroutine pyinitswitch

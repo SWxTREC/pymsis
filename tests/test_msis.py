@@ -312,7 +312,7 @@ def test_run_poles(input_data):
 
 def test_run_versions(input_data):
     # Make sure we accept these version numbers and don't throw an error
-    for ver in [0, 2, "00", "2"]:
+    for ver in [0, 2, 2.0, 2.1, "00", "0", "2.0", "2.1", "2"]:
         msis.run(*input_data, version=ver)
     # Test for something outside of that list for an error to be thrown
     with pytest.raises(ValueError, match="The MSIS version selected"):
@@ -405,10 +405,10 @@ def test_bad_run_inputs(inputs):
 
 
 @pytest.mark.parametrize(
-    ("version", "func"),
-    [("0", msis00f.pygtd7d), ("2.0", msis20f.pymsiscalc), ("2.1", msis21f.pymsiscalc)],
+    ("version", "msis_lib"),
+    [("0", msis00f), ("2.0", msis20f), ("2.1", msis21f)],
 )
-def test_keyword_argument_call(input_data, version, func):
+def test_keyword_argument_call(input_data, version, msis_lib):
     # Make sure that the wrapper definition is correct for whether we
     # call it with or without keyword arguments
     date, lon, lat, alt, f107, f107a, ap = input_data
@@ -428,7 +428,7 @@ def test_keyword_argument_call(input_data, version, func):
         aps=ap,
         version=version,
     )
-    direct_output = func(
+    direct_output = msis_lib.pymsiscalc(
         day=np.array([dyear]),
         utsec=np.array([dseconds]),
         z=np.array([alt]),
@@ -459,32 +459,18 @@ def test_changing_options(input_data, expected_output, expected_output_with_opti
     )
 
 
-def test_options_calls(input_data):
+@pytest.mark.parametrize(
+    ("version", "msis_lib"), [("00", msis00f), ("2.0", msis20f), ("2.1", msis21f)]
+)
+def test_options_calls(input_data, version, msis_lib):
     # Check that we don't call the initialization function unless
     # our options have changed between calls.
     # Reset the cache
-    for msis_lib in [msis00f, msis20f, msis21f]:
-        msis_lib._last_used_options = None
-    with patch("pymsis.msis21f.pyinitswitch") as mock_init:
-        msis.run(*input_data, options=[0] * 25)
+    msis_lib._last_used_options = None
+    with patch(msis_lib.__name__ + ".pyinitswitch") as mock_init:
+        msis.run(*input_data, options=[0] * 25, version=version)
         mock_init.assert_called_once()
-        msis.run(*input_data, options=[0] * 25)
-        # Called again shouldn't call the initialization function
-        mock_init.assert_called_once()
-
-    # Our initialization function is different for MSIS00 and v2.0
-    # This should still be called and not already set because
-    # we've already run v2.1
-    with patch("pymsis.msis20f.pyinitswitch") as mock_init:
-        msis.run(*input_data, options=[0] * 25, version="2.0")
-        mock_init.assert_called_once()
-        msis.run(*input_data, options=[0] * 25, version="2.0")
-        # Called again shouldn't call the initialization function
-        mock_init.assert_called_once()
-    with patch("pymsis.msis00f.pytselec") as mock_init:
-        msis.run(*input_data, options=[0] * 25, version=0)
-        mock_init.assert_called_once()
-        msis.run(*input_data, options=[0] * 25, version=0)
+        msis.run(*input_data, options=[0] * 25, version=version)
         # Called again shouldn't call the initialization function
         mock_init.assert_called_once()
 
