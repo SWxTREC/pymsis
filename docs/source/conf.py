@@ -37,11 +37,12 @@ release = version
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    "matplotlib.sphinxext.plot_directive",
+    "myst_parser",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.githubpages",  # Helpful for publishing to gh-pages
     "sphinx.ext.napoleon",
-    "matplotlib.sphinxext.plot_directive",
     "sphinx_gallery.gen_gallery",
 ]
 
