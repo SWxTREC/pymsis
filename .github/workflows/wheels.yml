@@ -40,6 +40,8 @@ jobs:
         shell: bash
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Download source files
         run: |
@@ -82,6 +84,12 @@ jobs:
           # from source rather than use setup-fortran if we want to support
           # lower macOS versions.
           MACOSX_DEPLOYMENT_TARGET: "${{ matrix.os == 'macos-13' && '13.0' || '14.0' }}"
+          # TEMP don't use automated/isolated build environment, but manually
+          # install build dependencies so we can build with meson from source
+          CIBW_BUILD_FRONTEND: "pip; args: --no-build-isolation"
+          CIBW_BEFORE_BUILD:
+            python -m pip install git+https://github.com/mesonbuild/meson &&
+            python -m pip install ninja meson-python setuptools_scm numpy
 
       - uses: actions/upload-artifact@v4
         with:

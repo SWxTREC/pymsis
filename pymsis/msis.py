@@ -1,5 +1,6 @@
 """Interface for running and creating input for the MSIS models."""
 
+import threading
 from pathlib import Path
 
 import numpy as np
@@ -9,9 +10,13 @@ from pymsis import msis00f, msis20f, msis21f  # type: ignore
 from pymsis.utils import get_f107_ap
 
 
-# Store the previous options to avoid reinitializing the model
-# each iteration unless necessary
-_previous_options: dict[str, list[float] | None] = {"0": None, "2.0": None, "2.1": None}
+for lib in [msis00f, msis20f, msis21f]:
+    # Store the previous options to avoid reinitializing the model
+    # each iteration unless necessary
+    lib._last_used_options = None
+    # Anytime we call into the Fortran code, we need to lock
+    # to avoid threading issues
+    lib._lock = threading.Lock()
 
 
 def run(
@@ -140,19 +145,20 @@ def run(
     # convert to string version
     version = str(version)
     if version in {"0", "00"}:
-        if _previous_options["0"] != options:
-            msis00f.pytselec(options)
-            _previous_options["0"] = options
-        output = msis00f.pygtd7d(
-            input_data[:, 0],
-            input_data[:, 1],
-            input_data[:, 2],
-            input_data[:, 3],
-            input_data[:, 4],
-            input_data[:, 5],
-            input_data[:, 6],
-            input_data[:, 7:],
-        )
+        with msis00f._lock:
+            if msis00f._last_used_options != options:
+                msis00f.pytselec(options)
+                msis00f._last_used_options = options
+            output = msis00f.pygtd7d(
+                input_data[:, 0],
+                input_data[:, 1],
+                input_data[:, 2],
+                input_data[:, 3],
+                input_data[:, 4],
+                input_data[:, 5],
+                input_data[:, 6],
+                input_data[:, 7:],
+            )
 
     elif version.startswith("2"):
         # We need to point to the MSIS parameter file that was installed with
@@ -167,21 +173,22 @@ def run(
             version = "2.1"
             msis_lib = msis21f
 
-        # Only reinitialize the model if the options have changed
-        if _previous_options[version] != options:
-            msis_lib.pyinitswitch(options, parmpath=msis_path)
-            _previous_options[version] = options
+        with msis_lib._lock:
+            # Only reinitialize the model if the options have changed
+            if msis_lib._last_used_options != options:
+                msis_lib.pyinitswitch(options, parmpath=msis_path)
+                msis_lib._last_used_options = options
 
-        output = msis_lib.pymsiscalc(
-            input_data[:, 0],
-            input_data[:, 1],
-            input_data[:, 2],
-            input_data[:, 3],
-            input_data[:, 4],
-            input_data[:, 5],
-            input_data[:, 6],
-            input_data[:, 7:],
-        )
+            output = msis_lib.pymsiscalc(
+                input_data[:, 0],
+                input_data[:, 1],
+                input_data[:, 2],
+                input_data[:, 3],
+                input_data[:, 4],
+                input_data[:, 5],
+                input_data[:, 6],
+                input_data[:, 7:],
+            )
 
     else:
         raise ValueError(
