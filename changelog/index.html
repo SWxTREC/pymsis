@@ -1,0 +1,639 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Changelog &#8212; pymsis 0.10.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=82662543"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'changelog/index';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Development" href="../development/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.10.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pymsis-logo.png" class="logo__image only-light" alt="pymsis 0.10.0 documentation - Home"/>
+    <img src="../_static/pymsis-logo.png" class="logo__image only-dark pst-js-only" alt="pymsis 0.10.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+      <div class="navbar-item"><!-- This will display the version of the docs -->
+v0.10.0</div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../development/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Changelog
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/SWxTREC/pymsis" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../development/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Changelog
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/SWxTREC/pymsis" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Changelog</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">#</a></h1>
+<p>All notable changes to this project will be documented in this file.</p>
+<section id="v0-10-0-2024-11-19">
+<h2>[v0.10.0] 2024-11-19<a class="headerlink" href="#v0-10-0-2024-11-19" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>ADDED</strong> Top-level function exports to avoid submodule imports</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">pymsis.calculate()</span></code> is the primrary entrypoint to running the MSIS
+model and calculating the atmosphere at the requested data points.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pymsis.msis.run()</span></code> was not very descriptive and caused issues with IDL
+bridging into Python and wanting that name reserved. To avoid this, the
+function has been renamed <code class="docutils literal notranslate"><span class="pre">calculate</span></code> and is available as <code class="docutils literal notranslate"><span class="pre">pymsis.calculate()</span></code>
+now. The <code class="docutils literal notranslate"><span class="pre">pymsis.msis.run()</span></code> is still available as an alias for now, but
+may be removed in the future.</p></li>
+</ul>
+</li>
+<li><p><strong>ADDED</strong> Variable enumeration for easier indexing into output arrays.</p>
+<ul>
+<li><p>This can be used as <code class="docutils literal notranslate"><span class="pre">pymsis.Variable.O2</span></code> for getting the <code class="docutils literal notranslate"><span class="pre">O2</span></code> species index.
+For example, <code class="docutils literal notranslate"><span class="pre">output_array[...,</span> <span class="pre">pymsis.Variable.O2]</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>ADDED</strong> Python 3.13 and 3.13t support</p></li>
+<li><p><strong>ADDED</strong> Multithreaded support.</p>
+<ul>
+<li><p>The underlying MSIS libraries are not threadsafe due
+to the use of many global/save variables. There is a lock around the
+extension modules so that only one thread will be calling the routines
+at a time, so the Python library is safe to use in a multi-threaded context.</p></li>
+</ul>
+</li>
+<li><p><strong>MAINTENANCE</strong> Default <code class="docutils literal notranslate"><span class="pre">-O1</span></code> optimization level for all builds.</p>
+<ul>
+<li><p>Previously, this
+was only done on Windows machines. Users can change this by updating
+environment variables before building with <code class="docutils literal notranslate"><span class="pre">FFLAGS=-Ofast</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.</span></code>,
+but note that some machines produce invalid results when higher
+optimizations are used.</p></li>
+</ul>
+</li>
+<li><p><strong>PERFORMANCE</strong> Cache options state between subsequent runs.</p>
+<ul>
+<li><p>Avoid calling initialization switches unless they have changed between runs</p></li>
+</ul>
+</li>
+<li><p><strong>PERFORMANCE</strong> Speed up numpy function calls.</p>
+<ul>
+<li><p>Change some numpy broadcasting and comparisons to speed up the creation of
+input and output values.</p></li>
+</ul>
+</li>
+<li><p><strong>MAINTENANCE</strong> Add dynamic versioning to the project based on git tags and commits.</p>
+<ul>
+<li><p>This removes the need to manually bump the version numbers and metadata before
+releasing the project which led to some errors previously.</p></li>
+</ul>
+</li>
+<li><p><strong>DEPRECATED</strong> Calling <code class="docutils literal notranslate"><span class="pre">msis00f.pytselec()</span></code> and <code class="docutils literal notranslate"><span class="pre">msis00f.pygtd7d</span></code> functions.</p>
+<ul>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">msis00f.pyinitswitch</span></code> and <code class="docutils literal notranslate"><span class="pre">msis00f.pymsiscalc</span></code> instead.</p></li>
+<li><p>This helps with standardization across the extension modules. These extension
+should rarely be used by external people and <code class="docutils literal notranslate"><span class="pre">pymsis.calculate()</span></code> is a better entry
+to using the package.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="v0-9-0-2024-04-03">
+<h2>[v0.9.0] - 2024-04-03<a class="headerlink" href="#v0-9-0-2024-04-03" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>MAINTENANCE</strong> Add MacOS arm64 wheels (Apple Silicon).</p></li>
+<li><p><strong>FIX</strong> Obvious solar radio burst F10.7 data is automatically removed.</p>
+<ul>
+<li><p>This applies to the default data and a warning is issued when running over
+these time periods.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="v0-8-0-2023-10-03">
+<h2>[v0.8.0] - 2023-10-03<a class="headerlink" href="#v0-8-0-2023-10-03" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>MAINTENANCE</strong> Python 3.10+ required.</p></li>
+</ul>
+</section>
+<section id="v0-7-0-2023-01-29">
+<h2>[v0.7.0] - 2023-01-29<a class="headerlink" href="#v0-7-0-2023-01-29" title="Link to this heading">#</a></h2>
+<section id="maintenance">
+<h3>Maintenance<a class="headerlink" href="#maintenance" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>MAINTENANCE</strong> CelesTrak is now used as the data provider for the Ap and F10.7 values.</p>
+<ul>
+<li><p>This avoids data gaps and interpolation issues that were present in the source data.</p></li>
+</ul>
+</li>
+<li><p><strong>MAINTENANCE</strong> Cleanup type hints throughout the codebase.</p></li>
+<li><p><strong>MAINTENANCE</strong> Updated the wrappers argument order to be the same throughout.</p>
+<ul>
+<li><p>This helps when called with positional vs keyword arguments.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="v0-6-0-2022-11-14">
+<h2>[v0.6.0] - 2022-11-14<a class="headerlink" href="#v0-6-0-2022-11-14" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>ADDED</strong> Automatic download of F10.7 and ap data for users.</p>
+<ul>
+<li><p>This means that F10.7 and ap are optional inputs to the <code class="docutils literal notranslate"><span class="pre">pymsis.calculate()</span></code>
+function during historical periods and the routines will automatically
+fetch the proper input data.</p></li>
+</ul>
+</li>
+<li><p><strong>MAINTENANCE</strong> We now use meson as the build system to compile the extension modules.</p></li>
+</ul>
+</section>
+<section id="v0-5-0-2022-08-18">
+<h2>[v0.5.0] - 2022-08-18<a class="headerlink" href="#v0-5-0-2022-08-18" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>ADDED</strong> MSIS2.1, a new version of MSIS.</p>
+<ul>
+<li><p>This is the first version that contains NO.</p></li>
+<li><p>This is the new default used in <code class="docutils literal notranslate"><span class="pre">pymsis.calculate()</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>MAINTENANCE</strong> Added more wheels to the release and CI systems for testing.</p></li>
+</ul>
+</section>
+<section id="v0-4-0-2022-02-26">
+<h2>[v0.4.0] - 2022-02-26<a class="headerlink" href="#v0-4-0-2022-02-26" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>ADDED</strong> Created a DOI for the project: <a class="reference external" href="https://doi.org/10.5281/zenodo.5348502">https://doi.org/10.5281/zenodo.5348502</a>.</p></li>
+<li><p><strong>ADDED</strong> Handle flattened input arrays directly (satellite flythroughs).</p></li>
+</ul>
+</section>
+<section id="v0-3-0-2021-08-31">
+<h2>[v0.3.0] - 2021-08-31<a class="headerlink" href="#v0-3-0-2021-08-31" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>ADDED</strong> First release with wheels for all platforms.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../development/index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Development</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v0-10-0-2024-11-19">[v0.10.0] 2024-11-19</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v0-9-0-2024-04-03">[v0.9.0] - 2024-04-03</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v0-8-0-2023-10-03">[v0.8.0] - 2023-10-03</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v0-7-0-2023-01-29">[v0.7.0] - 2023-01-29</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maintenance">Maintenance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v0-6-0-2022-11-14">[v0.6.0] - 2022-11-14</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v0-5-0-2022-08-18">[v0.5.0] - 2022-08-18</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v0-4-0-2022-02-26">[v0.4.0] - 2022-02-26</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v0-3-0-2021-08-31">[v0.3.0] - 2021-08-31</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/changelog/index.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2020, Regents of the University of Colorado.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

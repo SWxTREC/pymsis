@@ -11,7 +11,7 @@ import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 import numpy as np
 
-from pymsis import msis
+import pymsis
 
 
 lon = 0
@@ -28,7 +28,7 @@ f107s = [f107] * ndates
 f107as = [f107a] * ndates
 aps = [[ap] * 7] * ndates
 
-output = msis.run(dates, lon, lat, alt, f107s, f107as, aps)
+output = pymsis.calculate(dates, lon, lat, alt, f107s, f107as, aps)
 #  output is now of the shape (ndates, 1, 1, 1, 11)
 # Get rid of the single dimensions
 output = np.squeeze(output)
@@ -36,26 +36,9 @@ output = np.squeeze(output)
 # Lets get the percent variation from the annual mean for each variable
 variation = 100 * (output / output.mean(axis=0) - 1)
 
-variables = [
-    "Total mass density",
-    "N2",
-    "O2",
-    "O",
-    "He",
-    "H",
-    "Ar",
-    "N",
-    "Anomalous O",
-    "NO",
-    "Temperature",
-]
-
 _, ax = plt.subplots()
-for i, label in enumerate(variables):
-    if label == "NO":
-        # There is currently no NO data
-        continue
-    ax.plot(dates, variation[:, i], label=label)
+for variable in pymsis.Variable:
+    ax.plot(dates, variation[:, variable], label=variable.name)
 
 ax.legend(
     loc="upper center", bbox_to_anchor=(0.5, 1.15), fancybox=True, shadow=True, ncol=5

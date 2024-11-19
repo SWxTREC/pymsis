@@ -13,27 +13,45 @@ This is a collection of demos and examples of what can be done with pymsis.
 
     <div class="sphx-glr-thumbnails">
 
+.. thumbnail-parent-div-open
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the altitude variations at a single location. Additi...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the quantities on a constant altitude plane.">
 
 .. only:: html
 
-  .. image:: /examples/images/thumb/sphx_glr_plot_altitude_profiles_thumb.png
+  .. image:: /examples/images/thumb/sphx_glr_plot_surface_thumb.png
     :alt:
 
-  :ref:`sphx_glr_examples_plot_altitude_profiles.py`
+  :ref:`sphx_glr_examples_plot_surface.py`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Altitude profiles</div>
+      <div class="sphx-glr-thumbnail-title">Surface plot</div>
     </div>
 
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the difference from the annual mean at a single loca...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the percent change of all variables on a surface between MSIS version 00 and 2.">
+
+.. only:: html
+
+  .. image:: /examples/images/thumb/sphx_glr_plot_version_diff_surface_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_plot_version_diff_surface.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Version Differences (Surface)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the difference from the annual mean at a single location.">
 
 .. only:: html
 
@@ -45,6 +63,23 @@ This is a collection of demos and examples of what can be done with pymsis.
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Annual variation</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the altitude variations at a single location. Additionally, we show the difference between densities at noon (solid) and midnight (dashed).">
+
+.. only:: html
+
+  .. image:: /examples/images/thumb/sphx_glr_plot_altitude_profiles_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_plot_altitude_profiles.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Altitude profiles</div>
     </div>
 
 
@@ -67,41 +102,7 @@ This is a collection of demos and examples of what can be done with pymsis.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to animate the surface plot. Showing the variations over the cour...">
-
-.. only:: html
-
-  .. image:: /examples/images/thumb/sphx_glr_plot_surface_animation_thumb.gif
-    :alt:
-
-  :ref:`sphx_glr_examples_plot_surface_animation.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Surface animation</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the quantities on a constant altitude plane.">
-
-.. only:: html
-
-  .. image:: /examples/images/thumb/sphx_glr_plot_surface_thumb.png
-    :alt:
-
-  :ref:`sphx_glr_examples_plot_surface.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Surface plot</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the percent change along an altitude profile between...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the percent change along an altitude profile between MSIS version 00 and 2. Additionally, we show the difference between densities at noon (solid) and midnight (dashed).">
 
 .. only:: html
 
@@ -118,20 +119,22 @@ This is a collection of demos and examples of what can be done with pymsis.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the percent change of all variables on a surface bet...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to animate the surface plot. Showing the variations over the course of a year.">
 
 .. only:: html
 
-  .. image:: /examples/images/thumb/sphx_glr_plot_version_diff_surface_thumb.png
+  .. image:: /examples/images/thumb/sphx_glr_plot_surface_animation_thumb.gif
     :alt:
 
-  :ref:`sphx_glr_examples_plot_version_diff_surface.py`
+  :ref:`sphx_glr_examples_plot_surface_animation.py`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Version Differences (Surface)</div>
+      <div class="sphx-glr-thumbnail-title">Surface animation</div>
     </div>
 
+
+.. thumbnail-parent-div-close
 
 .. raw:: html
 
@@ -141,13 +144,13 @@ This is a collection of demos and examples of what can be done with pymsis.
 .. toctree::
    :hidden:
 
-   /examples/plot_altitude_profiles
-   /examples/plot_annual_variation
-   /examples/plot_diurnal_variation
-   /examples/plot_surface_animation
    /examples/plot_surface
-   /examples/plot_version_diff_altitude
    /examples/plot_version_diff_surface
+   /examples/plot_annual_variation
+   /examples/plot_altitude_profiles
+   /examples/plot_diurnal_variation
+   /examples/plot_version_diff_altitude
+   /examples/plot_surface_animation
 
 
 .. only:: html

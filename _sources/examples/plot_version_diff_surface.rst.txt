@@ -11,7 +11,7 @@
         :class: sphx-glr-download-link-note
 
         :ref:`Go to the end <sphx_glr_download_examples_plot_version_diff_surface.py>`
-        to download the full example code
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -25,29 +25,18 @@ This example demonstrates how to calculate the
 percent change of all variables on a surface between
 MSIS version 00 and 2.
 
-.. GENERATED FROM PYTHON SOURCE LINES 10-62
+.. GENERATED FROM PYTHON SOURCE LINES 10-53
 
 
 
 .. image-sg:: /examples/images/sphx_glr_plot_version_diff_surface_001.png
-   :alt: Total mass density, N2, O2, O, He, H, Ar, N, Anomalous O
+   :alt: MASS_DENSITY, N2, O2, O, HE, H, AR, N, ANOMALOUS_O
    :srcset: /examples/images/sphx_glr_plot_version_diff_surface_001.png
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pymsis/pymsis/examples/plot_version_diff_surface.py:52: MatplotlibDeprecationWarning: The get_cmap function was deprecated in Matplotlib 3.7 and will be removed two minor releases later. Use ``matplotlib.colormaps[name]`` or ``matplotlib.colormaps.get_cmap(obj)`` instead.
-      cmap = mpl.cm.get_cmap("RdBu_r")
 
 
-
-
-
-
-|
 
 .. code-block:: Python
 
@@ -56,7 +45,7 @@ MSIS version 00 and 2.
     import matplotlib.pyplot as plt
     import numpy as np
 
-    from pymsis import msis
+    import pymsis
 
 
     lons = range(-180, 185, 5)
@@ -69,34 +58,25 @@ MSIS version 00 and 2.
     date = np.datetime64("2003-01-01T12:00")
     aps = [[ap] * 7]
 
-    output2 = msis.run(date, lons, lats, alt, f107, f107a, aps)
-    output0 = msis.run(date, lons, lats, alt, f107, f107a, aps, version=0)
+    output2 = pymsis.calculate(date, lons, lats, alt, f107, f107a, aps)
+    output0 = pymsis.calculate(date, lons, lats, alt, f107, f107a, aps, version=0)
     diff = (output2 - output0) / output0 * 100
     #  diff is now of the shape (1, nlons, nlats, 1, 11)
     # Get rid of the single dimensions
     diff = np.squeeze(diff)
 
-    variables = [
-        "Total mass density",
-        "N2",
-        "O2",
-        "O",
-        "He",
-        "H",
-        "Ar",
-        "N",
-        "Anomalous O",
-        "NO",
-        "Temperature",
-    ]
-
     fig, axarr = plt.subplots(nrows=3, ncols=3, constrained_layout=True, figsize=(8, 6))
     xx, yy = np.meshgrid(lons, lats)
     norm = mpl.colors.Normalize(-50, 50)
-    cmap = mpl.cm.get_cmap("RdBu_r")
-    for i, ax in enumerate(axarr.flatten()):
-        mesh = ax.pcolormesh(xx, yy, diff[:, :, i].T, shading="auto", norm=norm, cmap=cmap)
-        ax.set_title(f"{variables[i]}")
+    cmap = mpl.colormaps["RdBu_r"]
+    for i, variable in enumerate(pymsis.Variable):
+        if i > 8:
+            break
+        ax = axarr.flatten()[i]
+        mesh = ax.pcolormesh(
+            xx, yy, diff[:, :, variable].T, shading="auto", norm=norm, cmap=cmap
+        )
+        ax.set_title(f"{variable.name}")
 
     plt.colorbar(
         mesh, ax=axarr, label="Change from MSIS-00 to MSIS2 (%)", orientation="horizontal"
@@ -107,7 +87,7 @@ MSIS version 00 and 2.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.877 seconds)
+   **Total running time of the script:** (0 minutes 0.912 seconds)
 
 
 .. _sphx_glr_download_examples_plot_version_diff_surface.py:
@@ -123,6 +103,10 @@ MSIS version 00 and 2.
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: plot_version_diff_surface.py <plot_version_diff_surface.py>`
+
+    .. container:: sphx-glr-download sphx-glr-download-zip
+
+      :download:`Download zipped: plot_version_diff_surface.zip <plot_version_diff_surface.zip>`
 
 
 .. only:: html

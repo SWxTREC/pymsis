@@ -12,7 +12,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 
-from pymsis import msis
+import pymsis
 
 
 lons = range(-180, 185, 5)
@@ -25,34 +25,25 @@ ap = 7
 date = np.datetime64("2003-01-01T12:00")
 aps = [[ap] * 7]
 
-output2 = msis.run(date, lons, lats, alt, f107, f107a, aps)
-output0 = msis.run(date, lons, lats, alt, f107, f107a, aps, version=0)
+output2 = pymsis.calculate(date, lons, lats, alt, f107, f107a, aps)
+output0 = pymsis.calculate(date, lons, lats, alt, f107, f107a, aps, version=0)
 diff = (output2 - output0) / output0 * 100
 #  diff is now of the shape (1, nlons, nlats, 1, 11)
 # Get rid of the single dimensions
 diff = np.squeeze(diff)
 
-variables = [
-    "Total mass density",
-    "N2",
-    "O2",
-    "O",
-    "He",
-    "H",
-    "Ar",
-    "N",
-    "Anomalous O",
-    "NO",
-    "Temperature",
-]
-
 fig, axarr = plt.subplots(nrows=3, ncols=3, constrained_layout=True, figsize=(8, 6))
 xx, yy = np.meshgrid(lons, lats)
 norm = mpl.colors.Normalize(-50, 50)
-cmap = mpl.cm.get_cmap("RdBu_r")
-for i, ax in enumerate(axarr.flatten()):
-    mesh = ax.pcolormesh(xx, yy, diff[:, :, i].T, shading="auto", norm=norm, cmap=cmap)
-    ax.set_title(f"{variables[i]}")
+cmap = mpl.colormaps["RdBu_r"]
+for i, variable in enumerate(pymsis.Variable):
+    if i > 8:
+        break
+    ax = axarr.flatten()[i]
+    mesh = ax.pcolormesh(
+        xx, yy, diff[:, :, variable].T, shading="auto", norm=norm, cmap=cmap
+    )
+    ax.set_title(f"{variable.name}")
 
 plt.colorbar(
     mesh, ax=axarr, label="Change from MSIS-00 to MSIS2 (%)", orientation="horizontal"

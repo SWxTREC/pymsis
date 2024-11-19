@@ -11,7 +11,7 @@
         :class: sphx-glr-download-link-note
 
         :ref:`Go to the end <sphx_glr_download_examples_plot_diurnal_variation.py>`
-        to download the full example code
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -24,7 +24,7 @@ Diurnal variation
 This example demonstrates how to calculate the
 diurnal variation at a single location.
 
-.. GENERATED FROM PYTHON SOURCE LINES 9-70
+.. GENERATED FROM PYTHON SOURCE LINES 9-53
 
 
 
@@ -44,7 +44,7 @@ diurnal variation at a single location.
     import matplotlib.pyplot as plt
     import numpy as np
 
-    from pymsis import msis
+    import pymsis
 
 
     lon = 0
@@ -61,7 +61,7 @@ diurnal variation at a single location.
     f107as = [f107a] * ndates
     aps = [[ap] * 7] * ndates
 
-    output = msis.run(dates, lon, lat, alt, f107s, f107as, aps)
+    output = pymsis.calculate(dates, lon, lat, alt, f107s, f107as, aps)
     #  output is now of the shape (ndates, 1, 1, 1, 11)
     # Get rid of the single dimensions
     output = np.squeeze(output)
@@ -69,26 +69,9 @@ diurnal variation at a single location.
     # Lets get the percent variation from the annual mean for each variable
     variation = 100 * (output / output.mean(axis=0) - 1)
 
-    variables = [
-        "Total mass density",
-        "N2",
-        "O2",
-        "O",
-        "He",
-        "H",
-        "Ar",
-        "N",
-        "Anomalous O",
-        "NO",
-        "Temperature",
-    ]
-
     _, ax = plt.subplots()
-    for i, label in enumerate(variables):
-        if label == "NO":
-            # There is currently no NO data
-            continue
-        ax.plot(dates, variation[:, i], label=label)
+    for variable in pymsis.Variable:
+        ax.plot(dates, variation[:, variable], label=variable.name)
 
     ax.legend(
         loc="upper center", bbox_to_anchor=(0.5, 1.15), fancybox=True, shadow=True, ncol=5
@@ -104,7 +87,7 @@ diurnal variation at a single location.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.157 seconds)
+   **Total running time of the script:** (0 minutes 0.178 seconds)
 
 
 .. _sphx_glr_download_examples_plot_diurnal_variation.py:
@@ -120,6 +103,10 @@ diurnal variation at a single location.
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: plot_diurnal_variation.py <plot_diurnal_variation.py>`
+
+    .. container:: sphx-glr-download sphx-glr-download-zip
+
+      :download:`Download zipped: plot_diurnal_variation.zip <plot_diurnal_variation.zip>`
 
 
 .. only:: html

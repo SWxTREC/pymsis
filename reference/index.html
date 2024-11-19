@@ -1,59 +1,59 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>API reference &#8212; pymsis 0.8.0 documentation</title>
+    <title>API reference &#8212; pymsis 0.10.0 documentation</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-  
-  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/documentation_options.js?v=82662543"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/index';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="pymsis.msis.run" href="generated/pymsis.msis.run.html" />
-    <link rel="prev" title="Version Differences (Surface)" href="../examples/plot_version_diff_surface.html" />
+    <link rel="next" title="pymsis.calculate" href="generated/pymsis.calculate.html" />
+    <link rel="prev" title="Surface animation" href="../examples/plot_surface_animation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.10.0" />
   </head>
   
   
@@ -61,31 +61,16 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -93,7 +78,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search the docs ..."
          aria-label="Search the docs ..."
          autocomplete="off"
@@ -101,20 +85,27 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
-  <label class="sidebar-toggle primary-toggle" for="__primary">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
-  </label>
+  </button>
   
   
   <div class="col-lg-3 navbar-header-items__start">
     
       <div class="navbar-item">
 
+  
+    
   
 
 <a class="navbar-brand logo" href="../index.html">
@@ -128,11 +119,14 @@
       
     
     
-    <img src="../_static/pymsis-logo.png" class="logo__image only-light" alt="pymsis 0.8.0 documentation - Home"/>
-    <script>document.write(`<img src="../_static/pymsis-logo.png" class="logo__image only-dark" alt="pymsis 0.8.0 documentation - Home"/>`);</script>
+    <img src="../_static/pymsis-logo.png" class="logo__image only-light" alt="pymsis 0.10.0 documentation - Home"/>
+    <img src="../_static/pymsis-logo.png" class="logo__image only-dark pst-js-only" alt="pymsis 0.10.0 documentation - Home"/>
   
   
 </a></div>
+    
+      <div class="navbar-item"><!-- This will display the version of the docs -->
+v0.10.0</div>
     
   </div>
   
@@ -141,29 +135,36 @@
     <div class="me-auto navbar-header-items__center">
       
         <div class="navbar-item">
-<nav class="navbar-nav">
+<nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../examples/index.html">
-                        Examples
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="#">
-                        API reference
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../development/index.html">
-                        Development
-                      </a>
-                    </li>
-                
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../development/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../changelog/index.html">
+    Changelog
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -175,31 +176,23 @@
         <div class="navbar-item navbar-persistent--container">
           
 
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
         </div>
       
       
         <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
       
-        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+        <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
           
@@ -210,7 +203,7 @@ document.write(`
           
           
           
-          <a href="https://github.com/SWxTREC/pymsis" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+          <a href="https://github.com/SWxTREC/pymsis" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -222,22 +215,18 @@ document.write(`
   
     <div class="navbar-persistent--mobile">
 
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
     </div>
   
 
   
-    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
       <span class="fa-solid fa-outdent"></span>
-    </label>
+    </button>
   
 </div>
 
@@ -249,7 +238,8 @@ document.write(`
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -258,32 +248,42 @@ document.write(`
     
       <div class="sidebar-header-items__center">
         
-          <div class="navbar-item">
-<nav class="navbar-nav">
+          
+          
+            <div class="navbar-item">
+<nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../examples/index.html">
-                        Examples
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="#">
-                        API reference
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../development/index.html">
-                        Development
-                      </a>
-                    </li>
-                
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../development/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../changelog/index.html">
+    Changelog
+  </a>
+</li>
+
   </ul>
 </nav></div>
+          
         
       </div>
     
@@ -293,17 +293,13 @@ document.write(`
         
           <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
         
-          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+          <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
           
@@ -314,7 +310,7 @@ document.write(`
           
           
           
-          <a href="https://github.com/SWxTREC/pymsis" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+          <a href="https://github.com/SWxTREC/pymsis" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -329,9 +325,13 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="generated/pymsis.msis.run.html">pymsis.msis.run</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generated/pymsis.msis.create_options.html">pymsis.msis.create_options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/pymsis.calculate.html">pymsis.calculate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/pymsis.Variable.html">pymsis.Variable</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="generated/pymsis.msis.create_input.html">pymsis.msis.create_input</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/pymsis.msis.create_options.html">pymsis.msis.create_options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/pymsis.msis.calculate.html">pymsis.msis.calculate</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="generated/pymsis.utils.download_f107_ap.html">pymsis.utils.download_f107_ap</a></li>
@@ -350,22 +350,20 @@ document.write(`
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
         <div class="header-article-item">
 
-
-
-<nav aria-label="Breadcrumb">
+<nav aria-label="Breadcrumb" class="d-print-none">
   <ul class="bd-breadcrumbs">
     
     <li class="breadcrumb-item breadcrumb-home">
@@ -373,7 +371,7 @@ document.write(`
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page">API reference</li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">API reference</span></li>
   </ul>
 </nav>
 </div>
@@ -391,33 +389,64 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="api-reference">
-<span id="api"></span><h1>API reference<a class="headerlink" href="#api-reference" title="Permalink to this heading">#</a></h1>
+<span id="api"></span><h1>API reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h1>
 <p>This page gives an overview of the routines within the pymsis package.
-To run the code, use the <code class="xref py py-mod docutils literal notranslate"><span class="pre">pymsis.msis</span></code> module.</p>
-<table class="autosummary longtable table autosummary">
+To calculate atmospheric constituents at grid points, use the <a class="reference internal" href="generated/pymsis.calculate.html#pymsis.calculate" title="pymsis.calculate"><code class="xref py py-func docutils literal notranslate"><span class="pre">calculate()</span></code></a> function.
+This is typically the only function you will need to use. You can access the output variables
+using the <a class="reference internal" href="generated/pymsis.Variable.html#pymsis.Variable" title="pymsis.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a> enumeration for easier indexing into the output data array.
+For example, as <code class="docutils literal notranslate"><span class="pre">output_array[...,</span> <span class="pre">Variable.MASS_DENSITY]</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/pymsis.msis.run.html#pymsis.msis.run" title="pymsis.msis.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">msis.run</span></code></a>(dates, lons, lats, alts[, f107s, ...])</p></td>
-<td><p>Call MSIS looping over all possible inputs.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pymsis.calculate.html#pymsis.calculate" title="pymsis.calculate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate</span></code></a></p></td>
+<td><p>Call MSIS to calculate the atmosphere at the provided input points.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/pymsis.msis.create_options.html#pymsis.msis.create_options" title="pymsis.msis.create_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">msis.create_options</span></code></a>([f107, ...])</p></td>
-<td><p>Create the options list based on keyword argument choices.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/pymsis.msis.create_input.html#pymsis.msis.create_input" title="pymsis.msis.create_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">msis.create_input</span></code></a>(dates, lons, lats, alts[, ...])</p></td>
-<td><p>Combine all input values into a single flattened array.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/pymsis.Variable.html#pymsis.Variable" title="pymsis.Variable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Variable</span></code></a></p></td>
+<td><p>Enumeration of variable data indices for the output from <code class="docutils literal notranslate"><span class="pre">calculate()</span></code>.</p></td>
 </tr>
 </tbody>
 </table>
-<p>To get input data for historical events, use the <code class="xref py py-mod docutils literal notranslate"><span class="pre">pymsis.utils</span></code> module.</p>
-<table class="autosummary longtable table autosummary">
+</div>
+<section id="msis-module">
+<h2>msis module<a class="headerlink" href="#msis-module" title="Link to this heading">#</a></h2>
+<p>For more control and help creating properly formatted inputs, one can
+use the <code class="xref py py-mod docutils literal notranslate"><span class="pre">pymsis.msis</span></code> module. This module provides functions to
+create input data, create the options list, and run the model.</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/pymsis.utils.download_f107_ap.html#pymsis.utils.download_f107_ap" title="pymsis.utils.download_f107_ap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">utils.download_f107_ap</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pymsis.msis.create_input.html#pymsis.msis.create_input" title="pymsis.msis.create_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">msis.create_input</span></code></a></p></td>
+<td><p>Combine all input values into a single flattened array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/pymsis.msis.create_options.html#pymsis.msis.create_options" title="pymsis.msis.create_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">msis.create_options</span></code></a></p></td>
+<td><p>Create the options list based on keyword argument choices.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pymsis.msis.calculate.html#pymsis.msis.calculate" title="pymsis.msis.calculate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">msis.calculate</span></code></a></p></td>
+<td><p>Call MSIS to calculate the atmosphere at the provided input points.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="utils-module">
+<h2>utils module<a class="headerlink" href="#utils-module" title="Link to this heading">#</a></h2>
+<p>The MSIS model requires solar forcing data (F10.7 and ap) to calculate the state of the atmosphere.
+When running over past time periods, this data is automatically downloaded and used if not specified by the user.
+For more control over the F10.7 and Ap values the model is using, one can input the desired values
+into the <a class="reference internal" href="generated/pymsis.calculate.html#pymsis.calculate" title="pymsis.calculate"><code class="xref py py-func docutils literal notranslate"><span class="pre">calculate()</span></code></a> call <code class="docutils literal notranslate"><span class="pre">calculate(...,</span> <span class="pre">f107s=...,</span> <span class="pre">f107as=...,</span> <span class="pre">aps=...)</span></code>.
+To get the values used automatically by the model, the <code class="xref py py-mod docutils literal notranslate"><span class="pre">pymsis.utils</span></code> module has several
+helper routines to download new files (will retrieve a file with data up to the present) and
+get the proper F10.7 and ap values to use for a specific date and time.</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/pymsis.utils.download_f107_ap.html#pymsis.utils.download_f107_ap" title="pymsis.utils.download_f107_ap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">utils.download_f107_ap</span></code></a></p></td>
 <td><p>Download the latest ap and F10.7 values.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/pymsis.utils.get_f107_ap.html#pymsis.utils.get_f107_ap" title="pymsis.utils.get_f107_ap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">utils.get_f107_ap</span></code></a>(dates)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/pymsis.utils.get_f107_ap.html#pymsis.utils.get_f107_ap" title="pymsis.utils.get_f107_ap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">utils.get_f107_ap</span></code></a></p></td>
 <td><p>Retrieve the F10.7 and ap data needed to run msis for the given times.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+</section>
 </section>
 
 
@@ -427,24 +456,24 @@ To run the code, use the <code class="xref py py-mod docutils literal notranslat
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../examples/plot_version_diff_surface.html"
+       href="../examples/plot_surface_animation.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Version Differences (Surface)</p>
+        <p class="prev-next-title">Surface animation</p>
       </div>
     </a>
     <a class="right-next"
-       href="generated/pymsis.msis.run.html"
+       href="generated/pymsis.calculate.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">pymsis.msis.run</p>
+        <p class="prev-next-title">pymsis.calculate</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -455,8 +484,22 @@ To run the code, use the <code class="xref py py-mod docutils literal notranslat
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#msis-module">msis module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utils-module">utils module</a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
 
@@ -480,8 +523,8 @@ To run the code, use the <code class="xref py py-mod docutils literal notranslat
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -501,7 +544,7 @@ To run the code, use the <code class="xref py py-mod docutils literal notranslat
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     <br/>
   </p>
 </div>
@@ -514,7 +557,7 @@ To run the code, use the <code class="xref py py-mod docutils literal notranslat
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.2.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
 </p></div>
       
     </div>

@@ -1,0 +1,6 @@
+﻿pymsis.msis.calculate
+=====================
+
+.. currentmodule:: pymsis.msis
+
+.. autofunction:: calculate

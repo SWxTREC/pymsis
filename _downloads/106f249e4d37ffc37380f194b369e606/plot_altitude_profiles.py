@@ -12,7 +12,7 @@ and midnight (dashed).
 import matplotlib.pyplot as plt
 import numpy as np
 
-from pymsis import msis
+import pymsis
 
 
 lon = 0
@@ -24,36 +24,22 @@ ap = 7
 aps = [[ap] * 7]
 
 date = np.datetime64("2003-01-01T00:00")
-output_midnight = msis.run(date, lon, lat, alts, f107, f107a, aps)
+output_midnight = pymsis.calculate(date, lon, lat, alts, f107, f107a, aps)
 date = np.datetime64("2003-01-01T12:00")
-output_noon = msis.run(date, lon, lat, alts, f107, f107a, aps)
+output_noon = pymsis.calculate(date, lon, lat, alts, f107, f107a, aps)
 
 #  output is now of the shape (1, 1, 1, 1000, 11)
 # Get rid of the single dimensions
 output_midnight = np.squeeze(output_midnight)
 output_noon = np.squeeze(output_noon)
 
-variables = [
-    "Total mass density",
-    "N2",
-    "O2",
-    "O",
-    "He",
-    "H",
-    "Ar",
-    "N",
-    "Anomalous O",
-    "NO",
-    "Temperature",
-]
-
 _, ax = plt.subplots()
-for i, label in enumerate(variables):
-    if label in ("NO", "Total mass density", "Temperature"):
-        # There is currently no NO data, also ignore non-number densities
+for variable in pymsis.Variable:
+    if variable.name in ("Total mass density", "Temperature"):
+        # Ignore non-number densities
         continue
-    (line,) = ax.plot(output_midnight[:, i], alts, linestyle="--")
-    ax.plot(output_noon[:, i], alts, c=line.get_color(), label=label)
+    (line,) = ax.plot(output_midnight[:, variable], alts, linestyle="--")
+    ax.plot(output_noon[:, variable], alts, c=line.get_color(), label=variable.name)
 
 ax.legend(
     loc="upper center", bbox_to_anchor=(0.5, 1.15), fancybox=True, shadow=True, ncol=4

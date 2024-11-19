@@ -1,0 +1,49 @@
+﻿pymsis.Variable
+===============
+
+.. currentmodule:: pymsis
+
+.. autoclass:: Variable
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Variable.conjugate
+      ~Variable.bit_length
+      ~Variable.bit_count
+      ~Variable.to_bytes
+      ~Variable.from_bytes
+      ~Variable.as_integer_ratio
+      ~Variable.is_integer
+      ~Variable.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Variable.real
+      ~Variable.imag
+      ~Variable.numerator
+      ~Variable.denominator
+      ~Variable.MASS_DENSITY
+      ~Variable.N2
+      ~Variable.O2
+      ~Variable.O
+      ~Variable.HE
+      ~Variable.H
+      ~Variable.AR
+      ~Variable.N
+      ~Variable.ANOMALOUS_O
+      ~Variable.NO
+      ~Variable.TEMPERATURE
+   
+   

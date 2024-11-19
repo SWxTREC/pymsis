@@ -11,7 +11,7 @@
         :class: sphx-glr-download-link-note
 
         :ref:`Go to the end <sphx_glr_download_examples_plot_version_diff_altitude.py>`
-        to download the full example code
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -26,7 +26,7 @@ percent change along an altitude profile between MSIS version 00 and 2.
 Additionally, we show the difference between densities at noon (solid)
 and midnight (dashed).
 
-.. GENERATED FROM PYTHON SOURCE LINES 11-74
+.. GENERATED FROM PYTHON SOURCE LINES 11-61
 
 
 
@@ -45,7 +45,7 @@ and midnight (dashed).
     import matplotlib.pyplot as plt
     import numpy as np
 
-    from pymsis import msis
+    import pymsis
 
 
     lon = 0
@@ -57,13 +57,13 @@ and midnight (dashed).
     aps = [[ap] * 7]
 
     date = np.datetime64("2003-01-01T00:00")
-    output_midnight2 = msis.run(date, lon, lat, alts, f107, f107a, aps)
-    output_midnight0 = msis.run(date, lon, lat, alts, f107, f107a, aps, version=0)
+    output_midnight2 = pymsis.calculate(date, lon, lat, alts, f107, f107a, aps)
+    output_midnight0 = pymsis.calculate(date, lon, lat, alts, f107, f107a, aps, version=0)
     diff_midnight = (output_midnight2 - output_midnight0) / output_midnight0 * 100
 
     date = np.datetime64("2003-01-01T12:00")
-    output_noon2 = msis.run(date, lon, lat, alts, f107, f107a, aps)
-    output_noon0 = msis.run(date, lon, lat, alts, f107, f107a, aps, version=0)
+    output_noon2 = pymsis.calculate(date, lon, lat, alts, f107, f107a, aps)
+    output_noon0 = pymsis.calculate(date, lon, lat, alts, f107, f107a, aps, version=0)
     diff_noon = (output_noon2 - output_noon0) / output_noon0 * 100
 
 
@@ -72,27 +72,14 @@ and midnight (dashed).
     diff_midnight = np.squeeze(diff_midnight)
     diff_noon = np.squeeze(diff_noon)
 
-    variables = [
-        "Total mass density",
-        "N2",
-        "O2",
-        "O",
-        "He",
-        "H",
-        "Ar",
-        "N",
-        "Anomalous O",
-        "NO",
-        "Temperature",
-    ]
-
     _, ax = plt.subplots()
-    for i, label in enumerate(variables):
-        if label in ("NO", "Total mass density", "Temperature"):
-            # There is currently no NO data, also ignore non-number densities
+    for variable in pymsis.Variable:
+        if variable.name in ("NO", "Total mass density", "Temperature"):
+            # There is currently no NO data for earlier versions,
+            # also ignore non-number densities
             continue
-        (line,) = ax.plot(diff_midnight[:, i], alts, linestyle="--")
-        ax.plot(diff_noon[:, i], alts, c=line.get_color(), label=label)
+        (line,) = ax.plot(diff_midnight[:, variable], alts, linestyle="--")
+        ax.plot(diff_noon[:, variable], alts, c=line.get_color(), label=variable.name)
 
     ax.legend(
         loc="upper center", bbox_to_anchor=(0.5, 1.15), fancybox=True, shadow=True, ncol=4
@@ -108,7 +95,7 @@ and midnight (dashed).
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.116 seconds)
+   **Total running time of the script:** (0 minutes 0.115 seconds)
 
 
 .. _sphx_glr_download_examples_plot_version_diff_altitude.py:
@@ -124,6 +111,10 @@ and midnight (dashed).
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: plot_version_diff_altitude.py <plot_version_diff_altitude.py>`
+
+    .. container:: sphx-glr-download sphx-glr-download-zip
+
+      :download:`Download zipped: plot_version_diff_altitude.zip <plot_version_diff_altitude.zip>`
 
 
 .. only:: html
