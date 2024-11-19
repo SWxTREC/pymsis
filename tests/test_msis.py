@@ -5,6 +5,7 @@ import numpy as np
 import pytest
 from numpy.testing import assert_allclose, assert_array_equal
 
+import pymsis
 from pymsis import msis, msis00f, msis20f, msis21f
 
 
@@ -221,41 +222,47 @@ def test_create_input_lon_wrapping(input_data, expected_input, version):
 
     # Test that -90 and 270 produce the same output
     assert_array_equal(
-        msis.run(date, lons, [lat] * 5, alt, f107, f107a, ap, version=version),
-        msis.run(date, lons + 360, [lat] * 5, alt, f107, f107a, ap, version=version),
+        pymsis.calculate(date, lons, [lat] * 5, alt, f107, f107a, ap, version=version),
+        pymsis.calculate(
+            date, lons + 360, [lat] * 5, alt, f107, f107a, ap, version=version
+        ),
     )
 
 
-def test_run_options(input_data, expected_output):
+def test_calculate_options(input_data, expected_output):
     # Default options is all 1's, so make sure they are equivalent
     assert_allclose(
-        np.squeeze(msis.run(*input_data, options=None)), expected_output, rtol=1e-5
+        np.squeeze(pymsis.calculate(*input_data, options=None)),
+        expected_output,
+        rtol=1e-5,
     )
     assert_allclose(
-        np.squeeze(msis.run(*input_data, options=[1] * 25)), expected_output, rtol=1e-5
+        np.squeeze(pymsis.calculate(*input_data, options=[1] * 25)),
+        expected_output,
+        rtol=1e-5,
     )
 
     with pytest.raises(ValueError, match="options needs to be a list"):
-        msis.run(*input_data, options=[1] * 22)
+        pymsis.calculate(*input_data, options=[1] * 22)
 
 
-def test_run_single_point(input_data, expected_output):
-    output = msis.run(*input_data)
+def test_calculate_single_point(input_data, expected_output):
+    output = pymsis.calculate(*input_data)
     assert output.shape == (1, 11)
     assert_allclose(np.squeeze(output), expected_output, rtol=1e-5)
 
 
-def test_run_gridded_multi_point(input_data, expected_output):
+def test_calculate_gridded_multi_point(input_data, expected_output):
     date, lon, lat, alt, f107, f107a, ap = input_data
     # 5 x 5 surface
     input_data = (date, [lon] * 5, [lat] * 5, alt, f107, f107a, ap)
-    output = msis.run(*input_data)
+    output = pymsis.calculate(*input_data)
     assert output.shape == (1, 5, 5, 1, 11)
     expected = np.tile(expected_output, (5, 5, 1))
     assert_allclose(np.squeeze(output), expected, rtol=1e-5)
 
 
-def test_run_multi_point(input_data, expected_output):
+def test_calculate_multi_point(input_data, expected_output):
     # test multi-point run, like a satellite fly-through
     # and make sure we don't grid the input data
     # 5 input points
@@ -269,77 +276,77 @@ def test_run_multi_point(input_data, expected_output):
         [f107a] * 5,
         ap * 5,
     )
-    output = msis.run(*input_data)
+    output = pymsis.calculate(*input_data)
     assert output.shape == (5, 11)
     expected = np.tile(expected_output, (5, 1))
     assert_allclose(np.squeeze(output), expected, rtol=1e-5)
 
 
-def test_run_wrapped_lon(input_data, expected_output):
+def test_calculate_wrapped_lon(input_data, expected_output):
     date, _, lat, alt, f107, f107a, ap = input_data
 
     input_data = (date, -180, lat, alt, f107, f107a, ap)
-    output1 = msis.run(*input_data)
+    output1 = pymsis.calculate(*input_data)
     input_data = (date, 180, lat, alt, f107, f107a, ap)
-    output2 = msis.run(*input_data)
+    output2 = pymsis.calculate(*input_data)
     assert_allclose(output1, output2, rtol=1e-5)
 
     input_data = (date, 0, lat, alt, f107, f107a, ap)
-    output1 = msis.run(*input_data)
+    output1 = pymsis.calculate(*input_data)
     input_data = (date, 360, lat, alt, f107, f107a, ap)
-    output2 = msis.run(*input_data)
+    output2 = pymsis.calculate(*input_data)
     assert_allclose(output1, output2, rtol=1e-5)
 
 
-def test_run_poles(input_data):
+def test_calculate_poles(input_data):
     # Test that moving in longitude around a pole
     # returns the same values
     # North pole
     date, _, _, alt, f107, f107a, ap = input_data
     input_data = (date, 0, 90, alt, f107, f107a, ap)
-    output1 = msis.run(*input_data)
+    output1 = pymsis.calculate(*input_data)
     input_data = (date, 20, 90, alt, f107, f107a, ap)
-    output2 = msis.run(*input_data)
+    output2 = pymsis.calculate(*input_data)
     assert_allclose(output1, output2, rtol=1e-5)
 
     # South pole
     input_data = (date, 0, -90, alt, f107, f107a, ap)
-    output1 = msis.run(*input_data)
+    output1 = pymsis.calculate(*input_data)
     input_data = (date, 20, -90, alt, f107, f107a, ap)
-    output2 = msis.run(*input_data)
+    output2 = pymsis.calculate(*input_data)
     assert_allclose(output1, output2, rtol=1e-5)
 
 
-def test_run_versions(input_data):
+def test_calculate_versions(input_data):
     # Make sure we accept these version numbers and don't throw an error
     for ver in [0, 2, 2.0, 2.1, "00", "0", "2.0", "2.1", "2"]:
-        msis.run(*input_data, version=ver)
+        pymsis.calculate(*input_data, version=ver)
     # Test for something outside of that list for an error to be thrown
     with pytest.raises(ValueError, match="The MSIS version selected"):
-        msis.run(*input_data, version=1)
+        pymsis.calculate(*input_data, version=1)
 
 
-def test_run_version00(input_data, expected_output00):
-    output = msis.run(*input_data, version=0)
+def test_calculate_version00(input_data, expected_output00):
+    output = pymsis.calculate(*input_data, version=0)
     assert output.shape == (1, 11)
     assert_allclose(np.squeeze(output), expected_output00, rtol=1e-5)
 
 
-def test_run_multi_point00(input_data, expected_output00):
+def test_calculate_multi_point00(input_data, expected_output00):
     date, lon, lat, alt, f107, f107a, ap = input_data
     # 5 x 5 surface
     input_data = (date, [lon] * 5, [lat] * 5, alt, f107, f107a, ap)
-    output = msis.run(*input_data, version=0)
+    output = pymsis.calculate(*input_data, version=0)
     assert output.shape == (1, 5, 5, 1, 11)
     expected = np.tile(expected_output00, (5, 5, 1))
     assert_allclose(np.squeeze(output), expected, rtol=1e-5)
 
 
-def test_run_version00_low_altitude(input_data):
+def test_calculate_version00_low_altitude(input_data):
     # There is no O, H, N below 72.5 km, should be NaN
     date, lon, lat, _, f107, f107a, ap = input_data
     input_data = (date, lon, lat, 71, f107, f107a, ap)
-    output = msis.run(*input_data, version=0)
+    output = pymsis.calculate(*input_data, version=0)
     assert np.all(np.isnan(np.squeeze(output)[[3, 5, 7]]))
 
 
@@ -369,25 +376,25 @@ def test_create_input_auto_f107(input_auto_f107_ap):
     assert_allclose(data, test_data)
 
 
-def test_run_auto_f107(input_auto_f107_ap):
+def test_calculate_auto_f107(input_auto_f107_ap):
     # Dropping any of the f107/f107a/ap will go and get those
     # values automatically as needed
     date, lon, lat, alt, f107, f107a, ap = input_auto_f107_ap
 
     # fully specified run
-    expected = msis.run(*input_auto_f107_ap)
+    expected = pymsis.calculate(*input_auto_f107_ap)
 
     # auto
-    assert_allclose(msis.run(date, lon, lat, alt), expected)
+    assert_allclose(pymsis.calculate(date, lon, lat, alt), expected)
 
     # f107
-    assert_allclose(msis.run(date, lon, lat, alt, f107s=f107), expected)
+    assert_allclose(pymsis.calculate(date, lon, lat, alt, f107s=f107), expected)
 
     # f107a
-    assert_allclose(msis.run(date, lon, lat, alt, f107as=f107a), expected)
+    assert_allclose(pymsis.calculate(date, lon, lat, alt, f107as=f107a), expected)
 
     # ap
-    assert_allclose(msis.run(date, lon, lat, alt, aps=ap), expected)
+    assert_allclose(pymsis.calculate(date, lon, lat, alt, aps=ap), expected)
 
 
 @pytest.mark.parametrize(
@@ -401,7 +408,7 @@ def test_run_auto_f107(input_auto_f107_ap):
 def test_bad_run_inputs(inputs):
     # Inputs that have nan's in them at various places should all raise for the user
     with pytest.raises(ValueError, match="Input data has non-finite values"):
-        msis.run(*inputs)
+        pymsis.calculate(*inputs)
 
 
 @pytest.mark.parametrize(
@@ -418,7 +425,7 @@ def test_keyword_argument_call(input_data, version, msis_lib):
     dseconds = (date.astype("datetime64[s]") - date.astype("datetime64[D]")).astype(
         float
     )
-    run_output = msis.run(
+    run_output = pymsis.calculate(
         dates=date,
         alts=alt,
         lats=lat,
@@ -450,10 +457,12 @@ def test_changing_options(input_data, expected_output, expected_output_with_opti
     # so we need to make sure that we are actually changing the model
     # when the options change.
     assert_allclose(
-        np.squeeze(msis.run(*input_data, options=[1] * 25)), expected_output, rtol=1e-5
+        np.squeeze(pymsis.calculate(*input_data, options=[1] * 25)),
+        expected_output,
+        rtol=1e-5,
     )
     assert_allclose(
-        np.squeeze(msis.run(*input_data, options=[0] * 25)),
+        np.squeeze(pymsis.calculate(*input_data, options=[0] * 25)),
         expected_output_with_options,
         rtol=1e-5,
     )
@@ -468,9 +477,9 @@ def test_options_calls(input_data, version, msis_lib):
     # Reset the cache
     msis_lib._last_used_options = None
     with patch(msis_lib.__name__ + ".pyinitswitch") as mock_init:
-        msis.run(*input_data, options=[0] * 25, version=version)
+        pymsis.calculate(*input_data, options=[0] * 25, version=version)
         mock_init.assert_called_once()
-        msis.run(*input_data, options=[0] * 25, version=version)
+        pymsis.calculate(*input_data, options=[0] * 25, version=version)
         # Called again shouldn't call the initialization function
         mock_init.assert_called_once()
 
@@ -510,7 +519,7 @@ def test_multithreaded(
     def run_function(input_items):
         version, options, expected = input_items
         return np.squeeze(
-            msis.run(*input_data, version=version, options=options)
+            pymsis.calculate(*input_data, version=version, options=options)
         ), expected
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
@@ -524,8 +533,8 @@ def test_multithreaded(
 
 def test_output_enum(input_data):
     # Make sure we can access the output enums
-    assert msis.Variable.MASS_DENSITY == 0
-    assert msis.Variable._member_names_ == [
+    assert pymsis.Variable.MASS_DENSITY == 0
+    assert pymsis.Variable._member_names_ == [
         "MASS_DENSITY",
         "N2",
         "O2",
@@ -538,5 +547,11 @@ def test_output_enum(input_data):
         "NO",
         "TEMPERATURE",
     ]
-    data = msis.run(*input_data)
-    assert data[..., msis.Variable.MASS_DENSITY] == data[..., 0]
+    data = pymsis.calculate(*input_data)
+    assert data[..., pymsis.Variable.MASS_DENSITY] == data[..., 0]
+
+
+def test_deprecated_legacy_imports():
+    # Make sure that msis.run() is still available and
+    # we are getting our expected variables
+    assert pymsis.calculate == msis.run == msis.calculate

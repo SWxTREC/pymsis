@@ -3,7 +3,7 @@ from pathlib import Path
 import numpy as np
 from numpy.testing import assert_allclose
 
-from pymsis import msis
+import pymsis
 
 
 def run_input_line(line, version):
@@ -28,7 +28,7 @@ def run_input_line(line, version):
     )
 
     test_inp = (date, lon, lat, alt, f107, f107a, ap)
-    test_output = np.squeeze(msis.run(*test_inp, version=version))
+    test_output = np.squeeze(pymsis.calculate(*test_inp, version=version))
 
     # Rearrange the run's output to match the expected
     # ordering of elements
