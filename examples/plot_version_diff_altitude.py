@@ -39,27 +39,14 @@ diff_noon = (output_noon2 - output_noon0) / output_noon0 * 100
 diff_midnight = np.squeeze(diff_midnight)
 diff_noon = np.squeeze(diff_noon)
 
-variables = [
-    "Total mass density",
-    "N2",
-    "O2",
-    "O",
-    "He",
-    "H",
-    "Ar",
-    "N",
-    "Anomalous O",
-    "NO",
-    "Temperature",
-]
-
 _, ax = plt.subplots()
-for i, label in enumerate(variables):
-    if label in ("NO", "Total mass density", "Temperature"):
-        # There is currently no NO data, also ignore non-number densities
+for variable in msis.Variable:
+    if variable.name in ("NO", "Total mass density", "Temperature"):
+        # There is currently no NO data for earlier versions,
+        # also ignore non-number densities
         continue
-    (line,) = ax.plot(diff_midnight[:, i], alts, linestyle="--")
-    ax.plot(diff_noon[:, i], alts, c=line.get_color(), label=label)
+    (line,) = ax.plot(diff_midnight[:, variable], alts, linestyle="--")
+    ax.plot(diff_noon[:, variable], alts, c=line.get_color(), label=variable.name)
 
 ax.legend(
     loc="upper center", bbox_to_anchor=(0.5, 1.15), fancybox=True, shadow=True, ncol=4

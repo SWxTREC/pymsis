@@ -33,27 +33,13 @@ output_noon = msis.run(date, lon, lat, alts, f107, f107a, aps)
 output_midnight = np.squeeze(output_midnight)
 output_noon = np.squeeze(output_noon)
 
-variables = [
-    "Total mass density",
-    "N2",
-    "O2",
-    "O",
-    "He",
-    "H",
-    "Ar",
-    "N",
-    "Anomalous O",
-    "NO",
-    "Temperature",
-]
-
 _, ax = plt.subplots()
-for i, label in enumerate(variables):
-    if label in ("NO", "Total mass density", "Temperature"):
-        # There is currently no NO data, also ignore non-number densities
+for variable in msis.Variable:
+    if variable.name in ("Total mass density", "Temperature"):
+        # Ignore non-number densities
         continue
-    (line,) = ax.plot(output_midnight[:, i], alts, linestyle="--")
-    ax.plot(output_noon[:, i], alts, c=line.get_color(), label=label)
+    (line,) = ax.plot(output_midnight[:, variable], alts, linestyle="--")
+    ax.plot(output_noon[:, variable], alts, c=line.get_color(), label=variable.name)
 
 ax.legend(
     loc="upper center", bbox_to_anchor=(0.5, 1.15), fancybox=True, shadow=True, ncol=4

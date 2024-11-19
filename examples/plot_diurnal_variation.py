@@ -36,26 +36,9 @@ output = np.squeeze(output)
 # Lets get the percent variation from the annual mean for each variable
 variation = 100 * (output / output.mean(axis=0) - 1)
 
-variables = [
-    "Total mass density",
-    "N2",
-    "O2",
-    "O",
-    "He",
-    "H",
-    "Ar",
-    "N",
-    "Anomalous O",
-    "NO",
-    "Temperature",
-]
-
 _, ax = plt.subplots()
-for i, label in enumerate(variables):
-    if label == "NO":
-        # There is currently no NO data
-        continue
-    ax.plot(dates, variation[:, i], label=label)
+for variable in msis.Variable:
+    ax.plot(dates, variation[:, variable], label=variable.name)
 
 ax.legend(
     loc="upper center", bbox_to_anchor=(0.5, 1.15), fancybox=True, shadow=True, ncol=5

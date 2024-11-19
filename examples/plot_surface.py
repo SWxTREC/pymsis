@@ -28,11 +28,9 @@ output = msis.run(date, lons, lats, alt, f107, f107a, aps)
 # Get rid of the single dimensions
 output = np.squeeze(output)
 
-i = 2  # O2
-
 _, ax = plt.subplots()
 xx, yy = np.meshgrid(lons, lats)
-mesh = ax.pcolormesh(xx, yy, output[:, :, i].T, shading="auto")
+mesh = ax.pcolormesh(xx, yy, output[:, :, msis.Variable.O2].T, shading="auto")
 plt.colorbar(mesh, label="Number density (/m$^3$)")
 
 ax.set_title(f"O$_2$ number density at {alt} km")

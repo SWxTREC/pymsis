@@ -520,3 +520,23 @@ def test_multithreaded(
     for future in results:
         result, expected_result = future.result()
         assert_allclose(result, expected_result, rtol=1e-5)
+
+
+def test_output_enum(input_data):
+    # Make sure we can access the output enums
+    assert msis.Variable.MASS_DENSITY == 0
+    assert msis.Variable._member_names_ == [
+        "MASS_DENSITY",
+        "N2",
+        "O2",
+        "O",
+        "HE",
+        "H",
+        "AR",
+        "N",
+        "ANOMALOUS_O",
+        "NO",
+        "TEMPERATURE",
+    ]
+    data = msis.run(*input_data)
+    assert data[..., msis.Variable.MASS_DENSITY] == data[..., 0]

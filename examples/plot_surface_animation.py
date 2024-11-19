@@ -35,21 +35,21 @@ output = msis.run(dates, lons, lats, alt, f107s, f107as, aps)
 # Get rid of the single dimensions
 output = np.squeeze(output)
 
-i = 7  # N
-
 fig, (ax_time, ax_mesh) = plt.subplots(
     nrows=2, gridspec_kw={"height_ratios": [1, 4]}, constrained_layout=True
 )
 xx, yy = np.meshgrid(lons, lats)
 vmin, vmax = 1e13, 8e13
 norm = matplotlib.colors.Normalize(vmin, vmax)
-mesh = ax_mesh.pcolormesh(xx, yy, output[0, :, :, i].T, shading="auto", norm=norm)
+mesh = ax_mesh.pcolormesh(
+    xx, yy, output[0, :, :, msis.Variable.N].T, shading="auto", norm=norm
+)
 plt.colorbar(
     mesh, label=f"N number density at {alt} km (/m$^3$)", orientation="horizontal"
 )
 
 time_data = output[:, len(lons) // 2, len(lats) // 2, :]
-ax_time.plot(dates, time_data[:, i], c="k")
+ax_time.plot(dates, time_data[:, msis.Variable.N], c="k")
 ax_time.set_xlim(dates[0], dates[-1])
 ax_time.set_ylim(vmin, vmax)
 ax_time.xaxis.set_major_locator(mdates.HourLocator(interval=3))
@@ -74,7 +74,7 @@ def update_surface(t):
     date_string = dates[t].astype("O").strftime("%H:%M")
     title.set_text(f"{date_string}")
     time_line.set_xdata([dates[t]])
-    mesh.set_array(output[t, :, :, i].T)
+    mesh.set_array(output[t, :, :, msis.Variable.N].T)
     sun.set_data([sun_loc[t]], [0])
 
 
