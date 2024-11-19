@@ -12,7 +12,7 @@ and midnight (dashed).
 import matplotlib.pyplot as plt
 import numpy as np
 
-from pymsis import msis
+import pymsis
 
 
 lon = 0
@@ -24,9 +24,9 @@ ap = 7
 aps = [[ap] * 7]
 
 date = np.datetime64("2003-01-01T00:00")
-output_midnight = msis.run(date, lon, lat, alts, f107, f107a, aps)
+output_midnight = pymsis.calculate(date, lon, lat, alts, f107, f107a, aps)
 date = np.datetime64("2003-01-01T12:00")
-output_noon = msis.run(date, lon, lat, alts, f107, f107a, aps)
+output_noon = pymsis.calculate(date, lon, lat, alts, f107, f107a, aps)
 
 #  output is now of the shape (1, 1, 1, 1000, 11)
 # Get rid of the single dimensions
@@ -34,7 +34,7 @@ output_midnight = np.squeeze(output_midnight)
 output_noon = np.squeeze(output_noon)
 
 _, ax = plt.subplots()
-for variable in msis.Variable:
+for variable in pymsis.Variable:
     if variable.name in ("Total mass density", "Temperature"):
         # Ignore non-number densities
         continue

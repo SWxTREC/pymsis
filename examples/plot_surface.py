@@ -10,7 +10,7 @@ quantities on a constant altitude plane.
 import matplotlib.pyplot as plt
 import numpy as np
 
-from pymsis import msis
+import pymsis
 
 
 lons = range(-180, 185, 5)
@@ -23,14 +23,14 @@ ap = 7
 date = np.datetime64("2003-01-01T12:00")
 aps = [[ap] * 7]
 
-output = msis.run(date, lons, lats, alt, f107, f107a, aps)
+output = pymsis.calculate(date, lons, lats, alt, f107, f107a, aps)
 #  output is now of the shape (1, nlons, nlats, 1, 11)
 # Get rid of the single dimensions
 output = np.squeeze(output)
 
 _, ax = plt.subplots()
 xx, yy = np.meshgrid(lons, lats)
-mesh = ax.pcolormesh(xx, yy, output[:, :, msis.Variable.O2].T, shading="auto")
+mesh = ax.pcolormesh(xx, yy, output[:, :, pymsis.Variable.O2].T, shading="auto")
 plt.colorbar(mesh, label="Number density (/m$^3$)")
 
 ax.set_title(f"O$_2$ number density at {alt} km")

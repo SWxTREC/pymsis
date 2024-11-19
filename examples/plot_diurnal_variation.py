@@ -11,7 +11,7 @@ import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 import numpy as np
 
-from pymsis import msis
+import pymsis
 
 
 lon = 0
@@ -28,7 +28,7 @@ f107s = [f107] * ndates
 f107as = [f107a] * ndates
 aps = [[ap] * 7] * ndates
 
-output = msis.run(dates, lon, lat, alt, f107s, f107as, aps)
+output = pymsis.calculate(dates, lon, lat, alt, f107s, f107as, aps)
 #  output is now of the shape (ndates, 1, 1, 1, 11)
 # Get rid of the single dimensions
 output = np.squeeze(output)
@@ -37,7 +37,7 @@ output = np.squeeze(output)
 variation = 100 * (output / output.mean(axis=0) - 1)
 
 _, ax = plt.subplots()
-for variable in msis.Variable:
+for variable in pymsis.Variable:
     ax.plot(dates, variation[:, variable], label=variable.name)
 
 ax.legend(

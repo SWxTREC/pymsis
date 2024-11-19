@@ -2,17 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [v0.10.0] 2024-11-19
 
+- **ADDED** Top-level function exports to avoid submodule imports
+  - `pymsis.calculate()` is the primrary entrypoint to running the MSIS
+    model and calculating the atmosphere at the requested data points.
+  - `pymsis.msis.run()` was not very descriptive and caused issues with IDL
+    bridging into Python and wanting that name reserved. To avoid this, the
+    function has been renamed `calculate` and is available as `pymsis.calculate()`
+    now. The `pymsis.msis.run()` is still available as an alias for now, but
+    may be removed in the future.
+- **ADDED** Variable enumeration for easier indexing into output arrays.
+  - This can be used as `pymsis.Variable.O2` for getting the `O2` species index.
+    For example, `output_array[..., pymsis.Variable.O2]`.
 - **ADDED** Python 3.13 and 3.13t support
 - **ADDED** Multithreaded support.
   - The underlying MSIS libraries are not threadsafe due
     to the use of many global/save variables. There is a lock around the
     extension modules so that only one thread will be calling the routines
     at a time, so the Python library is safe to use in a multi-threaded context.
-- **ADDED** Variable enumeration for easier indexing into output arrays.
-  - This can be used as `msis.Variable.O2` for getting the `O2` species index.
-    For example, `output_array[..., msis.Variable.O2]`.
 - **MAINTENANCE** Default `-O1` optimization level for all builds.
   - Previously, this
     was only done on Windows machines. Users can change this by updating
@@ -30,7 +38,7 @@ All notable changes to this project will be documented in this file.
 - **DEPRECATED** Calling `msis00f.pytselec()` and `msis00f.pygtd7d` functions.
   - Use `msis00f.pyinitswitch` and `msis00f.pymsiscalc` instead.
   - This helps with standardization across the extension modules. These extension
-    should rarely be used by external people and `msis.run()` is a better entry
+    should rarely be used by external people and `pymsis.calculate()` is a better entry
     to using the package.
 
 ## [v0.9.0] - 2024-04-03
@@ -57,7 +65,7 @@ All notable changes to this project will be documented in this file.
 ## [v0.6.0] - 2022-11-14
 
 - **ADDED** Automatic download of F10.7 and ap data for users.
-  - This means that F10.7 and ap are optional inputs to the `msis.run()`
+  - This means that F10.7 and ap are optional inputs to the `pymsis.calculate()`
     function during historical periods and the routines will automatically
     fetch the proper input data.
 
@@ -67,7 +75,7 @@ All notable changes to this project will be documented in this file.
 
 - **ADDED** MSIS2.1, a new version of MSIS.
   - This is the first version that contains NO.
-  - This is the new default used in `msis.run()`.
+  - This is the new default used in `pymsis.calculate()`.
 - **MAINTENANCE** Added more wheels to the release and CI systems for testing.
 
 ## [v0.4.0] - 2022-02-26

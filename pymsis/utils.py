@@ -22,13 +22,13 @@ def download_f107_ap() -> None:
     Download the latest ap and F10.7 values.
 
     The file is downloaded into the installed package location, keeping
-    the same filename as the data source: `SW-All.csv`.
+    the same filename as the data source: ``SW-All.csv``.
     This routine can be called to update the data as well if you would like to
     use newer data since the last time you downloaded the file.
 
     Notes
     -----
-    The data provider we are using is CelesTrak, which gets data from other
+    The default data provider is CelesTrak, which gets data from other
     sources and interpolates or predicts missing values to make data easier to
     work with. A warning is emitted when the interpolation or prediction
     occurs, but it is up to the user to verify the Ap and F10.7 data that is used
@@ -192,7 +192,7 @@ def get_f107_ap(dates: npt.ArrayLike) -> tuple[npt.NDArray, npt.NDArray, npt.NDA
         f107a : np.ndarray
             F10.7 running 81-day average centered on the given date(s)
         ap : np.ndarray
-            | Ap for the given date(s), (1-6 only used if `geomagnetic_activity=-1`)
+            | Ap for the given date(s), (1-6 only used if ``geomagnetic_activity=-1``)
             | (0) Daily Ap
             | (1) 3 hr ap index for current time
             | (2) 3 hr ap index for 3 hrs before current time

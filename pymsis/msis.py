@@ -23,8 +23,8 @@ for lib in [msis00f, msis20f, msis21f]:
 
 
 class Variable(IntEnum):
-    """
-    Enumeration of output data indices for the pymsis run calls.
+    r"""
+    Enumeration of variable data indices for the output from ``calculate()``.
 
     This can be used to access the data from the output arrays instead of having
     to remember the order of the output. For example,
@@ -33,25 +33,25 @@ class Variable(IntEnum):
     Attributes
     ----------
     MASS_DENSITY
-        Index of total mass density (kg/m3).
+        Index of total mass density (kg/m\ :sup:`3`).
     N2
-        Index of N2 number density (m-3).
+        Index of N2 number density (m\ :sup:`-3`).
     O2
-        Index of O2 number density (m-3).
+        Index of O2 number density (m\ :sup:`-3`).
     O
-        Index of O number density (m-3).
+        Index of O number density (m\ :sup:`-3`).
     HE
-        Index of He number density (m-3).
+        Index of He number density (m\ :sup:`-3`).
     H
-        Index of H number density (m-3).
+        Index of H number density (m\ :sup:`-3`).
     AR
-        Index of Ar number density (m-3).
+        Index of Ar number density (m\ :sup:`-3`).
     N
-        Index of N number density (m-3).
+        Index of N number density (m\ :sup:`-3`).
     ANOMALOUS_O
-        Index of anomalous oxygen number density (m-3).
+        Index of anomalous oxygen number density (m\ :sup:`-3`).
     NO
-        Index of NO number density (m-3).
+        Index of NO number density (m\ :sup:`-3`).
     TEMPERATURE
         Index of temperature (K).
 
@@ -70,7 +70,7 @@ class Variable(IntEnum):
     TEMPERATURE = 10
 
 
-def run(
+def calculate(
     dates: npt.ArrayLike,
     lons: npt.ArrayLike,
     lats: npt.ArrayLike,
@@ -83,7 +83,7 @@ def run(
     version: float | str = 2.1,
     **kwargs: dict,
 ) -> npt.NDArray:
-    """
+    r"""
     Call MSIS to calculate the atmosphere at the provided input points.
 
     **Satellite Fly-Through Mode:**
@@ -136,23 +136,23 @@ def run(
         MSIS version number, one of (0, 2.0, 2.1).
     **kwargs : dict
         Single options for the switches can be defined through keyword arguments.
-        For example, run(..., geomagnetic_activity=-1) will set the geomagnetic
+        For example, calculate(..., geomagnetic_activity=-1) will set the geomagnetic
         activity switch to -1 (storm-time ap mode).
 
     Returns
     -------
     ndarray (ndates, nlons, nlats, nalts, 11) or (ndates, 11)
         | The data calculated at each grid point:
-        | [Total mass density (kg/m3),
-        | N2 # density (m-3),
-        | O2 # density (m-3),
-        | O # density (m-3),
-        | He # density (m-3),
-        | H # density (m-3),
-        | Ar # density (m-3),
-        | N # density (m-3),
-        | Anomalous oxygen # density (m-3),
-        | NO # density (m-3),
+        | [Total mass density (kg/m\ :sup:`3`),
+        | N2 # density (m\ :sup:`-3`),
+        | O2 # density (m\ :sup:`-3`),
+        | O # density (m\ :sup:`-3`),
+        | He # density (m\ :sup:`-3`),
+        | H # density (m\ :sup:`-3`),
+        | Ar # density (m\ :sup:`-3`),
+        | N # density (m\ :sup:`-3`),
+        | Anomalous oxygen # density (m\ :sup:`-3`),
+        | NO # density (m\ :sup:`-3`),
         | Temperature (K)]
 
     Other Parameters
@@ -246,6 +246,10 @@ def run(
     output[(output >= 9.9e-38) & (output < 1e-37)] = np.nan  # noqa: PLR2004
 
     return output.reshape(*input_shape, 11)
+
+
+# For backwards compatibility export the old name here
+run = calculate
 
 
 def create_options(

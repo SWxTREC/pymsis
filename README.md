@@ -28,11 +28,11 @@ there is a web viewer that uses pymsis: <https://swx-trec.com/msis>
 
 ```python
 import numpy as np
-from pymsis import msis
+import pymsis
 
 dates = np.arange(np.datetime64("2003-10-28T00:00"), np.datetime64("2003-11-04T00:00"), np.timedelta64(30, "m"))
 # geomagnetic_activity=-1 is a storm-time run
-data = msis.run(dates, 0, 0, 400, geomagnetic_activity=-1)
+data = pymsis.calculate(dates, 0, 0, 400, geomagnetic_activity=-1)
 
 # Plot the data
 import matplotlib.pyplot as plt
@@ -56,7 +56,7 @@ is developed by the Naval Research Laboratory.
 Note that the MSIS2 code is not available for commercial use without
 contacting NRL. See the [MSIS2 license file](https://github.com/SWxTREC/pymsis/blob/main/MSIS2_LICENSE)) for explicit
 details. We do not repackage the MSIS source code in this
-repository for that reason. However, we do provide utilities to easily
+repository for that reason. However, utility functions are provided to easily
 download and extract the original source code. By using that code you
 agree to their terms and conditions.
 
