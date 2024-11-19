@@ -14,6 +14,17 @@ To run the code, use the :mod:`pymsis.msis` module.
     msis.create_options
     msis.create_input
 
+The output of the model is stored in basic numpy arrays with the final
+dimension being the variable/species. To get the output in a more human-readable
+format, use the :class:`~.Variable` enumeration that provides
+easier indexing into the output arrays.
+
+.. autosummary::
+    :toctree: generated/
+    :nosignatures:
+
+    msis.Variable
+
 To get input data for historical events, use the :mod:`pymsis.utils` module.
 
 .. autosummary::

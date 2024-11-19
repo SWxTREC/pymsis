@@ -1,6 +1,7 @@
 """Interface for running and creating input for the MSIS models."""
 
 import threading
+from enum import IntEnum
 from pathlib import Path
 
 import numpy as np
@@ -21,6 +22,54 @@ for lib in [msis00f, msis20f, msis21f]:
     lib._lock = threading.Lock()
 
 
+class Variable(IntEnum):
+    """
+    Enumeration of output data indices for the pymsis run calls.
+
+    This can be used to access the data from the output arrays instead of having
+    to remember the order of the output. For example,
+    ``output_array[..., Variable.MASS_DENSITY]``.
+
+    Attributes
+    ----------
+    MASS_DENSITY
+        Index of total mass density (kg/m3).
+    N2
+        Index of N2 number density (m-3).
+    O2
+        Index of O2 number density (m-3).
+    O
+        Index of O number density (m-3).
+    HE
+        Index of He number density (m-3).
+    H
+        Index of H number density (m-3).
+    AR
+        Index of Ar number density (m-3).
+    N
+        Index of N number density (m-3).
+    ANOMALOUS_O
+        Index of anomalous oxygen number density (m-3).
+    NO
+        Index of NO number density (m-3).
+    TEMPERATURE
+        Index of temperature (K).
+
+    """
+
+    MASS_DENSITY = 0
+    N2 = 1
+    O2 = 2
+    O = 3  # noqa: E741 (ambiguous name)
+    HE = 4
+    H = 5
+    AR = 6
+    N = 7
+    ANOMALOUS_O = 8
+    NO = 9
+    TEMPERATURE = 10
+
+
 def run(
     dates: npt.ArrayLike,
     lons: npt.ArrayLike,
@@ -35,13 +84,25 @@ def run(
     **kwargs: dict,
 ) -> npt.NDArray:
     """
-    Call MSIS looping over all possible inputs.
+    Call MSIS to calculate the atmosphere at the provided input points.
 
-    If ndates is the same as nlons, nlats, and nalts, then a flattened
-    multi-point input array is assumed. Otherwise, the data
-    will be expanded in a grid-like fashion. The possible
-    return shapes are therefore (ndates, 11) and
-    (ndates, nlons, nlats, nalts, 11).
+    **Satellite Fly-Through Mode:**
+    If ndates is the same length as nlons, nlats, and nalts, then the
+    input arrays are assumed to be aligned and no regridding is done.
+    This is equivalent to a satellite fly-through, producing an output
+    return shape of (ndates, 11).
+
+    **Grid Mode:**
+    If the input arrays have different lengths the data will be expanded
+    in a grid-like fashion broadcasting to a larger shape than the input
+    arrays. This is equivalent to a full atmosphere simulation where you
+    want to calculate the data at every grid point. The output shape will
+    be 5D (ndates, nlons, nlats, nalts, 11), with potentially single element
+    dimensions if you have a single date, lon, lat, or alt.
+
+    The output array can be indexed with the :class:`~.Variable` enum
+    for easier access. ``output_array[..., Variable.MASS_DENSITY]``
+    returns the total mass density.
 
     Parameters
     ----------
@@ -58,7 +119,7 @@ def run(
     f107as : ArrayLike, optional
         F10.7 running 81-day average centered on the given date(s)
     aps : ArrayLike, optional
-        | Ap for the given date(s), (1-6 only used if `geomagnetic_activity=-1`)
+        | Ap for the given date(s), (1-6 only used if ``geomagnetic_activity=-1``)
         | (0) Daily Ap
         | (1) 3 hr ap index for current time
         | (2) 3 hr ap index for 3 hrs before current time
@@ -75,6 +136,8 @@ def run(
         MSIS version number, one of (0, 2.0, 2.1).
     **kwargs : dict
         Single options for the switches can be defined through keyword arguments.
+        For example, run(..., geomagnetic_activity=-1) will set the geomagnetic
+        activity switch to -1 (storm-time ap mode).
 
     Returns
     -------

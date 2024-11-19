@@ -86,7 +86,7 @@ lint.select = ["B", "D", "E", "F", "I", "N", "S", "W", "PL", "PT", "UP", "RUF", 
 lint.ignore = ["B028", "D203", "D212", "PLR0913", "S310"]
 
 [tool.ruff.lint.per-file-ignores]
-"examples/*" = ["ANN", "D"]
+"examples/*" = ["ANN", "D", "PLR2004"]
 "tests/*" = ["ANN", "D", "S"]
 "tools/*" = ["ANN", "S"]
 ".github/*" = ["S"]

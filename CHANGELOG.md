@@ -10,11 +10,15 @@ All notable changes to this project will be documented in this file.
     to the use of many global/save variables. There is a lock around the
     extension modules so that only one thread will be calling the routines
     at a time, so the Python library is safe to use in a multi-threaded context.
+- **ADDED** Variable enumeration for easier indexing into output arrays.
+  - This can be used as `msis.Variable.O2` for getting the `O2` species index.
+    For example, `output_array[..., msis.Variable.O2]`.
 - **MAINTENANCE** Default `-O1` optimization level for all builds.
   - Previously, this
     was only done on Windows machines. Users can change this by updating
-    environment variables before building with `FFLAGS=-Ofast`, but note that
-    some machines produce invalid results when higher optimizations are used.
+    environment variables before building with `FFLAGS=-Ofast pip install .`,
+    but note that some machines produce invalid results when higher
+    optimizations are used.
 - **PERFORMANCE** Cache options state between subsequent runs.
   - Avoid calling initialization switches unless they have changed between runs
 - **PERFORMANCE** Speed up numpy function calls.

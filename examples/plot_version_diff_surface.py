@@ -32,27 +32,18 @@ diff = (output2 - output0) / output0 * 100
 # Get rid of the single dimensions
 diff = np.squeeze(diff)
 
-variables = [
-    "Total mass density",
-    "N2",
-    "O2",
-    "O",
-    "He",
-    "H",
-    "Ar",
-    "N",
-    "Anomalous O",
-    "NO",
-    "Temperature",
-]
-
 fig, axarr = plt.subplots(nrows=3, ncols=3, constrained_layout=True, figsize=(8, 6))
 xx, yy = np.meshgrid(lons, lats)
 norm = mpl.colors.Normalize(-50, 50)
 cmap = mpl.colormaps["RdBu_r"]
-for i, ax in enumerate(axarr.flatten()):
-    mesh = ax.pcolormesh(xx, yy, diff[:, :, i].T, shading="auto", norm=norm, cmap=cmap)
-    ax.set_title(f"{variables[i]}")
+for i, variable in enumerate(msis.Variable):
+    if i > 8:
+        break
+    ax = axarr.flatten()[i]
+    mesh = ax.pcolormesh(
+        xx, yy, diff[:, :, variable].T, shading="auto", norm=norm, cmap=cmap
+    )
+    ax.set_title(f"{variable.name}")
 
 plt.colorbar(
     mesh, ax=axarr, label="Change from MSIS-00 to MSIS2 (%)", orientation="horizontal"
