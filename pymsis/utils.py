@@ -54,8 +54,10 @@ def _load_f107_ap_data() -> dict[str, npt.NDArray]:
     # Check if the data file exists and is up-to-date
     file_is_missing = not _F107_AP_PATH.exists()
     file_is_stale = (
-        datetime.datetime.now() >
-        datetime.datetime.fromtimestamp(os.path.getmtime(_F107_AP_PATH)) + datetime.timedelta(days=1)
+        datetime.datetime.now()
+        > datetime.datetime.fromtimestamp(
+            os.path.getmtime(_F107_AP_PATH)
+        ) + datetime.timedelta(days=1)
     )
 
     if file_is_missing or file_is_stale:
