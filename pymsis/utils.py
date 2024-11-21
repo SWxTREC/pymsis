@@ -1,5 +1,7 @@
 """Utilities for obtaining input datasets."""
 
+import datetime
+import os
 import urllib.request
 import warnings
 from io import BytesIO
@@ -49,8 +51,14 @@ def download_f107_ap() -> None:
 
 
 def _load_f107_ap_data() -> dict[str, npt.NDArray]:
-    """Load data from disk, if it isn't present go out and download it first."""
-    if not _F107_AP_PATH.exists():
+    # Check if the data file exists and is up-to-date
+    file_is_missing = not _F107_AP_PATH.exists()
+    file_is_stale = (
+        datetime.datetime.now() >
+        datetime.datetime.fromtimestamp(os.path.getmtime(_F107_AP_PATH)) + datetime.timedelta(days=1)
+    )
+
+    if file_is_missing or file_is_stale:
         download_f107_ap()
 
     dtype = {
