@@ -96,6 +96,9 @@ def _load_f107_ap_data() -> dict[str, npt.NDArray]:
                 if "PRM" in line:
                     # We don't want the monthly predicted values
                     continue
+                if ",,,,,,,," in line:
+                    # We don't want lines with missing values
+                    continue
                 fout.write(line.encode("utf-8"))
             fout.seek(0)
             arr = np.loadtxt(
