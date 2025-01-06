@@ -1,12 +1,12 @@
 """Utilities for obtaining input datasets."""
 
-import os
 import csv
+import os
 import urllib.request
 import warnings
+from datetime import datetime, timedelta
 from io import BytesIO
 from pathlib import Path
-from datetime import datetime, timedelta
 
 import numpy as np
 import numpy.typing as npt
@@ -53,37 +53,42 @@ def download_f107_ap() -> None:
     with _F107_AP_PATH.open("wb") as f:
         f.write(req.read())
 
-def _refresh_f107_ap_data(last_obs_date: np.datetime64):
+
+def _refresh_f107_ap_data(last_obs_date: np.datetime64) -> None:
     """
-    Refresh exising SW_All file after last_obs_date
+    Refresh exising SW_All file after last_obs_date.
 
     Parameters
     ----------
     last_obs_date : datetime of last observed parameter
     """
-    warnings.warn(f"Refreshing data using partial ap and F10.7 data from {_PARTIAL_F107_AP_URL}")
+    warnings.warn(
+        f"Refreshing data using partial ap and F10.7 data from {_PARTIAL_F107_AP_URL}"
+    )
     req = urllib.request.urlopen(_PARTIAL_F107_AP_URL)
     with _PARTIAL_F107_AP_PATH.open("wb") as f:
         f.write(req.read())
 
     # Store all observed dates in existing_data
-    with open(_F107_AP_PATH, "r") as f:
+    with open(_F107_AP_PATH) as f:
         reader = csv.DictReader(f)
-        existing_data = [row for row in reader if np.datetime64(row['DATE']) <= last_obs_date]
+        existing_data = [
+            row for row in reader if np.datetime64(row["DATE"]) <= last_obs_date
+        ]
 
     # Store data new dates in updated_data
     updated_data = []
     if os.path.exists(_PARTIAL_F107_AP_PATH):
-        with open(_PARTIAL_F107_AP_PATH, "r") as f:
+        with open(_PARTIAL_F107_AP_PATH) as f:
             reader = csv.DictReader(f)
             updated_data = [row for row in reader]
 
     # Merge existing_data and new_data into all_data
-    all_data = {row['DATE']: row for row in existing_data}
-    all_data.update({row['DATE']: row for row in updated_data})
+    all_data = {row["DATE"]: row for row in existing_data}
+    all_data.update({row["DATE"]: row for row in updated_data})
 
     # Sort all_data by date
-    sorted_data = sorted(all_data.values(), key=lambda x: np.datetime64(x['DATE']))
+    sorted_data = sorted(all_data.values(), key=lambda x: np.datetime64(x["DATE"]))
     with open(_F107_AP_PATH, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=sorted_data[0].keys())
         writer.writeheader()
@@ -91,11 +96,13 @@ def _refresh_f107_ap_data(last_obs_date: np.datetime64):
 
     os.remove(_PARTIAL_F107_AP_PATH)
 
+
 def _load_f107_ap_data(end_date: np.datetime64) -> dict[str, npt.NDArray]:
     """
-    Load data from disk:
-        - If it isn't present go out and download it first
-        - If present but not up to date, go out and refresh it
+    Load data from disk.
+
+        - If it isn't present go out and download it first.
+        - If present but not up to date, go out and refresh it.
 
     Parameters
     ----------
@@ -143,13 +150,10 @@ def _load_f107_ap_data(end_date: np.datetime64) -> dict[str, npt.NDArray]:
     # so we can't just go back in line lengths)
     with _F107_AP_PATH.open() as fin:
         with BytesIO() as fout:
-            last_obs_date: np.datetime64|None = None
+            last_obs_date: np.datetime64 | None = None
             for line in fin:
-                if "PRM" in line:
-                    # We don't want the monthly predicted values
-                    continue
-                if ",,,,,,,," in line:
-                    # We don't want lines with missing values
+                if "PRM" in line or ",,,,,,,," in line:
+                    # We don't want the monthly predicted values or missing values
                     continue
                 if ",OBS," in line:
                     # Capture last observed date
@@ -163,9 +167,8 @@ def _load_f107_ap_data(end_date: np.datetime64) -> dict[str, npt.NDArray]:
     # Check if the file needs to be refreshed after parsing
     if last_obs_date is not None:
         file_mod_time = datetime.fromtimestamp(os.path.getmtime(_F107_AP_PATH))
-        if (
-            last_obs_date < end_date
-            and datetime.now() - file_mod_time >= timedelta(hours=3)
+        if last_obs_date < end_date and datetime.now() - file_mod_time >= timedelta(
+            hours=3
         ):
             # Refresh file if:
             # - requested date is beyond the end of current file
