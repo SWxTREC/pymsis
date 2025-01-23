@@ -51,7 +51,7 @@ def download_f107_ap() -> None:
 
 
 def _load_f107_ap_data() -> dict[str, npt.NDArray]:
-    """Load data from disk. If it isn't present go out and download it first."""
+    """Load data from disk, if it isn't present go out and download it first."""
     if not _F107_AP_PATH.exists():
         download_f107_ap()
 
