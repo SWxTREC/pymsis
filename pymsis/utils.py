@@ -207,7 +207,9 @@ def get_f107_ap(dates: npt.ArrayLike) -> tuple[npt.NDArray, npt.NDArray, npt.NDA
     """
     dates = np.asarray(dates, dtype=np.datetime64)
     data = _DATA or _load_f107_ap_data()
-    if dates[-1] > data["dates"][~np.repeat(data["warn_data"], 8)][-1]:
+    # If our requested data time is after the cached values we have,
+    # go and download a new file to refresh the local file cache
+    if dates.max() > data["dates"][~np.repeat(data["warn_data"], 8)][-1]:
         file_mod_time = datetime.fromtimestamp(os.path.getmtime(_F107_AP_PATH))
         # Don't refresh if file was updated in the last 1 hour
         if (datetime.now() - file_mod_time).seconds > 60 * 60:
