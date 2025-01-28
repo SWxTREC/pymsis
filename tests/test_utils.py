@@ -1,3 +1,6 @@
+from pathlib import Path
+from unittest.mock import patch
+
 import numpy as np
 import pytest
 from numpy.testing import assert_allclose, assert_array_equal
@@ -130,3 +133,41 @@ def test_get_f107_ap_interpolated_warns(dates):
         UserWarning, match="There is data that was either interpolated or"
     ):
         utils.get_f107_ap(dates)
+
+
+@patch("pymsis.utils.download_f107_ap")
+def test_auto_refresh(download_data_mock, monkeypatch):
+    test_file = Path(__file__).parent / "f107_ap_test_data.txt"
+    # Monkeypatch the url and expected download location, so we aren't
+    # dependent on an internet connection.
+    monkeypatch.setattr(utils, "_F107_AP_PATH", test_file)
+
+    def call_with_time(time):
+        try:
+            utils.get_f107_ap(time)
+        except ValueError:
+            # There is no data in our test file for this, so we will error later
+            # But this is enough to trigger an attempt at a refresh
+            pass
+
+    # Should not trigger a refresh, data before the time in the file
+    call_with_time(np.datetime64("1990-12-31T23:00"))
+    assert download_data_mock.call_count == 0
+
+    # Final observed time in the file
+    call_with_time(np.datetime64("2000-12-29T21:00"))
+    assert download_data_mock.call_count == 0
+
+    # One hour beyond our current time shouldn't trigger a refresh
+    # there would be no data to get for that time period
+    call_with_time(np.datetime64("now") + np.timedelta64(1, "h"))
+    assert download_data_mock.call_count == 0
+
+    # Within the predicted data in the file should try to get a refresh
+    with pytest.warns(UserWarning, match="There is data that was either"):
+        call_with_time(np.datetime64("2000-12-30T00:00"))
+    assert download_data_mock.call_count == 1
+
+    # Should trigger a refresh, after the data in the file but before current time
+    call_with_time(np.datetime64("2005-01-01T00:00"))
+    assert download_data_mock.call_count == 2  # noqa: PLR2004
