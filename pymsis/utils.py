@@ -306,6 +306,23 @@ def get_f107_ap(
             _SPACE_WEATHER.data = _load_f107_ap_data()
         data = _SPACE_WEATHER.data
 
+        # Each ap value covers the three-hour interval beginning at its
+        # timestamp. Refresh only when the requested data is outside the file.
+        data_end = data["dates"][-1] + np.timedelta64(3, "h")
+        needs_refresh = _SPACE_WEATHER.path == _F107_AP_DEFAULT_FILE and np.any(
+            dates >= data_end
+        )
+        if needs_refresh:
+            try:
+                download_f107_ap()
+            except OSError:
+                # Leave the old file and cache intact. The range check below
+                # reports the normal unavailable-data error for the request.
+                pass
+            if _SPACE_WEATHER.data is None:
+                _SPACE_WEATHER.data = _load_f107_ap_data()
+            data = _SPACE_WEATHER.data
+
     data_start = data["dates"][0]
     data_end = data["dates"][-1]
     # atleast_1d keeps output shapes consistent for scalar and array inputs

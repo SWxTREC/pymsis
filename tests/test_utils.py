@@ -154,6 +154,68 @@ def test_download_refreshes_cache(monkeypatch, tmp_path, local_path):
     assert_array_equal(utils.get_f107_ap("2000-07-01T12:00")[0], [159.6])
 
 
+def test_historical_request_does_not_refresh(monkeypatch, tmp_path, local_path):
+    target = tmp_path / "weather.csv"
+    target.write_text(local_path.read_text().replace("159.6", "199.6"))
+    monkeypatch.setattr(utils._SPACE_WEATHER, "path", target)
+    monkeypatch.setattr(utils, "_F107_AP_DEFAULT_FILE", target)
+
+    with patch.object(utils, "download_f107_ap") as download:
+        assert_array_equal(utils.get_f107_ap("2000-07-01T12:00")[0], [199.6])
+    download.assert_not_called()
+
+
+def test_out_of_range_request_refreshes(monkeypatch, tmp_path, local_path):
+    target = tmp_path / "weather.csv"
+    lines = local_path.read_text().splitlines()
+    target.write_text("\n".join(lines[:100]) + "\n")
+    monkeypatch.setattr(utils._SPACE_WEATHER, "path", target)
+    monkeypatch.setattr(utils, "_F107_AP_DEFAULT_FILE", target)
+
+    def refresh_from_fixture():
+        target.write_bytes(local_path.read_bytes())
+        utils._SPACE_WEATHER.data = None
+
+    with patch.object(
+        utils, "download_f107_ap", side_effect=refresh_from_fixture
+    ) as download:
+        assert_array_equal(utils.get_f107_ap("2000-07-01T12:00")[0], [159.6])
+    download.assert_called_once_with()
+
+
+def test_custom_file_is_not_refreshed(monkeypatch, tmp_path, local_path):
+    target = tmp_path / "weather.csv"
+    lines = local_path.read_text().splitlines()
+    target.write_text("\n".join(lines[:100]) + "\n")
+    utils.use_space_weather_file(target)
+
+    with (
+        patch.object(utils, "download_f107_ap") as download,
+        pytest.raises(ValueError, match="not available"),
+    ):
+        utils.get_f107_ap("2000-07-01T12:00")
+    download.assert_not_called()
+
+
+def test_out_of_range_request_raises_when_refresh_fails(
+    monkeypatch, tmp_path, local_path
+):
+    target = tmp_path / "weather.csv"
+    lines = local_path.read_text().splitlines()
+    target.write_text("\n".join(lines[:100]) + "\n")
+    monkeypatch.setattr(utils._SPACE_WEATHER, "path", target)
+    monkeypatch.setattr(utils, "_F107_AP_DEFAULT_FILE", target)
+
+    with (
+        patch.object(
+            utils, "download_f107_ap", side_effect=OSError("offline")
+        ) as download,
+        pytest.raises(ValueError, match="not available"),
+    ):
+        utils.get_f107_ap("2000-07-01T12:00")
+    download.assert_called_once_with()
+
+
 @pytest.mark.parametrize(
     ("dates", "expected_f107", "expected_f107a", "expected_ap"),
     [
