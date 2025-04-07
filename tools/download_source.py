@@ -24,7 +24,7 @@ def get_source():
     if not Path("src/msis2.0/msis_init.F90").exists():
         # No source code yet, so go download and extract it
         try:
-            warnings.warn("Downloading the MSIS2.0 source code from " f"{MSIS20_FILE}")
+            warnings.warn(f"Downloading the MSIS2.0 source code from {MSIS20_FILE}")
             with urllib.request.urlopen(MSIS20_FILE) as stream:
                 tf = tarfile.open(fileobj=stream, mode="r|gz")
                 tf.extractall(path=Path("src/msis2.0"))
@@ -49,7 +49,7 @@ def get_source():
     if not Path("src/msis2.1/msis_init.F90").exists():
         # No source code yet, so go download and extract it
         try:
-            warnings.warn("Downloading the MSIS2.1 source code from " f"{MSIS21_FILE}")
+            warnings.warn(f"Downloading the MSIS2.1 source code from {MSIS21_FILE}")
             with urllib.request.urlopen(MSIS21_FILE) as stream:
                 tf = tarfile.open(fileobj=stream, mode="r|gz")
                 tf.extractall(path=Path("src/msis2.1"))
@@ -76,7 +76,7 @@ def get_source():
         local_msis00_path.parent.mkdir(parents=True, exist_ok=True)
         # No source code yet, so go download and extract it
         try:
-            warnings.warn("Downloading the MSIS-00 source code from " f"{MSIS00_FILE}")
+            warnings.warn(f"Downloading the MSIS-00 source code from {MSIS00_FILE}")
 
             with urllib.request.urlopen(MSIS00_FILE) as response:
                 with open(local_msis00_path, "wb") as f:
