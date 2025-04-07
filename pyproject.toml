@@ -71,6 +71,10 @@ testpaths = [
 addopts = [
     "--import-mode=importlib",
 ]
+filterwarnings = [
+# Ignore warnings loading from file specifically
+    'ignore:Downloading ap and F10.7 data from file:UserWarning',
+]
 
 [tool.cibuildwheel]
 # skip Python <3.10
