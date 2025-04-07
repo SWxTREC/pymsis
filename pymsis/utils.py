@@ -110,7 +110,7 @@ def _load_f107_ap_data() -> dict[str, npt.NDArray]:
     daily_ap = arr["Ap"].astype(float)
     dates = np.repeat(arr["date"], 8).astype("datetime64[m]")
     for i in range(8):
-        ap[i::8] = arr[f"ap{i+1}"]
+        ap[i::8] = arr[f"ap{i + 1}"]
         dates[i::8] += i * np.timedelta64(3, "h")
 
     # data file has missing values as negatives
