@@ -104,16 +104,22 @@ def calculate(
     for easier access. ``output_array[..., Variable.MASS_DENSITY]``
     returns the total mass density.
 
+    If F10.7, F10.7a, or Ap values are not provided, the historical data
+    for the given date(s) will be used. If the local file is not available,
+    the data will be downloaded and cached for future use. See
+    :func:`~pymsis.utils.get_f107_ap` for more details on the historical
+    data retrieval.
+
     Parameters
     ----------
     dates : ArrayLike
         Dates and times of interest
     lons : ArrayLike
-        Longitudes of interest
+       Geodetic longitudes (deg), referenced to the WGS84 ellipsoid
     lats : ArrayLike
-        Latitudes of interest
+        Geodetic latitudes (deg), referenced to the WGS84 ellipsoid
     alts : ArrayLike
-        Altitudes of interest
+        Geodetic altitudes (km), referenced to the WGS84 ellipsoid
     f107s : ArrayLike, optional
         Daily F10.7 of the previous day for the given date(s)
     f107as : ArrayLike, optional
@@ -136,8 +142,8 @@ def calculate(
         MSIS version number, one of (0, 2.0, 2.1).
     **kwargs : dict
         Single options for the switches can be defined through keyword arguments.
-        For example, calculate(..., geomagnetic_activity=-1) will set the geomagnetic
-        activity switch to -1 (storm-time ap mode).
+        For example, ``calculate(..., geomagnetic_activity=-1)`` will set the
+        geomagnetic activity switch to -1 (storm-time ap mode).
 
     Returns
     -------
@@ -271,7 +277,11 @@ def create_options(
     """
     Create the options list based on keyword argument choices.
 
-    Defaults to all 1's for the input options.
+    Defaults to all 1's for the input options. Any value other than 1
+    will turn off the corresponding effect in the MSIS model, with the
+    exception of geomagnetic activity, which can be set to -1 for storm-time
+    Ap mode. You may also use booleans for the options, ``diurnal=False`` will
+    turn off the diurnal effect.
 
     Parameters
     ----------
