@@ -6,6 +6,7 @@ project(
   license: 'MIT',
   meson_version: '>=1.2.99',
   default_options: [
+    'buildtype=release',
     'fortran_std=legacy',
   ],
 )
@@ -30,15 +31,18 @@ ff = meson.get_compiler('fortran')
 if ff.has_argument('-Wno-conversion')
   add_project_arguments('-Wno-conversion', language: 'fortran')
 endif
-
-# Default to optimization level 1
-# Some CI jobs fail with higher levels of optimization, so restrict this by default.
-add_project_arguments('-O1', language: 'fortran')
+if ff.has_argument('-ffast-math')
+  add_project_arguments('-ffast-math', language: 'fortran')
+endif
 
 is_windows = host_machine.system() == 'windows'
 # Platform detection
 is_mingw = is_windows and cc.get_id() == 'gcc'
 if is_windows
+  # Default to optimization level 0 on Windows only
+  # Some CI jobs fail with higher levels of optimization, so restrict this by default.
+  add_project_arguments('-O0', language: 'fortran')
+
   # Need static libraries to get libgfortran
   gcc_link_args = ['-static']
   if is_mingw
