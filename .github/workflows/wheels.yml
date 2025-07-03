@@ -13,10 +13,6 @@ on:
       - reopened
       - labeled
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.number }}-${{ github.event_name }}-${{ github.event.ref }}
-  cancel-in-progress: true
-
 jobs:
   build_wheels:
     if: |
@@ -48,7 +44,7 @@ jobs:
           python .github/workflows/download_mirror.py
 
       - name: Set up QEMU
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && runner.arch == 'X64'
         uses: docker/setup-qemu-action@v3
         with:
           platforms: all
@@ -68,19 +64,17 @@ jobs:
           gfortran --version
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.21.3
+        uses: pypa/cibuildwheel@v3.0.0
         env:
           # The brew built gfortran linked libraries have minimum macOS versions
           # of the macOS version they were built on. We would need to compile
           # from source rather than use setup-fortran if we want to support
           # lower macOS versions.
           MACOSX_DEPLOYMENT_TARGET: "${{ matrix.os == 'macos-13' && '13.0' || '14.0' }}"
-          # TEMP don't use automated/isolated build environment, but manually
-          # install build dependencies so we can build with meson from source
-          CIBW_BUILD_FRONTEND: "pip; args: --no-build-isolation"
-          CIBW_BEFORE_BUILD:
-            python -m pip install git+https://github.com/mesonbuild/meson &&
-            python -m pip install ninja meson-python setuptools_scm numpy
+          # configure cibuildwheel on Linux to build native archs ('auto'),
+          # and to split the remaining architectures between the x86_64 and
+          # ARM runners
+          CIBW_ARCHS_LINUX: ${{ runner.arch == 'X64' && 'auto ppc64le s390x' || 'auto' }}
 
       - uses: actions/upload-artifact@v4
         with:
