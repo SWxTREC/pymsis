@@ -43,12 +43,6 @@ jobs:
         run: |
           python .github/workflows/download_mirror.py
 
-      - name: Set up QEMU
-        if: runner.os == 'Linux' && runner.arch == 'X64'
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: all
-
       # sets up the compiler paths automatically for us
       - uses: fortran-lang/setup-fortran@v1
         id: setup-fortran
@@ -71,10 +65,6 @@ jobs:
           # from source rather than use setup-fortran if we want to support
           # lower macOS versions.
           MACOSX_DEPLOYMENT_TARGET: "${{ matrix.os == 'macos-13' && '13.0' || '14.0' }}"
-          # configure cibuildwheel on Linux to build native archs ('auto'),
-          # and to split the remaining architectures between the x86_64 and
-          # ARM runners
-          CIBW_ARCHS_LINUX: ${{ runner.arch == 'X64' && 'auto ppc64le s390x' || 'auto' }}
 
       - uses: actions/upload-artifact@v4
         with:
