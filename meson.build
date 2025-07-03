@@ -34,7 +34,7 @@ endif
 
 # fast-math optimizations add a pretty significant speed-up.
 # Tests fail on linux aarch64, so don't add the flag there
-if ff.has_argument('-ffast-math') and host_machine.cpu_family() != 'aarch64'
+if ff.has_argument('-ffast-math')
   add_project_arguments('-ffast-math', language: 'fortran')
 endif
 
