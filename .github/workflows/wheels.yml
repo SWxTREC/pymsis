@@ -13,10 +13,6 @@ on:
       - reopened
       - labeled
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.number }}-${{ github.event_name }}-${{ github.event.ref }}
-  cancel-in-progress: true
-
 jobs:
   build_wheels:
     if: |
@@ -34,7 +30,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-13, macos-14]
+        os: [ubuntu-latest, windows-latest, macos-13, macos-14, ubuntu-24.04-arm]
     defaults:
       run:
         shell: bash
@@ -46,12 +42,6 @@ jobs:
       - name: Download source files
         run: |
           python .github/workflows/download_mirror.py
-
-      - name: Set up QEMU
-        if: runner.os == 'Linux'
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: all
 
       # sets up the compiler paths automatically for us
       - uses: fortran-lang/setup-fortran@v1
@@ -68,19 +58,13 @@ jobs:
           gfortran --version
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.21.3
+        uses: pypa/cibuildwheel@v3.0.0
         env:
           # The brew built gfortran linked libraries have minimum macOS versions
           # of the macOS version they were built on. We would need to compile
           # from source rather than use setup-fortran if we want to support
           # lower macOS versions.
           MACOSX_DEPLOYMENT_TARGET: "${{ matrix.os == 'macos-13' && '13.0' || '14.0' }}"
-          # TEMP don't use automated/isolated build environment, but manually
-          # install build dependencies so we can build with meson from source
-          CIBW_BUILD_FRONTEND: "pip; args: --no-build-isolation"
-          CIBW_BEFORE_BUILD:
-            python -m pip install git+https://github.com/mesonbuild/meson &&
-            python -m pip install ninja meson-python setuptools_scm numpy
 
       - uses: actions/upload-artifact@v4
         with:
@@ -89,15 +73,14 @@ jobs:
 
   build_sdist:
     name: Build source distribution
-    needs: build_wheels
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         name: Install Python
         with:
-          python-version: '3.12'
+          python-version: '3.13'
 
       - name: Download source files
         run: |
@@ -106,7 +89,7 @@ jobs:
         run: |
           python -m pip install meson-python meson ninja build
           python -m build --sdist
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: cibw-sdist
           path: dist/*.tar.gz
