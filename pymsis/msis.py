@@ -377,15 +377,14 @@ def create_input(
         (ndates == nlons == nlats == nalts), then the shape is (ndates,).
     """
     # Turn everything into arrays
-    dates_arr: npt.NDArray[np.datetime64] = np.atleast_1d(
-        np.array(dates, dtype=np.datetime64)
-    )
-    dyear: npt.NDArray[np.datetime64] = (
-        dates_arr.astype("datetime64[D]") - dates_arr.astype("datetime64[Y]")
-    ).astype(float) + 1  # DOY 1-366
-    dseconds: npt.NDArray[np.datetime64] = (
-        dates_arr.astype("datetime64[s]") - dates_arr.astype("datetime64[D]")
-    ).astype(float)
+    dates_arr: npt.NDArray[np.datetime64] = np.atleast_1d(dates).astype(np.datetime64)
+    dates_arr_y = dates_arr.astype("datetime64[Y]")
+    dates_arr_d = dates_arr.astype("datetime64[D]")
+    dates_arr_s = dates_arr.astype("datetime64[s]")
+
+    # dyear is DOY 1-366
+    dyear: npt.NDArray[np.float64] = (dates_arr_d - dates_arr_y).astype(float) + 1.0
+    dseconds: npt.NDArray[np.float64] = (dates_arr_s - dates_arr_d).astype(float)
     # TODO: Make it a continuous day of year?
     #       The new code mentions it should be and accepts float, but the
     #       regression tests indicate it should still be integer DOY
