@@ -141,7 +141,7 @@ def test_create_input_single_point(input_data, expected_input):
 def test_create_input_datetime(input_data, expected_input):
     # Test with datetime, not just np.datetime64s
     # .item() gets the datetime object from the np.datetime64 object
-    input_data = (input_data[0].item(),) + input_data[1:]
+    input_data = (input_data[0].item(), *input_data[1:])
     shape, data = msis.create_input(*input_data)
     assert shape == (1,)
     assert data.shape == (1, 14)
@@ -151,7 +151,7 @@ def test_create_input_datetime(input_data, expected_input):
 def test_create_input_f107_date_mismatch(input_data):
     # Make sure we raise when f107 and dates are different shapes
     # Repeat 5 dates, but not f107
-    input_data = ([input_data[0]] * 5,) + input_data[1:]
+    input_data = ([input_data[0]] * 5, *input_data[1:])
     with pytest.raises(ValueError, match="The length of dates"):
         msis.create_input(*input_data)
 
