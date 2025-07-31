@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.11.0] 2025-07-30
+
+- **MAINTENANCE** Default `-O2` optimization level for Linux/Mac and
+  `-O0` for Windows. The Windows wheel tests fail with higher optimizations,
+  but they can be set manually when building the project (see below for examples).
+- **MAINTENANCE** Added aarch64 wheels.
+- **PERFORMANCE** Supplying numpy datetime64 dates directly is much faster now and
+  does not do an unnecessary extra copy of the data.
+
 ## [v0.10.0] 2024-11-19
 
 - **ADDED** Top-level function exports to avoid submodule imports
