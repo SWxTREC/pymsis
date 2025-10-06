@@ -208,7 +208,7 @@ def test_create_input_multi_lon_lat(input_data, expected_input):
 
 @pytest.mark.parametrize("version", ["0", "2.0", "2.1"])
 def test_create_input_lon_wrapping(input_data, expected_input, version):
-    date, lon, lat, alt, f107, f107a, ap = input_data
+    date, _lon, lat, alt, f107, f107a, ap = input_data
     # Repeat 5 dates
     lons = np.array([-90] * 5)
     input_data = (date, lons, [lat] * 5, alt, f107, f107a, ap)

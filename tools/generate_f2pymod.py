@@ -34,7 +34,7 @@ def main():
             stderr=subprocess.PIPE,
             cwd=os.getcwd(),
         )
-        out, err = p.communicate()
+        out, _err = p.communicate()
         if not (p.returncode == 0):
             raise RuntimeError(
                 f"Writing {args.outfile} with f2py failed!\n" f"{out}\n" r"{err}"
