@@ -68,21 +68,24 @@ incdir_numpy = run_command(py3,
   check : true
 ).stdout().strip()
 
-inc_np = include_directories(incdir_numpy)
+inc_np = declare_dependency(
+  compile_args: ['-I' + incdir_numpy]
+)
 
 incdir_f2py = incdir_numpy / '..' / '..' / 'f2py' / 'src'
-inc_f2py = include_directories(incdir_f2py)
+inc_f2py = declare_dependency(
+  compile_args: ['-I' + incdir_f2py]
+)
 fortranobject_c = incdir_f2py / 'fortranobject.c'
 
 # Share this object across multiple modules.
 fortranobject_lib = static_library('_fortranobject',
   fortranobject_c,
-  dependencies: py3_dep,
-  include_directories: [inc_np, inc_f2py],
+  dependencies: [py3_dep, inc_np, inc_f2py],
 )
 fortranobject_dep = declare_dependency(
   link_with: fortranobject_lib,
-  include_directories: [inc_np, inc_f2py],
+  dependencies: [inc_np, inc_f2py],
 )
 
 generate_f2pymod = files('tools/generate_f2pymod.py')
