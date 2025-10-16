@@ -10,7 +10,7 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v5
 
     # sets up the compiler paths automatically for us
     - uses: fortran-lang/setup-fortran@v1
@@ -20,9 +20,9 @@ jobs:
         version: 13
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v6
       with:
-        python-version: '3.13'
+        python-version: '3.14'
 
     - name: Download source files
       run: |
