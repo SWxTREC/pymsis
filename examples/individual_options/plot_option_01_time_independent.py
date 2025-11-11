@@ -20,10 +20,10 @@ from msis_options_utils import create_option_analysis_figure
 #
 # This atmospheric effect includes:
 #
-# * Time-invariant atmospheric background
-# * Mean atmospheric state without temporal variations
-# * Reference density and temperature profiles
-# * Baseline structure for other effect calculations
+# * Baseline atmospheric structure that varies with latitude
+# * North-south atmospheric density and temperature gradients
+# * Geographic variations in atmospheric properties
+# * Time-independent latitude-dependent reference state
 #
 # This analysis shows how turning OFF this option affects atmospheric density
 # across different dimensions and conditions.
@@ -59,10 +59,10 @@ plt.show()
 #
 # This atmospheric effect is important because:
 #
-# * Provides fundamental atmospheric structure
-# * Reference state for all other atmospheric variations
-# * Essential baseline for atmospheric modeling
-# * Critical foundation for all MSIS calculations
+# * Provides fundamental atmospheric structure from poles to equator
+# * Essential for accurate geographic atmospheric modeling
+# * Critical for understanding latitude-dependent atmospheric behavior
+# * Foundation for all other atmospheric variations
 #
 # When this option is turned OFF, these physical processes are removed
 # from the atmospheric model, which can significantly impact the accuracy

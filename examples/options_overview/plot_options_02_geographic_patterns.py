@@ -32,7 +32,7 @@ f107a = 160
 ap = 10
 
 # Create date array for one day
-base_date = np.datetime64("2003-06-21")  # Summer solstice
+base_date = np.datetime64("2003-03-20")  # Spring equinox - sun centered on equator
 dates = [base_date + np.timedelta64(int(h), "h") for h in times]
 
 # Select key options that show strong geographic/temporal patterns
@@ -97,7 +97,11 @@ for plot_idx, (option_name, option_idx) in enumerate(key_options.items()):
         linewidths=0.5,
     )
 
-    ax.set_title(f"{option_name} Effect", fontsize=12, fontweight="bold")
+    ax.set_title(
+        f"{option_name} Effect\n{base_date} (Spring Equinox)",
+        fontsize=12,
+        fontweight="bold",
+    )
     ax.set_xlabel("Longitude (degrees)")
     ax.set_ylabel("Time (hours UT)")
     ax.grid(True, alpha=0.3)
@@ -110,7 +114,7 @@ for plot_idx, (option_name, option_idx) in enumerate(key_options.items()):
 fig.suptitle(
     f"Geographic and Temporal Effects of MSIS Options\n"
     f"Mass Density at {alt} km altitude, {lat}°N latitude\n"
-    f"Summer Solstice, F10.7={f107}, Ap={ap}",
+    f"Spring Equinox 2003-03-20, F10.7={f107}, Ap={ap}",
     fontsize=14,
     y=0.98,
 )

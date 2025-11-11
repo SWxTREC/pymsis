@@ -169,9 +169,11 @@ def calculate(
         F10.7 variations are ignored and the atmosphere uses a standard reference
         solar flux level.
     time_independent : float
-        Time-independent baseline atmospheric parameters. Controls the base
-        atmospheric state that doesn't vary with solar or geomagnetic conditions.
-        Setting to 0 removes the baseline model, leaving only the variations.
+        Time-independent baseline atmospheric structure. Controls the
+        basic north-south atmospheric variations that provide the fundamental
+        geographic structure of the atmosphere independent of time. Setting
+        to 0 removes these baseline latitude-dependent terms, leaving only
+        time-varying atmospheric patterns.
     symmetrical_annual : float
         Annual variations that are the same in both hemispheres. Controls
         seasonal changes in atmospheric density due to Earth's orbit around
@@ -324,9 +326,11 @@ def create_options(
         F10.7 variations are ignored and the atmosphere uses a standard reference
         solar flux level.
     time_independent : float
-        Time-independent baseline atmospheric parameters. Controls the base
-        atmospheric state that doesn't vary with solar or geomagnetic conditions.
-        Setting to 0 removes the baseline model, leaving only the variations.
+        Time-independent baseline atmospheric structure. Controls the
+        basic north-south atmospheric variations that provide the fundamental
+        geographic structure of the atmosphere independent of time. Setting
+        to 0 removes these baseline latitude-dependent terms, leaving only
+        time-varying atmospheric patterns.
     symmetrical_annual : float
         Annual variations that are the same in both hemispheres. Controls
         seasonal changes in atmospheric density due to Earth's orbit around
