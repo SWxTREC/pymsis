@@ -312,10 +312,13 @@ def create_options(
     """
     Create the options list based on keyword argument choices.
 
-    Defaults to all 1's for the input options. Any value other than 1
-    will turn off the corresponding effect in the MSIS model, with the
-    exception of geomagnetic activity, which can be set to -1 for storm-time
-    Ap mode. You may also use booleans for the options, ``diurnal=False`` will
+    Defaults to all 1's for the input options.
+    0 turns the option off.
+    1 turns the option on.
+    2 turns the main effects off, but the cross terms on.
+
+    For geomagnetic_activity, 1 is for daily Ap mode, and -1 is for storm-time Ap mode.
+    You may also use booleans for the options, ``diurnal=False`` will
     turn off the diurnal effect.
 
     Parameters
