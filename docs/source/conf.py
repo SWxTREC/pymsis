@@ -17,6 +17,8 @@ import sys
 #
 from pathlib import Path
 
+from sphinx_gallery.sorting import ExampleTitleSortKey, ExplicitOrder
+
 
 sys.path.insert(0, Path("../../pymsis").resolve())
 
@@ -78,9 +80,20 @@ html_static_path = ["_static"]
 autosummary_generate = True
 autodoc_typehints = "none"
 
+# Define subsection order for examples gallery
+subsection_order = ExplicitOrder(
+    [
+        "../../examples/general_examples",
+        "../../examples/options_overview",
+        "../../examples/individual_options",
+    ]
+)
+
 # Sphinx gallery
 sphinx_gallery_conf = {
-    "examples_dirs": "../../examples",  # path to example scripts
-    "gallery_dirs": "examples",  # path to where to save generated output
+    "examples_dirs": "../../examples",
+    "gallery_dirs": "examples",
     "matplotlib_animations": True,
+    "within_subsection_order": ExampleTitleSortKey,
+    "subsection_order": subsection_order,
 }

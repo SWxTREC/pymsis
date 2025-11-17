@@ -164,34 +164,69 @@ def calculate(
     Other Parameters
     ----------------
     f107 : float
-        Account for F10.7 variations
+        Solar flux F10.7 effects on atmospheric density. Controls how much
+        the current F10.7 value modifies the base atmospheric state. When set to 0,
+        F10.7 variations are ignored and the atmosphere uses a standard reference
+        solar flux level.
     time_independent : float
-        Account for time variations
+        Time-independent baseline atmospheric structure. Controls the
+        basic north-south atmospheric variations that provide the fundamental
+        geographic structure of the atmosphere independent of time. Setting
+        to 0 removes these baseline latitude-dependent terms, leaving only
+        time-varying atmospheric patterns.
     symmetrical_annual : float
-        Account for symmetrical annual variations
+        Annual variations that are the same in both hemispheres. Controls
+        seasonal changes in atmospheric density due to Earth's orbit around
+        the Sun. When set to 0, removes symmetric year-to-year variations.
     symmetrical_semiannual : float
-        Account for symmetrical semiannual variations
+        Semiannual (6-month) variations that are symmetric between hemispheres.
+        Controls atmospheric changes that occur twice per year due to solar
+        heating patterns. Setting to 0 removes these biannual variations.
     asymmetrical_annual : float
-        Account for asymmetrical annual variations
+        Annual variations that differ between northern and southern hemispheres.
+        Accounts for seasonal differences caused by land/ocean distribution and
+        other hemispheric asymmetries. When set to 0, removes asymmetric
+        seasonal effects.
     asymmetrical_semiannual : float
-        Account for asymmetrical semiannual variations
+        Semiannual variations that differ between hemispheres. Controls
+        atmospheric changes that occur twice yearly but with different magnitudes
+        in each hemisphere. Setting to 0 removes these asymmetric biannual variations.
     diurnal : float
-        Account for diurnal variations
+        Daily (24-hour) variations in atmospheric density. Controls day/night
+        differences caused by solar heating and atmospheric tides. When set to 0,
+        removes all diurnal atmospheric variations.
     semidiurnal : float
-        Account for semidiurnal variations
+        Semi-daily (12-hour) variations in atmospheric density. Controls
+        atmospheric tides that occur twice per day due to solar heating patterns.
+        Setting to 0 removes these twice-daily atmospheric oscillations.
     geomagnetic_activity : float
-        Account for geomagnetic activity
-        (1 = Daily Ap mode, -1 = Storm-time Ap mode)
+        Geomagnetic activity effects on atmospheric heating and expansion.
+        Controls how magnetic storms and aurora affect atmospheric density.
+        (1 = Daily Ap mode using average daily values, -1 = Storm-time Ap mode
+        using 3-hourly Ap indices for more detailed storm modeling)
     all_ut_effects : float
-        Account for all UT/longitudinal effects
+        Universal Time (UT) and longitudinal effects combined. Controls
+        atmospheric variations that depend on the time of day in UT and
+        geographic longitude. Setting to 0 removes all UT/longitude-dependent
+        variations.
     longitudinal : float
-        Account for longitudinal effects
+        Pure longitudinal variations independent of UT. Controls atmospheric
+        differences that vary only with geographic longitude (e.g., land/sea contrasts,
+        topography). When set to 0, removes longitude-only atmospheric variations.
     mixed_ut_long : float
-        Account for UT and mixed UT/longitudinal effects
+        Mixed Universal Time and longitudinal effects. Controls atmospheric
+        variations that depend on both UT and longitude simultaneously (e.g.,
+        regional differences in tidal patterns). Setting to 0 removes these
+        coupled effects.
     mixed_ap_ut_long : float
-        Account for mixed Ap, UT, and longitudinal effects
+        Combined geomagnetic activity, UT, and longitudinal effects. Controls
+        how magnetic activity affects the atmosphere differently across longitude
+        and UT. When set to 0, removes the geographic/temporal coupling of
+        magnetic effects.
     terdiurnal : float
-        Account for terdiurnal variations
+        Terdiurnal (8-hour) atmospheric variations. Controls atmospheric tides
+        that occur three times per day due to solar heating harmonics. Setting
+        to 0 removes these 8-hourly atmospheric oscillations.
 
     Notes
     -----
@@ -277,43 +312,83 @@ def create_options(
     """
     Create the options list based on keyword argument choices.
 
-    Defaults to all 1's for the input options. Any value other than 1
-    will turn off the corresponding effect in the MSIS model, with the
-    exception of geomagnetic activity, which can be set to -1 for storm-time
-    Ap mode. You may also use booleans for the options, ``diurnal=False`` will
+    Defaults to all 1's for the input options.
+    0 turns the option off.
+    1 turns the option on.
+    2 turns the main effects off, but the cross terms on.
+
+    For geomagnetic_activity, 1 is for daily Ap mode, and -1 is for storm-time Ap mode.
+    You may also use booleans for the options, ``diurnal=False`` will
     turn off the diurnal effect.
 
     Parameters
     ----------
     f107 : float
-        Account for F10.7 variations
+        Solar flux F10.7 effects on atmospheric density. Controls how much
+        the current F10.7 value modifies the base atmospheric state. When set to 0,
+        F10.7 variations are ignored and the atmosphere uses a standard reference
+        solar flux level.
     time_independent : float
-        Account for time variations
+        Time-independent baseline atmospheric structure. Controls the
+        basic north-south atmospheric variations that provide the fundamental
+        geographic structure of the atmosphere independent of time. Setting
+        to 0 removes these baseline latitude-dependent terms, leaving only
+        time-varying atmospheric patterns.
     symmetrical_annual : float
-        Account for symmetrical annual variations
+        Annual variations that are the same in both hemispheres. Controls
+        seasonal changes in atmospheric density due to Earth's orbit around
+        the Sun. When set to 0, removes symmetric year-to-year variations.
     symmetrical_semiannual : float
-        Account for symmetrical semiannual variations
+        Semiannual (6-month) variations that are symmetric between hemispheres.
+        Controls atmospheric changes that occur twice per year due to solar
+        heating patterns. Setting to 0 removes these biannual variations.
     asymmetrical_annual : float
-        Account for asymmetrical annual variations
+        Annual variations that differ between northern and southern hemispheres.
+        Accounts for seasonal differences caused by land/ocean distribution and
+        other hemispheric asymmetries. When set to 0, removes asymmetric
+        seasonal effects.
     asymmetrical_semiannual : float
-        Account for asymmetrical semiannual variations
+        Semiannual variations that differ between hemispheres. Controls
+        atmospheric changes that occur twice yearly but with different magnitudes
+        in each hemisphere. Setting to 0 removes these asymmetric biannual
+        variations.
     diurnal : float
-        Account for diurnal variations
+        Daily (24-hour) variations in atmospheric density. Controls day/night
+        differences caused by solar heating and atmospheric tides. When set to 0,
+        removes all diurnal atmospheric variations.
     semidiurnal : float
-        Account for semidiurnal variations
+        Semi-daily (12-hour) variations in atmospheric density. Controls
+        atmospheric tides that occur twice per day due to solar heating patterns.
+        Setting to 0 removes these twice-daily atmospheric oscillations.
     geomagnetic_activity : float
-        Account for geomagnetic activity
-        (1 = Daily Ap mode, -1 = Storm-time Ap mode)
+        Geomagnetic activity effects on atmospheric heating and expansion.
+        Controls how magnetic storms and aurora affect atmospheric density.
+        (1 = Daily Ap mode using average daily values, -1 = Storm-time Ap mode
+        using 3-hourly Ap indices for more detailed storm modeling)
     all_ut_effects : float
-        Account for all UT/longitudinal effects
+        Universal Time (UT) and longitudinal effects combined. Controls
+        atmospheric variations that depend on the time of day in UT and
+        geographic longitude. Setting to 0 removes all UT/longitude-dependent
+        variations.
     longitudinal : float
-        Account for longitudinal effects
+        Pure longitudinal variations independent of UT. Controls atmospheric
+        differences that vary only with geographic longitude (e.g., land/sea
+        contrasts, topography). When set to 0, removes longitude-only
+        atmospheric variations.
     mixed_ut_long : float
-        Account for UT and mixed UT/longitudinal effects
+        Mixed Universal Time and longitudinal effects. Controls atmospheric
+        variations that depend on both UT and longitude simultaneously (e.g.,
+        regional differences in tidal patterns). Setting to 0 removes these
+        coupled effects.
     mixed_ap_ut_long : float
-        Account for mixed Ap, UT, and longitudinal effects
+        Combined geomagnetic activity, UT, and longitudinal effects. Controls
+        how magnetic activity affects the atmosphere differently across longitude
+        and UT. When set to 0, removes the geographic/temporal coupling of
+        magnetic effects.
     terdiurnal : float
-        Account for terdiurnal variations
+        Terdiurnal (8-hour) atmospheric variations. Controls atmospheric tides
+        that occur three times per day due to solar heating harmonics. Setting
+        to 0 removes these 8-hourly atmospheric oscillations.
 
     Returns
     -------
