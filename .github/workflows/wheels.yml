@@ -50,6 +50,44 @@ jobs:
           compiler: gcc
           version: 13
 
+      - name: Fix compiler symlinks for Intel Mac
+        if: matrix.os == 'macos-15-intel'
+        run: |
+          # setup-fortran creates broken symlinks on Intel Macs
+          # because it points to /opt/homebrew/bin but compilers are in /usr/local/bin
+          # Find where gcc-13 is actually installed
+          if [ -f /usr/local/bin/gcc-13 ]; then
+            GCC_PATH="/usr/local/bin/gcc-13"
+            GFORTRAN_PATH="/usr/local/bin/gfortran-13"
+            GXX_PATH="/usr/local/bin/g++-13"
+          elif [ -f /opt/homebrew/bin/gcc-13 ]; then
+            GCC_PATH="/opt/homebrew/bin/gcc-13"
+            GFORTRAN_PATH="/opt/homebrew/bin/gfortran-13"
+            GXX_PATH="/opt/homebrew/bin/g++-13"
+          else
+            echo "Error: Cannot find gcc-13"
+            exit 1
+          fi
+
+          echo "Found compilers at: $GCC_PATH"
+
+          # Remove any existing symlinks and create new ones
+          sudo rm -f /usr/local/bin/gcc /usr/local/bin/gfortran /usr/local/bin/g++
+          sudo ln -sf "$GCC_PATH" /usr/local/bin/gcc
+          sudo ln -sf "$GFORTRAN_PATH" /usr/local/bin/gfortran
+          sudo ln -sf "$GXX_PATH" /usr/local/bin/g++
+
+          echo "Created symlinks:"
+          ls -la /usr/local/bin/gcc /usr/local/bin/gfortran /usr/local/bin/g++
+
+          # Force /usr/local/bin to be first in PATH for all subsequent steps
+          echo "PATH=/usr/local/bin:$PATH" >> $GITHUB_ENV
+
+          # Also explicitly set the compiler environment variables to full paths
+          echo "CC=/usr/local/bin/gcc" >> $GITHUB_ENV
+          echo "CXX=/usr/local/bin/g++" >> $GITHUB_ENV
+          echo "FC=/usr/local/bin/gfortran" >> $GITHUB_ENV
+
       - name: Compiler versions
         run: |
           which gcc
