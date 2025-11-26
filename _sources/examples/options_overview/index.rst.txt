@@ -1,0 +1,69 @@
+
+
+.. _sphx_glr_examples_options_overview:
+
+.. _options_overview:
+
+MSIS Options Overview
+---------------------
+
+High-level visualization of MSIS option effects across multiple dimensions.
+These examples provide comparative analysis showing how different options
+affect atmospheric structure and help identify which options have the most
+significant impacts under various conditions.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the visual impact of each MSIS option by showing altitude profiles of percentage changes in atmospheric mass density when each option is turned OFF compared to when it&#x27;s ON. This makes it easy to see which options have the largest effects and at what altitudes.">
+
+.. only:: html
+
+  .. image:: /examples/options_overview/images/thumb/sphx_glr_plot_options_01_altitude_impact_overview_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_options_overview_plot_options_01_altitude_impact_overview.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Altitude Impact Comparison</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how different MSIS options affect atmospheric density across longitude and time. The plots show surface maps of mass density at 300 km altitude, revealing the geographic and temporal patterns controlled by each option.">
+
+.. only:: html
+
+  .. image:: /examples/options_overview/images/thumb/sphx_glr_plot_options_02_geographic_patterns_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_options_overview_plot_options_02_geographic_patterns.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Geographic and Temporal Patterns</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/options_overview/plot_options_01_altitude_impact_overview
+   /examples/options_overview/plot_options_02_geographic_patterns
+

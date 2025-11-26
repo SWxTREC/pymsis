@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pymsis.calculate &#8212; pymsis 0.11.0 documentation</title>
+    <title>pymsis.calculate &#8212; pymsis 0.12.0 documentation</title>
   
   
   
@@ -43,7 +43,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=f3b36f1a"></script>
+    <script src="../../_static/documentation_options.js?v=61ccb1f1"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/generated/pymsis.calculate';</script>
@@ -53,7 +53,7 @@
     <link rel="prev" title="API reference" href="../index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.11.0" />
+  <meta name="docsearch:version" content="0.12.0" />
   </head>
   
   
@@ -119,14 +119,14 @@
       
     
     
-    <img src="../../_static/pymsis-logo.png" class="logo__image only-light" alt="pymsis 0.11.0 documentation - Home"/>
-    <img src="../../_static/pymsis-logo.png" class="logo__image only-dark pst-js-only" alt="pymsis 0.11.0 documentation - Home"/>
+    <img src="../../_static/pymsis-logo.png" class="logo__image only-light" alt="pymsis 0.12.0 documentation - Home"/>
+    <img src="../../_static/pymsis-logo.png" class="logo__image only-dark pst-js-only" alt="pymsis 0.12.0 documentation - Home"/>
   
   
 </a></div>
     
       <div class="navbar-item"><!-- This will display the version of the docs -->
-v0.11.0</div>
+v0.12.0</div>
     
   </div>
   
@@ -454,21 +454,56 @@ all keyword arguments specifying individual options will be ignored.</p></li>
 <li><p><strong>**kwargs</strong> (<em>dict</em>) – Single options for the switches can be defined through keyword arguments.
 For example, <code class="docutils literal notranslate"><span class="pre">calculate(...,</span> <span class="pre">geomagnetic_activity=-1)</span></code> will set the
 geomagnetic activity switch to -1 (storm-time ap mode).</p></li>
-<li><p><strong>f107</strong> (<em>float</em>) – Account for F10.7 variations</p></li>
-<li><p><strong>time_independent</strong> (<em>float</em>) – Account for time variations</p></li>
-<li><p><strong>symmetrical_annual</strong> (<em>float</em>) – Account for symmetrical annual variations</p></li>
-<li><p><strong>symmetrical_semiannual</strong> (<em>float</em>) – Account for symmetrical semiannual variations</p></li>
-<li><p><strong>asymmetrical_annual</strong> (<em>float</em>) – Account for asymmetrical annual variations</p></li>
-<li><p><strong>asymmetrical_semiannual</strong> (<em>float</em>) – Account for asymmetrical semiannual variations</p></li>
-<li><p><strong>diurnal</strong> (<em>float</em>) – Account for diurnal variations</p></li>
-<li><p><strong>semidiurnal</strong> (<em>float</em>) – Account for semidiurnal variations</p></li>
-<li><p><strong>geomagnetic_activity</strong> (<em>float</em>) – Account for geomagnetic activity
-(1 = Daily Ap mode, -1 = Storm-time Ap mode)</p></li>
-<li><p><strong>all_ut_effects</strong> (<em>float</em>) – Account for all UT/longitudinal effects</p></li>
-<li><p><strong>longitudinal</strong> (<em>float</em>) – Account for longitudinal effects</p></li>
-<li><p><strong>mixed_ut_long</strong> (<em>float</em>) – Account for UT and mixed UT/longitudinal effects</p></li>
-<li><p><strong>mixed_ap_ut_long</strong> (<em>float</em>) – Account for mixed Ap, UT, and longitudinal effects</p></li>
-<li><p><strong>terdiurnal</strong> (<em>float</em>) – Account for terdiurnal variations</p></li>
+<li><p><strong>f107</strong> (<em>float</em>) – Solar flux F10.7 effects on atmospheric density. Controls how much
+the current F10.7 value modifies the base atmospheric state. When set to 0,
+F10.7 variations are ignored and the atmosphere uses a standard reference
+solar flux level.</p></li>
+<li><p><strong>time_independent</strong> (<em>float</em>) – Time-independent baseline atmospheric structure. Controls the
+basic north-south atmospheric variations that provide the fundamental
+geographic structure of the atmosphere independent of time. Setting
+to 0 removes these baseline latitude-dependent terms, leaving only
+time-varying atmospheric patterns.</p></li>
+<li><p><strong>symmetrical_annual</strong> (<em>float</em>) – Annual variations that are the same in both hemispheres. Controls
+seasonal changes in atmospheric density due to Earth’s orbit around
+the Sun. When set to 0, removes symmetric year-to-year variations.</p></li>
+<li><p><strong>symmetrical_semiannual</strong> (<em>float</em>) – Semiannual (6-month) variations that are symmetric between hemispheres.
+Controls atmospheric changes that occur twice per year due to solar
+heating patterns. Setting to 0 removes these biannual variations.</p></li>
+<li><p><strong>asymmetrical_annual</strong> (<em>float</em>) – Annual variations that differ between northern and southern hemispheres.
+Accounts for seasonal differences caused by land/ocean distribution and
+other hemispheric asymmetries. When set to 0, removes asymmetric
+seasonal effects.</p></li>
+<li><p><strong>asymmetrical_semiannual</strong> (<em>float</em>) – Semiannual variations that differ between hemispheres. Controls
+atmospheric changes that occur twice yearly but with different magnitudes
+in each hemisphere. Setting to 0 removes these asymmetric biannual variations.</p></li>
+<li><p><strong>diurnal</strong> (<em>float</em>) – Daily (24-hour) variations in atmospheric density. Controls day/night
+differences caused by solar heating and atmospheric tides. When set to 0,
+removes all diurnal atmospheric variations.</p></li>
+<li><p><strong>semidiurnal</strong> (<em>float</em>) – Semi-daily (12-hour) variations in atmospheric density. Controls
+atmospheric tides that occur twice per day due to solar heating patterns.
+Setting to 0 removes these twice-daily atmospheric oscillations.</p></li>
+<li><p><strong>geomagnetic_activity</strong> (<em>float</em>) – Geomagnetic activity effects on atmospheric heating and expansion.
+Controls how magnetic storms and aurora affect atmospheric density.
+(1 = Daily Ap mode using average daily values, -1 = Storm-time Ap mode
+using 3-hourly Ap indices for more detailed storm modeling)</p></li>
+<li><p><strong>all_ut_effects</strong> (<em>float</em>) – Universal Time (UT) and longitudinal effects combined. Controls
+atmospheric variations that depend on the time of day in UT and
+geographic longitude. Setting to 0 removes all UT/longitude-dependent
+variations.</p></li>
+<li><p><strong>longitudinal</strong> (<em>float</em>) – Pure longitudinal variations independent of UT. Controls atmospheric
+differences that vary only with geographic longitude (e.g., land/sea contrasts,
+topography). When set to 0, removes longitude-only atmospheric variations.</p></li>
+<li><p><strong>mixed_ut_long</strong> (<em>float</em>) – Mixed Universal Time and longitudinal effects. Controls atmospheric
+variations that depend on both UT and longitude simultaneously (e.g.,
+regional differences in tidal patterns). Setting to 0 removes these
+coupled effects.</p></li>
+<li><p><strong>mixed_ap_ut_long</strong> (<em>float</em>) – Combined geomagnetic activity, UT, and longitudinal effects. Controls
+how magnetic activity affects the atmosphere differently across longitude
+and UT. When set to 0, removes the geographic/temporal coupling of
+magnetic effects.</p></li>
+<li><p><strong>terdiurnal</strong> (<em>float</em>) – Terdiurnal (8-hour) atmospheric variations. Controls atmospheric tides
+that occur three times per day due to solar heating harmonics. Setting
+to 0 removes these 8-hourly atmospheric oscillations.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

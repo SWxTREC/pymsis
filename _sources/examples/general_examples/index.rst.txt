@@ -1,0 +1,158 @@
+
+
+.. _sphx_glr_examples_general_examples:
+
+.. _general_examples:
+
+General Examples
+----------------
+
+Basic atmospheric modeling examples showing core pymsis functionality for
+typical use cases like plotting atmospheric profiles, understanding seasonal
+and diurnal variations, and comparing different MSIS versions.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the altitude variations at a single location. Additionally, we show the difference between densities at noon (solid) and midnight (dashed).">
+
+.. only:: html
+
+  .. image:: /examples/general_examples/images/thumb/sphx_glr_plot_altitude_profiles_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_general_examples_plot_altitude_profiles.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Altitude profiles</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the difference from the annual mean at a single location.">
+
+.. only:: html
+
+  .. image:: /examples/general_examples/images/thumb/sphx_glr_plot_annual_variation_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_general_examples_plot_annual_variation.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Annual variation</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the diurnal variation at a single location.">
+
+.. only:: html
+
+  .. image:: /examples/general_examples/images/thumb/sphx_glr_plot_diurnal_variation_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_general_examples_plot_diurnal_variation.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Diurnal variation</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to animate the surface plot. Showing the variations over the course of a year.">
+
+.. only:: html
+
+  .. image:: /examples/general_examples/images/thumb/sphx_glr_plot_surface_animation_thumb.gif
+    :alt:
+
+  :ref:`sphx_glr_examples_general_examples_plot_surface_animation.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Surface animation</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the quantities on a constant altitude plane.">
+
+.. only:: html
+
+  .. image:: /examples/general_examples/images/thumb/sphx_glr_plot_surface_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_general_examples_plot_surface.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Surface plot</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the percent change along an altitude profile between MSIS version 00 and 2. Additionally, we show the difference between densities at noon (solid) and midnight (dashed).">
+
+.. only:: html
+
+  .. image:: /examples/general_examples/images/thumb/sphx_glr_plot_version_diff_altitude_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_general_examples_plot_version_diff_altitude.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Version Differences (Altitude)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the percent change of all variables on a surface between MSIS version 00 and 2.">
+
+.. only:: html
+
+  .. image:: /examples/general_examples/images/thumb/sphx_glr_plot_version_diff_surface_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_general_examples_plot_version_diff_surface.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Version Differences (Surface)</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/general_examples/plot_altitude_profiles
+   /examples/general_examples/plot_annual_variation
+   /examples/general_examples/plot_diurnal_variation
+   /examples/general_examples/plot_surface_animation
+   /examples/general_examples/plot_surface
+   /examples/general_examples/plot_version_diff_altitude
+   /examples/general_examples/plot_version_diff_surface
+

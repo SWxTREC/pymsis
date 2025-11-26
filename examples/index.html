@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Examples &#8212; pymsis 0.11.0 documentation</title>
+    <title>Examples &#8212; pymsis 0.12.0 documentation</title>
   
   
   
@@ -43,17 +43,17 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=f3b36f1a"></script>
+    <script src="../_static/documentation_options.js?v=61ccb1f1"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples/index';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Surface plot" href="plot_surface.html" />
+    <link rel="next" title="General Examples" href="general_examples/index.html" />
     <link rel="prev" title="pymsis: A python wrapper of the NRLMSIS model" href="../index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.11.0" />
+  <meta name="docsearch:version" content="0.12.0" />
   </head>
   
   
@@ -119,14 +119,14 @@
       
     
     
-    <img src="../_static/pymsis-logo.png" class="logo__image only-light" alt="pymsis 0.11.0 documentation - Home"/>
-    <img src="../_static/pymsis-logo.png" class="logo__image only-dark pst-js-only" alt="pymsis 0.11.0 documentation - Home"/>
+    <img src="../_static/pymsis-logo.png" class="logo__image only-light" alt="pymsis 0.12.0 documentation - Home"/>
+    <img src="../_static/pymsis-logo.png" class="logo__image only-dark pst-js-only" alt="pymsis 0.12.0 documentation - Home"/>
   
   
 </a></div>
     
       <div class="navbar-item"><!-- This will display the version of the docs -->
-v0.11.0</div>
+v0.12.0</div>
     
   </div>
   
@@ -325,13 +325,81 @@ v0.11.0</div>
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="plot_surface.html">Surface plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plot_version_diff_surface.html">Version Differences (Surface)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plot_annual_variation.html">Annual variation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plot_altitude_profiles.html">Altitude profiles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plot_diurnal_variation.html">Diurnal variation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plot_version_diff_altitude.html">Version Differences (Altitude)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plot_surface_animation.html">Surface animation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="general_examples/index.html">General Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="general_examples/plot_altitude_profiles.html">Altitude profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_examples/plot_annual_variation.html">Annual variation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_examples/plot_diurnal_variation.html">Diurnal variation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_examples/plot_surface_animation.html">Surface animation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_examples/plot_surface.html">Surface plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_examples/plot_version_diff_altitude.html">Version Differences (Altitude)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_examples/plot_version_diff_surface.html">Version Differences (Surface)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="options_overview/index.html">MSIS Options Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="options_overview/plot_options_01_altitude_impact_overview.html">Altitude Impact Comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options_overview/plot_options_02_geographic_patterns.html">Geographic and Temporal Patterns</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="individual_options/index.html">Individual Option Analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="individual_options/plot_option_00_f107_effects.html">00. MSIS Option 0: F10.7 Effects</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="individual_options/plot_option_01_time_independent.html">01. MSIS Option 1: Time Independent</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="individual_options/plot_option_02_symmetric_annual.html">02. MSIS Option 2: Symmetric Annual</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="individual_options/plot_option_03_symmetric_semiannual.html">03. MSIS Option 3: Symmetric Semiannual</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="individual_options/plot_option_04_asymmetric_annual.html">04. MSIS Option 4: Asymmetric Annual</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="individual_options/plot_option_05_asymmetric_semiannual.html">05. MSIS Option 5: Asymmetric Semiannual</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="individual_options/plot_option_06_diurnal.html">06. MSIS Option 6: Diurnal</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="individual_options/plot_option_07_semidiurnal.html">07. MSIS Option 7: Semidiurnal</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="individual_options/plot_option_08_geomagnetic.html">08. MSIS Option 8: Geomagnetic Activity</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="individual_options/plot_option_09_ut_effects.html">09. MSIS Option 9: All UT Effects</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="individual_options/plot_option_10_longitudinal.html">10. MSIS Option 10: Longitudinal</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="individual_options/plot_option_11_mixed_ut_long.html">11. MSIS Option 11: Mixed UT/Long</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="individual_options/plot_option_12_lower_atmosphere.html">12. MSIS Option 12: Lower Atmosphere</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="individual_options/plot_option_13_lower_atm_f107.html">13. MSIS Option 13: Lower Atm F10.7</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="individual_options/msis_options_utils.html">MSIS Options Analysis Utilities</a></li>
+</ul>
+</details></li>
 </ul>
 </div>
 </nav></div>
@@ -392,27 +460,104 @@ v0.11.0</div>
   <section id="examples">
 <span id="id1"></span><h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h1>
 <p>This is a collection of demos and examples of what can be done with pymsis.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the quantities on a constant altitude plane."><img alt="" src="../_images/sphx_glr_plot_surface_thumb.png" />
-<p><a class="reference internal" href="plot_surface.html#sphx-glr-examples-plot-surface-py"><span class="std std-ref">Surface plot</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Surface plot</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the percent change of all variables on a surface between MSIS version 00 and 2."><img alt="" src="../_images/sphx_glr_plot_version_diff_surface_thumb.png" />
-<p><a class="reference internal" href="plot_version_diff_surface.html#sphx-glr-examples-plot-version-diff-surface-py"><span class="std std-ref">Version Differences (Surface)</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Version Differences (Surface)</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the difference from the annual mean at a single location."><img alt="" src="../_images/sphx_glr_plot_annual_variation_thumb.png" />
-<p><a class="reference internal" href="plot_annual_variation.html#sphx-glr-examples-plot-annual-variation-py"><span class="std std-ref">Annual variation</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Annual variation</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the altitude variations at a single location. Additionally, we show the difference between densities at noon (solid) and midnight (dashed)."><img alt="" src="../_images/sphx_glr_plot_altitude_profiles_thumb.png" />
-<p><a class="reference internal" href="plot_altitude_profiles.html#sphx-glr-examples-plot-altitude-profiles-py"><span class="std std-ref">Altitude profiles</span></a></p>
+<div class="sphx-glr-thumbnails"></div><section id="general-examples">
+<h2>General Examples<a class="headerlink" href="#general-examples" title="Link to this heading">#</a></h2>
+<p>Basic atmospheric modeling examples showing core pymsis functionality for
+typical use cases like plotting atmospheric profiles, understanding seasonal
+and diurnal variations, and comparing different MSIS versions.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the altitude variations at a single location. Additionally, we show the difference between densities at noon (solid) and midnight (dashed)."><img alt="" src="../_images/sphx_glr_plot_altitude_profiles_thumb.png" />
+<p><a class="reference internal" href="general_examples/plot_altitude_profiles.html#sphx-glr-examples-general-examples-plot-altitude-profiles-py"><span class="std std-ref">Altitude profiles</span></a></p>
   <div class="sphx-glr-thumbnail-title">Altitude profiles</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the difference from the annual mean at a single location."><img alt="" src="../_images/sphx_glr_plot_annual_variation_thumb.png" />
+<p><a class="reference internal" href="general_examples/plot_annual_variation.html#sphx-glr-examples-general-examples-plot-annual-variation-py"><span class="std std-ref">Annual variation</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Annual variation</div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the diurnal variation at a single location."><img alt="" src="../_images/sphx_glr_plot_diurnal_variation_thumb.png" />
-<p><a class="reference internal" href="plot_diurnal_variation.html#sphx-glr-examples-plot-diurnal-variation-py"><span class="std std-ref">Diurnal variation</span></a></p>
+<p><a class="reference internal" href="general_examples/plot_diurnal_variation.html#sphx-glr-examples-general-examples-plot-diurnal-variation-py"><span class="std std-ref">Diurnal variation</span></a></p>
   <div class="sphx-glr-thumbnail-title">Diurnal variation</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the percent change along an altitude profile between MSIS version 00 and 2. Additionally, we show the difference between densities at noon (solid) and midnight (dashed)."><img alt="" src="../_images/sphx_glr_plot_version_diff_altitude_thumb.png" />
-<p><a class="reference internal" href="plot_version_diff_altitude.html#sphx-glr-examples-plot-version-diff-altitude-py"><span class="std std-ref">Version Differences (Altitude)</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Version Differences (Altitude)</div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to animate the surface plot. Showing the variations over the course of a year."><img alt="" src="../_images/sphx_glr_plot_surface_animation_thumb.gif" />
-<p><a class="reference internal" href="plot_surface_animation.html#sphx-glr-examples-plot-surface-animation-py"><span class="std std-ref">Surface animation</span></a></p>
+<p><a class="reference internal" href="general_examples/plot_surface_animation.html#sphx-glr-examples-general-examples-plot-surface-animation-py"><span class="std std-ref">Surface animation</span></a></p>
   <div class="sphx-glr-thumbnail-title">Surface animation</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the quantities on a constant altitude plane."><img alt="" src="../_images/sphx_glr_plot_surface_thumb.png" />
+<p><a class="reference internal" href="general_examples/plot_surface.html#sphx-glr-examples-general-examples-plot-surface-py"><span class="std std-ref">Surface plot</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Surface plot</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the percent change along an altitude profile between MSIS version 00 and 2. Additionally, we show the difference between densities at noon (solid) and midnight (dashed)."><img alt="" src="../_images/sphx_glr_plot_version_diff_altitude_thumb.png" />
+<p><a class="reference internal" href="general_examples/plot_version_diff_altitude.html#sphx-glr-examples-general-examples-plot-version-diff-altitude-py"><span class="std std-ref">Version Differences (Altitude)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Version Differences (Altitude)</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to calculate the percent change of all variables on a surface between MSIS version 00 and 2."><img alt="" src="../_images/sphx_glr_plot_version_diff_surface_thumb.png" />
+<p><a class="reference internal" href="general_examples/plot_version_diff_surface.html#sphx-glr-examples-general-examples-plot-version-diff-surface-py"><span class="std std-ref">Version Differences (Surface)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Version Differences (Surface)</div>
+</div></div></section>
+<section id="msis-options-overview">
+<h2>MSIS Options Overview<a class="headerlink" href="#msis-options-overview" title="Link to this heading">#</a></h2>
+<p>High-level visualization of MSIS option effects across multiple dimensions.
+These examples provide comparative analysis showing how different options
+affect atmospheric structure and help identify which options have the most
+significant impacts under various conditions.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the visual impact of each MSIS option by showing altitude profiles of percentage changes in atmospheric mass density when each option is turned OFF compared to when it&#x27;s ON. This makes it easy to see which options have the largest effects and at what altitudes."><img alt="" src="../_images/sphx_glr_plot_options_01_altitude_impact_overview_thumb.png" />
+<p><a class="reference internal" href="options_overview/plot_options_01_altitude_impact_overview.html#sphx-glr-examples-options-overview-plot-options-01-altitude-impact-overview-py"><span class="std std-ref">Altitude Impact Comparison</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Altitude Impact Comparison</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how different MSIS options affect atmospheric density across longitude and time. The plots show surface maps of mass density at 300 km altitude, revealing the geographic and temporal patterns controlled by each option."><img alt="" src="../_images/sphx_glr_plot_options_02_geographic_patterns_thumb.png" />
+<p><a class="reference internal" href="options_overview/plot_options_02_geographic_patterns.html#sphx-glr-examples-options-overview-plot-options-02-geographic-patterns-py"><span class="std std-ref">Geographic and Temporal Patterns</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Geographic and Temporal Patterns</div>
+</div></div></section>
+<section id="individual-option-analysis">
+<h2>Individual Option Analysis<a class="headerlink" href="#individual-option-analysis" title="Link to this heading">#</a></h2>
+<p>Comprehensive analysis for each of the 14 main MSIS options. Each example
+provides detailed physical explanations and multi-dimensional visualization
+showing how turning OFF a specific option affects atmospheric density across
+altitude, geography, and time.</p>
+<p>Each analysis includes:</p>
+<ul class="simple">
+<li><p><strong>Altitude profiles</strong>: Seasonal and diurnal effects from 100-500 km</p></li>
+<li><p><strong>Geographic maps</strong>: Global latitude vs longitude patterns at 300 km</p></li>
+<li><p><strong>Diurnal cycles</strong>: 24-hour variations at a fixed location</p></li>
+<li><p><strong>Seasonal cycles</strong>: Annual variations throughout the year</p></li>
+</ul>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the analysis of MSIS Option 0, which controls Solar EUV flux variations. This option represents a key physical process that affects atmospheric density variations."><img alt="" src="../_images/sphx_glr_plot_option_00_f107_effects_thumb.png" />
+<p><a class="reference internal" href="individual_options/plot_option_00_f107_effects.html#sphx-glr-examples-individual-options-plot-option-00-f107-effects-py"><span class="std std-ref">00. MSIS Option 0: F10.7 Effects</span></a></p>
+  <div class="sphx-glr-thumbnail-title">00. MSIS Option 0: F10.7 Effects</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the analysis of MSIS Option 1, which controls Baseline atmospheric structure. This option represents a key physical process that affects atmospheric density variations."><img alt="" src="../_images/sphx_glr_plot_option_01_time_independent_thumb.png" />
+<p><a class="reference internal" href="individual_options/plot_option_01_time_independent.html#sphx-glr-examples-individual-options-plot-option-01-time-independent-py"><span class="std std-ref">01. MSIS Option 1: Time Independent</span></a></p>
+  <div class="sphx-glr-thumbnail-title">01. MSIS Option 1: Time Independent</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the analysis of MSIS Option 2, which controls Annual seasonal variations (symmetric). This option represents a key physical process that affects atmospheric density variations."><img alt="" src="../_images/sphx_glr_plot_option_02_symmetric_annual_thumb.png" />
+<p><a class="reference internal" href="individual_options/plot_option_02_symmetric_annual.html#sphx-glr-examples-individual-options-plot-option-02-symmetric-annual-py"><span class="std std-ref">02. MSIS Option 2: Symmetric Annual</span></a></p>
+  <div class="sphx-glr-thumbnail-title">02. MSIS Option 2: Symmetric Annual</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the analysis of MSIS Option 3, which controls Semiannual atmospheric oscillations. This option represents a key physical process that affects atmospheric density variations."><img alt="" src="../_images/sphx_glr_plot_option_03_symmetric_semiannual_thumb.png" />
+<p><a class="reference internal" href="individual_options/plot_option_03_symmetric_semiannual.html#sphx-glr-examples-individual-options-plot-option-03-symmetric-semiannual-py"><span class="std std-ref">03. MSIS Option 3: Symmetric Semiannual</span></a></p>
+  <div class="sphx-glr-thumbnail-title">03. MSIS Option 3: Symmetric Semiannual</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the analysis of MSIS Option 4, which controls Asymmetric annual variations. This option represents a key physical process that affects atmospheric density variations."><img alt="" src="../_images/sphx_glr_plot_option_04_asymmetric_annual_thumb.png" />
+<p><a class="reference internal" href="individual_options/plot_option_04_asymmetric_annual.html#sphx-glr-examples-individual-options-plot-option-04-asymmetric-annual-py"><span class="std std-ref">04. MSIS Option 4: Asymmetric Annual</span></a></p>
+  <div class="sphx-glr-thumbnail-title">04. MSIS Option 4: Asymmetric Annual</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the analysis of MSIS Option 5, which controls Asymmetric semiannual variations. This option represents a key physical process that affects atmospheric density variations."><img alt="" src="../_images/sphx_glr_plot_option_05_asymmetric_semiannual_thumb.png" />
+<p><a class="reference internal" href="individual_options/plot_option_05_asymmetric_semiannual.html#sphx-glr-examples-individual-options-plot-option-05-asymmetric-semiannual-py"><span class="std std-ref">05. MSIS Option 5: Asymmetric Semiannual</span></a></p>
+  <div class="sphx-glr-thumbnail-title">05. MSIS Option 5: Asymmetric Semiannual</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the analysis of MSIS Option 6, which controls Day/night atmospheric variations. This option represents a key physical process that affects atmospheric density variations."><img alt="" src="../_images/sphx_glr_plot_option_06_diurnal_thumb.png" />
+<p><a class="reference internal" href="individual_options/plot_option_06_diurnal.html#sphx-glr-examples-individual-options-plot-option-06-diurnal-py"><span class="std std-ref">06. MSIS Option 6: Diurnal</span></a></p>
+  <div class="sphx-glr-thumbnail-title">06. MSIS Option 6: Diurnal</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the analysis of MSIS Option 7, which controls 12-hour atmospheric tidal effects. This option represents a key physical process that affects atmospheric density variations."><img alt="" src="../_images/sphx_glr_plot_option_07_semidiurnal_thumb.png" />
+<p><a class="reference internal" href="individual_options/plot_option_07_semidiurnal.html#sphx-glr-examples-individual-options-plot-option-07-semidiurnal-py"><span class="std std-ref">07. MSIS Option 7: Semidiurnal</span></a></p>
+  <div class="sphx-glr-thumbnail-title">07. MSIS Option 7: Semidiurnal</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the analysis of MSIS Option 8, which controls Geomagnetic storm effects on atmosphere. This option represents a key physical process that affects atmospheric density variations."><img alt="" src="../_images/sphx_glr_plot_option_08_geomagnetic_thumb.png" />
+<p><a class="reference internal" href="individual_options/plot_option_08_geomagnetic.html#sphx-glr-examples-individual-options-plot-option-08-geomagnetic-py"><span class="std std-ref">08. MSIS Option 8: Geomagnetic Activity</span></a></p>
+  <div class="sphx-glr-thumbnail-title">08. MSIS Option 8: Geomagnetic Activity</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the analysis of MSIS Option 9, which controls Universal Time atmospheric dependencies. This option represents a key physical process that affects atmospheric density variations."><img alt="" src="../_images/sphx_glr_plot_option_09_ut_effects_thumb.png" />
+<p><a class="reference internal" href="individual_options/plot_option_09_ut_effects.html#sphx-glr-examples-individual-options-plot-option-09-ut-effects-py"><span class="std std-ref">09. MSIS Option 9: All UT Effects</span></a></p>
+  <div class="sphx-glr-thumbnail-title">09. MSIS Option 9: All UT Effects</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the analysis of MSIS Option 10, which controls Longitude-dependent atmospheric variations. This option represents a key physical process that affects atmospheric density variations."><img alt="" src="../_images/sphx_glr_plot_option_10_longitudinal_thumb.png" />
+<p><a class="reference internal" href="individual_options/plot_option_10_longitudinal.html#sphx-glr-examples-individual-options-plot-option-10-longitudinal-py"><span class="std std-ref">10. MSIS Option 10: Longitudinal</span></a></p>
+  <div class="sphx-glr-thumbnail-title">10. MSIS Option 10: Longitudinal</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the analysis of MSIS Option 11, which controls Combined UT and longitudinal effects. This option represents a key physical process that affects atmospheric density variations."><img alt="" src="../_images/sphx_glr_plot_option_11_mixed_ut_long_thumb.png" />
+<p><a class="reference internal" href="individual_options/plot_option_11_mixed_ut_long.html#sphx-glr-examples-individual-options-plot-option-11-mixed-ut-long-py"><span class="std std-ref">11. MSIS Option 11: Mixed UT/Long</span></a></p>
+  <div class="sphx-glr-thumbnail-title">11. MSIS Option 11: Mixed UT/Long</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the analysis of MSIS Option 12, which controls Lower atmospheric influences. This option represents a key physical process that affects atmospheric density variations."><img alt="" src="../_images/sphx_glr_plot_option_12_lower_atmosphere_thumb.png" />
+<p><a class="reference internal" href="individual_options/plot_option_12_lower_atmosphere.html#sphx-glr-examples-individual-options-plot-option-12-lower-atmosphere-py"><span class="std std-ref">12. MSIS Option 12: Lower Atmosphere</span></a></p>
+  <div class="sphx-glr-thumbnail-title">12. MSIS Option 12: Lower Atmosphere</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the analysis of MSIS Option 13, which controls Solar flux effects on lower atmosphere. This option represents a key physical process that affects atmospheric density variations."><img alt="" src="../_images/sphx_glr_plot_option_13_lower_atm_f107_thumb.png" />
+<p><a class="reference internal" href="individual_options/plot_option_13_lower_atm_f107.html#sphx-glr-examples-individual-options-plot-option-13-lower-atm-f107-py"><span class="std std-ref">13. MSIS Option 13: Lower Atm F10.7</span></a></p>
+  <div class="sphx-glr-thumbnail-title">13. MSIS Option 13: Lower Atm F10.7</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Utility functions for creating comprehensive MSIS option analysis plots. This module provides reusable functions for sphinx_gallery documentation."><img alt="" src="../_images/sphx_glr_msis_options_utils_thumb.png" />
+<p><a class="reference internal" href="individual_options/msis_options_utils.html#sphx-glr-examples-individual-options-msis-options-utils-py"><span class="std std-ref">MSIS Options Analysis Utilities</span></a></p>
+  <div class="sphx-glr-thumbnail-title">MSIS Options Analysis Utilities</div>
 </div></div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-footer sphx-glr-footer-gallery docutils container">
@@ -424,6 +569,7 @@ v0.11.0</div>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
 </section>
 
 
@@ -446,11 +592,11 @@ v0.11.0</div>
       </div>
     </a>
     <a class="right-next"
-       href="plot_surface.html"
+       href="general_examples/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Surface plot</p>
+        <p class="prev-next-title">General Examples</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -464,6 +610,20 @@ v0.11.0</div>
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-examples">General Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#msis-options-overview">MSIS Options Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#individual-option-analysis">Individual Option Analysis</a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
   <div role="note" aria-label="source link">

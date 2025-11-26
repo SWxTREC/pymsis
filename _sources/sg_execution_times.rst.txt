@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:32.756** total execution time for 7 files **from all galleries**:
+**00:46.792** total execution time for 24 files **from all galleries**:
 
 .. container::
 
@@ -32,24 +32,75 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
-   * - :ref:`sphx_glr_examples_plot_surface_animation.py` (``../../examples/plot_surface_animation.py``)
-     - 00:31.244
+   * - :ref:`sphx_glr_examples_general_examples_plot_surface_animation.py` (``../../examples/general_examples/plot_surface_animation.py``)
+     - 00:32.667
      - 0.0
-   * - :ref:`sphx_glr_examples_plot_version_diff_surface.py` (``../../examples/plot_version_diff_surface.py``)
-     - 00:00.758
+   * - :ref:`sphx_glr_examples_options_overview_plot_options_01_altitude_impact_overview.py` (``../../examples/options_overview/plot_options_01_altitude_impact_overview.py``)
+     - 00:01.119
      - 0.0
-   * - :ref:`sphx_glr_examples_plot_surface.py` (``../../examples/plot_surface.py``)
-     - 00:00.339
+   * - :ref:`sphx_glr_examples_general_examples_plot_version_diff_surface.py` (``../../examples/general_examples/plot_version_diff_surface.py``)
+     - 00:00.804
      - 0.0
-   * - :ref:`sphx_glr_examples_plot_altitude_profiles.py` (``../../examples/plot_altitude_profiles.py``)
-     - 00:00.118
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_00_f107_effects.py` (``../../examples/individual_options/plot_option_00_f107_effects.py``)
+     - 00:00.779
      - 0.0
-   * - :ref:`sphx_glr_examples_plot_diurnal_variation.py` (``../../examples/plot_diurnal_variation.py``)
-     - 00:00.103
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_11_mixed_ut_long.py` (``../../examples/individual_options/plot_option_11_mixed_ut_long.py``)
+     - 00:00.779
      - 0.0
-   * - :ref:`sphx_glr_examples_plot_version_diff_altitude.py` (``../../examples/plot_version_diff_altitude.py``)
-     - 00:00.102
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_09_ut_effects.py` (``../../examples/individual_options/plot_option_09_ut_effects.py``)
+     - 00:00.777
      - 0.0
-   * - :ref:`sphx_glr_examples_plot_annual_variation.py` (``../../examples/plot_annual_variation.py``)
-     - 00:00.091
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_10_longitudinal.py` (``../../examples/individual_options/plot_option_10_longitudinal.py``)
+     - 00:00.776
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_12_lower_atmosphere.py` (``../../examples/individual_options/plot_option_12_lower_atmosphere.py``)
+     - 00:00.774
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_05_asymmetric_semiannual.py` (``../../examples/individual_options/plot_option_05_asymmetric_semiannual.py``)
+     - 00:00.771
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_01_time_independent.py` (``../../examples/individual_options/plot_option_01_time_independent.py``)
+     - 00:00.771
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_06_diurnal.py` (``../../examples/individual_options/plot_option_06_diurnal.py``)
+     - 00:00.771
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_03_symmetric_semiannual.py` (``../../examples/individual_options/plot_option_03_symmetric_semiannual.py``)
+     - 00:00.770
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_13_lower_atm_f107.py` (``../../examples/individual_options/plot_option_13_lower_atm_f107.py``)
+     - 00:00.763
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_04_asymmetric_annual.py` (``../../examples/individual_options/plot_option_04_asymmetric_annual.py``)
+     - 00:00.763
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_02_symmetric_annual.py` (``../../examples/individual_options/plot_option_02_symmetric_annual.py``)
+     - 00:00.760
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_07_semidiurnal.py` (``../../examples/individual_options/plot_option_07_semidiurnal.py``)
+     - 00:00.759
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_08_geomagnetic.py` (``../../examples/individual_options/plot_option_08_geomagnetic.py``)
+     - 00:00.757
+     - 0.0
+   * - :ref:`sphx_glr_examples_options_overview_plot_options_02_geographic_patterns.py` (``../../examples/options_overview/plot_options_02_geographic_patterns.py``)
+     - 00:00.737
+     - 0.0
+   * - :ref:`sphx_glr_examples_general_examples_plot_altitude_profiles.py` (``../../examples/general_examples/plot_altitude_profiles.py``)
+     - 00:00.201
+     - 0.0
+   * - :ref:`sphx_glr_examples_general_examples_plot_surface.py` (``../../examples/general_examples/plot_surface.py``)
+     - 00:00.148
+     - 0.0
+   * - :ref:`sphx_glr_examples_general_examples_plot_diurnal_variation.py` (``../../examples/general_examples/plot_diurnal_variation.py``)
+     - 00:00.121
+     - 0.0
+   * - :ref:`sphx_glr_examples_general_examples_plot_version_diff_altitude.py` (``../../examples/general_examples/plot_version_diff_altitude.py``)
+     - 00:00.114
+     - 0.0
+   * - :ref:`sphx_glr_examples_general_examples_plot_annual_variation.py` (``../../examples/general_examples/plot_annual_variation.py``)
+     - 00:00.110
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_msis_options_utils.py` (``../../examples/individual_options/msis_options_utils.py``)
+     - 00:00.000
      - 0.0

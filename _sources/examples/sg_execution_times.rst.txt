@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:32.756** total execution time for 7 files **from examples**:
+**00:00.000** total execution time for 0 files **from examples**:
 
 .. container::
 
@@ -32,24 +32,6 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
-   * - :ref:`sphx_glr_examples_plot_surface_animation.py` (``plot_surface_animation.py``)
-     - 00:31.244
-     - 0.0
-   * - :ref:`sphx_glr_examples_plot_version_diff_surface.py` (``plot_version_diff_surface.py``)
-     - 00:00.758
-     - 0.0
-   * - :ref:`sphx_glr_examples_plot_surface.py` (``plot_surface.py``)
-     - 00:00.339
-     - 0.0
-   * - :ref:`sphx_glr_examples_plot_altitude_profiles.py` (``plot_altitude_profiles.py``)
-     - 00:00.118
-     - 0.0
-   * - :ref:`sphx_glr_examples_plot_diurnal_variation.py` (``plot_diurnal_variation.py``)
-     - 00:00.103
-     - 0.0
-   * - :ref:`sphx_glr_examples_plot_version_diff_altitude.py` (``plot_version_diff_altitude.py``)
-     - 00:00.102
-     - 0.0
-   * - :ref:`sphx_glr_examples_plot_annual_variation.py` (``plot_annual_variation.py``)
-     - 00:00.091
-     - 0.0
+   * - N/A
+     - N/A
+     - N/A

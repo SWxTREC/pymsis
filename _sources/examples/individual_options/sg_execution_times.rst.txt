@@ -1,0 +1,79 @@
+
+:orphan:
+
+.. _sphx_glr_examples_individual_options_sg_execution_times:
+
+
+Computation times
+=================
+**00:10.772** total execution time for 15 files **from examples/individual_options**:
+
+.. container::
+
+  .. raw:: html
+
+    <style scoped>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" class="init">
+    $(document).ready( function () {
+        $('table.sg-datatable').DataTable({order: [[1, 'desc']]});
+    } );
+    </script>
+
+  .. list-table::
+   :header-rows: 1
+   :class: table table-striped sg-datatable
+
+   * - Example
+     - Time
+     - Mem (MB)
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_00_f107_effects.py` (``plot_option_00_f107_effects.py``)
+     - 00:00.779
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_11_mixed_ut_long.py` (``plot_option_11_mixed_ut_long.py``)
+     - 00:00.779
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_09_ut_effects.py` (``plot_option_09_ut_effects.py``)
+     - 00:00.777
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_10_longitudinal.py` (``plot_option_10_longitudinal.py``)
+     - 00:00.776
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_12_lower_atmosphere.py` (``plot_option_12_lower_atmosphere.py``)
+     - 00:00.774
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_05_asymmetric_semiannual.py` (``plot_option_05_asymmetric_semiannual.py``)
+     - 00:00.771
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_01_time_independent.py` (``plot_option_01_time_independent.py``)
+     - 00:00.771
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_06_diurnal.py` (``plot_option_06_diurnal.py``)
+     - 00:00.771
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_03_symmetric_semiannual.py` (``plot_option_03_symmetric_semiannual.py``)
+     - 00:00.770
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_13_lower_atm_f107.py` (``plot_option_13_lower_atm_f107.py``)
+     - 00:00.763
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_04_asymmetric_annual.py` (``plot_option_04_asymmetric_annual.py``)
+     - 00:00.763
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_02_symmetric_annual.py` (``plot_option_02_symmetric_annual.py``)
+     - 00:00.760
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_07_semidiurnal.py` (``plot_option_07_semidiurnal.py``)
+     - 00:00.759
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_plot_option_08_geomagnetic.py` (``plot_option_08_geomagnetic.py``)
+     - 00:00.757
+     - 0.0
+   * - :ref:`sphx_glr_examples_individual_options_msis_options_utils.py` (``msis_options_utils.py``)
+     - 00:00.000
+     - 0.0
