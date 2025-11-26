@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.12.0] 2025-11-26
+
+- **MAINTENANCE** Publish Python 3.14 wheels.
+- **DOCUMENTATION** Add example plots showing what influence the different options have on atmospheric density.
+
 ## [v0.11.0] 2025-07-30
 
 - **MAINTENANCE** Default `-O2` optimization level for Linux/Mac and
