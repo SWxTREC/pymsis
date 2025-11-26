@@ -102,7 +102,7 @@ jobs:
           # of the macOS version they were built on. We would need to compile
           # from source rather than use setup-fortran if we want to support
           # lower macOS versions.
-          MACOSX_DEPLOYMENT_TARGET: "${{ matrix.os == 'macos-13' && '13.0' || '14.0' }}"
+          MACOSX_DEPLOYMENT_TARGET: "${{ (matrix.os == 'macos-15' || matrix.os == 'macos-15-intel') && '15.0' || (matrix.os == 'macos-13' && '13.0' || '14.0') }}"
 
       - uses: actions/upload-artifact@v4
         with:
