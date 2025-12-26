@@ -172,7 +172,10 @@ def _load_f107_ap_data() -> dict[str, npt.NDArray]:
     return data
 
 
-def get_f107_ap(dates: npt.ArrayLike) -> tuple[npt.NDArray, npt.NDArray, npt.NDArray]:
+def get_f107_ap(
+    dates: npt.ArrayLike,
+    interpolate: bool = False,
+) -> tuple[npt.NDArray, npt.NDArray, npt.NDArray]:
     """
     Retrieve the F10.7 and ap data needed to run msis for the given times.
 
@@ -183,6 +186,11 @@ def get_f107_ap(dates: npt.ArrayLike) -> tuple[npt.NDArray, npt.NDArray, npt.NDA
     ----------
     dates : datetime-like or sequence of datetimes
         times of interest to get the proper ap and F10.7 values for
+    interpolate : bool, default: False
+        If True, linearly interpolate all values between their native time
+        resolution (daily for F10.7/F10.7a/daily Ap, 3-hourly for ap indices).
+        If False (default), use step-function sampling where values change
+        discretely at boundaries.
 
     Returns
     -------
@@ -211,7 +219,8 @@ def get_f107_ap(dates: npt.ArrayLike) -> tuple[npt.NDArray, npt.NDArray, npt.NDA
 
     data_start = data["dates"][0]
     data_end = data["dates"][-1]
-    date_offsets = dates - data_start
+    date_offsets = np.atleast_1d(dates - data_start)
+    # Ensure consistent array shapes for both scalar and array inputs
     # daily index values
     daily_indices = date_offsets.astype("timedelta64[D]").astype(int)
     # 3-hourly index values
@@ -225,10 +234,39 @@ def get_f107_ap(dates: npt.ArrayLike) -> tuple[npt.NDArray, npt.NDArray, npt.NDA
             f"{data_end}."
         )
 
-    f107 = np.take(data["f107"], daily_indices)
-    f107a = np.take(data["f107a"], daily_indices)
-    ap = np.take(data["ap"], ap_indices, axis=0)
-    warn_or_not = np.take(data["warn_data"], daily_indices)
+    if not interpolate:
+        # Normal sampling (step function behavior)
+        f107 = data["f107"][daily_indices]
+        f107a = data["f107a"][daily_indices]
+        ap = data["ap"][ap_indices]
+    else:
+        # Linear interpolation between time boundaries
+        fractional_hours = date_offsets / np.timedelta64(1, "h")
+        daily_frac = (fractional_hours / 24.0) % 1.0
+        ap_frac = (fractional_hours % 3) / 3.0
+
+        def interp(
+            arr: npt.NDArray, idx: npt.NDArray, frac: npt.NDArray
+        ) -> npt.NDArray:
+            """Linear interpolation with automatic bounds clipping."""
+            floor_vals = np.take(arr, idx, axis=0, mode="clip")
+            ceil_vals = np.take(arr, idx + 1, axis=0, mode="clip")
+            # Expand frac for broadcasting with 2D arrays (ap data)
+            if arr.ndim > frac.ndim:
+                frac = frac[:, np.newaxis]
+            return floor_vals + frac * (ceil_vals - floor_vals)
+
+        # Interpolate daily values (F10.7, F10.7a)
+        f107 = interp(data["f107"], daily_indices, daily_frac)
+        f107a = interp(data["f107a"], daily_indices, daily_frac)
+
+        # Interpolate 3-hourly ap values (all columns)
+        ap = interp(data["ap"], ap_indices, ap_frac)
+
+        # Column 0 needs daily interpolation, use every 8th 3-hourly value
+        ap[:, 0] = interp(data["ap"][::8, 0], daily_indices, daily_frac)
+
+    warn_or_not = data["warn_data"][daily_indices]
     # TODO: Do we want to warn if any values within 81 days of a point are used?
     #      i.e. if any of the f107a values were interpolated or predicted
     if np.any(warn_or_not):

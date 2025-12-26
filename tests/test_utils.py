@@ -63,14 +63,14 @@ def test_loading_data(monkeypatch, tmp_path):
             np.datetime64("2000-01-01T00:00"),
             [np.nan],
             [166.2],
-            [30, 56, np.nan, np.nan, np.nan, np.nan, np.nan],
+            [[30, 56, np.nan, np.nan, np.nan, np.nan, np.nan]],
         ),
         # Middle of the data file, should be fully filled
         (
             np.datetime64("2000-07-01T12:00"),
             [159.6],
             [186.3],
-            [7, 4, 5, 9, 4, 5.25, 5.75],
+            [[7, 4, 5, 9, 4, 5.25, 5.75]],
         ),
         # Requesting two dates should return length two arrays
         (
@@ -85,7 +85,7 @@ def test_loading_data(monkeypatch, tmp_path):
             np.datetime64("2000-12-30T12:00"),
             [173.7],
             [173.5],
-            [3, 4, 4, 3, 3, 6.375, 5.375],
+            [[3, 4, 4, 3, 3, 6.375, 5.375]],
         ),
     ],
 )
@@ -130,3 +130,40 @@ def test_get_f107_ap_interpolated_warns(dates):
         UserWarning, match="There is data that was either interpolated or"
     ):
         utils.get_f107_ap(dates)
+
+
+@pytest.mark.parametrize(
+    ("date", "expected_f107", "expected_ap_col1"),
+    [
+        # At exact boundary (00:00), interpolated should match step values
+        ([np.datetime64("2000-07-01T00:00")], 159.6, 9.0),
+        # At 3-hour boundary: ap should match, f107 interpolates within day
+        ([np.datetime64("2000-07-01T03:00")], 160.1125, 4.0),
+        # Mid-way through 3-hour window (01:30): both ap and f107 interpolate
+        ([np.datetime64("2000-07-01T01:30")], 159.85625, 6.5),
+    ],
+)
+def test_get_f107_ap_interpolate(date, expected_f107, expected_ap_col1):
+    """Test linear interpolation of F10.7 and ap values."""
+    f107, _, ap = utils.get_f107_ap(date, interpolate=True)
+    assert_allclose(f107[0], expected_f107)
+    assert_allclose(ap[0, 1], expected_ap_col1)
+
+
+@pytest.mark.parametrize(
+    "date",
+    [
+        np.datetime64("2000-01-01T00:00"),
+        np.datetime64("2000-07-01T00:00"),
+        np.datetime64("2000-07-02T00:00"),
+    ],
+)
+def test_get_f107_ap_interpolate_exact_match(date):
+    """Test that interpolation at exact data points returns the same as no interp."""
+    f107_nointerp, f107a_nointerp, ap_nointerp = utils.get_f107_ap(
+        date, interpolate=False
+    )
+    f107_interp, f107a_interp, ap_interp = utils.get_f107_ap(date, interpolate=True)
+    assert_allclose(f107_nointerp, f107_interp)
+    assert_allclose(f107a_nointerp, f107a_interp)
+    assert_array_equal(ap_nointerp, ap_interp)
