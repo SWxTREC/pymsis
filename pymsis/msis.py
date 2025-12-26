@@ -81,6 +81,7 @@ def calculate(
     *,
     options: list[float] | None = None,
     version: float | str = 2.1,
+    interpolate_indices: bool = False,
     **kwargs: dict,
 ) -> npt.NDArray:
     r"""
@@ -140,6 +141,13 @@ def calculate(
         all keyword arguments specifying individual options will be ignored.
     version : Number or string, default: 2.1
         MSIS version number, one of (0, 2.0, 2.1).
+    interpolate_indices : bool, default: False
+        If True, linearly interpolate F10.7, F10.7a, and ap indices between
+        their native time resolution (daily for F10.7/F10.7a, 3-hourly for ap).
+        If False (default), use step-function sampling where values change
+        discretely at boundaries. Linear interpolation can provide smoother
+        density variations for high-cadence simulations. Daily values ramp
+        forward across the day, reaching that day's value at the next midnight.
     **kwargs : dict
         Single options for the switches can be defined through keyword arguments.
         For example, ``calculate(..., geomagnetic_activity=-1)`` will set the
@@ -241,7 +249,16 @@ def calculate(
     elif len(options) != num_options:
         raise ValueError(f"options needs to be a list of length {num_options}")
 
-    input_shape, input_data = create_input(dates, lons, lats, alts, f107s, f107as, aps)
+    input_shape, input_data = create_input(
+        dates,
+        lons,
+        lats,
+        alts,
+        f107s,
+        f107as,
+        aps,
+        interpolate_indices=interpolate_indices,
+    )
 
     if np.any(~np.isfinite(input_data)):
         raise ValueError(
@@ -422,6 +439,7 @@ def create_input(
     f107s: npt.ArrayLike | None = None,
     f107as: npt.ArrayLike | None = None,
     aps: npt.ArrayLike | None = None,
+    interpolate_indices: bool = False,
 ) -> tuple[tuple, npt.NDArray]:
     """
     Combine all input values into a single flattened array.
@@ -442,6 +460,9 @@ def create_input(
         F107 running 81-day average for the given date(s)
     aps : ArrayLike, optional
         Ap for the given date(s)
+    interpolate_indices : bool, default: False
+        If True, use linear interpolation for F10.7, F10.7a, and ap indices.
+        If False, use step-function (nearest-neighbor) sampling.
 
     Returns
     -------
@@ -471,7 +492,7 @@ def create_input(
     # If any of the geomagnetic data wasn't specified, we will default
     # to getting it with the utility functions.
     if f107s is None or f107as is None or aps is None:
-        data = get_f107_ap(dates_arr)
+        data = get_f107_ap(dates_arr, interpolate=interpolate_indices)
         # Only update the values that were None
         if f107s is None:
             f107s = data[0]
