@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.13.0] unreleased
+
+- **ADDED** `interpolate_indices` option.
+  - Linearly interpolate all input indices between their native time
+    resolution (daily for F10.7/F10.7a/daily Ap, 3-hourly for ap indices).
+    This can help avoid large step-changes in estimates when evaluating
+    at higher temporal resolutions. There can be step changes of more than
+    20% in some situations when going from hour 02:59 to 03:00 when new
+    indices get used again on the 3-hourly boundaries.
+- **CHANGED** `get_f107_ap()` returns arrays of the same shape as the input
+  - Previously, when a scalar date was passed to the utility function, the
+    `ap` values were 1d (7,) rather than of shape (1, 7) corresponding to
+    the date and all ap values. This makes the output consistent for scalar
+    and array-like inputs.
+  - This should have minimal impact on users, as it is a helper function
+    and behavior of the calculation routines is unchanged.
+
 ## [v0.12.0] 2025-11-26
 
 - **MAINTENANCE** Publish Python 3.14 wheels.
