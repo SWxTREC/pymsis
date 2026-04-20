@@ -43,8 +43,7 @@ def download_f107_ap() -> None:
        Space Weather, https://doi.org/10.1029/2020SW002641
     """
     warnings.warn(f"Downloading ap and F10.7 data from {_F107_AP_URL}")
-    req = urllib.request.urlopen(_F107_AP_URL)
-    with _F107_AP_PATH.open("wb") as f:
+    with _F107_AP_PATH.open("wb") as f, urllib.request.urlopen(_F107_AP_URL) as req:
         f.write(req.read())
 
 
@@ -90,20 +89,14 @@ def _load_f107_ap_data() -> dict[str, npt.NDArray]:
     # Use a buffer to read in and load so we can quickly get rid of
     # the extra "PRD" lines at the end of the file (unknown length
     # so we can't just go back in line lengths)
-    with _F107_AP_PATH.open() as fin:
-        with BytesIO() as fout:
-            for line in fin:
-                if "PRM" in line:
-                    # We don't want the monthly predicted values
-                    continue
-                if ",,,,,,,," in line:
-                    # We don't want lines with missing values
-                    continue
-                fout.write(line.encode("utf-8"))
-            fout.seek(0)
-            arr = np.loadtxt(
-                fout, delimiter=",", dtype=dtype, usecols=usecols, skiprows=1
-            )  # type: ignore
+    with _F107_AP_PATH.open() as fin, BytesIO() as fout:
+        for line in fin:
+            if "PRM" in line or ",,,,,,,," in line:
+                # We don't want the monthly predicted values or missing values
+                continue
+            fout.write(line.encode("utf-8"))
+        fout.seek(0)
+        arr = np.loadtxt(fout, delimiter=",", dtype=dtype, usecols=usecols, skiprows=1)  # type: ignore
 
     # transform each day's 8 3-hourly ap values into a single column
     ap = np.empty(len(arr) * 8, dtype=float)
@@ -208,6 +201,12 @@ def get_f107_ap(dates: npt.ArrayLike) -> tuple[npt.NDArray, npt.NDArray, npt.NDA
     """
     dates = np.asarray(dates, dtype=np.datetime64)
     data = _DATA or _load_f107_ap_data()
+    # If our requested data time is after the cached values we have,
+    # go and download a new file to refresh the local file cache
+    last_time_in_file = data["dates"][7::8][~data["warn_data"]].max()
+    if np.any((dates > last_time_in_file) & (dates < np.datetime64("now"))):
+        download_f107_ap()
+        data = _load_f107_ap_data()
 
     data_start = data["dates"][0]
     data_end = data["dates"][-1]
