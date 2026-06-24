@@ -96,7 +96,8 @@ def _load_f107_ap_data() -> dict[str, npt.NDArray]:
 
     if custom_file_used and not _F107_AP_PATH.exists():
         raise FileNotFoundError(
-            f"Custom space weather path has been set but does not exist: {_F107_AP_PATH}"
+            f"""Custom space weather path has been set but does not exist:
+            {_F107_AP_PATH}"""
         )
 
     if not custom_file_used and not default_file_exists:
