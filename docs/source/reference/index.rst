@@ -49,3 +49,4 @@ get the proper F10.7 and ap values to use for a specific date and time.
 
     utils.download_f107_ap
     utils.get_f107_ap
+    utils.set_space_weather_path

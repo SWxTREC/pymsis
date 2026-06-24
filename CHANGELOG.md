@@ -11,6 +11,11 @@ All notable changes to this project will be documented in this file.
     at higher temporal resolutions. There can be step changes of more than
     20% in some situations when going from hour 02:59 to 03:00 when new
     indices get used again on the 3-hourly boundaries.
+- **ADDED** `pymsis.set_space_weather_path()` function.
+  - The function points pymsis to a custom space weather
+    file instead of the one bundled in the install location. 
+  - The same path can be set at startup with the `PYMSIS_SPACE_WEATHER_PATH`
+    environment variable.
 - **CHANGED** `get_f107_ap()` returns arrays of the same shape as the input
   - Previously, when a scalar date was passed to the utility function, the
     `ap` values were 1d (7,) rather than of shape (1, 7) corresponding to
