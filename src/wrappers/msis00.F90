@@ -12,6 +12,7 @@ subroutine pyinitswitch(switch_legacy, parmpath)
 end subroutine pyinitswitch
 
 subroutine pymsiscalc(day, utsec, lon, lat, z, sflux, sfluxavg, ap, output, n)
+    use, intrinsic :: ieee_arithmetic, only: ieee_value, ieee_quiet_nan
     implicit none
 
     integer, intent(in)        :: n
@@ -27,8 +28,12 @@ subroutine pymsiscalc(day, utsec, lon, lat, z, sflux, sfluxavg, ap, output, n)
 
     integer :: i
     real :: t(2), d(9), lon_tmp ! Temporary to swap dimensions
+    real :: nan
+
+    nan = ieee_value(1.0, ieee_quiet_nan)
 
     do i=1, n
+        ! Normalize negative longitudes into [0, 360).
         if (lon(i) < 0) then
             lon_tmp = lon(i) + 360
         else
@@ -37,12 +42,11 @@ subroutine pymsiscalc(day, utsec, lon, lat, z, sflux, sfluxavg, ap, output, n)
         call gtd7d(10000 + FLOOR(day(i)), utsec(i), z(i), lat(i), lon_tmp, &
                    utsec(i)/3600. + lon_tmp/15., sfluxavg(i), &
                    sflux(i), ap(i, :), 48, d, t)
-        ! O, H, and N are set to zero below 72.5 km
-        ! Change them to NaN instead
+        ! O, H, and N are set to zero below 72.5 km, return NaN instead
         if(z(i) < 72.5) then
-            d(2) = 9.99e-38 ! NaN
-            d(7) = 9.99e-38 ! NaN
-            d(8) = 9.99e-38 ! NaN
+            d(2) = nan
+            d(7) = nan
+            d(8) = nan
         endif
         ! These mappings are to go from MSIS00 locations to MSIS2 locations
         output(i, 1) = d(6)
@@ -54,7 +58,7 @@ subroutine pymsiscalc(day, utsec, lon, lat, z, sflux, sfluxavg, ap, output, n)
         output(i, 7) = d(5)
         output(i, 8) = d(8)
         output(i, 9) = d(9)
-        output(i, 10) = 9.99e-38 ! NaN
+        output(i, 10) = nan ! MSIS-00 does not provide NO
         output(i, 11) = t(2)
     enddo
 
@@ -77,6 +81,7 @@ end subroutine pytselec
 
 subroutine pygtd7d(day, utsec, lon, lat, z, sflux, sfluxavg, ap, output, n)
 
+use, intrinsic :: ieee_arithmetic, only: ieee_value, ieee_quiet_nan
 implicit none
 
 integer, intent(in)        :: n
@@ -92,6 +97,9 @@ real, intent(out) :: output(n, 1:11)
 
 integer :: i
 real :: t(2), d(9), lon_tmp ! Temporary to swap dimensions
+real :: nan
+
+nan = ieee_value(1.0, ieee_quiet_nan)
 
 WRITE(6, *) 'Warning: pygtd7d is deprecated and will be removed in a future version. Use pymsiscalc instead.'
 do i=1, n
@@ -103,12 +111,11 @@ do i=1, n
   call gtd7d(10000 + FLOOR(day(i)), utsec(i), z(i), lat(i), lon_tmp, &
               utsec(i)/3600. + lon_tmp/15., sfluxavg(i), &
               sflux(i), ap(i, :), 48, d, t)
-  ! O, H, and N are set to zero below 72.5 km
-  ! Change them to NaN instead
+  ! O, H, and N are set to zero below 72.5 km, return NaN instead
   if(z(i) < 72.5) then
-    d(2) = 9.99e-38 ! NaN
-    d(7) = 9.99e-38 ! NaN
-    d(8) = 9.99e-38 ! NaN
+    d(2) = nan
+    d(7) = nan
+    d(8) = nan
   endif
   ! These mappings are to go from MSIS00 locations to MSIS2 locations
   output(i, 1) = d(6)
@@ -120,7 +127,7 @@ do i=1, n
   output(i, 7) = d(5)
   output(i, 8) = d(8)
   output(i, 9) = d(9)
-  output(i, 10) = 9.99e-38 ! NaN
+  output(i, 10) = nan ! MSIS-00 does not provide NO
   output(i, 11) = t(2)
 enddo
 

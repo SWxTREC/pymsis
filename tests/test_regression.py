@@ -67,9 +67,9 @@ def run_input_line(line, version):
         raise ValueError("Version number incorrect")
 
     # Different units in the test file (cgs)
-    x[np.isclose(x, 9.9e-38, atol=1e-38)] = np.nan
     x[:-1] *= 1e-6
     x[5] *= 1e3
+    # Missing values come back as NaN; the reference file encodes them as 9.999e-38
     x[np.isnan(x)] = 9.999e-38
     # The output print statements are messy.
     # They technically give 4 decimal places, but only truly 3 decimal places

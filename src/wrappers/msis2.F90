@@ -27,7 +27,8 @@ subroutine pymsiscalc(day, utsec, lon, lat, z, sflux, sfluxavg, ap, output, n)
     !       code takes the order (z, lat, lon).
     !       sflux also comes before sfluxavg
     use msis_calc, only: msiscalc
-    use msis_constants, only: rp
+    use msis_constants, only: rp, dmissing
+    use, intrinsic :: ieee_arithmetic, only: ieee_value, ieee_quiet_nan
 
     implicit none
 
@@ -43,16 +44,15 @@ subroutine pymsiscalc(day, utsec, lon, lat, z, sflux, sfluxavg, ap, output, n)
     real(kind=rp), intent(out) :: output(n, 1:11)
 
     integer :: i
-    real(kind=rp) :: lon_tmp
 
     do i=1, n
-        if (lon(i) < 0) then
-            lon_tmp = lon(i) + 360
-          else
-            lon_tmp = lon(i)
-          endif
         call msiscalc(day(i), utsec(i), z(i), lat(i), lon(i), sfluxavg(i), &
                     sflux(i), ap(i, :), output(i, 11), output(i, 1:10))
     enddo
+
+    ! The model marks missing densities with the tiny sentinel ``dmissing``.
+    ! Convert those to NaN here so callers receive an unambiguous missing value
+    ! and no downstream sentinel matching is required.
+    where (output == dmissing) output = ieee_value(1.0_rp, ieee_quiet_nan)
 
 end subroutine pymsiscalc

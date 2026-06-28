@@ -299,10 +299,6 @@ def calculate(
             input_data[:, 7:],
         )
 
-    # The Fortran code puts 9.9e-38 in as NaN
-    # or 9.99e-38, or 9.999e-38, so lets just bound the 9s
-    output[(output >= 9.9e-38) & (output < 1e-37)] = np.nan  # noqa: PLR2004
-
     return output.reshape(*input_shape, 11)
 
 
