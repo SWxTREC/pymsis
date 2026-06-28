@@ -45,6 +45,11 @@ subroutine pymsiscalc(day, utsec, lon, lat, z, sflux, sfluxavg, ap, output, n)
 
     integer :: i
 
+    ! Zero the output before calling into the model. There are some issues with
+    ! potential nan-leakage on unitiailzed arrays in free-threading builds,
+    ! so just set it to 0 to avoid any potential issues.
+    output = 0.0_rp
+
     do i=1, n
         call msiscalc(day(i), utsec(i), z(i), lat(i), lon(i), sfluxavg(i), &
                     sflux(i), ap(i, :), output(i, 11), output(i, 1:10))
