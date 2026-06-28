@@ -13,13 +13,13 @@ from pymsis.utils import get_f107_ap
 
 # We need to point to the MSIS parameter file that was installed with the Python package
 _MSIS_PARAMETER_PATH = str(Path(__file__).resolve().parent) + "/"
+# A single global lock guarding all calls into the Fortran code.
+# per-library isn't sufficient because the Fortran code uses global state
+_lock = threading.Lock()
 for lib in [msis00f, msis20f, msis21f]:
     # Store the previous options to avoid reinitializing the model
     # each iteration unless necessary
     lib._last_used_options = None
-    # Anytime we call into the Fortran code, we need to lock
-    # to avoid threading issues
-    lib._lock = threading.Lock()
 
 
 class Variable(IntEnum):
@@ -282,7 +282,7 @@ def calculate(
                 "one of the valid version numbers: (0, 2.0, 2.1)"
             )
 
-    with msis_lib._lock:
+    with _lock:
         # Only reinitialize the model if the options have changed
         if msis_lib._last_used_options != options:
             msis_lib.pyinitswitch(options, parmpath=_MSIS_PARAMETER_PATH)

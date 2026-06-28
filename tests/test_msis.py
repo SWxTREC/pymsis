@@ -508,12 +508,20 @@ def test_multithreaded(
         [f107a] * n,
         ap * n,
     )
+    expected_output20 = np.squeeze(pymsis.calculate(*input_data, version=2.0))
+    expected_output20_with_options = np.squeeze(
+        pymsis.calculate(*input_data, version=2.0, options=[0] * 25)
+    )
+
     # Create a tuple of items (version, options, expected_output)
-    # 3 items cycled over 100 times
+    # cycled over 100 times. Mixing versions 2.0 and 2.1 with differing
+    # options forces frequent re-initialization of multiple libraries.
     list_of_inputs = [
         (0, None, np.tile(expected_output00, (n, 1))),
         (2.1, None, np.tile(expected_output, (n, 1))),
         (2.1, [0] * 25, np.tile(expected_output_with_options, (n, 1))),
+        (2.0, None, expected_output20),
+        (2.0, [0] * 25, expected_output20_with_options),
     ] * 100
 
     def run_function(input_items):
