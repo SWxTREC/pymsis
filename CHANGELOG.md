@@ -18,6 +18,9 @@ All notable changes to this project will be documented in this file.
     and array-like inputs.
   - This should have minimal impact on users, as it is a helper function
     and behavior of the calculation routines is unchanged.
+- **FIXED** Missing values are now returned as NaN directly from the Fortran
+  wrappers instead of a small sentinel value (`9.99e-38`/`9.999e-38`) that was
+  converted to NaN in Python.
 
 ## [v0.12.0] 2025-11-26
 
