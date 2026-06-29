@@ -22,28 +22,34 @@ _F107_AP_PATH: Path = Path(
 )
 
 
-def set_space_weather_path(path: str | Path) -> None:
+def use_space_weather_file(path: str | Path | None = None) -> None:
     """
-    Set a custom path to retrieve the F10.7 and ap data from.
+    Direct pymsis to use a custom file to retrieve the F10.7 and ap data from.
+
+    The custom data file must follow the same (.csv) format as data retrieved from
+    Celestrak. The legacy (.txt) file format is not supported.
 
     By default, the data is retrieved from CelesTrak and stored inside the
     installed package location. Retrieving the data from a custom path may
     be useful if you are retrieving the data from a different source, if you
     have a centralized location for the data, or would like to use custom data.
 
-    Alternatively, you can set the environment variable ``PYMSIS_SPACE_WEATHER_PATH``
-    to the desired path to achieve the same result and to avoid setting the space
-    weather path programmatically on each run.
+    Alternatively, the path can be set using the environment variable
+    ``PYMSIS_SPACE_WEATHER_PATH`` to the desired path to achieve the same result and
+    to avoid setting the space weather path programmatically on each run.
 
     Setting a default and running `download_f107_ap()` will not download to
     this custom path.
 
     Parameters
     ----------
-    path : str or Path
+    path : str or Path or None
         Path to the F10.7 and ap data file, retrieved from CelesTrak or elsewhere.
+        If set to None, the space weather file downloaded from CelesTrak (stored in the
+        installed package location) will be used.
     """
-    if not Path(path).exists():
+    path = Path(path) if path is not None else _F107_AP_DEFAULT_PATH
+    if not path.is_file():
         raise FileNotFoundError(
             f"Provided custom space weather path does not exist: {path}"
         )
@@ -63,7 +69,7 @@ def download_f107_ap() -> None:
     This routine can be called to update the data as well if you would like to
     use newer data since the last time you downloaded the file.
 
-    If `set_space_weather_path()` has been called to set a custom path, the file will
+    If `use_space_weather_file()` has been called to set a custom path, the file will
     still be downloaded to the default location and thus ignored by pymsis.
 
     Notes
@@ -83,6 +89,13 @@ def download_f107_ap() -> None:
        Space Weather, https://doi.org/10.1029/2020SW002641
     """
     warnings.warn(f"Downloading ap and F10.7 data from {_F107_AP_URL}")
+    if _F107_AP_DEFAULT_PATH != _F107_AP_PATH:
+        warnings.warn(
+            "A custom space weather file has been set, but the downloaded file "
+            "will be stored in the default location and ignored. Unset the "
+            "custom path using `use_space_weather_file(None)` to use the "
+            "downloaded file."
+        )
     req = urllib.request.urlopen(_F107_AP_URL)
     with _F107_AP_DEFAULT_PATH.open("wb") as f:
         f.write(req.read())
@@ -90,13 +103,13 @@ def download_f107_ap() -> None:
 
 def _load_f107_ap_data() -> dict[str, npt.NDArray]:
     """Load data from disk, if it isn't present go out and download it first."""
-    default_file_exists = _F107_AP_DEFAULT_PATH.exists()
+    default_file_exists = _F107_AP_DEFAULT_PATH.is_file()
     custom_file_used = _F107_AP_PATH != _F107_AP_DEFAULT_PATH
 
-    if custom_file_used and not _F107_AP_PATH.exists():
+    if custom_file_used and not _F107_AP_PATH.is_file():
         raise FileNotFoundError(
-            f"""Custom space weather path has been set but does not exist:
-            {_F107_AP_PATH}"""
+            "Custom space weather file has been set but does not exist: "
+            f"{_F107_AP_PATH}"
         )
 
     if not custom_file_used and not default_file_exists:

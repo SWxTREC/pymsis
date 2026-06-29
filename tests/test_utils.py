@@ -1,3 +1,5 @@
+import importlib
+
 import numpy as np
 import pytest
 from numpy.testing import assert_allclose, assert_array_equal
@@ -172,13 +174,15 @@ def test_get_f107_ap_interpolate_exact_match(date):
     assert_allclose(f107_nointerp, f107_interp)
     assert_allclose(f107a_nointerp, f107a_interp)
     assert_array_equal(ap_nointerp, ap_interp)
-def test_set_space_weather_path(monkeypatch, tmp_path):
+
+
+def test_use_space_weather_file(monkeypatch, tmp_path):
     custom_file = tmp_path / "custom_sw.csv"
     custom_file.write_text("placeholder")
     # Pretend some data was already cached so we can verify it gets reset
     monkeypatch.setattr(utils, "_DATA", {"dummy": np.array([1])})
 
-    utils.set_space_weather_path(custom_file)
+    utils.use_space_weather_file(custom_file)
     # Check if the path has been updated
     assert utils._F107_AP_PATH == custom_file
     # Check if the data has been reset.
@@ -187,10 +191,27 @@ def test_set_space_weather_path(monkeypatch, tmp_path):
     # Setting a path that doesn't exist should raise
     missing = tmp_path / "does_not_exist.csv"
     with pytest.raises(FileNotFoundError, match="does not exist"):
-        utils.set_space_weather_path(missing)
+        utils.use_space_weather_file(missing)
 
-    # A custom path may also be set via the environment variable without going
-    # through set_space_weather_path(), so loading must validate it too.
-    monkeypatch.setattr(utils, "_F107_AP_PATH", missing)
-    with pytest.raises(FileNotFoundError, match="Custom space weather path"):
+    # downloading should raise a warning that the file is ignored.
+    # Redirect the download to a throwaway path so we don't overwrite shared test data.
+    monkeypatch.setattr(utils, "_F107_AP_DEFAULT_PATH", tmp_path / "downloaded.csv")
+    with pytest.warns(UserWarning, match="A custom space weather file has been set"):
+        utils.download_f107_ap()
+
+
+def test_space_weather_env_variable(monkeypatch, tmp_path):
+    # check if setting space weather path via env variable works
+    custom_file = tmp_path / "custom_sw.csv"
+    custom_file.write_text("placeholder")
+    monkeypatch.setenv("PYMSIS_SPACE_WEATHER_PATH", str(custom_file))
+    importlib.reload(utils)
+
+    assert utils._F107_AP_PATH == custom_file
+
+    # Loading the data must validate that the file exists.
+    missing = tmp_path / "does_not_exist.csv"
+    monkeypatch.setenv("PYMSIS_SPACE_WEATHER_PATH", str(missing))
+    importlib.reload(utils)
+    with pytest.raises(FileNotFoundError, match="Custom space weather file"):
         utils._load_f107_ap_data()
