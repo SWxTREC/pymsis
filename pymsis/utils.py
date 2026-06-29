@@ -48,11 +48,10 @@ def set_space_weather_path(path: str | Path) -> None:
             f"Provided custom space weather path does not exist: {path}"
         )
 
-    # set the global variable to the new path
-    globals()["_F107_AP_PATH"] = Path(path)
-
-    # reset the global data
-    globals()["_DATA"] = None
+    # update the global path and data variables
+    global _F107_AP_PATH, _DATA  # noqa: PLW0603
+    _F107_AP_PATH = Path(path)
+    _DATA = None
 
 
 def download_f107_ap() -> None:
@@ -218,7 +217,8 @@ def _load_f107_ap_data() -> dict[str, npt.NDArray]:
         "f107a": f107a_data,
         "warn_data": warn_data,
     }
-    globals()["_DATA"] = data
+    global _DATA  # noqa: PLW0603
+    _DATA = data
     return data
 
 
