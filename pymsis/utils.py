@@ -14,15 +14,15 @@ import pymsis
 
 _DATA_FNAME: str = "SW-All.csv"
 _F107_AP_URL: str = f"https://celestrak.org/SpaceData/{_DATA_FNAME}"
-_F107_AP_DEFAULT_PATH: Path = Path(pymsis.__file__).parent / _DATA_FNAME
+_F107_AP_DEFAULT_FILE: Path = Path(pymsis.__file__).parent / _DATA_FNAME
 _DATA: dict[str, npt.NDArray] | None = None
 
-_F107_AP_PATH: Path = Path(
-    os.environ.get("PYMSIS_SPACE_WEATHER_PATH", _F107_AP_DEFAULT_PATH)
+_F107_AP_FILE: Path = Path(
+    os.environ.get("PYMSIS_SPACE_WEATHER_FILE", _F107_AP_DEFAULT_FILE)
 )
 
 
-def use_space_weather_file(path: str | Path | None = None) -> None:
+def use_space_weather_file(file: str | Path | None = None) -> None:
     """
     Direct pymsis to use a custom file to retrieve the F10.7 and ap data from.
 
@@ -30,33 +30,33 @@ def use_space_weather_file(path: str | Path | None = None) -> None:
     Celestrak. The legacy (.txt) file format is not supported.
 
     By default, the data is retrieved from CelesTrak and stored inside the
-    installed package location. Retrieving the data from a custom path may
+    installed package location. Retrieving the data from a custom file path may
     be useful if you are retrieving the data from a different source, if you
     have a centralized location for the data, or would like to use custom data.
 
-    Alternatively, the path can be set using the environment variable
-    ``PYMSIS_SPACE_WEATHER_PATH`` to the desired path to achieve the same result and
-    to avoid setting the space weather path programmatically on each run.
+    Alternatively, the file path can be set using the environment variable
+    ``PYMSIS_SPACE_WEATHER_FILE`` to achieve the same result and
+    to avoid setting the space weather file path programmatically on each run.
 
     Setting a default and running `download_f107_ap()` will not download to
-    this custom path.
+    this custom file path.
 
     Parameters
     ----------
-    path : str or Path or None
+    file : str or Path or None
         Path to the F10.7 and ap data file, retrieved from CelesTrak or elsewhere.
         If set to None, the space weather file downloaded from CelesTrak (stored in the
         installed package location) will be used.
     """
-    path = Path(path) if path is not None else _F107_AP_DEFAULT_PATH
-    if not path.is_file():
+    file = Path(file) if file is not None else _F107_AP_DEFAULT_FILE
+    if not file.is_file():
         raise FileNotFoundError(
-            f"Provided custom space weather path does not exist: {path}"
+            f"Provided custom space weather file does not exist: {file}"
         )
 
     # update the global path and data variables
-    global _F107_AP_PATH, _DATA  # noqa: PLW0603
-    _F107_AP_PATH = Path(path)
+    global _F107_AP_FILE, _DATA  # noqa: PLW0603
+    _F107_AP_FILE = Path(file)
     _DATA = None
 
 
@@ -69,8 +69,8 @@ def download_f107_ap() -> None:
     This routine can be called to update the data as well if you would like to
     use newer data since the last time you downloaded the file.
 
-    If `use_space_weather_file()` has been called to set a custom path, the file will
-    still be downloaded to the default location and thus ignored by pymsis.
+    If `use_space_weather_file()` has been called to set a custom file path, the file
+    will still be downloaded to the default location and thus ignored by pymsis.
 
     Notes
     -----
@@ -89,27 +89,27 @@ def download_f107_ap() -> None:
        Space Weather, https://doi.org/10.1029/2020SW002641
     """
     warnings.warn(f"Downloading ap and F10.7 data from {_F107_AP_URL}")
-    if _F107_AP_DEFAULT_PATH != _F107_AP_PATH:
+    if _F107_AP_DEFAULT_FILE != _F107_AP_FILE:
         warnings.warn(
             "A custom space weather file has been set, but the downloaded file "
             "will be stored in the default location and ignored. Unset the "
-            "custom path using `use_space_weather_file(None)` to use the "
+            "custom file path using `use_space_weather_file(None)` to use the "
             "downloaded file."
         )
     req = urllib.request.urlopen(_F107_AP_URL)
-    with _F107_AP_DEFAULT_PATH.open("wb") as f:
+    with _F107_AP_DEFAULT_FILE.open("wb") as f:
         f.write(req.read())
 
 
 def _load_f107_ap_data() -> dict[str, npt.NDArray]:
     """Load data from disk, if it isn't present go out and download it first."""
-    default_file_exists = _F107_AP_DEFAULT_PATH.is_file()
-    custom_file_used = _F107_AP_PATH != _F107_AP_DEFAULT_PATH
+    default_file_exists = _F107_AP_DEFAULT_FILE.is_file()
+    custom_file_used = _F107_AP_FILE != _F107_AP_DEFAULT_FILE
 
-    if custom_file_used and not _F107_AP_PATH.is_file():
+    if custom_file_used and not _F107_AP_FILE.is_file():
         raise FileNotFoundError(
             "Custom space weather file has been set but does not exist: "
-            f"{_F107_AP_PATH}"
+            f"{_F107_AP_FILE}"
         )
 
     if not custom_file_used and not default_file_exists:
@@ -152,7 +152,7 @@ def _load_f107_ap_data() -> dict[str, npt.NDArray]:
     # Use a buffer to read in and load so we can quickly get rid of
     # the extra "PRD" lines at the end of the file (unknown length
     # so we can't just go back in line lengths)
-    with _F107_AP_PATH.open() as fin:
+    with _F107_AP_FILE.open() as fin:
         with BytesIO() as fout:
             for line in fin:
                 if "PRM" in line:

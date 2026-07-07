@@ -10,8 +10,8 @@ from pymsis import utils
 def test_downloading(monkeypatch, tmp_path):
     tmp_file = tmp_path / "testfile.txt"
     # download_f107_ap() always writes to the default location, so patch both
-    monkeypatch.setattr(utils, "_F107_AP_PATH", tmp_file)
-    monkeypatch.setattr(utils, "_F107_AP_DEFAULT_PATH", tmp_file)
+    monkeypatch.setattr(utils, "_F107_AP_FILE", tmp_file)
+    monkeypatch.setattr(utils, "_F107_AP_DEFAULT_FILE", tmp_file)
     # just be nice and make sure we are getting the monkeypatched local file
     assert utils._F107_AP_URL.startswith("file://")
     with pytest.warns(UserWarning, match="Downloading ap and F10.7"):
@@ -19,7 +19,7 @@ def test_downloading(monkeypatch, tmp_path):
     assert tmp_file.exists()
     with (
         open(tmp_file, "rb") as f_downloaded,
-        open(utils._F107_AP_PATH, "rb") as f_expected,
+        open(utils._F107_AP_FILE, "rb") as f_expected,
     ):
         assert f_downloaded.read() == f_expected.read()
 
@@ -33,8 +33,8 @@ def test_loading_data(monkeypatch, tmp_path):
     with monkeypatch.context() as m:
         # Point both at the (missing) default location so the auto-download
         # branch is exercised rather than the custom-path branch.
-        m.setattr(utils, "_F107_AP_PATH", tmp_file)
-        m.setattr(utils, "_F107_AP_DEFAULT_PATH", tmp_file)
+        m.setattr(utils, "_F107_AP_FILE", tmp_file)
+        m.setattr(utils, "_F107_AP_DEFAULT_FILE", tmp_file)
         assert not tmp_file.exists()
         with pytest.warns(UserWarning, match="Downloading ap and F10.7"):
             utils._load_f107_ap_data()
@@ -184,7 +184,7 @@ def test_use_space_weather_file(monkeypatch, tmp_path):
 
     utils.use_space_weather_file(custom_file)
     # Check if the path has been updated
-    assert utils._F107_AP_PATH == custom_file
+    assert utils._F107_AP_FILE == custom_file
     # Check if the data has been reset.
     assert utils._DATA is None
 
@@ -195,23 +195,23 @@ def test_use_space_weather_file(monkeypatch, tmp_path):
 
     # downloading should raise a warning that the file is ignored.
     # Redirect the download to a throwaway path so we don't overwrite shared test data.
-    monkeypatch.setattr(utils, "_F107_AP_DEFAULT_PATH", tmp_path / "downloaded.csv")
+    monkeypatch.setattr(utils, "_F107_AP_DEFAULT_FILE", tmp_path / "downloaded.csv")
     with pytest.warns(UserWarning, match="A custom space weather file has been set"):
         utils.download_f107_ap()
 
 
 def test_space_weather_env_variable(monkeypatch, tmp_path):
-    # check if setting space weather path via env variable works
+    # check if setting space weather file via env variable works
     custom_file = tmp_path / "custom_sw.csv"
     custom_file.write_text("placeholder")
-    monkeypatch.setenv("PYMSIS_SPACE_WEATHER_PATH", str(custom_file))
+    monkeypatch.setenv("PYMSIS_SPACE_WEATHER_FILE", str(custom_file))
     importlib.reload(utils)
 
-    assert utils._F107_AP_PATH == custom_file
+    assert utils._F107_AP_FILE == custom_file
 
     # Loading the data must validate that the file exists.
     missing = tmp_path / "does_not_exist.csv"
-    monkeypatch.setenv("PYMSIS_SPACE_WEATHER_PATH", str(missing))
+    monkeypatch.setenv("PYMSIS_SPACE_WEATHER_FILE", str(missing))
     importlib.reload(utils)
     with pytest.raises(FileNotFoundError, match="Custom space weather file"):
         utils._load_f107_ap_data()

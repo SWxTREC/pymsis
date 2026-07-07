@@ -14,7 +14,7 @@ All notable changes to this project will be documented in this file.
 - **ADDED** `pymsis.use_space_weather_file()` function.
   - The function points pymsis to a custom space weather
     file instead of the one bundled in the install location. 
-  - The same path can be set at startup with the `PYMSIS_SPACE_WEATHER_PATH`
+  - The same file path can be set at startup with the `PYMSIS_SPACE_WEATHER_FILE`
     environment variable.
 - **CHANGED** `get_f107_ap()` returns arrays of the same shape as the input
   - Previously, when a scalar date was passed to the utility function, the
