@@ -10,8 +10,10 @@ def local_path(monkeypatch):
     # Update the data location to our test data
     test_file = Path(__file__).parent / "f107_ap_test_data.txt"
     # Monkeypatch the url and expected download location, so we aren't
-    # dependent on an internet connection.
-    monkeypatch.setattr(utils, "_F107_AP_PATH", test_file)
+    # dependent on an internet connection. Patch both the active path and the
+    # default path so tests exercise the "default location" branch by default.
+    monkeypatch.setattr(utils, "_F107_AP_FILE", test_file)
+    monkeypatch.setattr(utils, "_F107_AP_DEFAULT_FILE", test_file)
     return test_file
 
 
