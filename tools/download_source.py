@@ -45,6 +45,7 @@ def get_source():
     # Now go through and clean the source files
     clean_utf8(Path("src/msis2.0").glob("*.F90"))
     fix_parmpath(Path("src/msis2.0/msis_init.F90"))
+    fix_msis2(Path("src/msis2.0/msis_calc.F90"))
 
     # MSIS21
     if not Path("src/msis2.1/msis_init.F90").exists():
@@ -71,6 +72,7 @@ def get_source():
     # Now go through and clean the source files
     clean_utf8(Path("src/msis2.1").glob("*.F90"))
     fix_parmpath(Path("src/msis2.1/msis_init.F90"))
+    fix_msis2(Path("src/msis2.1/msis_calc.F90"))
 
     # Now go to MSIS-00
     local_msis00_path = Path("src/msis00/NRLMSISE-00.FOR")
@@ -122,6 +124,20 @@ def fix_parmpath(fname):
         return
     if original not in data:
         raise ValueError(f"Could not find the parmpath1 declaration in {fname}")
+    fname.write_text(data.replace(original, patched), encoding="utf-8")
+
+
+def fix_msis2(fname):
+    """Exclude the uninitialized mass-density output from its own weighted sum."""
+    # dn(1) has not been assigned yet. Even with masswgt(1) == 0, a NaN
+    # in that slot contaminates the sum. Only include the species densities.
+    original = "dn(1) = dot_product(dn,masswgt)"
+    patched = "dn(1) = dot_product(dn(2:),masswgt(2:))"
+    data = fname.read_text(encoding="utf-8")
+    if patched in data:
+        return
+    if original not in data:
+        raise ValueError(f"Could not find the mass-density calculation in {fname}")
     fname.write_text(data.replace(original, patched), encoding="utf-8")
 
 

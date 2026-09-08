@@ -248,6 +248,9 @@ def calculate(
         options = create_options(**kwargs)  # type: ignore
     elif len(options) != num_options:
         raise ValueError(f"options needs to be a list of length {num_options}")
+    else:
+        # Keep initialization and the cache independent of the caller's list.
+        options = list(options)
 
     input_shape, input_data = create_input(
         dates,
@@ -283,7 +286,7 @@ def calculate(
             )
 
     with _lock:
-        # Only reinitialize the model if the options have changed
+        # Compare option values so equal snapshots reuse the initialized model.
         if msis_lib._last_used_options != options:
             msis_lib.pyinitswitch(options, parmpath=_MSIS_PARAMETER_PATH)
             msis_lib._last_used_options = options
