@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## [v0.13.0] unreleased
 
+- **CHANGED** Refresh the default CelesTrak space-weather cache only when a
+  requested time is outside the available data range. Custom space-weather
+  files are never refreshed automatically.
 - **FIXED** MSIS 2.0 and 2.1 support parameter directories longer than 128
   characters, avoiding premature process termination in deeply nested installs.
 - **ADDED** `interpolate_indices` option.
