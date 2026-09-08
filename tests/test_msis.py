@@ -520,12 +520,38 @@ def test_options_calls(input_data, version, msis_lib):
     # our options have changed between calls.
     # Reset the cache
     msis_lib._last_used_options = None
-    with patch(msis_lib.__name__ + ".pyinitswitch") as mock_init:
-        pymsis.calculate(*input_data, options=[0] * 25, version=version)
+    with patch(
+        msis_lib.__name__ + ".pyinitswitch", wraps=msis_lib.pyinitswitch
+    ) as mock_init:
+        options = [0] * 25
+        pymsis.calculate(*input_data, options=options, version=version)
         mock_init.assert_called_once()
-        pymsis.calculate(*input_data, options=[0] * 25, version=version)
-        # Called again shouldn't call the initialization function
+
+        # Both the original list and a new, equal list reuse the initialized
+        # model. Cache hits depend on option values, not object identity.
+        pymsis.calculate(*input_data, options=options, version=version)
+        pymsis.calculate(*input_data, options=options.copy(), version=version)
         mock_init.assert_called_once()
+
+        # Changing the values requires initialization exactly once more.
+        mock_init.reset_mock()
+        options[:] = [1] * 25
+        pymsis.calculate(*input_data, options=options, version=version)
+        mock_init.assert_called_once()
+        pymsis.calculate(*input_data, options=options.copy(), version=version)
+        mock_init.assert_called_once()
+
+
+@pytest.mark.parametrize("version", [0, 2.0, 2.1])
+def test_mutating_options(input_data, version):
+    expected = pymsis.calculate(*input_data, version=version, options=[0] * 25)
+    options = [1] * 25
+    pymsis.calculate(*input_data, version=version, options=options)
+
+    # Reusing and editing the same list must still reinitialize the model.
+    options[:] = [0] * 25
+    output = pymsis.calculate(*input_data, version=version, options=options)
+    assert_allclose(output, expected, rtol=1e-5)
 
 
 def test_multithreaded(
