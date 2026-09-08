@@ -46,6 +46,7 @@ plt.show()
 > - The model will automatically download and access the F10.7 and ap data for you if you have an internet connection.
 > - The returned data structure has shape [ndates, nlons, nlats, nalts, 11], but for this example we only have one point with many dates [ndates, 1, 1, 1, 11].
 > -s The 11 is for each of the species MSIS calculates for each input point. The first element is the Total Mass Density (kg/m3).
+> - Concurrent `pymsis.calculate()` calls are supported, with native evaluations running one at a time. Keep inputs unchanged during calls; direct Fortran calls are not thread-safe.
 
 ## NRL Mass Spectrometer, Incoherent Scatter Radar Extended Model (MSIS)
 

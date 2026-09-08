@@ -1,4 +1,7 @@
 import importlib
+from concurrent.futures import ThreadPoolExecutor
+from threading import Barrier, Event
+from unittest.mock import patch
 
 import numpy as np
 import pytest
@@ -10,7 +13,7 @@ from pymsis import utils
 def test_downloading(monkeypatch, tmp_path):
     tmp_file = tmp_path / "testfile.txt"
     # download_f107_ap() always writes to the default location, so patch both
-    monkeypatch.setattr(utils, "_F107_AP_FILE", tmp_file)
+    monkeypatch.setattr(utils._SPACE_WEATHER, "path", tmp_file)
     monkeypatch.setattr(utils, "_F107_AP_DEFAULT_FILE", tmp_file)
     # just be nice and make sure we are getting the monkeypatched local file
     assert utils._F107_AP_URL.startswith("file://")
@@ -19,34 +22,34 @@ def test_downloading(monkeypatch, tmp_path):
     assert tmp_file.exists()
     with (
         open(tmp_file, "rb") as f_downloaded,
-        open(utils._F107_AP_FILE, "rb") as f_expected,
+        open(utils._SPACE_WEATHER.path, "rb") as f_expected,
     ):
         assert f_downloaded.read() == f_expected.read()
 
 
 def test_loading_data(monkeypatch, tmp_path):
     # Make sure we are starting off fresh with nothing loaded yet
-    utils._DATA = None
+    utils._SPACE_WEATHER.data = None
 
     # Make sure a download warning is emitted if the file doesn't exist
     tmp_file = tmp_path / "testfile.txt"
     with monkeypatch.context() as m:
         # Point both at the (missing) default location so the auto-download
         # branch is exercised rather than the custom-path branch.
-        m.setattr(utils, "_F107_AP_FILE", tmp_file)
+        m.setattr(utils._SPACE_WEATHER, "path", tmp_file)
         m.setattr(utils, "_F107_AP_DEFAULT_FILE", tmp_file)
         assert not tmp_file.exists()
         with pytest.warns(UserWarning, match="Downloading ap and F10.7"):
-            utils._load_f107_ap_data()
-    assert utils._DATA is not None
+            utils.get_f107_ap("2000-07-01T12:00")
+    assert utils._SPACE_WEATHER.data is not None
 
     # If the file is already present locally we don't want a download warning
-    utils._DATA = None
-    utils._load_f107_ap_data()
-    assert utils._DATA is not None
+    utils._SPACE_WEATHER.data = None
+    utils.get_f107_ap("2000-07-01T12:00")
+    assert utils._SPACE_WEATHER.data is not None
 
     # Now make some assertions on the loaded data
-    data = utils._DATA
+    data = utils._SPACE_WEATHER.data
     assert data["dates"][0] == np.datetime64("2000-01-01T00:00")
     assert data["dates"][-1] == np.datetime64("2000-12-31T21:00")
     expected_data_length = (
@@ -58,6 +61,97 @@ def test_loading_data(monkeypatch, tmp_path):
     expected_data_length //= 8
     assert len(data["f107"]) == expected_data_length
     assert len(data["f107a"]) == expected_data_length
+
+
+@pytest.mark.filterwarnings("ignore:Downloading ap and F10.7")
+def test_concurrent_loading(monkeypatch, tmp_path):
+    target = tmp_path / "weather.csv"
+    monkeypatch.setattr(utils._SPACE_WEATHER, "path", target)
+    monkeypatch.setattr(utils, "_F107_AP_DEFAULT_FILE", target)
+    monkeypatch.setattr(utils._SPACE_WEATHER, "data", None)
+    start = Barrier(8)
+
+    def read_data():
+        start.wait(timeout=10)
+        return utils.get_f107_ap("2000-07-01T12:00")[0]
+
+    with (
+        patch.object(
+            utils, "_load_f107_ap_data", wraps=utils._load_f107_ap_data
+        ) as load,
+        ThreadPoolExecutor(max_workers=8) as executor,
+    ):
+        futures = [executor.submit(read_data) for _ in range(8)]
+        for future in futures:
+            assert_array_equal(future.result(timeout=10), [159.6])
+    load.assert_called_once()
+
+
+def test_switching_file_during_load(monkeypatch, tmp_path, local_path):
+    other = tmp_path / "other.csv"
+    other.write_text(local_path.read_text().replace("159.6", "199.6"))
+    monkeypatch.setattr(utils._SPACE_WEATHER, "data", None)
+    loaded, resume, switched = Event(), Event(), Event()
+    original_loadtxt = np.loadtxt
+
+    def blocked_loadtxt(*args, **kwargs):
+        result = original_loadtxt(*args, **kwargs)
+        loaded.set()
+        assert resume.wait(10)
+        return result
+
+    def switch_file():
+        utils.use_space_weather_file(other)
+        switched.set()
+
+    with (
+        patch.object(np, "loadtxt", blocked_loadtxt),
+        ThreadPoolExecutor(max_workers=2) as executor,
+    ):
+        reader = executor.submit(utils.get_f107_ap, "2000-07-01T12:00")
+        try:
+            assert loaded.wait(10)
+            setter = executor.submit(switch_file)
+            # Give the setter a chance to race with the in-flight load.
+            # With synchronization it waits until that load completes.
+            switched.wait(0.1)
+        finally:
+            resume.set()
+        reader.result(timeout=10)
+        setter.result(timeout=10)
+
+    assert utils._SPACE_WEATHER.path == other
+    assert_array_equal(utils.get_f107_ap("2000-07-01T12:00")[0], [199.6])
+
+
+def test_failed_download_preserves_file(monkeypatch, tmp_path, local_path):
+    target = tmp_path / "weather.csv"
+    original = local_path.read_bytes()
+    target.write_bytes(original)
+    monkeypatch.setattr(utils._SPACE_WEATHER, "path", target)
+    monkeypatch.setattr(utils, "_F107_AP_DEFAULT_FILE", target)
+    with patch.object(utils.urllib.request, "urlopen") as urlopen:
+        urlopen.return_value.read.side_effect = OSError("Interrupted download")
+        urlopen.return_value.__enter__.return_value = urlopen.return_value
+        with (
+            pytest.warns(UserWarning, match="Downloading ap and F10.7"),
+            pytest.raises(OSError, match="Interrupted download"),
+        ):
+            utils.download_f107_ap()
+    assert target.read_bytes() == original
+    assert list(tmp_path.iterdir()) == [target]
+
+
+def test_download_refreshes_cache(monkeypatch, tmp_path, local_path):
+    target = tmp_path / "weather.csv"
+    target.write_text(local_path.read_text().replace("159.6", "199.6"))
+    monkeypatch.setattr(utils._SPACE_WEATHER, "path", target)
+    monkeypatch.setattr(utils, "_F107_AP_DEFAULT_FILE", target)
+    monkeypatch.setattr(utils._SPACE_WEATHER, "data", None)
+    assert_array_equal(utils.get_f107_ap("2000-07-01T12:00")[0], [199.6])
+    with pytest.warns(UserWarning, match="Downloading ap and F10.7"):
+        utils.download_f107_ap()
+    assert_array_equal(utils.get_f107_ap("2000-07-01T12:00")[0], [159.6])
 
 
 @pytest.mark.parametrize(
@@ -180,13 +274,13 @@ def test_use_space_weather_file(monkeypatch, tmp_path):
     custom_file = tmp_path / "custom_sw.csv"
     custom_file.write_text("placeholder")
     # Pretend some data was already cached so we can verify it gets reset
-    monkeypatch.setattr(utils, "_DATA", {"dummy": np.array([1])})
+    monkeypatch.setattr(utils._SPACE_WEATHER, "data", {"dummy": np.array([1])})
 
     utils.use_space_weather_file(custom_file)
     # Check if the path has been updated
-    assert utils._F107_AP_FILE == custom_file
+    assert utils._SPACE_WEATHER.path == custom_file
     # Check if the data has been reset.
-    assert utils._DATA is None
+    assert utils._SPACE_WEATHER.data is None
 
     # Setting a path that doesn't exist should raise
     missing = tmp_path / "does_not_exist.csv"
@@ -207,7 +301,7 @@ def test_space_weather_env_variable(monkeypatch, tmp_path):
     monkeypatch.setenv("PYMSIS_SPACE_WEATHER_FILE", str(custom_file))
     importlib.reload(utils)
 
-    assert utils._F107_AP_FILE == custom_file
+    assert utils._SPACE_WEATHER.path == custom_file
 
     # Loading the data must validate that the file exists.
     missing = tmp_path / "does_not_exist.csv"

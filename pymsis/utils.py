@@ -1,10 +1,13 @@
 """Utilities for obtaining input datasets."""
 
 import os
+import threading
 import urllib.request
 import warnings
+from dataclasses import dataclass
 from io import BytesIO
 from pathlib import Path
+from tempfile import mkstemp
 
 import numpy as np
 import numpy.typing as npt
@@ -15,10 +18,20 @@ import pymsis
 _DATA_FNAME: str = "SW-All.csv"
 _F107_AP_URL: str = f"https://celestrak.org/SpaceData/{_DATA_FNAME}"
 _F107_AP_DEFAULT_FILE: Path = Path(pymsis.__file__).parent / _DATA_FNAME
-_DATA: dict[str, npt.NDArray] | None = None
+# Loading can call download_f107_ap(), which acquires the same lock.
+_DATA_LOCK = threading.RLock()
 
-_F107_AP_FILE: Path = Path(
-    os.environ.get("PYMSIS_SPACE_WEATHER_FILE", _F107_AP_DEFAULT_FILE)
+
+@dataclass
+class _SpaceWeatherState:
+    """The selected weather file and its cached contents, guarded by _DATA_LOCK."""
+
+    path: Path
+    data: dict[str, npt.NDArray] | None = None
+
+
+_SPACE_WEATHER = _SpaceWeatherState(
+    Path(os.environ.get("PYMSIS_SPACE_WEATHER_FILE", _F107_AP_DEFAULT_FILE))
 )
 
 
@@ -54,10 +67,9 @@ def use_space_weather_file(file: str | Path | None = None) -> None:
             f"Provided custom space weather file does not exist: {file}"
         )
 
-    # update the global path and data variables
-    global _F107_AP_FILE, _DATA  # noqa: PLW0603
-    _F107_AP_FILE = Path(file)
-    _DATA = None
+    with _DATA_LOCK:
+        _SPACE_WEATHER.path = file
+        _SPACE_WEATHER.data = None
 
 
 def download_f107_ap() -> None:
@@ -88,28 +100,42 @@ def download_f107_ap() -> None:
        2021. The geomagnetic Kp index and derived indices of geomagnetic activity.
        Space Weather, https://doi.org/10.1029/2020SW002641
     """
-    warnings.warn(f"Downloading ap and F10.7 data from {_F107_AP_URL}")
-    if _F107_AP_DEFAULT_FILE != _F107_AP_FILE:
-        warnings.warn(
-            "A custom space weather file has been set, but the downloaded file "
-            "will be stored in the default location and ignored. Unset the "
-            "custom file path using `use_space_weather_file(None)` to use the "
-            "downloaded file."
-        )
-    req = urllib.request.urlopen(_F107_AP_URL)
-    with _F107_AP_DEFAULT_FILE.open("wb") as f:
-        f.write(req.read())
+    with _DATA_LOCK:
+        warnings.warn(f"Downloading ap and F10.7 data from {_F107_AP_URL}")
+        if _F107_AP_DEFAULT_FILE != _SPACE_WEATHER.path:
+            warnings.warn(
+                "A custom space weather file has been set, but the downloaded file "
+                "will be stored in the default location and ignored. Unset the "
+                "custom file path using `use_space_weather_file(None)` to use the "
+                "downloaded file."
+            )
+        with urllib.request.urlopen(_F107_AP_URL) as response:
+            data = response.read()
+
+        # Replace the complete file atomically so readers never see a partial
+        # download, including readers in other processes.
+        fd, name = mkstemp(dir=_F107_AP_DEFAULT_FILE.parent)
+        temporary = Path(name)
+        try:
+            with os.fdopen(fd, "wb") as f:
+                f.write(data)
+            temporary.replace(_F107_AP_DEFAULT_FILE)
+        finally:
+            temporary.unlink(missing_ok=True)
+        if _SPACE_WEATHER.path == _F107_AP_DEFAULT_FILE:
+            _SPACE_WEATHER.data = None
 
 
 def _load_f107_ap_data() -> dict[str, npt.NDArray]:
     """Load data from disk, if it isn't present go out and download it first."""
+    # The caller holds _DATA_LOCK until the loaded data has been cached.
     default_file_exists = _F107_AP_DEFAULT_FILE.is_file()
-    custom_file_used = _F107_AP_FILE != _F107_AP_DEFAULT_FILE
+    custom_file_used = _SPACE_WEATHER.path != _F107_AP_DEFAULT_FILE
 
-    if custom_file_used and not _F107_AP_FILE.is_file():
+    if custom_file_used and not _SPACE_WEATHER.path.is_file():
         raise FileNotFoundError(
             "Custom space weather file has been set but does not exist: "
-            f"{_F107_AP_FILE}"
+            f"{_SPACE_WEATHER.path}"
         )
 
     if not custom_file_used and not default_file_exists:
@@ -152,7 +178,7 @@ def _load_f107_ap_data() -> dict[str, npt.NDArray]:
     # Use a buffer to read in and load so we can quickly get rid of
     # the extra "PRD" lines at the end of the file (unknown length
     # so we can't just go back in line lengths)
-    with _F107_AP_FILE.open() as fin:
+    with _SPACE_WEATHER.path.open() as fin:
         with BytesIO() as fout:
             for line in fin:
                 if "PRM" in line:
@@ -222,17 +248,13 @@ def _load_f107_ap_data() -> dict[str, npt.NDArray]:
     # to the following day when we would actually use the value
     warn_data[1:] = warn_data[:-1]
 
-    # Set the global module-level data variable
-    data = {
+    return {
         "dates": dates,
         "ap": ap_data,
         "f107": f107_data,
         "f107a": f107a_data,
         "warn_data": warn_data,
     }
-    global _DATA  # noqa: PLW0603
-    _DATA = data
-    return data
 
 
 def get_f107_ap(
@@ -279,7 +301,10 @@ def get_f107_ap(
             |     prior to current time
     """
     dates = np.asarray(dates, dtype=np.datetime64)
-    data = _DATA or _load_f107_ap_data()
+    with _DATA_LOCK:
+        if _SPACE_WEATHER.data is None:
+            _SPACE_WEATHER.data = _load_f107_ap_data()
+        data = _SPACE_WEATHER.data
 
     data_start = data["dates"][0]
     data_end = data["dates"][-1]
