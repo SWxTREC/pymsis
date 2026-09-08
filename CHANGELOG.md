@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [v0.13.0] unreleased
 
+- **FIXED** MSIS 2.0 and 2.1 support parameter directories longer than 128
+  characters, avoiding premature process termination in deeply nested installs.
 - **ADDED** `interpolate_indices` option.
   - Linearly interpolate all input indices between their native time
     resolution (daily for F10.7/F10.7a/daily Ap, 3-hourly for ap indices).
