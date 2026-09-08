@@ -44,6 +44,7 @@ def get_source():
 
     # Now go through and clean the source files
     clean_utf8(Path("src/msis2.0").glob("*.F90"))
+    fix_parmpath(Path("src/msis2.0/msis_init.F90"))
 
     # MSIS21
     if not Path("src/msis2.1/msis_init.F90").exists():
@@ -69,6 +70,7 @@ def get_source():
 
     # Now go through and clean the source files
     clean_utf8(Path("src/msis2.1").glob("*.F90"))
+    fix_parmpath(Path("src/msis2.1/msis_init.F90"))
 
     # Now go to MSIS-00
     local_msis00_path = Path("src/msis00/NRLMSISE-00.FOR")
@@ -109,6 +111,18 @@ def clean_utf8(fnames):
             f.seek(0)
             f.write(data.encode("utf-8"))
             f.truncate()
+
+
+def fix_parmpath(fname):
+    """Allow parameter directories longer than the upstream 128-character buffer."""
+    original = "character(len=128)                        :: parmpath1"
+    patched = "character(len=:), allocatable             :: parmpath1"
+    data = fname.read_text(encoding="utf-8")
+    if patched in data:
+        return
+    if original not in data:
+        raise ValueError(f"Could not find the parmpath1 declaration in {fname}")
+    fname.write_text(data.replace(original, patched), encoding="utf-8")
 
 
 def fix_msis00(fname):

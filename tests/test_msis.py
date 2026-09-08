@@ -1,4 +1,8 @@
 import concurrent.futures
+import shutil
+import subprocess
+import sys
+from pathlib import Path
 from unittest.mock import patch
 
 import numpy as np
@@ -250,6 +254,46 @@ def test_calculate_single_point(input_data, expected_output):
     output = pymsis.calculate(*input_data)
     assert output.shape == (1, 11)
     assert_allclose(np.squeeze(output), expected_output, rtol=1e-5)
+
+
+@pytest.mark.parametrize("version", ["2.0", "2.1"])
+def test_long_parameter_path(tmp_path, version):
+    # Exercise the compiled source patch, including in installed wheel tests.
+    original_path_limit = 128
+    parameter_dir = tmp_path
+    while len(str(parameter_dir)) <= original_path_limit:
+        parameter_dir /= "long_parameter_path"
+    parameter_dir.mkdir(parents=True, exist_ok=True)
+    filename = "msis2.0.parm" if version == "2.0" else "msis21.parm"
+    shutil.copyfile(
+        Path(msis._MSIS_PARAMETER_PATH) / filename, parameter_dir / filename
+    )
+
+    # Fortran STOP can exit with status 0: require a marker after calculation too.
+    script = """
+import sys
+import numpy as np
+from pymsis import msis, msis20f, msis21f
+
+version, parameter_dir = sys.argv[1:]
+inputs = (np.datetime64("2010-01-01T12:00"), 0, 0, 200, 150, 150, [[3] * 7])
+expected = msis.calculate(*inputs, version=version)
+msis._MSIS_PARAMETER_PATH = parameter_dir + "/"
+library = msis20f if version == "2.0" else msis21f
+library._last_used_options = None
+actual = msis.calculate(*inputs, version=version)
+np.testing.assert_allclose(actual, expected)
+print("CALCULATION_COMPLETED")
+"""
+    result = subprocess.run(
+        [sys.executable, "-c", script, version, str(parameter_dir)],
+        capture_output=True,
+        text=True,
+        timeout=60,
+        check=False,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "CALCULATION_COMPLETED" in result.stdout, result.stdout + result.stderr
 
 
 def test_calculate_gridded_multi_point(input_data, expected_output):
