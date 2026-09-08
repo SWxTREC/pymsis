@@ -12,7 +12,7 @@ dynamic = ["version"]
 description = "A Python wrapper around the NRLMSIS model."
 readme = "README.md"
 license = {file = "LICENSE"}
-keyword = ["MSIS2", "NRLMSIS"]
+keywords = ["MSIS2", "NRLMSIS"]
 authors = [{name = "Greg Lucas", email = "greg.lucas@lasp.colorado.edu"}]
 classifiers = [
     "Development Status :: 4 - Beta",

@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v0.13.0] unreleased
+## [v0.13.0] 2026-09-08
 
 - **CHANGED** Refresh the default CelesTrak space-weather cache only when a
   requested time is outside the available data range. Custom space-weather
